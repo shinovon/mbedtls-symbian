@@ -1,3 +1,9 @@
+README for repo
+===================
+
+This repo includes Mbed TLS source with custom configuration that disables unused components and allows building on needed platforms.
+
+
 README for Mbed TLS
 ===================
 
