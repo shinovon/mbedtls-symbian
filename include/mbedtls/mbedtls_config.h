@@ -554,6 +554,14 @@
 //#define MBEDTLS_CHECK_RETURN_WARNING
 
 /**
+ * \def MBEDTLS_CIPHER_MODE_IGE
+ *
+ * Enable Infinite Garble Extension mode (IGE) for AES.
+ */
+//TODO: add support for cipher module
+#define MBEDTLS_CIPHER_MODE_IGE
+
+/**
  * \def MBEDTLS_CIPHER_MODE_CBC
  *
  * Enable Cipher Block Chaining mode (CBC) for symmetric ciphers.

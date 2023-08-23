@@ -1106,6 +1106,88 @@ exit:
 }
 #endif /* MBEDTLS_CIPHER_MODE_CBC */
 
+#if defined(MBEDTLS_CIPHER_MODE_IGE)
+/*
+ * AES-IGE buffer encryption/decryption
+ */
+int mbedtls_aes_crypt_ige(mbedtls_aes_context *ctx,
+                          int mode,
+                          size_t length,
+                          unsigned char iv[32],
+                          const unsigned char *input,
+                          unsigned char *output)
+{
+    int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+    unsigned char temp[16];
+
+    if (mode != MBEDTLS_AES_ENCRYPT && mode != MBEDTLS_AES_DECRYPT) {
+        return MBEDTLS_ERR_AES_BAD_INPUT_DATA;
+    }
+
+    if (length % 16) {
+        return MBEDTLS_ERR_AES_INVALID_INPUT_LENGTH;
+    }
+
+#if defined(MBEDTLS_PADLOCK_C) && defined(MBEDTLS_HAVE_X86)
+    if (aes_padlock_ace > 0) {
+        if (mbedtls_padlock_xcryptcbc(ctx, mode, length, iv, input, output) == 0) {
+            return 0;
+        }
+
+        // If padlock data misaligned, we just fall back to
+        // unaccelerated mode
+        //
+    }
+#endif
+
+    if (mode == MBEDTLS_AES_DECRYPT) {
+        while (length > 0) {
+            memcpy(temp, input, 16);
+
+            mbedtls_xor(output, input, iv + 16, 16);
+
+            ret = mbedtls_aes_crypt_ecb(ctx, mode, output, output);
+            if (ret != 0) {
+                goto exit;
+            }
+
+            mbedtls_xor(output, output, iv, 16);
+
+            memcpy(iv, temp, 16);
+            memcpy(iv + 16, output, 16);
+
+            input  += 16;
+            output += 16;
+            length -= 16;
+        }
+    } else {
+        while (length > 0) {
+            memcpy(temp, input, 16);
+
+            mbedtls_xor(output, input, iv, 16);
+
+            ret = mbedtls_aes_crypt_ecb(ctx, mode, output, output);
+            if (ret != 0) {
+                goto exit;
+            }
+
+            mbedtls_xor(output, output, iv + 16, 16);
+
+            memcpy(iv, output, 16);
+            memcpy(iv + 16, temp, 16);
+
+            input  += 16;
+            output += 16;
+            length -= 16;
+        }
+    }
+    ret = 0;
+
+exit:
+    return ret;
+}
+#endif /* MBEDTLS_CIPHER_MODE_IGE */
+
 #if defined(MBEDTLS_CIPHER_MODE_XTS)
 
 typedef unsigned char mbedtls_be128[16];
