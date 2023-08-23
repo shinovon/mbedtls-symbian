@@ -553,6 +553,8 @@
  */
 //#define MBEDTLS_CHECK_RETURN_WARNING
 
+//TODO: add an secure source of entropy for Symbian
+
 /**
  * \def MBEDTLS_CIPHER_MODE_IGE
  *
