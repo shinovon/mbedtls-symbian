@@ -1140,17 +1140,17 @@ int mbedtls_aes_crypt_ige(mbedtls_aes_context *ctx,
     }
 #endif
 
+    memcpy(output, input, length);
+
     if (mode == MBEDTLS_AES_DECRYPT) {
         while (length > 0) {
-            memcpy(temp, input, 16);
+            memcpy(temp, output, 16);
 
-            mbedtls_xor(output, input, iv + 16, 16);
-
+            mbedtls_xor(output, output, iv + 16, 16);
             ret = mbedtls_aes_crypt_ecb(ctx, mode, output, output);
             if (ret != 0) {
                 goto exit;
             }
-
             mbedtls_xor(output, output, iv, 16);
 
             memcpy(iv, temp, 16);
@@ -1162,15 +1162,13 @@ int mbedtls_aes_crypt_ige(mbedtls_aes_context *ctx,
         }
     } else {
         while (length > 0) {
-            memcpy(temp, input, 16);
+            memcpy(temp, output, 16);
 
-            mbedtls_xor(output, input, iv, 16);
-
+            mbedtls_xor(output, output, iv, 16);
             ret = mbedtls_aes_crypt_ecb(ctx, mode, output, output);
             if (ret != 0) {
                 goto exit;
             }
-
             mbedtls_xor(output, output, iv + 16, 16);
 
             memcpy(iv, output, 16);
