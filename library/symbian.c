@@ -16,4 +16,16 @@ int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t 
     return 0;
 }
 
+extern int __aeabi_uidivmod(unsigned int a, unsigned int b);
+extern int __aeabi_idivmod(int a, int b);
+int __aeabi_idiv(int a, int b)
+{
+    return __aeabi_idivmod(a, b);
+}
+
+int __aeabi_uidiv(unsigned int a, unsigned int b)
+{
+    return __aeabi_uidivmod(a, b);
+}
+
 #endif
