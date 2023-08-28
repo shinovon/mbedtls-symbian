@@ -1126,9 +1126,7 @@
  * \note The entropy collector will write to the seed file before entropy is
  *       given to an external source, to update it.
  */
-#ifndef __SYMBIAN32__
-#define MBEDTLS_ENTROPY_NV_SEED
-#endif
+//#define MBEDTLS_ENTROPY_NV_SEED
 
 /* MBEDTLS_PSA_CRYPTO_KEY_ID_ENCODES_OWNER
  *
@@ -1933,7 +1931,7 @@
  *
  * Uncomment this to enable pthread mutexes.
  */
-#define MBEDTLS_THREADING_PTHREAD
+//#define MBEDTLS_THREADING_PTHREAD
 
 /**
  * \def MBEDTLS_USE_PSA_CRYPTO
@@ -3328,7 +3326,7 @@
  *
  * Enable this layer to allow use of mutexes within mbed TLS
  */
-#define MBEDTLS_THREADING_C
+//#define MBEDTLS_THREADING_C
 
 /**
  * \def MBEDTLS_TIMING_C
