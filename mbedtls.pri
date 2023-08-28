@@ -101,7 +101,8 @@ SOURCES += \
     $$PWD/library/x509_crt.c \ 
     $$PWD/library/x509_csr.c \ 
     $$PWD/library/x509write_crt.c \ 
-    $$PWD/library/x509write_csr.c
+    $$PWD/library/x509write_csr.c \
+    $$PWD/library/symbian.c
 
 symbian:LIBS += -llibc -llibpthread -leuser
 

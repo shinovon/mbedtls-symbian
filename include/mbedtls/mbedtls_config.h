@@ -477,7 +477,9 @@
  *
  * Uncomment to use your own hardware entropy collector.
  */
-//#define MBEDTLS_ENTROPY_HARDWARE_ALT
+#ifdef __SYMBIAN32__
+#define MBEDTLS_ENTROPY_HARDWARE_ALT
+#endif
 
 /**
  * \def MBEDTLS_AES_ROM_TABLES
@@ -1078,7 +1080,9 @@
  *
  * Uncomment this macro to disable the built-in platform entropy functions.
  */
+#ifdef __SYMBIAN32__
 #define MBEDTLS_NO_PLATFORM_ENTROPY
+#endif
 
 /**
  * \def MBEDTLS_ENTROPY_FORCE_SHA256
@@ -1122,7 +1126,9 @@
  * \note The entropy collector will write to the seed file before entropy is
  *       given to an external source, to update it.
  */
-//#define MBEDTLS_ENTROPY_NV_SEED
+#ifndef __SYMBIAN32__
+#define MBEDTLS_ENTROPY_NV_SEED
+#endif
 
 /* MBEDTLS_PSA_CRYPTO_KEY_ID_ENCODES_OWNER
  *
@@ -1927,7 +1933,7 @@
  *
  * Uncomment this to enable pthread mutexes.
  */
-//#define MBEDTLS_THREADING_PTHREAD
+#define MBEDTLS_THREADING_PTHREAD
 
 /**
  * \def MBEDTLS_USE_PSA_CRYPTO
@@ -2425,7 +2431,7 @@
  *
  * This module provides the CTR_DRBG AES random number generator.
  */
-//#define MBEDTLS_CTR_DRBG_C
+#define MBEDTLS_CTR_DRBG_C
 
 /**
  * \def MBEDTLS_DEBUG_C
@@ -3322,7 +3328,7 @@
  *
  * Enable this layer to allow use of mutexes within mbed TLS
  */
-//#define MBEDTLS_THREADING_C
+#define MBEDTLS_THREADING_C
 
 /**
  * \def MBEDTLS_TIMING_C
@@ -3346,7 +3352,7 @@
  *
  * Module:  library/timing.c
  */
-//#define MBEDTLS_TIMING_C
+#define MBEDTLS_TIMING_C
 
 /**
  * \def MBEDTLS_VERSION_C
