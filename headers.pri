@@ -48,8 +48,7 @@ HEADERS += \
     $$PWD/include/mbedtls/ssl_cookie.h \ 
     $$PWD/include/mbedtls/build_info.h \ 
     $$PWD/include/mbedtls/config_psa.h \ 
-    $$PWD/include/mbedtls/ecp.h \ 
-    $$PWD/include/mbedtls/mbedtls_config.h.full.symbian \ 
+    $$PWD/include/mbedtls/ecp.h \
     $$PWD/include/mbedtls/pkcs12.h \ 
     $$PWD/include/mbedtls/ripemd160.h \ 
     $$PWD/include/mbedtls/ssl_ticket.h \ 
