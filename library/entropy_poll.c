@@ -46,7 +46,7 @@
     "Platform entropy sources only work on Unix and Windows, see MBEDTLS_NO_PLATFORM_ENTROPY in mbedtls_config.h"
 #endif
 
-#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
+#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32) && WINAPI_PARTITION_PHONE_APP != 1
 
 #if !defined(_WIN32_WINNT)
 #define _WIN32_WINNT 0x0400
