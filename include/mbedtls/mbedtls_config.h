@@ -3096,7 +3096,7 @@
  *
  * This module adds support for SHA-224.
  */
-//#define MBEDTLS_SHA224_C
+#define MBEDTLS_SHA224_C
 
 /**
  * \def MBEDTLS_SHA256_C
@@ -3173,7 +3173,7 @@
  *
  * Comment to disable SHA-384
  */
-//#define MBEDTLS_SHA384_C
+#define MBEDTLS_SHA384_C
 
 /**
  * \def MBEDTLS_SHA512_C
