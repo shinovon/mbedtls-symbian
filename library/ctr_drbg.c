@@ -41,7 +41,7 @@
 /*
  * CTR_DRBG context initialization
  */
-void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx)
+EXPORT_C void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_ctr_drbg_context));
     mbedtls_aes_init(&ctx->aes_ctx);
@@ -56,7 +56,7 @@ void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx)
  *  This function resets CTR_DRBG context to the state immediately
  *  after initial call of mbedtls_ctr_drbg_init().
  */
-void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx)
+EXPORT_C void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -74,19 +74,19 @@ void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx)
     ctx->reseed_counter = -1;
 }
 
-void mbedtls_ctr_drbg_set_prediction_resistance(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C void mbedtls_ctr_drbg_set_prediction_resistance(mbedtls_ctr_drbg_context *ctx,
                                                 int resistance)
 {
     ctx->prediction_resistance = resistance;
 }
 
-void mbedtls_ctr_drbg_set_entropy_len(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C void mbedtls_ctr_drbg_set_entropy_len(mbedtls_ctr_drbg_context *ctx,
                                       size_t len)
 {
     ctx->entropy_len = len;
 }
 
-int mbedtls_ctr_drbg_set_nonce_len(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C int mbedtls_ctr_drbg_set_nonce_len(mbedtls_ctr_drbg_context *ctx,
                                    size_t len)
 {
     /* If mbedtls_ctr_drbg_seed() has already been called, it's
@@ -114,7 +114,7 @@ int mbedtls_ctr_drbg_set_nonce_len(mbedtls_ctr_drbg_context *ctx,
     return 0;
 }
 
-void mbedtls_ctr_drbg_set_reseed_interval(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C void mbedtls_ctr_drbg_set_reseed_interval(mbedtls_ctr_drbg_context *ctx,
                                           int interval)
 {
     ctx->reseed_interval = interval;
@@ -303,7 +303,7 @@ exit:
  * and with outputs
  *   ctx = initial_working_state
  */
-int mbedtls_ctr_drbg_update(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C int mbedtls_ctr_drbg_update(mbedtls_ctr_drbg_context *ctx,
                             const unsigned char *additional,
                             size_t add_len)
 {
@@ -396,7 +396,7 @@ exit:
     return ret;
 }
 
-int mbedtls_ctr_drbg_reseed(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C int mbedtls_ctr_drbg_reseed(mbedtls_ctr_drbg_context *ctx,
                             const unsigned char *additional, size_t len)
 {
     return mbedtls_ctr_drbg_reseed_internal(ctx, additional, len, 0);
@@ -427,7 +427,7 @@ static size_t good_nonce_len(size_t entropy_len)
  * and with outputs
  *   ctx = initial_working_state
  */
-int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
                           int (*f_entropy)(void *, unsigned char *, size_t),
                           void *p_entropy,
                           const unsigned char *custom,
@@ -491,7 +491,7 @@ int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
  *   returned_bits = output[:output_len]
  *   ctx contains new_working_state
  */
-int mbedtls_ctr_drbg_random_with_add(void *p_rng,
+EXPORT_C int mbedtls_ctr_drbg_random_with_add(void *p_rng,
                                      unsigned char *output, size_t output_len,
                                      const unsigned char *additional, size_t add_len)
 {
@@ -570,7 +570,7 @@ exit:
     return ret;
 }
 
-int mbedtls_ctr_drbg_random(void *p_rng, unsigned char *output,
+EXPORT_C int mbedtls_ctr_drbg_random(void *p_rng, unsigned char *output,
                             size_t output_len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

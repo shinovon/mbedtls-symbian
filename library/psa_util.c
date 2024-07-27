@@ -65,7 +65,7 @@ const mbedtls_error_pair_t psa_to_ssl_errors[] =
 
 #if defined(PSA_WANT_KEY_TYPE_RSA_PUBLIC_KEY) ||    \
     defined(PSA_WANT_KEY_TYPE_RSA_KEY_PAIR)
-const mbedtls_error_pair_t psa_to_pk_rsa_errors[] =
+EXPORT_C const mbedtls_error_pair_t psa_to_pk_rsa_errors[] =
 {
     { PSA_SUCCESS,                     0 },
     { PSA_ERROR_NOT_PERMITTED,         MBEDTLS_ERR_RSA_BAD_INPUT_DATA },
@@ -92,7 +92,7 @@ const mbedtls_error_pair_t psa_to_pk_ecdsa_errors[] =
 };
 #endif
 
-int psa_generic_status_to_mbedtls(psa_status_t status)
+EXPORT_C int psa_generic_status_to_mbedtls(psa_status_t status)
 {
     switch (status) {
         case PSA_SUCCESS:
@@ -110,7 +110,7 @@ int psa_generic_status_to_mbedtls(psa_status_t status)
     }
 }
 
-int psa_status_to_mbedtls(psa_status_t status,
+EXPORT_C int psa_status_to_mbedtls(psa_status_t status,
                           const mbedtls_error_pair_t *local_translations,
                           size_t local_errors_num,
                           int (*fallback_f)(psa_status_t))
@@ -123,7 +123,7 @@ int psa_status_to_mbedtls(psa_status_t status,
     return fallback_f(status);
 }
 
-int psa_pk_status_to_mbedtls(psa_status_t status)
+EXPORT_C int psa_pk_status_to_mbedtls(psa_status_t status)
 {
     switch (status) {
         case PSA_ERROR_INVALID_HANDLE:

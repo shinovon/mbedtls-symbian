@@ -36,12 +36,12 @@
 
 #if !defined(MBEDTLS_MD5_ALT)
 
-void mbedtls_md5_init(mbedtls_md5_context *ctx)
+EXPORT_C void mbedtls_md5_init(mbedtls_md5_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_md5_context));
 }
 
-void mbedtls_md5_free(mbedtls_md5_context *ctx)
+EXPORT_C void mbedtls_md5_free(mbedtls_md5_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -50,7 +50,7 @@ void mbedtls_md5_free(mbedtls_md5_context *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_md5_context));
 }
 
-void mbedtls_md5_clone(mbedtls_md5_context *dst,
+EXPORT_C void mbedtls_md5_clone(mbedtls_md5_context *dst,
                        const mbedtls_md5_context *src)
 {
     *dst = *src;
@@ -59,7 +59,7 @@ void mbedtls_md5_clone(mbedtls_md5_context *dst,
 /*
  * MD5 context setup
  */
-int mbedtls_md5_starts(mbedtls_md5_context *ctx)
+EXPORT_C int mbedtls_md5_starts(mbedtls_md5_context *ctx)
 {
     ctx->total[0] = 0;
     ctx->total[1] = 0;
@@ -73,7 +73,7 @@ int mbedtls_md5_starts(mbedtls_md5_context *ctx)
 }
 
 #if !defined(MBEDTLS_MD5_PROCESS_ALT)
-int mbedtls_internal_md5_process(mbedtls_md5_context *ctx,
+EXPORT_C int mbedtls_internal_md5_process(mbedtls_md5_context *ctx,
                                  const unsigned char data[64])
 {
     struct {
@@ -212,7 +212,7 @@ int mbedtls_internal_md5_process(mbedtls_md5_context *ctx,
 /*
  * MD5 process buffer
  */
-int mbedtls_md5_update(mbedtls_md5_context *ctx,
+EXPORT_C int mbedtls_md5_update(mbedtls_md5_context *ctx,
                        const unsigned char *input,
                        size_t ilen)
 {
@@ -264,7 +264,7 @@ int mbedtls_md5_update(mbedtls_md5_context *ctx,
 /*
  * MD5 final digest
  */
-int mbedtls_md5_finish(mbedtls_md5_context *ctx,
+EXPORT_C int mbedtls_md5_finish(mbedtls_md5_context *ctx,
                        unsigned char output[16])
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -322,7 +322,7 @@ int mbedtls_md5_finish(mbedtls_md5_context *ctx,
 /*
  * output = MD5( input buffer )
  */
-int mbedtls_md5(const unsigned char *input,
+EXPORT_C int mbedtls_md5(const unsigned char *input,
                 size_t ilen,
                 unsigned char output[16])
 {

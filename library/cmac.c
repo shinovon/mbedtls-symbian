@@ -170,7 +170,7 @@ static void cmac_pad(unsigned char padded_block[MBEDTLS_CIPHER_BLKSIZE_MAX],
     }
 }
 
-int mbedtls_cipher_cmac_starts(mbedtls_cipher_context_t *ctx,
+EXPORT_C int mbedtls_cipher_cmac_starts(mbedtls_cipher_context_t *ctx,
                                const unsigned char *key, size_t keybits)
 {
     mbedtls_cipher_type_t type;
@@ -212,7 +212,7 @@ int mbedtls_cipher_cmac_starts(mbedtls_cipher_context_t *ctx,
     return 0;
 }
 
-int mbedtls_cipher_cmac_update(mbedtls_cipher_context_t *ctx,
+EXPORT_C int mbedtls_cipher_cmac_update(mbedtls_cipher_context_t *ctx,
                                const unsigned char *input, size_t ilen)
 {
     mbedtls_cmac_context_t *cmac_ctx;
@@ -278,7 +278,7 @@ exit:
     return ret;
 }
 
-int mbedtls_cipher_cmac_finish(mbedtls_cipher_context_t *ctx,
+EXPORT_C int mbedtls_cipher_cmac_finish(mbedtls_cipher_context_t *ctx,
                                unsigned char *output)
 {
     mbedtls_cmac_context_t *cmac_ctx;
@@ -336,7 +336,7 @@ exit:
     return ret;
 }
 
-int mbedtls_cipher_cmac_reset(mbedtls_cipher_context_t *ctx)
+EXPORT_C int mbedtls_cipher_cmac_reset(mbedtls_cipher_context_t *ctx)
 {
     mbedtls_cmac_context_t *cmac_ctx;
 
@@ -356,7 +356,7 @@ int mbedtls_cipher_cmac_reset(mbedtls_cipher_context_t *ctx)
     return 0;
 }
 
-int mbedtls_cipher_cmac(const mbedtls_cipher_info_t *cipher_info,
+EXPORT_C int mbedtls_cipher_cmac(const mbedtls_cipher_info_t *cipher_info,
                         const unsigned char *key, size_t keylen,
                         const unsigned char *input, size_t ilen,
                         unsigned char *output)
@@ -396,7 +396,7 @@ exit:
 /*
  * Implementation of AES-CMAC-PRF-128 defined in RFC 4615
  */
-int mbedtls_aes_cmac_prf_128(const unsigned char *key, size_t key_length,
+EXPORT_C int mbedtls_aes_cmac_prf_128(const unsigned char *key, size_t key_length,
                              const unsigned char *input, size_t in_len,
                              unsigned char output[16])
 {

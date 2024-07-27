@@ -185,12 +185,12 @@ static int mbedtls_a64_crypto_sha256_determine_support(void)
 
 #define SHA256_BLOCK_SIZE 64
 
-void mbedtls_sha256_init(mbedtls_sha256_context *ctx)
+EXPORT_C void mbedtls_sha256_init(mbedtls_sha256_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_sha256_context));
 }
 
-void mbedtls_sha256_free(mbedtls_sha256_context *ctx)
+EXPORT_C void mbedtls_sha256_free(mbedtls_sha256_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -199,7 +199,7 @@ void mbedtls_sha256_free(mbedtls_sha256_context *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_sha256_context));
 }
 
-void mbedtls_sha256_clone(mbedtls_sha256_context *dst,
+EXPORT_C void mbedtls_sha256_clone(mbedtls_sha256_context *dst,
                           const mbedtls_sha256_context *src)
 {
     *dst = *src;
@@ -208,7 +208,7 @@ void mbedtls_sha256_clone(mbedtls_sha256_context *dst,
 /*
  * SHA-256 context setup
  */
-int mbedtls_sha256_starts(mbedtls_sha256_context *ctx, int is224)
+EXPORT_C int mbedtls_sha256_starts(mbedtls_sha256_context *ctx, int is224)
 {
 #if defined(MBEDTLS_SHA224_C) && defined(MBEDTLS_SHA256_C)
     if (is224 != 0 && is224 != 1) {
@@ -589,7 +589,7 @@ static size_t mbedtls_internal_sha256_process_many(mbedtls_sha256_context *ctx,
     }
 }
 
-int mbedtls_internal_sha256_process(mbedtls_sha256_context *ctx,
+EXPORT_C int mbedtls_internal_sha256_process(mbedtls_sha256_context *ctx,
                                     const unsigned char data[SHA256_BLOCK_SIZE])
 {
     if (mbedtls_a64_crypto_sha256_has_support()) {
@@ -605,7 +605,7 @@ int mbedtls_internal_sha256_process(mbedtls_sha256_context *ctx,
 /*
  * SHA-256 process buffer
  */
-int mbedtls_sha256_update(mbedtls_sha256_context *ctx,
+EXPORT_C int mbedtls_sha256_update(mbedtls_sha256_context *ctx,
                           const unsigned char *input,
                           size_t ilen)
 {
@@ -660,7 +660,7 @@ int mbedtls_sha256_update(mbedtls_sha256_context *ctx,
 /*
  * SHA-256 final digest
  */
-int mbedtls_sha256_finish(mbedtls_sha256_context *ctx,
+EXPORT_C int mbedtls_sha256_finish(mbedtls_sha256_context *ctx,
                           unsigned char *output)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -729,7 +729,7 @@ int mbedtls_sha256_finish(mbedtls_sha256_context *ctx,
 /*
  * output = SHA-256( input buffer )
  */
-int mbedtls_sha256(const unsigned char *input,
+EXPORT_C int mbedtls_sha256(const unsigned char *input,
                    size_t ilen,
                    unsigned char *output,
                    int is224)

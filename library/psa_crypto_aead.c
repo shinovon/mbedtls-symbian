@@ -130,7 +130,7 @@ static psa_status_t psa_aead_setup(
     return PSA_SUCCESS;
 }
 
-psa_status_t mbedtls_psa_aead_encrypt(
+EXPORT_C psa_status_t mbedtls_psa_aead_encrypt(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg,
@@ -242,7 +242,7 @@ static psa_status_t psa_aead_unpadded_locate_tag(size_t tag_length,
     return PSA_SUCCESS;
 }
 
-psa_status_t mbedtls_psa_aead_decrypt(
+EXPORT_C psa_status_t mbedtls_psa_aead_decrypt(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg,
@@ -334,7 +334,7 @@ exit:
 
 /* Set the key and algorithm for a multipart authenticated encryption
  * operation. */
-psa_status_t mbedtls_psa_aead_encrypt_setup(
+EXPORT_C psa_status_t mbedtls_psa_aead_encrypt_setup(
     mbedtls_psa_aead_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -355,7 +355,7 @@ psa_status_t mbedtls_psa_aead_encrypt_setup(
 
 /* Set the key and algorithm for a multipart authenticated decryption
  * operation. */
-psa_status_t mbedtls_psa_aead_decrypt_setup(
+EXPORT_C psa_status_t mbedtls_psa_aead_decrypt_setup(
     mbedtls_psa_aead_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -375,7 +375,7 @@ psa_status_t mbedtls_psa_aead_decrypt_setup(
 }
 
 /* Set a nonce for the multipart AEAD operation*/
-psa_status_t mbedtls_psa_aead_set_nonce(
+EXPORT_C psa_status_t mbedtls_psa_aead_set_nonce(
     mbedtls_psa_aead_operation_t *operation,
     const uint8_t *nonce,
     size_t nonce_length)
@@ -433,7 +433,7 @@ psa_status_t mbedtls_psa_aead_set_nonce(
 }
 
 /* Declare the lengths of the message and additional data for AEAD. */
-psa_status_t mbedtls_psa_aead_set_lengths(
+EXPORT_C psa_status_t mbedtls_psa_aead_set_lengths(
     mbedtls_psa_aead_operation_t *operation,
     size_t ad_length,
     size_t plaintext_length)
@@ -457,7 +457,7 @@ psa_status_t mbedtls_psa_aead_set_lengths(
 }
 
 /* Pass additional data to an active multipart AEAD operation. */
-psa_status_t mbedtls_psa_aead_update_ad(
+EXPORT_C psa_status_t mbedtls_psa_aead_update_ad(
     mbedtls_psa_aead_operation_t *operation,
     const uint8_t *input,
     size_t input_length)
@@ -497,7 +497,7 @@ psa_status_t mbedtls_psa_aead_update_ad(
 
 /* Encrypt or decrypt a message fragment in an active multipart AEAD
  * operation.*/
-psa_status_t mbedtls_psa_aead_update(
+EXPORT_C psa_status_t mbedtls_psa_aead_update(
     mbedtls_psa_aead_operation_t *operation,
     const uint8_t *input,
     size_t input_length,
@@ -562,7 +562,7 @@ psa_status_t mbedtls_psa_aead_update(
 }
 
 /* Finish encrypting a message in a multipart AEAD operation. */
-psa_status_t mbedtls_psa_aead_finish(
+EXPORT_C psa_status_t mbedtls_psa_aead_finish(
     mbedtls_psa_aead_operation_t *operation,
     uint8_t *ciphertext,
     size_t ciphertext_size,
@@ -636,7 +636,7 @@ psa_status_t mbedtls_psa_aead_finish(
 }
 
 /* Abort an AEAD operation */
-psa_status_t mbedtls_psa_aead_abort(
+EXPORT_C psa_status_t mbedtls_psa_aead_abort(
     mbedtls_psa_aead_operation_t *operation)
 {
     switch (operation->alg) {

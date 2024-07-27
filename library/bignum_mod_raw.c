@@ -35,7 +35,7 @@
 
 #include "bignum_mod_raw_invasive.h"
 
-void mbedtls_mpi_mod_raw_cond_assign(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_cond_assign(mbedtls_mpi_uint *X,
                                      const mbedtls_mpi_uint *A,
                                      const mbedtls_mpi_mod_modulus *N,
                                      unsigned char assign)
@@ -43,7 +43,7 @@ void mbedtls_mpi_mod_raw_cond_assign(mbedtls_mpi_uint *X,
     mbedtls_mpi_core_cond_assign(X, A, N->limbs, assign);
 }
 
-void mbedtls_mpi_mod_raw_cond_swap(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_cond_swap(mbedtls_mpi_uint *X,
                                    mbedtls_mpi_uint *Y,
                                    const mbedtls_mpi_mod_modulus *N,
                                    unsigned char swap)
@@ -51,7 +51,7 @@ void mbedtls_mpi_mod_raw_cond_swap(mbedtls_mpi_uint *X,
     mbedtls_mpi_core_cond_swap(X, Y, N->limbs, swap);
 }
 
-int mbedtls_mpi_mod_raw_read(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_mod_raw_read(mbedtls_mpi_uint *X,
                              const mbedtls_mpi_mod_modulus *N,
                              const unsigned char *input,
                              size_t input_length,
@@ -86,7 +86,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_mpi_mod_raw_write(const mbedtls_mpi_uint *A,
+EXPORT_C int mbedtls_mpi_mod_raw_write(const mbedtls_mpi_uint *A,
                               const mbedtls_mpi_mod_modulus *N,
                               unsigned char *output,
                               size_t output_length,
@@ -110,7 +110,7 @@ int mbedtls_mpi_mod_raw_write(const mbedtls_mpi_uint *A,
 
 /* BEGIN MERGE SLOT 2 */
 
-void mbedtls_mpi_mod_raw_sub(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_sub(mbedtls_mpi_uint *X,
                              const mbedtls_mpi_uint *A,
                              const mbedtls_mpi_uint *B,
                              const mbedtls_mpi_mod_modulus *N)
@@ -133,7 +133,7 @@ void mbedtls_mpi_mod_raw_fix_quasi_reduction(mbedtls_mpi_uint *X,
 
 #endif /* MBEDTLS_TEST_HOOKS */
 
-void mbedtls_mpi_mod_raw_mul(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_mul(mbedtls_mpi_uint *X,
                              const mbedtls_mpi_uint *A,
                              const mbedtls_mpi_uint *B,
                              const mbedtls_mpi_mod_modulus *N,
@@ -147,7 +147,7 @@ void mbedtls_mpi_mod_raw_mul(mbedtls_mpi_uint *X,
 
 /* BEGIN MERGE SLOT 3 */
 
-size_t mbedtls_mpi_mod_raw_inv_prime_working_limbs(size_t AN_limbs)
+EXPORT_C size_t mbedtls_mpi_mod_raw_inv_prime_working_limbs(size_t AN_limbs)
 {
     /* mbedtls_mpi_mod_raw_inv_prime() needs a temporary for the exponent,
      * which will be the same size as the modulus and input (AN_limbs),
@@ -156,7 +156,7 @@ size_t mbedtls_mpi_mod_raw_inv_prime_working_limbs(size_t AN_limbs)
            mbedtls_mpi_core_exp_mod_working_limbs(AN_limbs, AN_limbs);
 }
 
-void mbedtls_mpi_mod_raw_inv_prime(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_inv_prime(mbedtls_mpi_uint *X,
                                    const mbedtls_mpi_uint *A,
                                    const mbedtls_mpi_uint *N,
                                    size_t AN_limbs,
@@ -185,7 +185,7 @@ void mbedtls_mpi_mod_raw_inv_prime(mbedtls_mpi_uint *X,
 /* END MERGE SLOT 4 */
 
 /* BEGIN MERGE SLOT 5 */
-void mbedtls_mpi_mod_raw_add(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_add(mbedtls_mpi_uint *X,
                              const mbedtls_mpi_uint *A,
                              const mbedtls_mpi_uint *B,
                              const mbedtls_mpi_mod_modulus *N)
@@ -199,7 +199,7 @@ void mbedtls_mpi_mod_raw_add(mbedtls_mpi_uint *X,
 
 /* BEGIN MERGE SLOT 6 */
 
-int mbedtls_mpi_mod_raw_canonical_to_modulus_rep(
+EXPORT_C int mbedtls_mpi_mod_raw_canonical_to_modulus_rep(
     mbedtls_mpi_uint *X,
     const mbedtls_mpi_mod_modulus *N)
 {
@@ -213,7 +213,7 @@ int mbedtls_mpi_mod_raw_canonical_to_modulus_rep(
     }
 }
 
-int mbedtls_mpi_mod_raw_modulus_to_canonical_rep(
+EXPORT_C int mbedtls_mpi_mod_raw_modulus_to_canonical_rep(
     mbedtls_mpi_uint *X,
     const mbedtls_mpi_mod_modulus *N)
 {
@@ -227,7 +227,7 @@ int mbedtls_mpi_mod_raw_modulus_to_canonical_rep(
     }
 }
 
-int mbedtls_mpi_mod_raw_random(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_mod_raw_random(mbedtls_mpi_uint *X,
                                mbedtls_mpi_uint min,
                                const mbedtls_mpi_mod_modulus *N,
                                int (*f_rng)(void *, unsigned char *, size_t),
@@ -243,7 +243,7 @@ int mbedtls_mpi_mod_raw_random(mbedtls_mpi_uint *X,
 /* END MERGE SLOT 6 */
 
 /* BEGIN MERGE SLOT 7 */
-int mbedtls_mpi_mod_raw_to_mont_rep(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_mod_raw_to_mont_rep(mbedtls_mpi_uint *X,
                                     const mbedtls_mpi_mod_modulus *N)
 {
     mbedtls_mpi_uint *T;
@@ -261,7 +261,7 @@ int mbedtls_mpi_mod_raw_to_mont_rep(mbedtls_mpi_uint *X,
     return 0;
 }
 
-int mbedtls_mpi_mod_raw_from_mont_rep(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_mod_raw_from_mont_rep(mbedtls_mpi_uint *X,
                                       const mbedtls_mpi_mod_modulus *N)
 {
     const size_t t_limbs = mbedtls_mpi_core_montmul_working_limbs(N->limbs);
@@ -278,7 +278,7 @@ int mbedtls_mpi_mod_raw_from_mont_rep(mbedtls_mpi_uint *X,
     return 0;
 }
 
-void mbedtls_mpi_mod_raw_neg(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_mod_raw_neg(mbedtls_mpi_uint *X,
                              const mbedtls_mpi_uint *A,
                              const mbedtls_mpi_mod_modulus *N)
 {

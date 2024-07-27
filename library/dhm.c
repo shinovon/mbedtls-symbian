@@ -107,22 +107,22 @@ cleanup:
     return ret;
 }
 
-void mbedtls_dhm_init(mbedtls_dhm_context *ctx)
+EXPORT_C void mbedtls_dhm_init(mbedtls_dhm_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_dhm_context));
 }
 
-size_t mbedtls_dhm_get_bitlen(const mbedtls_dhm_context *ctx)
+EXPORT_C size_t mbedtls_dhm_get_bitlen(const mbedtls_dhm_context *ctx)
 {
     return mbedtls_mpi_bitlen(&ctx->P);
 }
 
-size_t mbedtls_dhm_get_len(const mbedtls_dhm_context *ctx)
+EXPORT_C size_t mbedtls_dhm_get_len(const mbedtls_dhm_context *ctx)
 {
     return mbedtls_mpi_size(&ctx->P);
 }
 
-int mbedtls_dhm_get_value(const mbedtls_dhm_context *ctx,
+EXPORT_C int mbedtls_dhm_get_value(const mbedtls_dhm_context *ctx,
                           mbedtls_dhm_parameter param,
                           mbedtls_mpi *dest)
 {
@@ -155,7 +155,7 @@ int mbedtls_dhm_get_value(const mbedtls_dhm_context *ctx,
 /*
  * Parse the ServerKeyExchange parameters
  */
-int mbedtls_dhm_read_params(mbedtls_dhm_context *ctx,
+EXPORT_C int mbedtls_dhm_read_params(mbedtls_dhm_context *ctx,
                             unsigned char **p,
                             const unsigned char *end)
 {
@@ -232,7 +232,7 @@ cleanup:
 /*
  * Setup and write the ServerKeyExchange parameters
  */
-int mbedtls_dhm_make_params(mbedtls_dhm_context *ctx, int x_size,
+EXPORT_C int mbedtls_dhm_make_params(mbedtls_dhm_context *ctx, int x_size,
                             unsigned char *output, size_t *olen,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng)
@@ -281,7 +281,7 @@ cleanup:
 /*
  * Set prime modulus and generator
  */
-int mbedtls_dhm_set_group(mbedtls_dhm_context *ctx,
+EXPORT_C int mbedtls_dhm_set_group(mbedtls_dhm_context *ctx,
                           const mbedtls_mpi *P,
                           const mbedtls_mpi *G)
 {
@@ -298,7 +298,7 @@ int mbedtls_dhm_set_group(mbedtls_dhm_context *ctx,
 /*
  * Import the peer's public value G^Y
  */
-int mbedtls_dhm_read_public(mbedtls_dhm_context *ctx,
+EXPORT_C int mbedtls_dhm_read_public(mbedtls_dhm_context *ctx,
                             const unsigned char *input, size_t ilen)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -317,7 +317,7 @@ int mbedtls_dhm_read_public(mbedtls_dhm_context *ctx,
 /*
  * Create own private value X and export G^X
  */
-int mbedtls_dhm_make_public(mbedtls_dhm_context *ctx, int x_size,
+EXPORT_C int mbedtls_dhm_make_public(mbedtls_dhm_context *ctx, int x_size,
                             unsigned char *output, size_t olen,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng)
@@ -414,7 +414,7 @@ cleanup:
 /*
  * Derive and export the shared secret (G^Y)^X mod P
  */
-int mbedtls_dhm_calc_secret(mbedtls_dhm_context *ctx,
+EXPORT_C int mbedtls_dhm_calc_secret(mbedtls_dhm_context *ctx,
                             unsigned char *output, size_t output_size, size_t *olen,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng)
@@ -467,7 +467,7 @@ cleanup:
 /*
  * Free the components of a DHM key
  */
-void mbedtls_dhm_free(mbedtls_dhm_context *ctx)
+EXPORT_C void mbedtls_dhm_free(mbedtls_dhm_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -491,7 +491,7 @@ void mbedtls_dhm_free(mbedtls_dhm_context *ctx)
 /*
  * Parse DHM parameters
  */
-int mbedtls_dhm_parse_dhm(mbedtls_dhm_context *dhm, const unsigned char *dhmin,
+EXPORT_C int mbedtls_dhm_parse_dhm(mbedtls_dhm_context *dhm, const unsigned char *dhmin,
                           size_t dhminlen)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

@@ -231,7 +231,7 @@ static int x509_csr_parse_attributes(mbedtls_x509_csr *csr,
 /*
  * Parse a CSR in DER format
  */
-int mbedtls_x509_csr_parse_der(mbedtls_x509_csr *csr,
+EXPORT_C int mbedtls_x509_csr_parse_der(mbedtls_x509_csr *csr,
                                const unsigned char *buf, size_t buflen)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -398,7 +398,7 @@ int mbedtls_x509_csr_parse_der(mbedtls_x509_csr *csr,
 /*
  * Parse a CSR, allowing for PEM or raw DER encoding
  */
-int mbedtls_x509_csr_parse(mbedtls_x509_csr *csr, const unsigned char *buf, size_t buflen)
+EXPORT_C int mbedtls_x509_csr_parse(mbedtls_x509_csr *csr, const unsigned char *buf, size_t buflen)
 {
 #if defined(MBEDTLS_PEM_PARSE_C)
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -473,7 +473,7 @@ int mbedtls_x509_csr_parse_file(mbedtls_x509_csr *csr, const char *path)
 /*
  * Return an informational string about the CSR.
  */
-int mbedtls_x509_csr_info(char *buf, size_t size, const char *prefix,
+EXPORT_C int mbedtls_x509_csr_info(char *buf, size_t size, const char *prefix,
                           const mbedtls_x509_csr *csr)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -554,7 +554,7 @@ int mbedtls_x509_csr_info(char *buf, size_t size, const char *prefix,
 /*
  * Initialize a CSR
  */
-void mbedtls_x509_csr_init(mbedtls_x509_csr *csr)
+EXPORT_C void mbedtls_x509_csr_init(mbedtls_x509_csr *csr)
 {
     memset(csr, 0, sizeof(mbedtls_x509_csr));
 }
@@ -562,7 +562,7 @@ void mbedtls_x509_csr_init(mbedtls_x509_csr *csr)
 /*
  * Unallocate all CSR data
  */
-void mbedtls_x509_csr_free(mbedtls_x509_csr *csr)
+EXPORT_C void mbedtls_x509_csr_free(mbedtls_x509_csr *csr)
 {
     if (csr == NULL) {
         return;

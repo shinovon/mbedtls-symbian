@@ -398,7 +398,7 @@ static mbedtls_ecp_group_id ecp_supported_grp_id[ECP_NB_CURVES];
 /*
  * List of supported curves and associated info
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_list(void)
+EXPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_list(void)
 {
     return ecp_supported_curves;
 }
@@ -406,7 +406,7 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_list(void)
 /*
  * List of supported curves, group ID only
  */
-const mbedtls_ecp_group_id *mbedtls_ecp_grp_id_list(void)
+EXPORT_C const mbedtls_ecp_group_id *mbedtls_ecp_grp_id_list(void)
 {
     static int init_done = 0;
 
@@ -430,7 +430,7 @@ const mbedtls_ecp_group_id *mbedtls_ecp_grp_id_list(void)
 /*
  * Get the curve info for the internal identifier
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_grp_id(mbedtls_ecp_group_id grp_id)
+EXPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_grp_id(mbedtls_ecp_group_id grp_id)
 {
     const mbedtls_ecp_curve_info *curve_info;
 
@@ -448,7 +448,7 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_grp_id(mbedtls_ecp_gro
 /*
  * Get the curve info from the TLS identifier
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_tls_id(uint16_t tls_id)
+EXPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_tls_id(uint16_t tls_id)
 {
     const mbedtls_ecp_curve_info *curve_info;
 
@@ -466,7 +466,7 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_tls_id(uint16_t tls_id
 /*
  * Get the curve info from the name
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_name(const char *name)
+EXPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_name(const char *name)
 {
     const mbedtls_ecp_curve_info *curve_info;
 
@@ -488,7 +488,7 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_name(const char *name)
 /*
  * Get the type of a curve
  */
-mbedtls_ecp_curve_type mbedtls_ecp_get_type(const mbedtls_ecp_group *grp)
+EXPORT_C mbedtls_ecp_curve_type mbedtls_ecp_get_type(const mbedtls_ecp_group *grp)
 {
     if (grp->G.X.p == NULL) {
         return MBEDTLS_ECP_TYPE_NONE;
@@ -504,7 +504,7 @@ mbedtls_ecp_curve_type mbedtls_ecp_get_type(const mbedtls_ecp_group *grp)
 /*
  * Initialize (the components of) a point
  */
-void mbedtls_ecp_point_init(mbedtls_ecp_point *pt)
+EXPORT_C void mbedtls_ecp_point_init(mbedtls_ecp_point *pt)
 {
     mbedtls_mpi_init(&pt->X);
     mbedtls_mpi_init(&pt->Y);
@@ -514,7 +514,7 @@ void mbedtls_ecp_point_init(mbedtls_ecp_point *pt)
 /*
  * Initialize (the components of) a group
  */
-void mbedtls_ecp_group_init(mbedtls_ecp_group *grp)
+EXPORT_C void mbedtls_ecp_group_init(mbedtls_ecp_group *grp)
 {
     grp->id = MBEDTLS_ECP_DP_NONE;
     mbedtls_mpi_init(&grp->P);
@@ -536,7 +536,7 @@ void mbedtls_ecp_group_init(mbedtls_ecp_group *grp)
 /*
  * Initialize (the components of) a key pair
  */
-void mbedtls_ecp_keypair_init(mbedtls_ecp_keypair *key)
+EXPORT_C void mbedtls_ecp_keypair_init(mbedtls_ecp_keypair *key)
 {
     mbedtls_ecp_group_init(&key->grp);
     mbedtls_mpi_init(&key->d);
@@ -546,7 +546,7 @@ void mbedtls_ecp_keypair_init(mbedtls_ecp_keypair *key)
 /*
  * Unallocate (the components of) a point
  */
-void mbedtls_ecp_point_free(mbedtls_ecp_point *pt)
+EXPORT_C void mbedtls_ecp_point_free(mbedtls_ecp_point *pt)
 {
     if (pt == NULL) {
         return;
@@ -573,7 +573,7 @@ static int ecp_group_is_static_comb_table(const mbedtls_ecp_group *grp)
 /*
  * Unallocate (the components of) a group
  */
-void mbedtls_ecp_group_free(mbedtls_ecp_group *grp)
+EXPORT_C void mbedtls_ecp_group_free(mbedtls_ecp_group *grp)
 {
     size_t i;
 
@@ -600,7 +600,7 @@ void mbedtls_ecp_group_free(mbedtls_ecp_group *grp)
 /*
  * Unallocate (the components of) a key pair
  */
-void mbedtls_ecp_keypair_free(mbedtls_ecp_keypair *key)
+EXPORT_C void mbedtls_ecp_keypair_free(mbedtls_ecp_keypair *key)
 {
     if (key == NULL) {
         return;
@@ -614,7 +614,7 @@ void mbedtls_ecp_keypair_free(mbedtls_ecp_keypair *key)
 /*
  * Copy the contents of a point
  */
-int mbedtls_ecp_copy(mbedtls_ecp_point *P, const mbedtls_ecp_point *Q)
+EXPORT_C int mbedtls_ecp_copy(mbedtls_ecp_point *P, const mbedtls_ecp_point *Q)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     MBEDTLS_MPI_CHK(mbedtls_mpi_copy(&P->X, &Q->X));
@@ -628,7 +628,7 @@ cleanup:
 /*
  * Copy the contents of a group object
  */
-int mbedtls_ecp_group_copy(mbedtls_ecp_group *dst, const mbedtls_ecp_group *src)
+EXPORT_C int mbedtls_ecp_group_copy(mbedtls_ecp_group *dst, const mbedtls_ecp_group *src)
 {
     return mbedtls_ecp_group_load(dst, src->id);
 }
@@ -636,7 +636,7 @@ int mbedtls_ecp_group_copy(mbedtls_ecp_group *dst, const mbedtls_ecp_group *src)
 /*
  * Set point to zero
  */
-int mbedtls_ecp_set_zero(mbedtls_ecp_point *pt)
+EXPORT_C int mbedtls_ecp_set_zero(mbedtls_ecp_point *pt)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     MBEDTLS_MPI_CHK(mbedtls_mpi_lset(&pt->X, 1));
@@ -650,7 +650,7 @@ cleanup:
 /*
  * Tell if a point is zero
  */
-int mbedtls_ecp_is_zero(mbedtls_ecp_point *pt)
+EXPORT_C int mbedtls_ecp_is_zero(mbedtls_ecp_point *pt)
 {
     return mbedtls_mpi_cmp_int(&pt->Z, 0) == 0;
 }
@@ -658,7 +658,7 @@ int mbedtls_ecp_is_zero(mbedtls_ecp_point *pt)
 /*
  * Compare two points lazily
  */
-int mbedtls_ecp_point_cmp(const mbedtls_ecp_point *P,
+EXPORT_C int mbedtls_ecp_point_cmp(const mbedtls_ecp_point *P,
                           const mbedtls_ecp_point *Q)
 {
     if (mbedtls_mpi_cmp_mpi(&P->X, &Q->X) == 0 &&
@@ -673,7 +673,7 @@ int mbedtls_ecp_point_cmp(const mbedtls_ecp_point *P,
 /*
  * Import a non-zero point from ASCII strings
  */
-int mbedtls_ecp_point_read_string(mbedtls_ecp_point *P, int radix,
+EXPORT_C int mbedtls_ecp_point_read_string(mbedtls_ecp_point *P, int radix,
                                   const char *x, const char *y)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -688,7 +688,7 @@ cleanup:
 /*
  * Export a point into unsigned binary data (SEC1 2.3.3 and RFC7748)
  */
-int mbedtls_ecp_point_write_binary(const mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_point_write_binary(const mbedtls_ecp_group *grp,
                                    const mbedtls_ecp_point *P,
                                    int format, size_t *olen,
                                    unsigned char *buf, size_t buflen)
@@ -766,7 +766,7 @@ static int mbedtls_ecp_sw_derive_y(const mbedtls_ecp_group *grp,
 /*
  * Import a point from unsigned binary data (SEC1 2.3.4 and RFC7748)
  */
-int mbedtls_ecp_point_read_binary(const mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_point_read_binary(const mbedtls_ecp_group *grp,
                                   mbedtls_ecp_point *pt,
                                   const unsigned char *buf, size_t ilen)
 {
@@ -841,7 +841,7 @@ cleanup:
  *          opaque point <1..2^8-1>;
  *      } ECPoint;
  */
-int mbedtls_ecp_tls_read_point(const mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_tls_read_point(const mbedtls_ecp_group *grp,
                                mbedtls_ecp_point *pt,
                                const unsigned char **buf, size_t buf_len)
 {
@@ -874,7 +874,7 @@ int mbedtls_ecp_tls_read_point(const mbedtls_ecp_group *grp,
  *          opaque point <1..2^8-1>;
  *      } ECPoint;
  */
-int mbedtls_ecp_tls_write_point(const mbedtls_ecp_group *grp, const mbedtls_ecp_point *pt,
+EXPORT_C int mbedtls_ecp_tls_write_point(const mbedtls_ecp_group *grp, const mbedtls_ecp_point *pt,
                                 int format, size_t *olen,
                                 unsigned char *buf, size_t blen)
 {
@@ -908,7 +908,7 @@ int mbedtls_ecp_tls_write_point(const mbedtls_ecp_group *grp, const mbedtls_ecp_
 /*
  * Set a group from an ECParameters record (RFC 4492)
  */
-int mbedtls_ecp_tls_read_group(mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_tls_read_group(mbedtls_ecp_group *grp,
                                const unsigned char **buf, size_t len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -924,7 +924,7 @@ int mbedtls_ecp_tls_read_group(mbedtls_ecp_group *grp,
  * Read a group id from an ECParameters record (RFC 4492) and convert it to
  * mbedtls_ecp_group_id.
  */
-int mbedtls_ecp_tls_read_group_id(mbedtls_ecp_group_id *grp,
+EXPORT_C int mbedtls_ecp_tls_read_group_id(mbedtls_ecp_group_id *grp,
                                   const unsigned char **buf, size_t len)
 {
     uint16_t tls_id;
@@ -962,7 +962,7 @@ int mbedtls_ecp_tls_read_group_id(mbedtls_ecp_group_id *grp,
 /*
  * Write the ECParameters record corresponding to a group (RFC 4492)
  */
-int mbedtls_ecp_tls_write_group(const mbedtls_ecp_group *grp, size_t *olen,
+EXPORT_C int mbedtls_ecp_tls_write_group(const mbedtls_ecp_group *grp, size_t *olen,
                                 unsigned char *buf, size_t blen)
 {
     const mbedtls_ecp_curve_info *curve_info;
@@ -2702,7 +2702,7 @@ cleanup:
 /*
  * Restartable multiplication R = m * P
  */
-int mbedtls_ecp_mul_restartable(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
+EXPORT_C int mbedtls_ecp_mul_restartable(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
                                 const mbedtls_mpi *m, const mbedtls_ecp_point *P,
                                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng,
                                 mbedtls_ecp_restart_ctx *rs_ctx)
@@ -2717,7 +2717,7 @@ int mbedtls_ecp_mul_restartable(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
 /*
  * Multiplication R = m * P
  */
-int mbedtls_ecp_mul(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
+EXPORT_C int mbedtls_ecp_mul(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
                     const mbedtls_mpi *m, const mbedtls_ecp_point *P,
                     int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
 {
@@ -2803,7 +2803,7 @@ cleanup:
  * Restartable linear combination
  * NOT constant-time
  */
-int mbedtls_ecp_muladd_restartable(
+EXPORT_C int mbedtls_ecp_muladd_restartable(
     mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
     const mbedtls_mpi *m, const mbedtls_ecp_point *P,
     const mbedtls_mpi *n, const mbedtls_ecp_point *Q,
@@ -2907,7 +2907,7 @@ cleanup:
  * Linear combination
  * NOT constant-time
  */
-int mbedtls_ecp_muladd(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
+EXPORT_C int mbedtls_ecp_muladd(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
                        const mbedtls_mpi *m, const mbedtls_ecp_point *P,
                        const mbedtls_mpi *n, const mbedtls_ecp_point *Q)
 {
@@ -3029,7 +3029,7 @@ static int ecp_check_pubkey_mx(const mbedtls_ecp_group *grp, const mbedtls_ecp_p
 /*
  * Check that a point is valid as a public key
  */
-int mbedtls_ecp_check_pubkey(const mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_check_pubkey(const mbedtls_ecp_group *grp,
                              const mbedtls_ecp_point *pt)
 {
     /* Must use affine coordinates */
@@ -3053,7 +3053,7 @@ int mbedtls_ecp_check_pubkey(const mbedtls_ecp_group *grp,
 /*
  * Check that an mbedtls_mpi is valid as a private key
  */
-int mbedtls_ecp_check_privkey(const mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_check_privkey(const mbedtls_ecp_group *grp,
                               const mbedtls_mpi *d)
 {
 #if defined(MBEDTLS_ECP_MONTGOMERY_ENABLED)
@@ -3139,7 +3139,7 @@ static int mbedtls_ecp_gen_privkey_sw(
 /*
  * Generate a private key
  */
-int mbedtls_ecp_gen_privkey(const mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_gen_privkey(const mbedtls_ecp_group *grp,
                             mbedtls_mpi *d,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng)
@@ -3162,7 +3162,7 @@ int mbedtls_ecp_gen_privkey(const mbedtls_ecp_group *grp,
 /*
  * Generate a keypair with configurable base point
  */
-int mbedtls_ecp_gen_keypair_base(mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_gen_keypair_base(mbedtls_ecp_group *grp,
                                  const mbedtls_ecp_point *G,
                                  mbedtls_mpi *d, mbedtls_ecp_point *Q,
                                  int (*f_rng)(void *, unsigned char *, size_t),
@@ -3179,7 +3179,7 @@ cleanup:
 /*
  * Generate key pair, wrapper for conventional base point
  */
-int mbedtls_ecp_gen_keypair(mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_gen_keypair(mbedtls_ecp_group *grp,
                             mbedtls_mpi *d, mbedtls_ecp_point *Q,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng)
@@ -3190,7 +3190,7 @@ int mbedtls_ecp_gen_keypair(mbedtls_ecp_group *grp,
 /*
  * Generate a keypair, prettier wrapper
  */
-int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
+EXPORT_C int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
                         int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -3206,7 +3206,7 @@ int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
 /*
  * Read a private key.
  */
-int mbedtls_ecp_read_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
+EXPORT_C int mbedtls_ecp_read_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
                          const unsigned char *buf, size_t buflen)
 {
     int ret = 0;
@@ -3285,7 +3285,7 @@ cleanup:
 /*
  * Write a private key.
  */
-int mbedtls_ecp_write_key(mbedtls_ecp_keypair *key,
+EXPORT_C int mbedtls_ecp_write_key(mbedtls_ecp_keypair *key,
                           unsigned char *buf, size_t buflen)
 {
     int ret = MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE;
@@ -3320,7 +3320,7 @@ cleanup:
 /*
  * Check a public-private key pair
  */
-int mbedtls_ecp_check_pub_priv(
+EXPORT_C int mbedtls_ecp_check_pub_priv(
     const mbedtls_ecp_keypair *pub, const mbedtls_ecp_keypair *prv,
     int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
 {
@@ -3361,7 +3361,7 @@ cleanup:
 /*
  * Export generic key-pair parameters.
  */
-int mbedtls_ecp_export(const mbedtls_ecp_keypair *key, mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecp_export(const mbedtls_ecp_keypair *key, mbedtls_ecp_group *grp,
                        mbedtls_mpi *d, mbedtls_ecp_point *Q)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

@@ -102,7 +102,7 @@
 //static void *(*const volatile memset_func)(void *, int, size_t) = memset;
 //#endif
 
-void mbedtls_platform_zeroize(void *buf, size_t len)
+EXPORT_C void mbedtls_platform_zeroize(void *buf, size_t len)
 {
     MBEDTLS_INTERNAL_VALIDATE(len == 0 || buf != NULL);
 
@@ -157,7 +157,7 @@ void mbedtls_platform_zeroize(void *buf, size_t len)
              ( defined(_POSIX_THREAD_SAFE_FUNCTIONS ) && \
                 _POSIX_THREAD_SAFE_FUNCTIONS >= 200112L ) ) */
 
-struct tm *mbedtls_platform_gmtime_r(const mbedtls_time_t *tt,
+EXPORT_C struct tm *mbedtls_platform_gmtime_r(const mbedtls_time_t *tt,
                                      struct tm *tm_buf)
 {
 #if defined(_WIN32) && !defined(PLATFORM_UTIL_USE_GMTIME)
@@ -203,19 +203,19 @@ void (*mbedtls_test_hook_test_fail)(const char *, int, const char *);
  * Provide external definitions of some inline functions so that the compiler
  * has the option to not inline them
  */
-extern inline void mbedtls_xor(unsigned char *r,
+EXPORT_C extern inline void mbedtls_xor(unsigned char *r,
                                const unsigned char *a,
                                const unsigned char *b,
                                size_t n);
 
-extern inline uint16_t mbedtls_get_unaligned_uint16(const void *p);
+EXPORT_C extern inline uint16_t mbedtls_get_unaligned_uint16(const void *p);
 
-extern inline void mbedtls_put_unaligned_uint16(void *p, uint16_t x);
+EXPORT_C extern inline void mbedtls_put_unaligned_uint16(void *p, uint16_t x);
 
-extern inline uint32_t mbedtls_get_unaligned_uint32(const void *p);
+EXPORT_C extern inline uint32_t mbedtls_get_unaligned_uint32(const void *p);
 
-extern inline void mbedtls_put_unaligned_uint32(void *p, uint32_t x);
+EXPORT_C extern inline void mbedtls_put_unaligned_uint32(void *p, uint32_t x);
 
-extern inline uint64_t mbedtls_get_unaligned_uint64(const void *p);
+EXPORT_C extern inline uint64_t mbedtls_get_unaligned_uint64(const void *p);
 
-extern inline void mbedtls_put_unaligned_uint64(void *p, uint64_t x);
+EXPORT_C extern inline void mbedtls_put_unaligned_uint64(void *p, uint64_t x);

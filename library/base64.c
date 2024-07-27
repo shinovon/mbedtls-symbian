@@ -36,7 +36,7 @@
 /*
  * Encode a buffer into base64 format
  */
-int mbedtls_base64_encode(unsigned char *dst, size_t dlen, size_t *olen,
+EXPORT_C int mbedtls_base64_encode(unsigned char *dst, size_t dlen, size_t *olen,
                           const unsigned char *src, size_t slen)
 {
     size_t i, n;
@@ -103,7 +103,7 @@ int mbedtls_base64_encode(unsigned char *dst, size_t dlen, size_t *olen,
 /*
  * Decode a base64-formatted buffer
  */
-int mbedtls_base64_decode(unsigned char *dst, size_t dlen, size_t *olen,
+EXPORT_C int mbedtls_base64_decode(unsigned char *dst, size_t dlen, size_t *olen,
                           const unsigned char *src, size_t slen)
 {
     size_t i; /* index in source */

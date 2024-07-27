@@ -513,7 +513,7 @@ static int ssl_write_use_srtp_ext(mbedtls_ssl_context *ssl,
 }
 #endif /* MBEDTLS_SSL_DTLS_SRTP */
 
-int mbedtls_ssl_tls12_write_client_hello_exts(mbedtls_ssl_context *ssl,
+EXPORT_C int mbedtls_ssl_tls12_write_client_hello_exts(mbedtls_ssl_context *ssl,
                                               unsigned char *buf,
                                               const unsigned char *end,
                                               int uses_ec,
@@ -3482,7 +3482,7 @@ static int ssl_parse_new_session_ticket(mbedtls_ssl_context *ssl)
 /*
  * SSL handshake -- client side -- single step
  */
-int mbedtls_ssl_handshake_client_step(mbedtls_ssl_context *ssl)
+EXPORT_C int mbedtls_ssl_handshake_client_step(mbedtls_ssl_context *ssl)
 {
     int ret = 0;
 

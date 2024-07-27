@@ -897,7 +897,7 @@ static int ssl_prepare_client_hello(mbedtls_ssl_context *ssl)
  * Write ClientHello handshake message.
  * Handler for MBEDTLS_SSL_CLIENT_HELLO
  */
-int mbedtls_ssl_write_client_hello(mbedtls_ssl_context *ssl)
+EXPORT_C int mbedtls_ssl_write_client_hello(mbedtls_ssl_context *ssl)
 {
     int ret = 0;
     unsigned char *buf;

@@ -48,12 +48,12 @@
 
 #include "mbedtls/platform.h"
 
-void mbedtls_x509write_csr_init(mbedtls_x509write_csr *ctx)
+EXPORT_C void mbedtls_x509write_csr_init(mbedtls_x509write_csr *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_x509write_csr));
 }
 
-void mbedtls_x509write_csr_free(mbedtls_x509write_csr *ctx)
+EXPORT_C void mbedtls_x509write_csr_free(mbedtls_x509write_csr *ctx)
 {
     mbedtls_asn1_free_named_data_list(&ctx->subject);
     mbedtls_asn1_free_named_data_list(&ctx->extensions);
@@ -61,23 +61,23 @@ void mbedtls_x509write_csr_free(mbedtls_x509write_csr *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_x509write_csr));
 }
 
-void mbedtls_x509write_csr_set_md_alg(mbedtls_x509write_csr *ctx, mbedtls_md_type_t md_alg)
+EXPORT_C void mbedtls_x509write_csr_set_md_alg(mbedtls_x509write_csr *ctx, mbedtls_md_type_t md_alg)
 {
     ctx->md_alg = md_alg;
 }
 
-void mbedtls_x509write_csr_set_key(mbedtls_x509write_csr *ctx, mbedtls_pk_context *key)
+EXPORT_C void mbedtls_x509write_csr_set_key(mbedtls_x509write_csr *ctx, mbedtls_pk_context *key)
 {
     ctx->key = key;
 }
 
-int mbedtls_x509write_csr_set_subject_name(mbedtls_x509write_csr *ctx,
+EXPORT_C int mbedtls_x509write_csr_set_subject_name(mbedtls_x509write_csr *ctx,
                                            const char *subject_name)
 {
     return mbedtls_x509_string_to_names(&ctx->subject, subject_name);
 }
 
-int mbedtls_x509write_csr_set_extension(mbedtls_x509write_csr *ctx,
+EXPORT_C int mbedtls_x509write_csr_set_extension(mbedtls_x509write_csr *ctx,
                                         const char *oid, size_t oid_len,
                                         int critical,
                                         const unsigned char *val, size_t val_len)
@@ -86,7 +86,7 @@ int mbedtls_x509write_csr_set_extension(mbedtls_x509write_csr *ctx,
                                       critical, val, val_len);
 }
 
-int mbedtls_x509write_csr_set_subject_alternative_name(mbedtls_x509write_csr *ctx,
+EXPORT_C int mbedtls_x509write_csr_set_subject_alternative_name(mbedtls_x509write_csr *ctx,
                                                        const mbedtls_x509_san_list *san_list)
 {
     int ret = 0;
@@ -185,7 +185,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_x509write_csr_set_key_usage(mbedtls_x509write_csr *ctx, unsigned char key_usage)
+EXPORT_C int mbedtls_x509write_csr_set_key_usage(mbedtls_x509write_csr *ctx, unsigned char key_usage)
 {
     unsigned char buf[4] = { 0 };
     unsigned char *c;
@@ -208,7 +208,7 @@ int mbedtls_x509write_csr_set_key_usage(mbedtls_x509write_csr *ctx, unsigned cha
     return 0;
 }
 
-int mbedtls_x509write_csr_set_ns_cert_type(mbedtls_x509write_csr *ctx,
+EXPORT_C int mbedtls_x509write_csr_set_ns_cert_type(mbedtls_x509write_csr *ctx,
                                            unsigned char ns_cert_type)
 {
     unsigned char buf[4] = { 0 };
@@ -386,7 +386,7 @@ static int x509write_csr_der_internal(mbedtls_x509write_csr *ctx,
     return (int) len;
 }
 
-int mbedtls_x509write_csr_der(mbedtls_x509write_csr *ctx, unsigned char *buf,
+EXPORT_C int mbedtls_x509write_csr_der(mbedtls_x509write_csr *ctx, unsigned char *buf,
                               size_t size,
                               int (*f_rng)(void *, unsigned char *, size_t),
                               void *p_rng)

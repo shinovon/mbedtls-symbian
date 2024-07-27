@@ -4221,7 +4221,7 @@ static int ssl_write_new_session_ticket(mbedtls_ssl_context *ssl)
 /*
  * SSL handshake -- server side -- single step
  */
-int mbedtls_ssl_handshake_server_step(mbedtls_ssl_context *ssl)
+EXPORT_C int mbedtls_ssl_handshake_server_step(mbedtls_ssl_context *ssl)
 {
     int ret = 0;
 
@@ -4333,7 +4333,7 @@ int mbedtls_ssl_handshake_server_step(mbedtls_ssl_context *ssl)
     return ret;
 }
 
-void mbedtls_ssl_conf_preference_order(mbedtls_ssl_config *conf, int order)
+EXPORT_C void mbedtls_ssl_conf_preference_order(mbedtls_ssl_config *conf, int order)
 {
     conf->respect_cli_pref = order;
 }

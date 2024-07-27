@@ -237,12 +237,12 @@ static void poly1305_compute_mac(const mbedtls_poly1305_context *ctx,
     MBEDTLS_PUT_UINT32_LE(acc3, mac, 12);
 }
 
-void mbedtls_poly1305_init(mbedtls_poly1305_context *ctx)
+EXPORT_C void mbedtls_poly1305_init(mbedtls_poly1305_context *ctx)
 {
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_poly1305_context));
 }
 
-void mbedtls_poly1305_free(mbedtls_poly1305_context *ctx)
+EXPORT_C void mbedtls_poly1305_free(mbedtls_poly1305_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -251,7 +251,7 @@ void mbedtls_poly1305_free(mbedtls_poly1305_context *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_poly1305_context));
 }
 
-int mbedtls_poly1305_starts(mbedtls_poly1305_context *ctx,
+EXPORT_C int mbedtls_poly1305_starts(mbedtls_poly1305_context *ctx,
                             const unsigned char key[32])
 {
     /* r &= 0x0ffffffc0ffffffc0ffffffc0fffffff */
@@ -279,7 +279,7 @@ int mbedtls_poly1305_starts(mbedtls_poly1305_context *ctx,
     return 0;
 }
 
-int mbedtls_poly1305_update(mbedtls_poly1305_context *ctx,
+EXPORT_C int mbedtls_poly1305_update(mbedtls_poly1305_context *ctx,
                             const unsigned char *input,
                             size_t ilen)
 {
@@ -335,7 +335,7 @@ int mbedtls_poly1305_update(mbedtls_poly1305_context *ctx,
     return 0;
 }
 
-int mbedtls_poly1305_finish(mbedtls_poly1305_context *ctx,
+EXPORT_C int mbedtls_poly1305_finish(mbedtls_poly1305_context *ctx,
                             unsigned char mac[16])
 {
     /* Process any leftover data */
@@ -358,7 +358,7 @@ int mbedtls_poly1305_finish(mbedtls_poly1305_context *ctx,
     return 0;
 }
 
-int mbedtls_poly1305_mac(const unsigned char key[32],
+EXPORT_C int mbedtls_poly1305_mac(const unsigned char key[32],
                          const unsigned char *input,
                          size_t ilen,
                          unsigned char mac[16])

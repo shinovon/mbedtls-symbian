@@ -37,12 +37,12 @@
 
 #if !defined(MBEDTLS_RIPEMD160_ALT)
 
-void mbedtls_ripemd160_init(mbedtls_ripemd160_context *ctx)
+EXPORT_C void mbedtls_ripemd160_init(mbedtls_ripemd160_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_ripemd160_context));
 }
 
-void mbedtls_ripemd160_free(mbedtls_ripemd160_context *ctx)
+EXPORT_C void mbedtls_ripemd160_free(mbedtls_ripemd160_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -51,7 +51,7 @@ void mbedtls_ripemd160_free(mbedtls_ripemd160_context *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_ripemd160_context));
 }
 
-void mbedtls_ripemd160_clone(mbedtls_ripemd160_context *dst,
+EXPORT_C void mbedtls_ripemd160_clone(mbedtls_ripemd160_context *dst,
                              const mbedtls_ripemd160_context *src)
 {
     *dst = *src;
@@ -60,7 +60,7 @@ void mbedtls_ripemd160_clone(mbedtls_ripemd160_context *dst,
 /*
  * RIPEMD-160 context setup
  */
-int mbedtls_ripemd160_starts(mbedtls_ripemd160_context *ctx)
+EXPORT_C int mbedtls_ripemd160_starts(mbedtls_ripemd160_context *ctx)
 {
     ctx->total[0] = 0;
     ctx->total[1] = 0;
@@ -78,7 +78,7 @@ int mbedtls_ripemd160_starts(mbedtls_ripemd160_context *ctx)
 /*
  * Process one block
  */
-int mbedtls_internal_ripemd160_process(mbedtls_ripemd160_context *ctx,
+EXPORT_C int mbedtls_internal_ripemd160_process(mbedtls_ripemd160_context *ctx,
                                        const unsigned char data[64])
 {
     struct {
@@ -275,7 +275,7 @@ int mbedtls_internal_ripemd160_process(mbedtls_ripemd160_context *ctx,
 /*
  * RIPEMD-160 process buffer
  */
-int mbedtls_ripemd160_update(mbedtls_ripemd160_context *ctx,
+EXPORT_C int mbedtls_ripemd160_update(mbedtls_ripemd160_context *ctx,
                              const unsigned char *input,
                              size_t ilen)
 {
@@ -336,7 +336,7 @@ static const unsigned char ripemd160_padding[64] =
 /*
  * RIPEMD-160 final digest
  */
-int mbedtls_ripemd160_finish(mbedtls_ripemd160_context *ctx,
+EXPORT_C int mbedtls_ripemd160_finish(mbedtls_ripemd160_context *ctx,
                              unsigned char output[20])
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -378,7 +378,7 @@ int mbedtls_ripemd160_finish(mbedtls_ripemd160_context *ctx,
 /*
  * output = RIPEMD-160( input buffer )
  */
-int mbedtls_ripemd160(const unsigned char *input,
+EXPORT_C int mbedtls_ripemd160(const unsigned char *input,
                       size_t ilen,
                       unsigned char output[20])
 {

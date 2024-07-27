@@ -169,7 +169,7 @@ exit:
 }
 #endif /* MBEDTLS_ECP_C */
 
-int mbedtls_pk_write_pubkey(unsigned char **p, unsigned char *start,
+EXPORT_C int mbedtls_pk_write_pubkey(unsigned char **p, unsigned char *start,
                             const mbedtls_pk_context *key)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -209,7 +209,7 @@ int mbedtls_pk_write_pubkey(unsigned char **p, unsigned char *start,
     return (int) len;
 }
 
-int mbedtls_pk_write_pubkey_der(const mbedtls_pk_context *key, unsigned char *buf, size_t size)
+EXPORT_C int mbedtls_pk_write_pubkey_der(const mbedtls_pk_context *key, unsigned char *buf, size_t size)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     unsigned char *c;
@@ -306,7 +306,7 @@ int mbedtls_pk_write_pubkey_der(const mbedtls_pk_context *key, unsigned char *bu
     return (int) len;
 }
 
-int mbedtls_pk_write_key_der(const mbedtls_pk_context *key, unsigned char *buf, size_t size)
+EXPORT_C int mbedtls_pk_write_key_der(const mbedtls_pk_context *key, unsigned char *buf, size_t size)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     unsigned char *c;

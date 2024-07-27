@@ -31,7 +31,7 @@
 
 #include <string.h>
 
-const mbedtls_cipher_info_t *mbedtls_cipher_info_from_psa(
+EXPORT_C const mbedtls_cipher_info_t *mbedtls_cipher_info_from_psa(
     psa_algorithm_t alg,
     psa_key_type_t key_type,
     size_t key_bits,
@@ -239,7 +239,7 @@ exit:
     return mbedtls_to_psa_error(ret);
 }
 
-psa_status_t mbedtls_psa_cipher_encrypt_setup(
+EXPORT_C psa_status_t mbedtls_psa_cipher_encrypt_setup(
     mbedtls_psa_cipher_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
@@ -250,7 +250,7 @@ psa_status_t mbedtls_psa_cipher_encrypt_setup(
                             alg, MBEDTLS_ENCRYPT);
 }
 
-psa_status_t mbedtls_psa_cipher_decrypt_setup(
+EXPORT_C psa_status_t mbedtls_psa_cipher_decrypt_setup(
     mbedtls_psa_cipher_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
@@ -261,7 +261,7 @@ psa_status_t mbedtls_psa_cipher_decrypt_setup(
                             alg, MBEDTLS_DECRYPT);
 }
 
-psa_status_t mbedtls_psa_cipher_set_iv(
+EXPORT_C psa_status_t mbedtls_psa_cipher_set_iv(
     mbedtls_psa_cipher_operation_t *operation,
     const uint8_t *iv, size_t iv_length)
 {
@@ -378,7 +378,7 @@ exit:
 }
 #endif /* MBEDTLS_PSA_BUILTIN_ALG_ECB_NO_PADDING */
 
-psa_status_t mbedtls_psa_cipher_update(
+EXPORT_C psa_status_t mbedtls_psa_cipher_update(
     mbedtls_psa_cipher_operation_t *operation,
     const uint8_t *input, size_t input_length,
     uint8_t *output, size_t output_size, size_t *output_length)
@@ -427,7 +427,7 @@ psa_status_t mbedtls_psa_cipher_update(
     return status;
 }
 
-psa_status_t mbedtls_psa_cipher_finish(
+EXPORT_C psa_status_t mbedtls_psa_cipher_finish(
     mbedtls_psa_cipher_operation_t *operation,
     uint8_t *output, size_t output_size, size_t *output_length)
 {
@@ -465,7 +465,7 @@ exit:
     return status;
 }
 
-psa_status_t mbedtls_psa_cipher_abort(
+EXPORT_C psa_status_t mbedtls_psa_cipher_abort(
     mbedtls_psa_cipher_operation_t *operation)
 {
     /* Sanity check (shouldn't happen: operation->alg should
@@ -479,7 +479,7 @@ psa_status_t mbedtls_psa_cipher_abort(
     return PSA_SUCCESS;
 }
 
-psa_status_t mbedtls_psa_cipher_encrypt(
+EXPORT_C psa_status_t mbedtls_psa_cipher_encrypt(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
     size_t key_buffer_size,
@@ -537,7 +537,7 @@ exit:
     return status;
 }
 
-psa_status_t mbedtls_psa_cipher_decrypt(
+EXPORT_C psa_status_t mbedtls_psa_cipher_decrypt(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
     size_t key_buffer_size,

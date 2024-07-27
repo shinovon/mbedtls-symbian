@@ -78,7 +78,7 @@ static int chachapoly_pad_ciphertext(mbedtls_chachapoly_context *ctx)
                                    16U - partial_block_len);
 }
 
-void mbedtls_chachapoly_init(mbedtls_chachapoly_context *ctx)
+EXPORT_C void mbedtls_chachapoly_init(mbedtls_chachapoly_context *ctx)
 {
     mbedtls_chacha20_init(&ctx->chacha20_ctx);
     mbedtls_poly1305_init(&ctx->poly1305_ctx);
@@ -88,7 +88,7 @@ void mbedtls_chachapoly_init(mbedtls_chachapoly_context *ctx)
     ctx->mode           = MBEDTLS_CHACHAPOLY_ENCRYPT;
 }
 
-void mbedtls_chachapoly_free(mbedtls_chachapoly_context *ctx)
+EXPORT_C void mbedtls_chachapoly_free(mbedtls_chachapoly_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -102,7 +102,7 @@ void mbedtls_chachapoly_free(mbedtls_chachapoly_context *ctx)
     ctx->mode           = MBEDTLS_CHACHAPOLY_ENCRYPT;
 }
 
-int mbedtls_chachapoly_setkey(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_setkey(mbedtls_chachapoly_context *ctx,
                               const unsigned char key[32])
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -112,7 +112,7 @@ int mbedtls_chachapoly_setkey(mbedtls_chachapoly_context *ctx,
     return ret;
 }
 
-int mbedtls_chachapoly_starts(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_starts(mbedtls_chachapoly_context *ctx,
                               const unsigned char nonce[12],
                               mbedtls_chachapoly_mode_t mode)
 {
@@ -151,7 +151,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_chachapoly_update_aad(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_update_aad(mbedtls_chachapoly_context *ctx,
                                   const unsigned char *aad,
                                   size_t aad_len)
 {
@@ -164,7 +164,7 @@ int mbedtls_chachapoly_update_aad(mbedtls_chachapoly_context *ctx,
     return mbedtls_poly1305_update(&ctx->poly1305_ctx, aad, aad_len);
 }
 
-int mbedtls_chachapoly_update(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_update(mbedtls_chachapoly_context *ctx,
                               size_t len,
                               const unsigned char *input,
                               unsigned char *output)
@@ -212,7 +212,7 @@ int mbedtls_chachapoly_update(mbedtls_chachapoly_context *ctx,
     return 0;
 }
 
-int mbedtls_chachapoly_finish(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_finish(mbedtls_chachapoly_context *ctx,
                               unsigned char mac[16])
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -285,7 +285,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_chachapoly_encrypt_and_tag(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_encrypt_and_tag(mbedtls_chachapoly_context *ctx,
                                        size_t length,
                                        const unsigned char nonce[12],
                                        const unsigned char *aad,
@@ -299,7 +299,7 @@ int mbedtls_chachapoly_encrypt_and_tag(mbedtls_chachapoly_context *ctx,
                                     input, output, tag);
 }
 
-int mbedtls_chachapoly_auth_decrypt(mbedtls_chachapoly_context *ctx,
+EXPORT_C int mbedtls_chachapoly_auth_decrypt(mbedtls_chachapoly_context *ctx,
                                     size_t length,
                                     const unsigned char nonce[12],
                                     const unsigned char *aad,

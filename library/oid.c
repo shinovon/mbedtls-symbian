@@ -80,7 +80,7 @@
  * descriptor of an mbedtls_oid_descriptor_t wrapper.
  */
 #define FN_OID_GET_DESCRIPTOR_ATTR1(FN_NAME, TYPE_T, TYPE_NAME, ATTR1_TYPE, ATTR1) \
-    int FN_NAME(const mbedtls_asn1_buf *oid, ATTR1_TYPE * ATTR1)                  \
+    EXPORT_C int FN_NAME(const mbedtls_asn1_buf *oid, ATTR1_TYPE * ATTR1)                  \
     {                                                                       \
         const TYPE_T *data = oid_ ## TYPE_NAME ## _from_asn1(oid);        \
         if (data == NULL) return MBEDTLS_ERR_OID_NOT_FOUND;            \
@@ -94,7 +94,7 @@
  * mbedtls_oid_descriptor_t wrapper.
  */
 #define FN_OID_GET_ATTR1(FN_NAME, TYPE_T, TYPE_NAME, ATTR1_TYPE, ATTR1) \
-    int FN_NAME(const mbedtls_asn1_buf *oid, ATTR1_TYPE * ATTR1)                  \
+    EXPORT_C int FN_NAME(const mbedtls_asn1_buf *oid, ATTR1_TYPE * ATTR1)                  \
     {                                                                       \
         const TYPE_T *data = oid_ ## TYPE_NAME ## _from_asn1(oid);        \
         if (data == NULL) return MBEDTLS_ERR_OID_NOT_FOUND;            \
@@ -108,7 +108,7 @@
  */
 #define FN_OID_GET_ATTR2(FN_NAME, TYPE_T, TYPE_NAME, ATTR1_TYPE, ATTR1,     \
                          ATTR2_TYPE, ATTR2)                                 \
-    int FN_NAME(const mbedtls_asn1_buf *oid, ATTR1_TYPE * ATTR1,               \
+    EXPORT_C int FN_NAME(const mbedtls_asn1_buf *oid, ATTR1_TYPE * ATTR1,               \
                 ATTR2_TYPE * ATTR2)              \
     {                                                                           \
         const TYPE_T *data = oid_ ## TYPE_NAME ## _from_asn1(oid);            \
@@ -123,7 +123,7 @@
  * attribute from a mbedtls_oid_descriptor_t wrapper.
  */
 #define FN_OID_GET_OID_BY_ATTR1(FN_NAME, TYPE_T, LIST, ATTR1_TYPE, ATTR1)   \
-    int FN_NAME(ATTR1_TYPE ATTR1, const char **oid, size_t *olen)             \
+    EXPORT_C int FN_NAME(ATTR1_TYPE ATTR1, const char **oid, size_t *olen)             \
     {                                                                           \
         const TYPE_T *cur = (LIST);                                             \
         while (cur->descriptor.asn1 != NULL) {                                 \
@@ -143,7 +143,7 @@
  */
 #define FN_OID_GET_OID_BY_ATTR2(FN_NAME, TYPE_T, LIST, ATTR1_TYPE, ATTR1,   \
                                 ATTR2_TYPE, ATTR2)                          \
-    int FN_NAME(ATTR1_TYPE ATTR1, ATTR2_TYPE ATTR2, const char **oid,         \
+    EXPORT_C int FN_NAME(ATTR1_TYPE ATTR1, ATTR2_TYPE ATTR2, const char **oid,         \
                 size_t *olen)                                                 \
     {                                                                           \
         const TYPE_T *cur = (LIST);                                             \
@@ -814,7 +814,7 @@ FN_OID_GET_ATTR2(mbedtls_oid_get_pkcs12_pbe_alg,
 #endif /* MBEDTLS_PKCS12_C */
 
 /* Return the x.y.z.... style numeric string for the given OID */
-int mbedtls_oid_get_numeric_string(char *buf, size_t size,
+EXPORT_C int mbedtls_oid_get_numeric_string(char *buf, size_t size,
                                    const mbedtls_asn1_buf *oid)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

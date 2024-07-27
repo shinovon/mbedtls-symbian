@@ -36,12 +36,12 @@
 
 #if !defined(MBEDTLS_SHA1_ALT)
 
-void mbedtls_sha1_init(mbedtls_sha1_context *ctx)
+EXPORT_C void mbedtls_sha1_init(mbedtls_sha1_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_sha1_context));
 }
 
-void mbedtls_sha1_free(mbedtls_sha1_context *ctx)
+EXPORT_C void mbedtls_sha1_free(mbedtls_sha1_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -50,7 +50,7 @@ void mbedtls_sha1_free(mbedtls_sha1_context *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_sha1_context));
 }
 
-void mbedtls_sha1_clone(mbedtls_sha1_context *dst,
+EXPORT_C void mbedtls_sha1_clone(mbedtls_sha1_context *dst,
                         const mbedtls_sha1_context *src)
 {
     *dst = *src;
@@ -59,7 +59,7 @@ void mbedtls_sha1_clone(mbedtls_sha1_context *dst,
 /*
  * SHA-1 context setup
  */
-int mbedtls_sha1_starts(mbedtls_sha1_context *ctx)
+EXPORT_C int mbedtls_sha1_starts(mbedtls_sha1_context *ctx)
 {
     ctx->total[0] = 0;
     ctx->total[1] = 0;
@@ -74,7 +74,7 @@ int mbedtls_sha1_starts(mbedtls_sha1_context *ctx)
 }
 
 #if !defined(MBEDTLS_SHA1_PROCESS_ALT)
-int mbedtls_internal_sha1_process(mbedtls_sha1_context *ctx,
+EXPORT_C int mbedtls_internal_sha1_process(mbedtls_sha1_context *ctx,
                                   const unsigned char data[64])
 {
     struct {
@@ -247,7 +247,7 @@ int mbedtls_internal_sha1_process(mbedtls_sha1_context *ctx,
 /*
  * SHA-1 process buffer
  */
-int mbedtls_sha1_update(mbedtls_sha1_context *ctx,
+EXPORT_C int mbedtls_sha1_update(mbedtls_sha1_context *ctx,
                         const unsigned char *input,
                         size_t ilen)
 {
@@ -300,7 +300,7 @@ int mbedtls_sha1_update(mbedtls_sha1_context *ctx,
 /*
  * SHA-1 final digest
  */
-int mbedtls_sha1_finish(mbedtls_sha1_context *ctx,
+EXPORT_C int mbedtls_sha1_finish(mbedtls_sha1_context *ctx,
                         unsigned char output[20])
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -359,7 +359,7 @@ int mbedtls_sha1_finish(mbedtls_sha1_context *ctx,
 /*
  * output = SHA-1( input buffer )
  */
-int mbedtls_sha1(const unsigned char *input,
+EXPORT_C int mbedtls_sha1(const unsigned char *input,
                  size_t ilen,
                  unsigned char output[20])
 {

@@ -59,7 +59,7 @@
  * of (a) and (b) above to attempt to factor N.
  *
  */
-int mbedtls_rsa_deduce_primes(mbedtls_mpi const *N,
+EXPORT_C int mbedtls_rsa_deduce_primes(mbedtls_mpi const *N,
                               mbedtls_mpi const *E, mbedtls_mpi const *D,
                               mbedtls_mpi *P, mbedtls_mpi *Q)
 {
@@ -191,7 +191,7 @@ cleanup:
  * Given P, Q and the public exponent E, deduce D.
  * This is essentially a modular inversion.
  */
-int mbedtls_rsa_deduce_private_exponent(mbedtls_mpi const *P,
+EXPORT_C int mbedtls_rsa_deduce_private_exponent(mbedtls_mpi const *P,
                                         mbedtls_mpi const *Q,
                                         mbedtls_mpi const *E,
                                         mbedtls_mpi *D)
@@ -234,7 +234,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_rsa_deduce_crt(const mbedtls_mpi *P, const mbedtls_mpi *Q,
+EXPORT_C int mbedtls_rsa_deduce_crt(const mbedtls_mpi *P, const mbedtls_mpi *Q,
                            const mbedtls_mpi *D, mbedtls_mpi *DP,
                            mbedtls_mpi *DQ, mbedtls_mpi *QP)
 {
@@ -268,7 +268,7 @@ cleanup:
 /*
  * Check that core RSA parameters are sane.
  */
-int mbedtls_rsa_validate_params(const mbedtls_mpi *N, const mbedtls_mpi *P,
+EXPORT_C int mbedtls_rsa_validate_params(const mbedtls_mpi *N, const mbedtls_mpi *P,
                                 const mbedtls_mpi *Q, const mbedtls_mpi *D,
                                 const mbedtls_mpi *E,
                                 int (*f_rng)(void *, unsigned char *, size_t),
@@ -381,7 +381,7 @@ cleanup:
 /*
  * Check that RSA CRT parameters are in accordance with core parameters.
  */
-int mbedtls_rsa_validate_crt(const mbedtls_mpi *P,  const mbedtls_mpi *Q,
+EXPORT_C int mbedtls_rsa_validate_crt(const mbedtls_mpi *P,  const mbedtls_mpi *Q,
                              const mbedtls_mpi *D,  const mbedtls_mpi *DP,
                              const mbedtls_mpi *DQ, const mbedtls_mpi *QP)
 {

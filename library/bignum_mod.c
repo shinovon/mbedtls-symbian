@@ -34,7 +34,7 @@
 #include "bignum_mod_raw.h"
 #include "constant_time_internal.h"
 
-int mbedtls_mpi_mod_residue_setup(mbedtls_mpi_mod_residue *r,
+EXPORT_C int mbedtls_mpi_mod_residue_setup(mbedtls_mpi_mod_residue *r,
                                   const mbedtls_mpi_mod_modulus *N,
                                   mbedtls_mpi_uint *p,
                                   size_t p_limbs)
@@ -49,7 +49,7 @@ int mbedtls_mpi_mod_residue_setup(mbedtls_mpi_mod_residue *r,
     return 0;
 }
 
-void mbedtls_mpi_mod_residue_release(mbedtls_mpi_mod_residue *r)
+EXPORT_C void mbedtls_mpi_mod_residue_release(mbedtls_mpi_mod_residue *r)
 {
     if (r == NULL) {
         return;
@@ -59,7 +59,7 @@ void mbedtls_mpi_mod_residue_release(mbedtls_mpi_mod_residue *r)
     r->p = NULL;
 }
 
-void mbedtls_mpi_mod_modulus_init(mbedtls_mpi_mod_modulus *N)
+EXPORT_C void mbedtls_mpi_mod_modulus_init(mbedtls_mpi_mod_modulus *N)
 {
     if (N == NULL) {
         return;
@@ -71,7 +71,7 @@ void mbedtls_mpi_mod_modulus_init(mbedtls_mpi_mod_modulus *N)
     N->int_rep = MBEDTLS_MPI_MOD_REP_INVALID;
 }
 
-void mbedtls_mpi_mod_modulus_free(mbedtls_mpi_mod_modulus *N)
+EXPORT_C void mbedtls_mpi_mod_modulus_free(mbedtls_mpi_mod_modulus *N)
 {
     if (N == NULL) {
         return;
@@ -136,7 +136,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_mpi_mod_modulus_setup(mbedtls_mpi_mod_modulus *N,
+EXPORT_C int mbedtls_mpi_mod_modulus_setup(mbedtls_mpi_mod_modulus *N,
                                   const mbedtls_mpi_uint *p,
                                   size_t p_limbs,
                                   mbedtls_mpi_mod_rep_selector int_rep)
@@ -177,7 +177,7 @@ exit:
 
 /* BEGIN MERGE SLOT 2 */
 
-int mbedtls_mpi_mod_mul(mbedtls_mpi_mod_residue *X,
+EXPORT_C int mbedtls_mpi_mod_mul(mbedtls_mpi_mod_residue *X,
                         const mbedtls_mpi_mod_residue *A,
                         const mbedtls_mpi_mod_residue *B,
                         const mbedtls_mpi_mod_modulus *N)
@@ -205,7 +205,7 @@ int mbedtls_mpi_mod_mul(mbedtls_mpi_mod_residue *X,
 /* END MERGE SLOT 2 */
 
 /* BEGIN MERGE SLOT 3 */
-int mbedtls_mpi_mod_sub(mbedtls_mpi_mod_residue *X,
+EXPORT_C int mbedtls_mpi_mod_sub(mbedtls_mpi_mod_residue *X,
                         const mbedtls_mpi_mod_residue *A,
                         const mbedtls_mpi_mod_residue *B,
                         const mbedtls_mpi_mod_modulus *N)
@@ -267,7 +267,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_mpi_mod_inv(mbedtls_mpi_mod_residue *X,
+EXPORT_C int mbedtls_mpi_mod_inv(mbedtls_mpi_mod_residue *X,
                         const mbedtls_mpi_mod_residue *A,
                         const mbedtls_mpi_mod_modulus *N)
 {
@@ -316,7 +316,7 @@ int mbedtls_mpi_mod_inv(mbedtls_mpi_mod_residue *X,
 /* END MERGE SLOT 4 */
 
 /* BEGIN MERGE SLOT 5 */
-int mbedtls_mpi_mod_add(mbedtls_mpi_mod_residue *X,
+EXPORT_C int mbedtls_mpi_mod_add(mbedtls_mpi_mod_residue *X,
                         const mbedtls_mpi_mod_residue *A,
                         const mbedtls_mpi_mod_residue *B,
                         const mbedtls_mpi_mod_modulus *N)
@@ -333,7 +333,7 @@ int mbedtls_mpi_mod_add(mbedtls_mpi_mod_residue *X,
 
 /* BEGIN MERGE SLOT 6 */
 
-int mbedtls_mpi_mod_random(mbedtls_mpi_mod_residue *X,
+EXPORT_C int mbedtls_mpi_mod_random(mbedtls_mpi_mod_residue *X,
                            mbedtls_mpi_uint min,
                            const mbedtls_mpi_mod_modulus *N,
                            int (*f_rng)(void *, unsigned char *, size_t),
@@ -348,7 +348,7 @@ int mbedtls_mpi_mod_random(mbedtls_mpi_mod_residue *X,
 /* END MERGE SLOT 6 */
 
 /* BEGIN MERGE SLOT 7 */
-int mbedtls_mpi_mod_read(mbedtls_mpi_mod_residue *r,
+EXPORT_C int mbedtls_mpi_mod_read(mbedtls_mpi_mod_residue *r,
                          const mbedtls_mpi_mod_modulus *N,
                          const unsigned char *buf,
                          size_t buflen,
@@ -377,7 +377,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_mpi_mod_write(const mbedtls_mpi_mod_residue *r,
+EXPORT_C int mbedtls_mpi_mod_write(const mbedtls_mpi_mod_residue *r,
                           const mbedtls_mpi_mod_modulus *N,
                           unsigned char *buf,
                           size_t buflen,
