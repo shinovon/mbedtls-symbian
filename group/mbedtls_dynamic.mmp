@@ -1,6 +1,7 @@
 //Building a dynamic library requires old elf2e32.
 TARGET		  mbedtls.dll
 TARGETTYPE	  DLL
+UID			 0x1000008d 0x20292B6B
 
 USERINCLUDE ../include
 SYSTEMINCLUDE /epoc32/include/stdapis
@@ -8,8 +9,9 @@ SYSTEMINCLUDE /epoc32/include/stdapis
 APP_LAYER_SYSTEMINCLUDE
 MACRO SYMBIAN_OE_POSIX_SIGNALS
 
-UID 0 0
-LIBRARY libc.lib libpthread.lib euser.lib
+LIBRARY libc.lib
+LIBRARY libpthread.lib
+LIBRARY euser.lib
 CAPABILITY NetworkServices ReadUserData WriteUserData
 
 EPOCALLOWDLLDATA 

@@ -14,5 +14,4 @@ DEFAULT
 PRJ_EXPORTS
 
 PRJ_MMPFILES
-mbedtls_static.mmp
 mbedtls_dynamic.mmp
