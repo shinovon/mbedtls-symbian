@@ -26,6 +26,8 @@
 #ifndef MBEDTLS_BUILD_INFO_H
 #define MBEDTLS_BUILD_INFO_H
 
+#include <e32def.h>
+
 /*
  * This set of compile-time defines can be used to determine the version number
  * of the Mbed TLS library used. Run-time variables for the same can be found in
