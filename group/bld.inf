@@ -15,3 +15,4 @@ PRJ_EXPORTS
 
 PRJ_MMPFILES
 mbedtls_dynamic.mmp
+mbedtls_static.mmp
