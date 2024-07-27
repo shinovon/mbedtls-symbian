@@ -152,7 +152,7 @@ static void chacha20_block(const uint32_t initial_state[16],
     mbedtls_platform_zeroize(working_state, sizeof(working_state));
 }
 
-void mbedtls_chacha20_init(mbedtls_chacha20_context *ctx)
+EXPORT_C void mbedtls_chacha20_init(mbedtls_chacha20_context *ctx)
 {
     mbedtls_platform_zeroize(ctx->state, sizeof(ctx->state));
     mbedtls_platform_zeroize(ctx->keystream8, sizeof(ctx->keystream8));
@@ -161,14 +161,14 @@ void mbedtls_chacha20_init(mbedtls_chacha20_context *ctx)
     ctx->keystream_bytes_used = CHACHA20_BLOCK_SIZE_BYTES;
 }
 
-void mbedtls_chacha20_free(mbedtls_chacha20_context *ctx)
+EXPORT_C void mbedtls_chacha20_free(mbedtls_chacha20_context *ctx)
 {
     if (ctx != NULL) {
         mbedtls_platform_zeroize(ctx, sizeof(mbedtls_chacha20_context));
     }
 }
 
-int mbedtls_chacha20_setkey(mbedtls_chacha20_context *ctx,
+EXPORT_C int mbedtls_chacha20_setkey(mbedtls_chacha20_context *ctx,
                             const unsigned char key[32])
 {
     /* ChaCha20 constants - the string "expand 32-byte k" */
@@ -190,7 +190,7 @@ int mbedtls_chacha20_setkey(mbedtls_chacha20_context *ctx,
     return 0;
 }
 
-int mbedtls_chacha20_starts(mbedtls_chacha20_context *ctx,
+EXPORT_C int mbedtls_chacha20_starts(mbedtls_chacha20_context *ctx,
                             const unsigned char nonce[12],
                             uint32_t counter)
 {
@@ -210,7 +210,7 @@ int mbedtls_chacha20_starts(mbedtls_chacha20_context *ctx,
     return 0;
 }
 
-int mbedtls_chacha20_update(mbedtls_chacha20_context *ctx,
+EXPORT_C int mbedtls_chacha20_update(mbedtls_chacha20_context *ctx,
                             size_t size,
                             const unsigned char *input,
                             unsigned char *output)
@@ -254,7 +254,7 @@ int mbedtls_chacha20_update(mbedtls_chacha20_context *ctx,
     return 0;
 }
 
-int mbedtls_chacha20_crypt(const unsigned char key[32],
+EXPORT_C int mbedtls_chacha20_crypt(const unsigned char key[32],
                            const unsigned char nonce[12],
                            uint32_t counter,
                            size_t data_len,

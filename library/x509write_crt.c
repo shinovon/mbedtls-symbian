@@ -48,14 +48,14 @@
 #include "hash_info.h"
 #include "mbedtls/legacy_or_psa.h"
 
-void mbedtls_x509write_crt_init(mbedtls_x509write_cert *ctx)
+EXPORT_C void mbedtls_x509write_crt_init(mbedtls_x509write_cert *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_x509write_cert));
 
     ctx->version = MBEDTLS_X509_CRT_VERSION_3;
 }
 
-void mbedtls_x509write_crt_free(mbedtls_x509write_cert *ctx)
+EXPORT_C void mbedtls_x509write_crt_free(mbedtls_x509write_cert *ctx)
 {
     mbedtls_asn1_free_named_data_list(&ctx->subject);
     mbedtls_asn1_free_named_data_list(&ctx->issuer);
@@ -64,44 +64,44 @@ void mbedtls_x509write_crt_free(mbedtls_x509write_cert *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_x509write_cert));
 }
 
-void mbedtls_x509write_crt_set_version(mbedtls_x509write_cert *ctx,
+EXPORT_C void mbedtls_x509write_crt_set_version(mbedtls_x509write_cert *ctx,
                                        int version)
 {
     ctx->version = version;
 }
 
-void mbedtls_x509write_crt_set_md_alg(mbedtls_x509write_cert *ctx,
+EXPORT_C void mbedtls_x509write_crt_set_md_alg(mbedtls_x509write_cert *ctx,
                                       mbedtls_md_type_t md_alg)
 {
     ctx->md_alg = md_alg;
 }
 
-void mbedtls_x509write_crt_set_subject_key(mbedtls_x509write_cert *ctx,
+EXPORT_C void mbedtls_x509write_crt_set_subject_key(mbedtls_x509write_cert *ctx,
                                            mbedtls_pk_context *key)
 {
     ctx->subject_key = key;
 }
 
-void mbedtls_x509write_crt_set_issuer_key(mbedtls_x509write_cert *ctx,
+EXPORT_C void mbedtls_x509write_crt_set_issuer_key(mbedtls_x509write_cert *ctx,
                                           mbedtls_pk_context *key)
 {
     ctx->issuer_key = key;
 }
 
-int mbedtls_x509write_crt_set_subject_name(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_subject_name(mbedtls_x509write_cert *ctx,
                                            const char *subject_name)
 {
     return mbedtls_x509_string_to_names(&ctx->subject, subject_name);
 }
 
-int mbedtls_x509write_crt_set_issuer_name(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_issuer_name(mbedtls_x509write_cert *ctx,
                                           const char *issuer_name)
 {
     return mbedtls_x509_string_to_names(&ctx->issuer, issuer_name);
 }
 
 #if defined(MBEDTLS_BIGNUM_C) && !defined(MBEDTLS_DEPRECATED_REMOVED)
-int mbedtls_x509write_crt_set_serial(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_serial(mbedtls_x509write_cert *ctx,
                                      const mbedtls_mpi *serial)
 {
     int ret;
@@ -124,7 +124,7 @@ int mbedtls_x509write_crt_set_serial(mbedtls_x509write_cert *ctx,
 }
 #endif // MBEDTLS_BIGNUM_C && !MBEDTLS_DEPRECATED_REMOVED
 
-int mbedtls_x509write_crt_set_serial_raw(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_serial_raw(mbedtls_x509write_cert *ctx,
                                          unsigned char *serial, size_t serial_len)
 {
     if (serial_len > MBEDTLS_X509_RFC5280_MAX_SERIAL_LEN) {
@@ -137,7 +137,7 @@ int mbedtls_x509write_crt_set_serial_raw(mbedtls_x509write_cert *ctx,
     return 0;
 }
 
-int mbedtls_x509write_crt_set_validity(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_validity(mbedtls_x509write_cert *ctx,
                                        const char *not_before,
                                        const char *not_after)
 {
@@ -153,7 +153,7 @@ int mbedtls_x509write_crt_set_validity(mbedtls_x509write_cert *ctx,
     return 0;
 }
 
-int mbedtls_x509write_crt_set_extension(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_extension(mbedtls_x509write_cert *ctx,
                                         const char *oid, size_t oid_len,
                                         int critical,
                                         const unsigned char *val, size_t val_len)
@@ -162,7 +162,7 @@ int mbedtls_x509write_crt_set_extension(mbedtls_x509write_cert *ctx,
                                       critical, val, val_len);
 }
 
-int mbedtls_x509write_crt_set_basic_constraints(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_basic_constraints(mbedtls_x509write_cert *ctx,
                                                 int is_ca, int max_pathlen)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -267,14 +267,14 @@ static int mbedtls_x509write_crt_set_key_identifier(mbedtls_x509write_cert *ctx,
     }
 }
 
-int mbedtls_x509write_crt_set_subject_key_identifier(mbedtls_x509write_cert *ctx)
+EXPORT_C int mbedtls_x509write_crt_set_subject_key_identifier(mbedtls_x509write_cert *ctx)
 {
     return mbedtls_x509write_crt_set_key_identifier(ctx,
                                                     0,
                                                     MBEDTLS_ASN1_OCTET_STRING);
 }
 
-int mbedtls_x509write_crt_set_authority_key_identifier(mbedtls_x509write_cert *ctx)
+EXPORT_C int mbedtls_x509write_crt_set_authority_key_identifier(mbedtls_x509write_cert *ctx)
 {
     return mbedtls_x509write_crt_set_key_identifier(ctx,
                                                     1,
@@ -282,7 +282,7 @@ int mbedtls_x509write_crt_set_authority_key_identifier(mbedtls_x509write_cert *c
 }
 #endif /* MBEDTLS_HAS_ALG_SHA_1_VIA_MD_OR_PSA_BASED_ON_USE_PSA */
 
-int mbedtls_x509write_crt_set_key_usage(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_key_usage(mbedtls_x509write_cert *ctx,
                                         unsigned int key_usage)
 {
     unsigned char buf[5] = { 0 }, ku[2] = { 0 };
@@ -323,7 +323,7 @@ int mbedtls_x509write_crt_set_key_usage(mbedtls_x509write_cert *ctx,
     return 0;
 }
 
-int mbedtls_x509write_crt_set_ext_key_usage(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_ext_key_usage(mbedtls_x509write_cert *ctx,
                                             const mbedtls_asn1_sequence *exts)
 {
     unsigned char buf[256];
@@ -364,7 +364,7 @@ int mbedtls_x509write_crt_set_ext_key_usage(mbedtls_x509write_cert *ctx,
                                                1, c, len);
 }
 
-int mbedtls_x509write_crt_set_ns_cert_type(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_set_ns_cert_type(mbedtls_x509write_cert *ctx,
                                            unsigned char ns_cert_type)
 {
     unsigned char buf[4] = { 0 };
@@ -416,7 +416,7 @@ static int x509_write_time(unsigned char **p, unsigned char *start,
     return (int) len;
 }
 
-int mbedtls_x509write_crt_der(mbedtls_x509write_cert *ctx,
+EXPORT_C int mbedtls_x509write_crt_der(mbedtls_x509write_cert *ctx,
                               unsigned char *buf, size_t size,
                               int (*f_rng)(void *, unsigned char *, size_t),
                               void *p_rng)

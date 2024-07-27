@@ -472,12 +472,12 @@ static void aes_gen_tables(void)
 
 #endif /* MBEDTLS_AES_FEWER_TABLES */
 
-void mbedtls_aes_init(mbedtls_aes_context *ctx)
+EXPORT_C void mbedtls_aes_init(mbedtls_aes_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_aes_context));
 }
 
-void mbedtls_aes_free(mbedtls_aes_context *ctx)
+EXPORT_C void mbedtls_aes_free(mbedtls_aes_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -555,7 +555,7 @@ static unsigned mbedtls_aes_rk_offset(uint32_t *buf)
  * AES key schedule (encryption)
  */
 #if !defined(MBEDTLS_AES_SETKEY_ENC_ALT)
-int mbedtls_aes_setkey_enc(mbedtls_aes_context *ctx, const unsigned char *key,
+EXPORT_C int mbedtls_aes_setkey_enc(mbedtls_aes_context *ctx, const unsigned char *key,
                            unsigned int keybits)
 {
     unsigned int i;
@@ -661,7 +661,7 @@ int mbedtls_aes_setkey_enc(mbedtls_aes_context *ctx, const unsigned char *key,
  * AES key schedule (decryption)
  */
 #if !defined(MBEDTLS_AES_SETKEY_DEC_ALT)
-int mbedtls_aes_setkey_dec(mbedtls_aes_context *ctx, const unsigned char *key,
+EXPORT_C int mbedtls_aes_setkey_dec(mbedtls_aes_context *ctx, const unsigned char *key,
                            unsigned int keybits)
 {
     int i, j, ret;
@@ -853,7 +853,7 @@ int mbedtls_aes_xts_setkey_dec(mbedtls_aes_xts_context *ctx,
  * AES-ECB block encryption
  */
 #if !defined(MBEDTLS_AES_ENCRYPT_ALT)
-int mbedtls_internal_aes_encrypt(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_internal_aes_encrypt(mbedtls_aes_context *ctx,
                                  const unsigned char input[16],
                                  unsigned char output[16])
 {
@@ -915,7 +915,7 @@ int mbedtls_internal_aes_encrypt(mbedtls_aes_context *ctx,
  * AES-ECB block decryption
  */
 #if !defined(MBEDTLS_AES_DECRYPT_ALT)
-int mbedtls_internal_aes_decrypt(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_internal_aes_decrypt(mbedtls_aes_context *ctx,
                                  const unsigned char input[16],
                                  unsigned char output[16])
 {
@@ -996,7 +996,7 @@ static void aes_maybe_realign(mbedtls_aes_context *ctx)
 /*
  * AES-ECB block encryption/decryption
  */
-int mbedtls_aes_crypt_ecb(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_ecb(mbedtls_aes_context *ctx,
                           int mode,
                           const unsigned char input[16],
                           unsigned char output[16])
@@ -1038,7 +1038,7 @@ int mbedtls_aes_crypt_ecb(mbedtls_aes_context *ctx,
 /*
  * AES-CBC buffer encryption/decryption
  */
-int mbedtls_aes_crypt_cbc(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_cbc(mbedtls_aes_context *ctx,
                           int mode,
                           size_t length,
                           unsigned char iv[16],
@@ -1110,7 +1110,7 @@ exit:
 /*
  * AES-IGE buffer encryption/decryption
  */
-int mbedtls_aes_crypt_ige(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_ige(mbedtls_aes_context *ctx,
                           int mode,
                           size_t length,
                           unsigned char iv[32],

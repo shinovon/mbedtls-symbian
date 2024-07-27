@@ -786,7 +786,7 @@ const char *mbedtls_low_level_strerr(int error_code)
     return NULL;
 }
 
-void mbedtls_strerror(int ret, char *buf, size_t buflen)
+EXPORT_C void mbedtls_strerror(int ret, char *buf, size_t buflen)
 {
     size_t len;
     int use_ret;
@@ -861,7 +861,7 @@ void mbedtls_strerror(int ret, char *buf, size_t buflen)
 /*
  * Provide a dummy implementation when MBEDTLS_ERROR_C is not defined
  */
-void mbedtls_strerror(int ret, char *buf, size_t buflen)
+EXPORT_C void mbedtls_strerror(int ret, char *buf, size_t buflen)
 {
     ((void) ret);
 

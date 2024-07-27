@@ -85,7 +85,7 @@ static inline uint32_t mbedtls_get_unaligned_volatile_uint32(volatile const unsi
 }
 #endif /* MBEDTLS_EFFICIENT_UNALIGNED_VOLATILE_ACCESS */
 
-int mbedtls_ct_memcmp(const void *a,
+EXPORT_C int mbedtls_ct_memcmp(const void *a,
                       const void *b,
                       size_t n)
 {
@@ -119,7 +119,7 @@ int mbedtls_ct_memcmp(const void *a,
     return (int) diff;
 }
 
-unsigned mbedtls_ct_uint_mask(unsigned value)
+EXPORT_C unsigned mbedtls_ct_uint_mask(unsigned value)
 {
     /* MSVC has a warning about unary minus on unsigned, but this is
      * well-defined and precisely what we want to do here */
@@ -135,7 +135,7 @@ unsigned mbedtls_ct_uint_mask(unsigned value)
 
 #if defined(MBEDTLS_SSL_SOME_SUITES_USE_MAC)
 
-size_t mbedtls_ct_size_mask(size_t value)
+EXPORT_C size_t mbedtls_ct_size_mask(size_t value)
 {
     /* MSVC has a warning about unary minus on unsigned integer types,
      * but this is well-defined and precisely what we want to do here. */
@@ -153,7 +153,7 @@ size_t mbedtls_ct_size_mask(size_t value)
 
 #if defined(MBEDTLS_BIGNUM_C)
 
-mbedtls_mpi_uint mbedtls_ct_mpi_uint_mask(mbedtls_mpi_uint value)
+EXPORT_C mbedtls_mpi_uint mbedtls_ct_mpi_uint_mask(mbedtls_mpi_uint value)
 {
     /* MSVC has a warning about unary minus on unsigned, but this is
      * well-defined and precisely what we want to do here */
@@ -198,7 +198,7 @@ static size_t mbedtls_ct_size_mask_lt(size_t x,
     return mask;
 }
 
-size_t mbedtls_ct_size_mask_ge(size_t x,
+EXPORT_C size_t mbedtls_ct_size_mask_ge(size_t x,
                                size_t y)
 {
     return ~mbedtls_ct_size_mask_lt(x, y);
@@ -226,7 +226,7 @@ unsigned char mbedtls_ct_uchar_mask_of_range(unsigned char low,
 
 #endif /* MBEDTLS_BASE64_C */
 
-unsigned mbedtls_ct_size_bool_eq(size_t x,
+EXPORT_C unsigned mbedtls_ct_size_bool_eq(size_t x,
                                  size_t y)
 {
     /* diff = 0 if x == y, non-zero otherwise */
@@ -276,7 +276,7 @@ static unsigned mbedtls_ct_size_gt(size_t x,
 
 #if defined(MBEDTLS_BIGNUM_C)
 
-unsigned mbedtls_ct_mpi_uint_lt(const mbedtls_mpi_uint x,
+EXPORT_C unsigned mbedtls_ct_mpi_uint_lt(const mbedtls_mpi_uint x,
                                 const mbedtls_mpi_uint y)
 {
     mbedtls_mpi_uint ret;
@@ -306,7 +306,7 @@ unsigned mbedtls_ct_mpi_uint_lt(const mbedtls_mpi_uint x,
 
 #endif /* MBEDTLS_BIGNUM_C */
 
-unsigned mbedtls_ct_uint_if(unsigned condition,
+EXPORT_C unsigned mbedtls_ct_uint_if(unsigned condition,
                             unsigned if1,
                             unsigned if0)
 {
@@ -350,7 +350,7 @@ static int mbedtls_ct_cond_select_sign(unsigned char condition,
     return (int) ur - 1;
 }
 
-void mbedtls_ct_mpi_uint_cond_assign(size_t n,
+EXPORT_C void mbedtls_ct_mpi_uint_cond_assign(size_t n,
                                      mbedtls_mpi_uint *dest,
                                      const mbedtls_mpi_uint *src,
                                      unsigned char condition)
@@ -380,7 +380,7 @@ void mbedtls_ct_mpi_uint_cond_assign(size_t n,
 
 #if defined(MBEDTLS_BASE64_C)
 
-unsigned char mbedtls_ct_base64_enc_char(unsigned char value)
+EXPORT_C unsigned char mbedtls_ct_base64_enc_char(unsigned char value)
 {
     unsigned char digit = 0;
     /* For each range of values, if value is in that range, mask digit with
@@ -394,7 +394,7 @@ unsigned char mbedtls_ct_base64_enc_char(unsigned char value)
     return digit;
 }
 
-signed char mbedtls_ct_base64_dec_value(unsigned char c)
+EXPORT_C signed char mbedtls_ct_base64_dec_value(unsigned char c)
 {
     unsigned char val = 0;
     /* For each range of digits, if c is in that range, mask val with
@@ -458,7 +458,7 @@ static void mbedtls_ct_mem_move_to_left(void *start,
 
 #if defined(MBEDTLS_SSL_SOME_SUITES_USE_MAC)
 
-void mbedtls_ct_memcpy_if_eq(unsigned char *dest,
+EXPORT_C void mbedtls_ct_memcpy_if_eq(unsigned char *dest,
                              const unsigned char *src,
                              size_t len,
                              size_t c1,
@@ -486,7 +486,7 @@ void mbedtls_ct_memcpy_if_eq(unsigned char *dest,
     }
 }
 
-void mbedtls_ct_memcpy_offset(unsigned char *dest,
+EXPORT_C void mbedtls_ct_memcpy_offset(unsigned char *dest,
                               const unsigned char *src,
                               size_t offset,
                               size_t offset_min,
@@ -511,7 +511,7 @@ void mbedtls_ct_memcpy_offset(unsigned char *dest,
 #define MAX_HASH_BLOCK_LENGTH PSA_HASH_BLOCK_LENGTH(PSA_ALG_SHA_1)
 #endif
 
-int mbedtls_ct_hmac(mbedtls_svc_key_id_t key,
+EXPORT_C int mbedtls_ct_hmac(mbedtls_svc_key_id_t key,
                     psa_algorithm_t mac_alg,
                     const unsigned char *add_data,
                     size_t add_data_len,
@@ -631,7 +631,7 @@ cleanup:
 #undef MAX_HASH_BLOCK_LENGTH
 
 #else
-int mbedtls_ct_hmac(mbedtls_md_context_t *ctx,
+EXPORT_C int mbedtls_ct_hmac(mbedtls_md_context_t *ctx,
                     const unsigned char *add_data,
                     size_t add_data_len,
                     const unsigned char *data,
@@ -741,7 +741,7 @@ cleanup:
  */
 __declspec(noinline)
 #endif
-int mbedtls_mpi_safe_cond_assign(mbedtls_mpi *X,
+EXPORT_C int mbedtls_mpi_safe_cond_assign(mbedtls_mpi *X,
                                  const mbedtls_mpi *Y,
                                  unsigned char assign)
 {
@@ -772,7 +772,7 @@ cleanup:
  * Here it is not ok to simply swap the pointers, which would lead to
  * different memory access patterns when X and Y are used afterwards.
  */
-int mbedtls_mpi_safe_cond_swap(mbedtls_mpi *X,
+EXPORT_C int mbedtls_mpi_safe_cond_swap(mbedtls_mpi *X,
                                mbedtls_mpi *Y,
                                unsigned char swap)
 {
@@ -801,7 +801,7 @@ cleanup:
 /*
  * Compare unsigned values in constant time
  */
-unsigned mbedtls_mpi_core_lt_ct(const mbedtls_mpi_uint *A,
+EXPORT_C unsigned mbedtls_mpi_core_lt_ct(const mbedtls_mpi_uint *A,
                                 const mbedtls_mpi_uint *B,
                                 size_t limbs)
 {
@@ -844,7 +844,7 @@ unsigned mbedtls_mpi_core_lt_ct(const mbedtls_mpi_uint *A,
 /*
  * Compare signed values in constant time
  */
-int mbedtls_mpi_lt_mpi_ct(const mbedtls_mpi *X,
+EXPORT_C int mbedtls_mpi_lt_mpi_ct(const mbedtls_mpi *X,
                           const mbedtls_mpi *Y,
                           unsigned *ret)
 {
@@ -912,7 +912,7 @@ int mbedtls_mpi_lt_mpi_ct(const mbedtls_mpi *X,
 
 #if defined(MBEDTLS_PKCS1_V15) && defined(MBEDTLS_RSA_C) && !defined(MBEDTLS_RSA_ALT)
 
-int mbedtls_ct_rsaes_pkcs1_v15_unpadding(unsigned char *input,
+EXPORT_C int mbedtls_ct_rsaes_pkcs1_v15_unpadding(unsigned char *input,
                                          size_t ilen,
                                          unsigned char *output,
                                          size_t output_max_len,

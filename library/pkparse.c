@@ -615,7 +615,7 @@ static int pk_get_pk_alg(unsigned char **p,
  *       algorithm            AlgorithmIdentifier,
  *       subjectPublicKey     BIT STRING }
  */
-int mbedtls_pk_parse_subpubkey(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_pk_parse_subpubkey(unsigned char **p, const unsigned char *end,
                                mbedtls_pk_context *pk)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -1208,7 +1208,7 @@ static int pk_parse_key_pkcs8_encrypted_der(
 /*
  * Parse a private key
  */
-int mbedtls_pk_parse_key(mbedtls_pk_context *pk,
+EXPORT_C int mbedtls_pk_parse_key(mbedtls_pk_context *pk,
                          const unsigned char *key, size_t keylen,
                          const unsigned char *pwd, size_t pwdlen,
                          int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
@@ -1418,7 +1418,7 @@ int mbedtls_pk_parse_key(mbedtls_pk_context *pk,
 /*
  * Parse a public key
  */
-int mbedtls_pk_parse_public_key(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_parse_public_key(mbedtls_pk_context *ctx,
                                 const unsigned char *key, size_t keylen)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

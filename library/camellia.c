@@ -283,12 +283,12 @@ static void camellia_feistel(const uint32_t x[2], const uint32_t k[2],
     z[1] ^= I0;
 }
 
-void mbedtls_camellia_init(mbedtls_camellia_context *ctx)
+EXPORT_C void mbedtls_camellia_init(mbedtls_camellia_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_camellia_context));
 }
 
-void mbedtls_camellia_free(mbedtls_camellia_context *ctx)
+EXPORT_C void mbedtls_camellia_free(mbedtls_camellia_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -300,7 +300,7 @@ void mbedtls_camellia_free(mbedtls_camellia_context *ctx)
 /*
  * Camellia key schedule (encryption)
  */
-int mbedtls_camellia_setkey_enc(mbedtls_camellia_context *ctx,
+EXPORT_C int mbedtls_camellia_setkey_enc(mbedtls_camellia_context *ctx,
                                 const unsigned char *key,
                                 unsigned int keybits)
 {
@@ -411,7 +411,7 @@ int mbedtls_camellia_setkey_enc(mbedtls_camellia_context *ctx,
 /*
  * Camellia key schedule (decryption)
  */
-int mbedtls_camellia_setkey_dec(mbedtls_camellia_context *ctx,
+EXPORT_C int mbedtls_camellia_setkey_dec(mbedtls_camellia_context *ctx,
                                 const unsigned char *key,
                                 unsigned int keybits)
 {
@@ -460,7 +460,7 @@ exit:
 /*
  * Camellia-ECB block encryption/decryption
  */
-int mbedtls_camellia_crypt_ecb(mbedtls_camellia_context *ctx,
+EXPORT_C int mbedtls_camellia_crypt_ecb(mbedtls_camellia_context *ctx,
                                int mode,
                                const unsigned char input[16],
                                unsigned char output[16])
@@ -526,7 +526,7 @@ int mbedtls_camellia_crypt_ecb(mbedtls_camellia_context *ctx,
 /*
  * Camellia-CBC buffer encryption/decryption
  */
-int mbedtls_camellia_crypt_cbc(mbedtls_camellia_context *ctx,
+EXPORT_C int mbedtls_camellia_crypt_cbc(mbedtls_camellia_context *ctx,
                                int mode,
                                size_t length,
                                unsigned char iv[16],

@@ -75,7 +75,7 @@ struct _hr_time {
  */
 #if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
 
-unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int reset)
+EXPORT_C unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int reset)
 {
     struct _hr_time *t = (struct _hr_time *) val;
 
@@ -95,7 +95,7 @@ unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int r
 
 #else /* _WIN32 && !EFIX64 && !EFI32 */
 
-unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int reset)
+EXPORT_C unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int reset)
 {
     struct _hr_time *t = (struct _hr_time *) val;
 
@@ -117,7 +117,7 @@ unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int r
 /*
  * Set delays to watch
  */
-void mbedtls_timing_set_delay(void *data, uint32_t int_ms, uint32_t fin_ms)
+EXPORT_C void mbedtls_timing_set_delay(void *data, uint32_t int_ms, uint32_t fin_ms)
 {
     mbedtls_timing_delay_context *ctx = (mbedtls_timing_delay_context *) data;
 
@@ -132,7 +132,7 @@ void mbedtls_timing_set_delay(void *data, uint32_t int_ms, uint32_t fin_ms)
 /*
  * Get number of delays expired
  */
-int mbedtls_timing_get_delay(void *data)
+EXPORT_C int mbedtls_timing_get_delay(void *data)
 {
     mbedtls_timing_delay_context *ctx = (mbedtls_timing_delay_context *) data;
     unsigned long elapsed_ms;
@@ -157,7 +157,7 @@ int mbedtls_timing_get_delay(void *data)
 /*
  * Get the final delay.
  */
-uint32_t mbedtls_timing_get_final_delay(
+EXPORT_C uint32_t mbedtls_timing_get_final_delay(
     const mbedtls_timing_delay_context *data)
 {
     return data->fin_ms;

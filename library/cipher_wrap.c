@@ -2125,7 +2125,7 @@ static const mbedtls_cipher_info_t aes_256_nist_kwp_info = {
 };
 #endif /* MBEDTLS_NIST_KW_C */
 
-const mbedtls_cipher_definition_t mbedtls_cipher_definitions[] =
+EXPORT_C const mbedtls_cipher_definition_t mbedtls_cipher_definitions[] =
 {
 #if defined(MBEDTLS_AES_C)
     { MBEDTLS_CIPHER_AES_128_ECB,          &aes_128_ecb_info },
@@ -2275,6 +2275,6 @@ const mbedtls_cipher_definition_t mbedtls_cipher_definitions[] =
 
 #define NUM_CIPHERS (sizeof(mbedtls_cipher_definitions) /      \
                      sizeof(mbedtls_cipher_definitions[0]))
-int mbedtls_cipher_supported[NUM_CIPHERS];
+EXPORT_C int mbedtls_cipher_supported[NUM_CIPHERS];
 
 #endif /* MBEDTLS_CIPHER_C */

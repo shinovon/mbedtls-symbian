@@ -56,7 +56,7 @@
 /*
  * Initialise a mbedtls_pk_context
  */
-void mbedtls_pk_init(mbedtls_pk_context *ctx)
+EXPORT_C void mbedtls_pk_init(mbedtls_pk_context *ctx)
 {
     ctx->pk_info = NULL;
     ctx->pk_ctx = NULL;
@@ -65,7 +65,7 @@ void mbedtls_pk_init(mbedtls_pk_context *ctx)
 /*
  * Free (the components of) a mbedtls_pk_context
  */
-void mbedtls_pk_free(mbedtls_pk_context *ctx)
+EXPORT_C void mbedtls_pk_free(mbedtls_pk_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -108,7 +108,7 @@ void mbedtls_pk_restart_free(mbedtls_pk_restart_ctx *ctx)
 /*
  * Get pk_info structure from type
  */
-const mbedtls_pk_info_t *mbedtls_pk_info_from_type(mbedtls_pk_type_t pk_type)
+EXPORT_C const mbedtls_pk_info_t *mbedtls_pk_info_from_type(mbedtls_pk_type_t pk_type)
 {
     switch (pk_type) {
 #if defined(MBEDTLS_RSA_C)
@@ -134,7 +134,7 @@ const mbedtls_pk_info_t *mbedtls_pk_info_from_type(mbedtls_pk_type_t pk_type)
 /*
  * Initialise context
  */
-int mbedtls_pk_setup(mbedtls_pk_context *ctx, const mbedtls_pk_info_t *info)
+EXPORT_C int mbedtls_pk_setup(mbedtls_pk_context *ctx, const mbedtls_pk_info_t *info)
 {
     if (info == NULL || ctx->pk_info != NULL) {
         return MBEDTLS_ERR_PK_BAD_INPUT_DATA;
@@ -196,7 +196,7 @@ int mbedtls_pk_setup_opaque(mbedtls_pk_context *ctx,
 /*
  * Initialize an RSA-alt context
  */
-int mbedtls_pk_setup_rsa_alt(mbedtls_pk_context *ctx, void *key,
+EXPORT_C int mbedtls_pk_setup_rsa_alt(mbedtls_pk_context *ctx, void *key,
                              mbedtls_pk_rsa_alt_decrypt_func decrypt_func,
                              mbedtls_pk_rsa_alt_sign_func sign_func,
                              mbedtls_pk_rsa_alt_key_len_func key_len_func)
@@ -228,7 +228,7 @@ int mbedtls_pk_setup_rsa_alt(mbedtls_pk_context *ctx, void *key,
 /*
  * Tell if a PK can do the operations of the given type
  */
-int mbedtls_pk_can_do(const mbedtls_pk_context *ctx, mbedtls_pk_type_t type)
+EXPORT_C int mbedtls_pk_can_do(const mbedtls_pk_context *ctx, mbedtls_pk_type_t type)
 {
     /* A context with null pk_info is not set up yet and can't do anything.
      * For backward compatibility, also accept NULL instead of a context
@@ -417,7 +417,7 @@ static int pk_restart_setup(mbedtls_pk_restart_ctx *ctx,
 /*
  * Verify a signature (restartable)
  */
-int mbedtls_pk_verify_restartable(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_verify_restartable(mbedtls_pk_context *ctx,
                                   mbedtls_md_type_t md_alg,
                                   const unsigned char *hash, size_t hash_len,
                                   const unsigned char *sig, size_t sig_len,
@@ -467,7 +467,7 @@ int mbedtls_pk_verify_restartable(mbedtls_pk_context *ctx,
 /*
  * Verify a signature
  */
-int mbedtls_pk_verify(mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
+EXPORT_C int mbedtls_pk_verify(mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
                       const unsigned char *hash, size_t hash_len,
                       const unsigned char *sig, size_t sig_len)
 {
@@ -478,7 +478,7 @@ int mbedtls_pk_verify(mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
 /*
  * Verify a signature with options
  */
-int mbedtls_pk_verify_ext(mbedtls_pk_type_t type, const void *options,
+EXPORT_C int mbedtls_pk_verify_ext(mbedtls_pk_type_t type, const void *options,
                           mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
                           const unsigned char *hash, size_t hash_len,
                           const unsigned char *sig, size_t sig_len)
@@ -600,7 +600,7 @@ int mbedtls_pk_verify_ext(mbedtls_pk_type_t type, const void *options,
 /*
  * Make a signature (restartable)
  */
-int mbedtls_pk_sign_restartable(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_sign_restartable(mbedtls_pk_context *ctx,
                                 mbedtls_md_type_t md_alg,
                                 const unsigned char *hash, size_t hash_len,
                                 unsigned char *sig, size_t sig_size, size_t *sig_len,
@@ -654,7 +654,7 @@ int mbedtls_pk_sign_restartable(mbedtls_pk_context *ctx,
 /*
  * Make a signature
  */
-int mbedtls_pk_sign(mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
+EXPORT_C int mbedtls_pk_sign(mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
                     const unsigned char *hash, size_t hash_len,
                     unsigned char *sig, size_t sig_size, size_t *sig_len,
                     int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
@@ -668,7 +668,7 @@ int mbedtls_pk_sign(mbedtls_pk_context *ctx, mbedtls_md_type_t md_alg,
 /*
  * Make a signature given a signature type.
  */
-int mbedtls_pk_sign_ext(mbedtls_pk_type_t pk_type,
+EXPORT_C int mbedtls_pk_sign_ext(mbedtls_pk_type_t pk_type,
                         mbedtls_pk_context *ctx,
                         mbedtls_md_type_t md_alg,
                         const unsigned char *hash, size_t hash_len,
@@ -723,7 +723,7 @@ int mbedtls_pk_sign_ext(mbedtls_pk_type_t pk_type,
 /*
  * Decrypt message
  */
-int mbedtls_pk_decrypt(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_decrypt(mbedtls_pk_context *ctx,
                        const unsigned char *input, size_t ilen,
                        unsigned char *output, size_t *olen, size_t osize,
                        int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
@@ -743,7 +743,7 @@ int mbedtls_pk_decrypt(mbedtls_pk_context *ctx,
 /*
  * Encrypt message
  */
-int mbedtls_pk_encrypt(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_encrypt(mbedtls_pk_context *ctx,
                        const unsigned char *input, size_t ilen,
                        unsigned char *output, size_t *olen, size_t osize,
                        int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
@@ -763,7 +763,7 @@ int mbedtls_pk_encrypt(mbedtls_pk_context *ctx,
 /*
  * Check public-private key pair
  */
-int mbedtls_pk_check_pair(const mbedtls_pk_context *pub,
+EXPORT_C int mbedtls_pk_check_pair(const mbedtls_pk_context *pub,
                           const mbedtls_pk_context *prv,
                           int (*f_rng)(void *, unsigned char *, size_t),
                           void *p_rng)
@@ -797,7 +797,7 @@ int mbedtls_pk_check_pair(const mbedtls_pk_context *pub,
 /*
  * Get key size in bits
  */
-size_t mbedtls_pk_get_bitlen(const mbedtls_pk_context *ctx)
+EXPORT_C size_t mbedtls_pk_get_bitlen(const mbedtls_pk_context *ctx)
 {
     /* For backward compatibility, accept NULL or a context that
      * isn't set up yet, and return a fake value that should be safe. */
@@ -811,7 +811,7 @@ size_t mbedtls_pk_get_bitlen(const mbedtls_pk_context *ctx)
 /*
  * Export debug information
  */
-int mbedtls_pk_debug(const mbedtls_pk_context *ctx, mbedtls_pk_debug_item *items)
+EXPORT_C int mbedtls_pk_debug(const mbedtls_pk_context *ctx, mbedtls_pk_debug_item *items)
 {
     if (ctx->pk_info == NULL) {
         return MBEDTLS_ERR_PK_BAD_INPUT_DATA;
@@ -828,7 +828,7 @@ int mbedtls_pk_debug(const mbedtls_pk_context *ctx, mbedtls_pk_debug_item *items
 /*
  * Access the PK type name
  */
-const char *mbedtls_pk_get_name(const mbedtls_pk_context *ctx)
+EXPORT_C const char *mbedtls_pk_get_name(const mbedtls_pk_context *ctx)
 {
     if (ctx == NULL || ctx->pk_info == NULL) {
         return "invalid PK";
@@ -840,7 +840,7 @@ const char *mbedtls_pk_get_name(const mbedtls_pk_context *ctx)
 /*
  * Access the PK type
  */
-mbedtls_pk_type_t mbedtls_pk_get_type(const mbedtls_pk_context *ctx)
+EXPORT_C mbedtls_pk_type_t mbedtls_pk_get_type(const mbedtls_pk_context *ctx)
 {
     if (ctx == NULL || ctx->pk_info == NULL) {
         return MBEDTLS_PK_NONE;

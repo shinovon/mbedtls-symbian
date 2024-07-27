@@ -48,7 +48,7 @@ static mbedtls_ecp_group_id mbedtls_ecdh_grp_id(
 #endif
 }
 
-int mbedtls_ecdh_can_do(mbedtls_ecp_group_id gid)
+EXPORT_C int mbedtls_ecdh_can_do(mbedtls_ecp_group_id gid)
 {
     /* At this time, all groups support ECDH. */
     (void) gid;
@@ -90,7 +90,7 @@ cleanup:
 /*
  * Generate public key
  */
-int mbedtls_ecdh_gen_public(mbedtls_ecp_group *grp, mbedtls_mpi *d, mbedtls_ecp_point *Q,
+EXPORT_C int mbedtls_ecdh_gen_public(mbedtls_ecp_group *grp, mbedtls_mpi *d, mbedtls_ecp_point *Q,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng)
 {
@@ -133,7 +133,7 @@ cleanup:
 /*
  * Compute shared secret (SEC1 3.3.1)
  */
-int mbedtls_ecdh_compute_shared(mbedtls_ecp_group *grp, mbedtls_mpi *z,
+EXPORT_C int mbedtls_ecdh_compute_shared(mbedtls_ecp_group *grp, mbedtls_mpi *z,
                                 const mbedtls_ecp_point *Q, const mbedtls_mpi *d,
                                 int (*f_rng)(void *, unsigned char *, size_t),
                                 void *p_rng)
@@ -159,7 +159,7 @@ static void ecdh_init_internal(mbedtls_ecdh_context_mbed *ctx)
 /*
  * Initialize context
  */
-void mbedtls_ecdh_init(mbedtls_ecdh_context *ctx)
+EXPORT_C void mbedtls_ecdh_init(mbedtls_ecdh_context *ctx)
 {
 #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
     ecdh_init_internal(ctx);
@@ -193,7 +193,7 @@ static int ecdh_setup_internal(mbedtls_ecdh_context_mbed *ctx,
 /*
  * Setup context
  */
-int mbedtls_ecdh_setup(mbedtls_ecdh_context *ctx, mbedtls_ecp_group_id grp_id)
+EXPORT_C int mbedtls_ecdh_setup(mbedtls_ecdh_context *ctx, mbedtls_ecp_group_id grp_id)
 {
 #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
     return ecdh_setup_internal(ctx, grp_id);
@@ -242,7 +242,7 @@ void mbedtls_ecdh_enable_restart(mbedtls_ecdh_context *ctx)
 /*
  * Free context
  */
-void mbedtls_ecdh_free(mbedtls_ecdh_context *ctx)
+EXPORT_C void mbedtls_ecdh_free(mbedtls_ecdh_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -337,7 +337,7 @@ static int ecdh_make_params_internal(mbedtls_ecdh_context_mbed *ctx,
  *          ECPoint         public;
  *      } ServerECDHParams;
  */
-int mbedtls_ecdh_make_params(mbedtls_ecdh_context *ctx, size_t *olen,
+EXPORT_C int mbedtls_ecdh_make_params(mbedtls_ecdh_context *ctx, size_t *olen,
                              unsigned char *buf, size_t blen,
                              int (*f_rng)(void *, unsigned char *, size_t),
                              void *p_rng)
@@ -385,7 +385,7 @@ static int ecdh_read_params_internal(mbedtls_ecdh_context_mbed *ctx,
  *          ECPoint         public;
  *      } ServerECDHParams;
  */
-int mbedtls_ecdh_read_params(mbedtls_ecdh_context *ctx,
+EXPORT_C int mbedtls_ecdh_read_params(mbedtls_ecdh_context *ctx,
                              const unsigned char **buf,
                              const unsigned char *end)
 {
@@ -445,7 +445,7 @@ static int ecdh_get_params_internal(mbedtls_ecdh_context_mbed *ctx,
 /*
  * Get parameters from a keypair
  */
-int mbedtls_ecdh_get_params(mbedtls_ecdh_context *ctx,
+EXPORT_C int mbedtls_ecdh_get_params(mbedtls_ecdh_context *ctx,
                             const mbedtls_ecp_keypair *key,
                             mbedtls_ecdh_side side)
 {
@@ -537,7 +537,7 @@ static int ecdh_make_public_internal(mbedtls_ecdh_context_mbed *ctx,
 /*
  * Setup and export the client public value
  */
-int mbedtls_ecdh_make_public(mbedtls_ecdh_context *ctx, size_t *olen,
+EXPORT_C int mbedtls_ecdh_make_public(mbedtls_ecdh_context *ctx, size_t *olen,
                              unsigned char *buf, size_t blen,
                              int (*f_rng)(void *, unsigned char *, size_t),
                              void *p_rng)
@@ -589,7 +589,7 @@ static int ecdh_read_public_internal(mbedtls_ecdh_context_mbed *ctx,
 /*
  * Parse and import the client's public value
  */
-int mbedtls_ecdh_read_public(mbedtls_ecdh_context *ctx,
+EXPORT_C int mbedtls_ecdh_read_public(mbedtls_ecdh_context *ctx,
                              const unsigned char *buf, size_t blen)
 {
 #if defined(MBEDTLS_ECDH_LEGACY_CONTEXT)
@@ -665,7 +665,7 @@ static int ecdh_calc_secret_internal(mbedtls_ecdh_context_mbed *ctx,
 /*
  * Derive and export the shared secret
  */
-int mbedtls_ecdh_calc_secret(mbedtls_ecdh_context *ctx, size_t *olen,
+EXPORT_C int mbedtls_ecdh_calc_secret(mbedtls_ecdh_context *ctx, size_t *olen,
                              unsigned char *buf, size_t blen,
                              int (*f_rng)(void *, unsigned char *, size_t),
                              void *p_rng)

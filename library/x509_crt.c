@@ -93,7 +93,7 @@ typedef struct {
 
 /* Default profile. Do not remove items unless there are serious security
  * concerns. */
-const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default =
+EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default =
 {
     /* Hashes from SHA-256 and above. Note that this selection
      * should be aligned with ssl_preset_default_hashes in ssl_tls.c. */
@@ -119,7 +119,7 @@ const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default =
 
 /* Next-generation profile. Currently identical to the default, but may
  * be tightened at any time. */
-const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next =
+EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next =
 {
     /* Hashes from SHA-256 and above. */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_MD_SHA256) |
@@ -144,7 +144,7 @@ const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next =
 /*
  * NSA Suite B Profile
  */
-const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
+EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
 {
     /* Only SHA-256 and 384 */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_MD_SHA256) |
@@ -165,7 +165,7 @@ const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
 /*
  * Empty / all-forbidden profile
  */
-const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_none =
+EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_none =
 {
     0,
     0,
@@ -1245,14 +1245,14 @@ static int mbedtls_x509_crt_parse_der_internal(mbedtls_x509_crt *chain,
     return 0;
 }
 
-int mbedtls_x509_crt_parse_der_nocopy(mbedtls_x509_crt *chain,
+EXPORT_C int mbedtls_x509_crt_parse_der_nocopy(mbedtls_x509_crt *chain,
                                       const unsigned char *buf,
                                       size_t buflen)
 {
     return mbedtls_x509_crt_parse_der_internal(chain, buf, buflen, 0, NULL, NULL);
 }
 
-int mbedtls_x509_crt_parse_der_with_ext_cb(mbedtls_x509_crt *chain,
+EXPORT_C int mbedtls_x509_crt_parse_der_with_ext_cb(mbedtls_x509_crt *chain,
                                            const unsigned char *buf,
                                            size_t buflen,
                                            int make_copy,
@@ -1262,7 +1262,7 @@ int mbedtls_x509_crt_parse_der_with_ext_cb(mbedtls_x509_crt *chain,
     return mbedtls_x509_crt_parse_der_internal(chain, buf, buflen, make_copy, cb, p_ctx);
 }
 
-int mbedtls_x509_crt_parse_der(mbedtls_x509_crt *chain,
+EXPORT_C int mbedtls_x509_crt_parse_der(mbedtls_x509_crt *chain,
                                const unsigned char *buf,
                                size_t buflen)
 {
@@ -1273,7 +1273,7 @@ int mbedtls_x509_crt_parse_der(mbedtls_x509_crt *chain,
  * Parse one or more PEM certificates from a buffer and add them to the chained
  * list
  */
-int mbedtls_x509_crt_parse(mbedtls_x509_crt *chain,
+EXPORT_C int mbedtls_x509_crt_parse(mbedtls_x509_crt *chain,
                            const unsigned char *buf,
                            size_t buflen)
 {
@@ -1608,7 +1608,7 @@ static int x509_info_cert_policies(char **buf, size_t *size,
  */
 #define BEFORE_COLON    18
 #define BC              "18"
-int mbedtls_x509_crt_info(char *buf, size_t size, const char *prefix,
+EXPORT_C int mbedtls_x509_crt_info(char *buf, size_t size, const char *prefix,
                           const mbedtls_x509_crt *crt)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -1759,7 +1759,7 @@ static const struct x509_crt_verify_string x509_crt_verify_strings[] = {
 };
 #undef X509_CRT_ERROR_INFO
 
-int mbedtls_x509_crt_verify_info(char *buf, size_t size, const char *prefix,
+EXPORT_C int mbedtls_x509_crt_verify_info(char *buf, size_t size, const char *prefix,
                                  uint32_t flags)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -1787,7 +1787,7 @@ int mbedtls_x509_crt_verify_info(char *buf, size_t size, const char *prefix,
 }
 #endif /* MBEDTLS_X509_REMOVE_INFO */
 
-int mbedtls_x509_crt_check_key_usage(const mbedtls_x509_crt *crt,
+EXPORT_C int mbedtls_x509_crt_check_key_usage(const mbedtls_x509_crt *crt,
                                      unsigned int usage)
 {
     unsigned int usage_must, usage_may;
@@ -1813,7 +1813,7 @@ int mbedtls_x509_crt_check_key_usage(const mbedtls_x509_crt *crt,
     return 0;
 }
 
-int mbedtls_x509_crt_check_extended_key_usage(const mbedtls_x509_crt *crt,
+EXPORT_C int mbedtls_x509_crt_check_extended_key_usage(const mbedtls_x509_crt *crt,
                                               const char *usage_oid,
                                               size_t usage_len)
 {
@@ -1847,7 +1847,7 @@ int mbedtls_x509_crt_check_extended_key_usage(const mbedtls_x509_crt *crt,
 /*
  * Return 1 if the certificate is revoked, or 0 otherwise.
  */
-int mbedtls_x509_crt_is_revoked(const mbedtls_x509_crt *crt, const mbedtls_x509_crl *crl)
+EXPORT_C int mbedtls_x509_crt_is_revoked(const mbedtls_x509_crt *crt, const mbedtls_x509_crl *crl)
 {
     const mbedtls_x509_crl_entry *cur = &crl->entry;
 
@@ -2742,7 +2742,7 @@ exit:
 /*
  * Verify the certificate validity (default profile, not restartable)
  */
-int mbedtls_x509_crt_verify(mbedtls_x509_crt *crt,
+EXPORT_C int mbedtls_x509_crt_verify(mbedtls_x509_crt *crt,
                             mbedtls_x509_crt *trust_ca,
                             mbedtls_x509_crl *ca_crl,
                             const char *cn, uint32_t *flags,
@@ -2759,7 +2759,7 @@ int mbedtls_x509_crt_verify(mbedtls_x509_crt *crt,
 /*
  * Verify the certificate validity (user-chosen profile, not restartable)
  */
-int mbedtls_x509_crt_verify_with_profile(mbedtls_x509_crt *crt,
+EXPORT_C int mbedtls_x509_crt_verify_with_profile(mbedtls_x509_crt *crt,
                                          mbedtls_x509_crt *trust_ca,
                                          mbedtls_x509_crl *ca_crl,
                                          const mbedtls_x509_crt_profile *profile,
@@ -2793,7 +2793,7 @@ int mbedtls_x509_crt_verify_with_ca_cb(mbedtls_x509_crt *crt,
 }
 #endif /* MBEDTLS_X509_TRUSTED_CERTIFICATE_CALLBACK */
 
-int mbedtls_x509_crt_verify_restartable(mbedtls_x509_crt *crt,
+EXPORT_C int mbedtls_x509_crt_verify_restartable(mbedtls_x509_crt *crt,
                                         mbedtls_x509_crt *trust_ca,
                                         mbedtls_x509_crl *ca_crl,
                                         const mbedtls_x509_crt_profile *profile,
@@ -2812,7 +2812,7 @@ int mbedtls_x509_crt_verify_restartable(mbedtls_x509_crt *crt,
 /*
  * Initialize a certificate chain
  */
-void mbedtls_x509_crt_init(mbedtls_x509_crt *crt)
+EXPORT_C void mbedtls_x509_crt_init(mbedtls_x509_crt *crt)
 {
     memset(crt, 0, sizeof(mbedtls_x509_crt));
 }
@@ -2820,7 +2820,7 @@ void mbedtls_x509_crt_init(mbedtls_x509_crt *crt)
 /*
  * Unallocate all certificate data
  */
-void mbedtls_x509_crt_free(mbedtls_x509_crt *crt)
+EXPORT_C void mbedtls_x509_crt_free(mbedtls_x509_crt *crt)
 {
     mbedtls_x509_crt *cert_cur = crt;
     mbedtls_x509_crt *cert_prv;

@@ -45,7 +45,7 @@ typedef struct {
 
 static psa_global_data_t global_data;
 
-int psa_is_valid_key_id(mbedtls_svc_key_id_t key, int vendor_ok)
+EXPORT_C int psa_is_valid_key_id(mbedtls_svc_key_id_t key, int vendor_ok)
 {
     psa_key_id_t key_id = MBEDTLS_SVC_KEY_ID_GET_KEY_ID(key);
 
@@ -140,7 +140,7 @@ static psa_status_t psa_get_and_lock_key_slot_in_memory(
     return status;
 }
 
-psa_status_t psa_initialize_key_slots(void)
+EXPORT_C psa_status_t psa_initialize_key_slots(void)
 {
     /* Nothing to do: program startup and psa_wipe_all_key_slots() both
      * guarantee that the key slots are initialized to all-zero, which
@@ -149,7 +149,7 @@ psa_status_t psa_initialize_key_slots(void)
     return PSA_SUCCESS;
 }
 
-void psa_wipe_all_key_slots(void)
+EXPORT_C void psa_wipe_all_key_slots(void)
 {
     size_t slot_idx;
 
@@ -161,7 +161,7 @@ void psa_wipe_all_key_slots(void)
     global_data.key_slots_initialized = 0;
 }
 
-psa_status_t psa_get_empty_key_slot(psa_key_id_t *volatile_key_id,
+EXPORT_C psa_status_t psa_get_empty_key_slot(psa_key_id_t *volatile_key_id,
                                     psa_key_slot_t **p_slot)
 {
     psa_status_t status = PSA_ERROR_CORRUPTION_DETECTED;
@@ -338,7 +338,7 @@ exit:
 }
 #endif /* MBEDTLS_PSA_CRYPTO_BUILTIN_KEYS */
 
-psa_status_t psa_get_and_lock_key_slot(mbedtls_svc_key_id_t key,
+EXPORT_C psa_status_t psa_get_and_lock_key_slot(mbedtls_svc_key_id_t key,
                                        psa_key_slot_t **p_slot)
 {
     psa_status_t status = PSA_ERROR_CORRUPTION_DETECTED;
@@ -398,7 +398,7 @@ psa_status_t psa_get_and_lock_key_slot(mbedtls_svc_key_id_t key,
 #endif /* MBEDTLS_PSA_CRYPTO_STORAGE_C || MBEDTLS_PSA_CRYPTO_BUILTIN_KEYS */
 }
 
-psa_status_t psa_unlock_key_slot(psa_key_slot_t *slot)
+EXPORT_C psa_status_t psa_unlock_key_slot(psa_key_slot_t *slot)
 {
     if (slot == NULL) {
         return PSA_SUCCESS;
@@ -421,7 +421,7 @@ psa_status_t psa_unlock_key_slot(psa_key_slot_t *slot)
     return PSA_ERROR_CORRUPTION_DETECTED;
 }
 
-psa_status_t psa_validate_key_location(psa_key_lifetime_t lifetime,
+EXPORT_C psa_status_t psa_validate_key_location(psa_key_lifetime_t lifetime,
                                        psa_se_drv_table_entry_t **p_drv)
 {
     if (psa_key_lifetime_is_external(lifetime)) {
@@ -452,7 +452,7 @@ psa_status_t psa_validate_key_location(psa_key_lifetime_t lifetime,
     }
 }
 
-psa_status_t psa_validate_key_persistence(psa_key_lifetime_t lifetime)
+EXPORT_C psa_status_t psa_validate_key_persistence(psa_key_lifetime_t lifetime)
 {
     if (PSA_KEY_LIFETIME_IS_VOLATILE(lifetime)) {
         /* Volatile keys are always supported */
@@ -471,7 +471,7 @@ psa_status_t psa_validate_key_persistence(psa_key_lifetime_t lifetime)
     }
 }
 
-psa_status_t psa_open_key(mbedtls_svc_key_id_t key, psa_key_handle_t *handle)
+EXPORT_C psa_status_t psa_open_key(mbedtls_svc_key_id_t key, psa_key_handle_t *handle)
 {
 #if defined(MBEDTLS_PSA_CRYPTO_STORAGE_C) || \
     defined(MBEDTLS_PSA_CRYPTO_BUILTIN_KEYS)
@@ -499,7 +499,7 @@ psa_status_t psa_open_key(mbedtls_svc_key_id_t key, psa_key_handle_t *handle)
 #endif /* MBEDTLS_PSA_CRYPTO_STORAGE_C || MBEDTLS_PSA_CRYPTO_BUILTIN_KEYS */
 }
 
-psa_status_t psa_close_key(psa_key_handle_t handle)
+EXPORT_C psa_status_t psa_close_key(psa_key_handle_t handle)
 {
     psa_status_t status;
     psa_key_slot_t *slot;
@@ -523,7 +523,7 @@ psa_status_t psa_close_key(psa_key_handle_t handle)
     }
 }
 
-psa_status_t psa_purge_key(mbedtls_svc_key_id_t key)
+EXPORT_C psa_status_t psa_purge_key(mbedtls_svc_key_id_t key)
 {
     psa_status_t status;
     psa_key_slot_t *slot;
@@ -541,7 +541,7 @@ psa_status_t psa_purge_key(mbedtls_svc_key_id_t key)
     }
 }
 
-void mbedtls_psa_get_stats(mbedtls_psa_stats_t *stats)
+EXPORT_C void mbedtls_psa_get_stats(mbedtls_psa_stats_t *stats)
 {
     size_t slot_idx;
 

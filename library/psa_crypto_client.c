@@ -26,13 +26,13 @@
 #include <string.h>
 #include "mbedtls/platform.h"
 
-void psa_reset_key_attributes(psa_key_attributes_t *attributes)
+EXPORT_C void psa_reset_key_attributes(psa_key_attributes_t *attributes)
 {
     mbedtls_free(attributes->domain_parameters);
     memset(attributes, 0, sizeof(*attributes));
 }
 
-psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
+EXPORT_C psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
                                            psa_key_type_t type,
                                            const uint8_t *data,
                                            size_t data_length)
@@ -61,7 +61,7 @@ psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
     return PSA_SUCCESS;
 }
 
-psa_status_t psa_get_key_domain_parameters(
+EXPORT_C psa_status_t psa_get_key_domain_parameters(
     const psa_key_attributes_t *attributes,
     uint8_t *data, size_t data_size, size_t *data_length)
 {

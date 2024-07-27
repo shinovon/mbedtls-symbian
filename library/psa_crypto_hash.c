@@ -30,7 +30,7 @@
 #include <string.h>
 
 #if defined(MBEDTLS_PSA_BUILTIN_HASH)
-psa_status_t mbedtls_psa_hash_abort(
+EXPORT_C psa_status_t mbedtls_psa_hash_abort(
     mbedtls_psa_hash_operation_t *operation)
 {
     switch (operation->alg) {
@@ -81,7 +81,7 @@ psa_status_t mbedtls_psa_hash_abort(
     return PSA_SUCCESS;
 }
 
-psa_status_t mbedtls_psa_hash_setup(
+EXPORT_C psa_status_t mbedtls_psa_hash_setup(
     mbedtls_psa_hash_operation_t *operation,
     psa_algorithm_t alg)
 {
@@ -148,7 +148,7 @@ psa_status_t mbedtls_psa_hash_setup(
     return mbedtls_to_psa_error(ret);
 }
 
-psa_status_t mbedtls_psa_hash_clone(
+EXPORT_C psa_status_t mbedtls_psa_hash_clone(
     const mbedtls_psa_hash_operation_t *source_operation,
     mbedtls_psa_hash_operation_t *target_operation)
 {
@@ -207,7 +207,7 @@ psa_status_t mbedtls_psa_hash_clone(
     return PSA_SUCCESS;
 }
 
-psa_status_t mbedtls_psa_hash_update(
+EXPORT_C psa_status_t mbedtls_psa_hash_update(
     mbedtls_psa_hash_operation_t *operation,
     const uint8_t *input,
     size_t input_length)
@@ -266,7 +266,7 @@ psa_status_t mbedtls_psa_hash_update(
     return mbedtls_to_psa_error(ret);
 }
 
-psa_status_t mbedtls_psa_hash_finish(
+EXPORT_C psa_status_t mbedtls_psa_hash_finish(
     mbedtls_psa_hash_operation_t *operation,
     uint8_t *hash,
     size_t hash_size,
@@ -340,7 +340,7 @@ exit:
     return status;
 }
 
-psa_status_t mbedtls_psa_hash_compute(
+EXPORT_C psa_status_t mbedtls_psa_hash_compute(
     psa_algorithm_t alg,
     const uint8_t *input,
     size_t input_length,

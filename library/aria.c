@@ -362,7 +362,7 @@ static void aria_rot128(uint32_t r[4], const uint32_t a[4],
 /*
  * Set encryption key
  */
-int mbedtls_aria_setkey_enc(mbedtls_aria_context *ctx,
+EXPORT_C int mbedtls_aria_setkey_enc(mbedtls_aria_context *ctx,
                             const unsigned char *key, unsigned int keybits)
 {
     /* round constant masks */
@@ -425,7 +425,7 @@ int mbedtls_aria_setkey_enc(mbedtls_aria_context *ctx,
 /*
  * Set decryption key
  */
-int mbedtls_aria_setkey_dec(mbedtls_aria_context *ctx,
+EXPORT_C int mbedtls_aria_setkey_dec(mbedtls_aria_context *ctx,
                             const unsigned char *key, unsigned int keybits)
 {
     int i, j, k, ret;
@@ -458,7 +458,7 @@ int mbedtls_aria_setkey_dec(mbedtls_aria_context *ctx,
 /*
  * Encrypt a block
  */
-int mbedtls_aria_crypt_ecb(mbedtls_aria_context *ctx,
+EXPORT_C int mbedtls_aria_crypt_ecb(mbedtls_aria_context *ctx,
                            const unsigned char input[MBEDTLS_ARIA_BLOCKSIZE],
                            unsigned char output[MBEDTLS_ARIA_BLOCKSIZE])
 {
@@ -513,14 +513,14 @@ int mbedtls_aria_crypt_ecb(mbedtls_aria_context *ctx,
 }
 
 /* Initialize context */
-void mbedtls_aria_init(mbedtls_aria_context *ctx)
+EXPORT_C void mbedtls_aria_init(mbedtls_aria_context *ctx)
 {
     ARIA_VALIDATE(ctx != NULL);
     memset(ctx, 0, sizeof(mbedtls_aria_context));
 }
 
 /* Clear context */
-void mbedtls_aria_free(mbedtls_aria_context *ctx)
+EXPORT_C void mbedtls_aria_free(mbedtls_aria_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -533,7 +533,7 @@ void mbedtls_aria_free(mbedtls_aria_context *ctx)
 /*
  * ARIA-CBC buffer encryption/decryption
  */
-int mbedtls_aria_crypt_cbc(mbedtls_aria_context *ctx,
+EXPORT_C int mbedtls_aria_crypt_cbc(mbedtls_aria_context *ctx,
                            int mode,
                            size_t length,
                            unsigned char iv[MBEDTLS_ARIA_BLOCKSIZE],

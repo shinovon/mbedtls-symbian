@@ -33,7 +33,7 @@
 #include "bn_mul.h"
 #include "constant_time_internal.h"
 
-size_t mbedtls_mpi_core_clz(mbedtls_mpi_uint a)
+EXPORT_C size_t mbedtls_mpi_core_clz(mbedtls_mpi_uint a)
 {
     size_t j;
     mbedtls_mpi_uint mask = (mbedtls_mpi_uint) 1 << (biL - 1);
@@ -49,7 +49,7 @@ size_t mbedtls_mpi_core_clz(mbedtls_mpi_uint a)
     return j;
 }
 
-size_t mbedtls_mpi_core_bitlen(const mbedtls_mpi_uint *A, size_t A_limbs)
+EXPORT_C size_t mbedtls_mpi_core_bitlen(const mbedtls_mpi_uint *A, size_t A_limbs)
 {
     size_t i, j;
 
@@ -103,7 +103,7 @@ static mbedtls_mpi_uint mpi_bigendian_to_host(mbedtls_mpi_uint a)
     }
 }
 
-void mbedtls_mpi_core_bigendian_to_host(mbedtls_mpi_uint *A,
+EXPORT_C void mbedtls_mpi_core_bigendian_to_host(mbedtls_mpi_uint *A,
                                         size_t A_limbs)
 {
     mbedtls_mpi_uint *cur_limb_left;
@@ -135,7 +135,7 @@ void mbedtls_mpi_core_bigendian_to_host(mbedtls_mpi_uint *A,
 
 /* Whether min <= A, in constant time.
  * A_limbs must be at least 1. */
-unsigned mbedtls_mpi_core_uint_le_mpi(mbedtls_mpi_uint min,
+EXPORT_C unsigned mbedtls_mpi_core_uint_le_mpi(mbedtls_mpi_uint min,
                                       const mbedtls_mpi_uint *A,
                                       size_t A_limbs)
 {
@@ -155,7 +155,7 @@ unsigned mbedtls_mpi_core_uint_le_mpi(mbedtls_mpi_uint min,
     return min_le_lsl | msll_nonzero;
 }
 
-void mbedtls_mpi_core_cond_assign(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_core_cond_assign(mbedtls_mpi_uint *X,
                                   const mbedtls_mpi_uint *A,
                                   size_t limbs,
                                   unsigned char assign)
@@ -167,7 +167,7 @@ void mbedtls_mpi_core_cond_assign(mbedtls_mpi_uint *X,
     mbedtls_ct_mpi_uint_cond_assign(limbs, X, A, assign);
 }
 
-void mbedtls_mpi_core_cond_swap(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_core_cond_swap(mbedtls_mpi_uint *X,
                                 mbedtls_mpi_uint *Y,
                                 size_t limbs,
                                 unsigned char swap)
@@ -186,7 +186,7 @@ void mbedtls_mpi_core_cond_swap(mbedtls_mpi_uint *X,
     }
 }
 
-int mbedtls_mpi_core_read_le(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_core_read_le(mbedtls_mpi_uint *X,
                              size_t X_limbs,
                              const unsigned char *input,
                              size_t input_length)
@@ -209,7 +209,7 @@ int mbedtls_mpi_core_read_le(mbedtls_mpi_uint *X,
     return 0;
 }
 
-int mbedtls_mpi_core_read_be(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_core_read_be(mbedtls_mpi_uint *X,
                              size_t X_limbs,
                              const unsigned char *input,
                              size_t input_length)
@@ -240,7 +240,7 @@ int mbedtls_mpi_core_read_be(mbedtls_mpi_uint *X,
     return 0;
 }
 
-int mbedtls_mpi_core_write_le(const mbedtls_mpi_uint *A,
+EXPORT_C int mbedtls_mpi_core_write_le(const mbedtls_mpi_uint *A,
                               size_t A_limbs,
                               unsigned char *output,
                               size_t output_length)
@@ -274,7 +274,7 @@ int mbedtls_mpi_core_write_le(const mbedtls_mpi_uint *A,
     return 0;
 }
 
-int mbedtls_mpi_core_write_be(const mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_core_write_be(const mbedtls_mpi_uint *X,
                               size_t X_limbs,
                               unsigned char *output,
                               size_t output_length)
@@ -313,7 +313,7 @@ int mbedtls_mpi_core_write_be(const mbedtls_mpi_uint *X,
     return 0;
 }
 
-void mbedtls_mpi_core_shift_r(mbedtls_mpi_uint *X, size_t limbs,
+EXPORT_C void mbedtls_mpi_core_shift_r(mbedtls_mpi_uint *X, size_t limbs,
                               size_t count)
 {
     size_t i, v0, v1;
@@ -353,7 +353,7 @@ void mbedtls_mpi_core_shift_r(mbedtls_mpi_uint *X, size_t limbs,
     }
 }
 
-mbedtls_mpi_uint mbedtls_mpi_core_add(mbedtls_mpi_uint *X,
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_add(mbedtls_mpi_uint *X,
                                       const mbedtls_mpi_uint *A,
                                       const mbedtls_mpi_uint *B,
                                       size_t limbs)
@@ -371,7 +371,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_add(mbedtls_mpi_uint *X,
     return c;
 }
 
-mbedtls_mpi_uint mbedtls_mpi_core_add_if(mbedtls_mpi_uint *X,
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_add_if(mbedtls_mpi_uint *X,
                                          const mbedtls_mpi_uint *A,
                                          size_t limbs,
                                          unsigned cond)
@@ -393,7 +393,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_add_if(mbedtls_mpi_uint *X,
     return c;
 }
 
-mbedtls_mpi_uint mbedtls_mpi_core_sub(mbedtls_mpi_uint *X,
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_sub(mbedtls_mpi_uint *X,
                                       const mbedtls_mpi_uint *A,
                                       const mbedtls_mpi_uint *B,
                                       size_t limbs)
@@ -410,7 +410,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_sub(mbedtls_mpi_uint *X,
     return c;
 }
 
-mbedtls_mpi_uint mbedtls_mpi_core_mla(mbedtls_mpi_uint *d, size_t d_len,
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_mla(mbedtls_mpi_uint *d, size_t d_len,
                                       const mbedtls_mpi_uint *s, size_t s_len,
                                       mbedtls_mpi_uint b)
 {
@@ -451,7 +451,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_mla(mbedtls_mpi_uint *d, size_t d_len,
 /*
  * Fast Montgomery initialization (thanks to Tom St Denis).
  */
-mbedtls_mpi_uint mbedtls_mpi_core_montmul_init(const mbedtls_mpi_uint *N)
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_montmul_init(const mbedtls_mpi_uint *N)
 {
     mbedtls_mpi_uint x = N[0];
 
@@ -464,7 +464,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_montmul_init(const mbedtls_mpi_uint *N)
     return ~x + 1;
 }
 
-void mbedtls_mpi_core_montmul(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_core_montmul(mbedtls_mpi_uint *X,
                               const mbedtls_mpi_uint *A,
                               const mbedtls_mpi_uint *B,
                               size_t B_limbs,
@@ -516,7 +516,7 @@ void mbedtls_mpi_core_montmul(mbedtls_mpi_uint *X,
     mbedtls_ct_mpi_uint_cond_assign(AN_limbs, X, T, (unsigned char) (carry ^ borrow));
 }
 
-int mbedtls_mpi_core_get_mont_r2_unsafe(mbedtls_mpi *X,
+EXPORT_C int mbedtls_mpi_core_get_mont_r2_unsafe(mbedtls_mpi *X,
                                         const mbedtls_mpi *N)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -549,7 +549,7 @@ void mbedtls_mpi_core_ct_uint_table_lookup(mbedtls_mpi_uint *dest,
  * deterministic ECDSA (see RFC 6979 §3.3 and the specification of
  * mbedtls_mpi_core_random()).
  */
-int mbedtls_mpi_core_fill_random(
+EXPORT_C int mbedtls_mpi_core_fill_random(
     mbedtls_mpi_uint *X, size_t X_limbs,
     size_t n_bytes,
     int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
@@ -571,7 +571,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_mpi_core_random(mbedtls_mpi_uint *X,
+EXPORT_C int mbedtls_mpi_core_random(mbedtls_mpi_uint *X,
                             mbedtls_mpi_uint min,
                             const mbedtls_mpi_uint *N,
                             size_t limbs,
@@ -645,7 +645,7 @@ static size_t exp_mod_get_window_size(size_t Ebits)
     return wsize;
 }
 
-size_t mbedtls_mpi_core_exp_mod_working_limbs(size_t AN_limbs, size_t E_limbs)
+EXPORT_C size_t mbedtls_mpi_core_exp_mod_working_limbs(size_t AN_limbs, size_t E_limbs)
 {
     const size_t wsize = exp_mod_get_window_size(E_limbs * biL);
     const size_t welem = ((size_t) 1) << wsize;
@@ -697,7 +697,7 @@ static void exp_mod_precompute_window(const mbedtls_mpi_uint *A,
  * (The difference is that the body in our loop processes a single bit instead
  * of a full window.)
  */
-void mbedtls_mpi_core_exp_mod(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_core_exp_mod(mbedtls_mpi_uint *X,
                               const mbedtls_mpi_uint *A,
                               const mbedtls_mpi_uint *N,
                               size_t AN_limbs,
@@ -788,7 +788,7 @@ void mbedtls_mpi_core_exp_mod(mbedtls_mpi_uint *X,
 
 /* BEGIN MERGE SLOT 3 */
 
-mbedtls_mpi_uint mbedtls_mpi_core_sub_int(mbedtls_mpi_uint *X,
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_sub_int(mbedtls_mpi_uint *X,
                                           const mbedtls_mpi_uint *A,
                                           mbedtls_mpi_uint c,  /* doubles as carry */
                                           size_t limbs)
@@ -803,7 +803,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_sub_int(mbedtls_mpi_uint *X,
     return c;
 }
 
-mbedtls_mpi_uint mbedtls_mpi_core_check_zero_ct(const mbedtls_mpi_uint *A,
+EXPORT_C mbedtls_mpi_uint mbedtls_mpi_core_check_zero_ct(const mbedtls_mpi_uint *A,
                                                 size_t limbs)
 {
     mbedtls_mpi_uint bits = 0;
@@ -815,7 +815,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_check_zero_ct(const mbedtls_mpi_uint *A,
     return bits;
 }
 
-void mbedtls_mpi_core_to_mont_rep(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_core_to_mont_rep(mbedtls_mpi_uint *X,
                                   const mbedtls_mpi_uint *A,
                                   const mbedtls_mpi_uint *N,
                                   size_t AN_limbs,
@@ -826,7 +826,7 @@ void mbedtls_mpi_core_to_mont_rep(mbedtls_mpi_uint *X,
     mbedtls_mpi_core_montmul(X, A, rr, AN_limbs, N, AN_limbs, mm, T);
 }
 
-void mbedtls_mpi_core_from_mont_rep(mbedtls_mpi_uint *X,
+EXPORT_C void mbedtls_mpi_core_from_mont_rep(mbedtls_mpi_uint *X,
                                     const mbedtls_mpi_uint *A,
                                     const mbedtls_mpi_uint *N,
                                     size_t AN_limbs,

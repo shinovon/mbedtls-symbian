@@ -22,7 +22,7 @@ int __aeabi_uidiv(unsigned int a, unsigned int b)
 
 #include <stdlib.h>
 
-int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t *olen)
+EXPORT_C int mbedtls_hardware_poll(void *data, unsigned char *output, size_t len, size_t *olen)
 {
     uint32_t rnd = 0, i;
     for (i = 0; i < len; ++i) {

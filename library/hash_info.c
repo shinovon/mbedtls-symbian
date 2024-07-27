@@ -57,7 +57,7 @@ static const hash_entry hash_table[] = {
 };
 
 /* Get size from MD type */
-unsigned char mbedtls_hash_info_get_size(mbedtls_md_type_t md_type)
+EXPORT_C unsigned char mbedtls_hash_info_get_size(mbedtls_md_type_t md_type)
 {
     const hash_entry *entry = hash_table;
     while (entry->md_type != MBEDTLS_MD_NONE &&
@@ -69,7 +69,7 @@ unsigned char mbedtls_hash_info_get_size(mbedtls_md_type_t md_type)
 }
 
 /* Get block size from MD type */
-unsigned char mbedtls_hash_info_get_block_size(mbedtls_md_type_t md_type)
+EXPORT_C unsigned char mbedtls_hash_info_get_block_size(mbedtls_md_type_t md_type)
 {
     const hash_entry *entry = hash_table;
     while (entry->md_type != MBEDTLS_MD_NONE &&
@@ -81,7 +81,7 @@ unsigned char mbedtls_hash_info_get_block_size(mbedtls_md_type_t md_type)
 }
 
 /* Get PSA from MD */
-psa_algorithm_t mbedtls_hash_info_psa_from_md(mbedtls_md_type_t md_type)
+EXPORT_C psa_algorithm_t mbedtls_hash_info_psa_from_md(mbedtls_md_type_t md_type)
 {
     const hash_entry *entry = hash_table;
     while (entry->md_type != MBEDTLS_MD_NONE &&
@@ -93,7 +93,7 @@ psa_algorithm_t mbedtls_hash_info_psa_from_md(mbedtls_md_type_t md_type)
 }
 
 /* Get MD from PSA */
-mbedtls_md_type_t mbedtls_hash_info_md_from_psa(psa_algorithm_t psa_alg)
+EXPORT_C mbedtls_md_type_t mbedtls_hash_info_md_from_psa(psa_algorithm_t psa_alg)
 {
     const hash_entry *entry = hash_table;
     while (entry->md_type != MBEDTLS_MD_NONE &&
@@ -105,7 +105,7 @@ mbedtls_md_type_t mbedtls_hash_info_md_from_psa(psa_algorithm_t psa_alg)
 }
 
 #if !defined(MBEDTLS_DEPRECATED_REMOVED)
-int mbedtls_md_error_from_psa(psa_status_t status)
+EXPORT_C int mbedtls_md_error_from_psa(psa_status_t status)
 {
     switch (status) {
         case PSA_SUCCESS:

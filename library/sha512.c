@@ -216,12 +216,12 @@ static void sha512_put_uint64_be(uint64_t n, unsigned char *b, uint8_t i)
 #define sha512_put_uint64_be    MBEDTLS_PUT_UINT64_BE
 #endif /* MBEDTLS_SHA512_SMALLER */
 
-void mbedtls_sha512_init(mbedtls_sha512_context *ctx)
+EXPORT_C void mbedtls_sha512_init(mbedtls_sha512_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_sha512_context));
 }
 
-void mbedtls_sha512_free(mbedtls_sha512_context *ctx)
+EXPORT_C void mbedtls_sha512_free(mbedtls_sha512_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -230,7 +230,7 @@ void mbedtls_sha512_free(mbedtls_sha512_context *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_sha512_context));
 }
 
-void mbedtls_sha512_clone(mbedtls_sha512_context *dst,
+EXPORT_C void mbedtls_sha512_clone(mbedtls_sha512_context *dst,
                           const mbedtls_sha512_context *src)
 {
     *dst = *src;
@@ -239,7 +239,7 @@ void mbedtls_sha512_clone(mbedtls_sha512_context *dst,
 /*
  * SHA-512 context setup
  */
-int mbedtls_sha512_starts(mbedtls_sha512_context *ctx, int is384)
+EXPORT_C int mbedtls_sha512_starts(mbedtls_sha512_context *ctx, int is384)
 {
 #if defined(MBEDTLS_SHA384_C) && defined(MBEDTLS_SHA512_C)
     if (is384 != 0 && is384 != 1) {
@@ -740,7 +740,7 @@ static size_t mbedtls_internal_sha512_process_many(mbedtls_sha512_context *ctx,
     }
 }
 
-int mbedtls_internal_sha512_process(mbedtls_sha512_context *ctx,
+EXPORT_C int mbedtls_internal_sha512_process(mbedtls_sha512_context *ctx,
                                     const unsigned char data[SHA512_BLOCK_SIZE])
 {
     if (mbedtls_a64_crypto_sha512_has_support()) {
@@ -755,7 +755,7 @@ int mbedtls_internal_sha512_process(mbedtls_sha512_context *ctx,
 /*
  * SHA-512 process buffer
  */
-int mbedtls_sha512_update(mbedtls_sha512_context *ctx,
+EXPORT_C int mbedtls_sha512_update(mbedtls_sha512_context *ctx,
                           const unsigned char *input,
                           size_t ilen)
 {
@@ -809,7 +809,7 @@ int mbedtls_sha512_update(mbedtls_sha512_context *ctx,
 /*
  * SHA-512 final digest
  */
-int mbedtls_sha512_finish(mbedtls_sha512_context *ctx,
+EXPORT_C int mbedtls_sha512_finish(mbedtls_sha512_context *ctx,
                           unsigned char *output)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -878,7 +878,7 @@ int mbedtls_sha512_finish(mbedtls_sha512_context *ctx,
 /*
  * output = SHA-512( input buffer )
  */
-int mbedtls_sha512(const unsigned char *input,
+EXPORT_C int mbedtls_sha512(const unsigned char *input,
                    size_t ilen,
                    unsigned char *output,
                    int is384)

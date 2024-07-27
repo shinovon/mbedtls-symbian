@@ -51,12 +51,12 @@
 /*
  * Initialize context
  */
-void mbedtls_ccm_init(mbedtls_ccm_context *ctx)
+EXPORT_C void mbedtls_ccm_init(mbedtls_ccm_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_ccm_context));
 }
 
-int mbedtls_ccm_setkey(mbedtls_ccm_context *ctx,
+EXPORT_C int mbedtls_ccm_setkey(mbedtls_ccm_context *ctx,
                        mbedtls_cipher_id_t cipher,
                        const unsigned char *key,
                        unsigned int keybits)
@@ -91,7 +91,7 @@ int mbedtls_ccm_setkey(mbedtls_ccm_context *ctx,
 /*
  * Free context
  */
-void mbedtls_ccm_free(mbedtls_ccm_context *ctx)
+EXPORT_C void mbedtls_ccm_free(mbedtls_ccm_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -197,7 +197,7 @@ static int ccm_calculate_first_block_if_ready(mbedtls_ccm_context *ctx)
     return 0;
 }
 
-int mbedtls_ccm_starts(mbedtls_ccm_context *ctx,
+EXPORT_C int mbedtls_ccm_starts(mbedtls_ccm_context *ctx,
                        int mode,
                        const unsigned char *iv,
                        size_t iv_len)
@@ -235,7 +235,7 @@ int mbedtls_ccm_starts(mbedtls_ccm_context *ctx,
     return ccm_calculate_first_block_if_ready(ctx);
 }
 
-int mbedtls_ccm_set_lengths(mbedtls_ccm_context *ctx,
+EXPORT_C int mbedtls_ccm_set_lengths(mbedtls_ccm_context *ctx,
                             size_t total_ad_len,
                             size_t plaintext_len,
                             size_t tag_len)
@@ -264,7 +264,7 @@ int mbedtls_ccm_set_lengths(mbedtls_ccm_context *ctx,
     return ccm_calculate_first_block_if_ready(ctx);
 }
 
-int mbedtls_ccm_update_ad(mbedtls_ccm_context *ctx,
+EXPORT_C int mbedtls_ccm_update_ad(mbedtls_ccm_context *ctx,
                           const unsigned char *add,
                           size_t add_len)
 {
@@ -326,7 +326,7 @@ int mbedtls_ccm_update_ad(mbedtls_ccm_context *ctx,
     return 0;
 }
 
-int mbedtls_ccm_update(mbedtls_ccm_context *ctx,
+EXPORT_C int mbedtls_ccm_update(mbedtls_ccm_context *ctx,
                        const unsigned char *input, size_t input_len,
                        unsigned char *output, size_t output_size,
                        size_t *output_len)
@@ -430,7 +430,7 @@ exit:
     return ret;
 }
 
-int mbedtls_ccm_finish(mbedtls_ccm_context *ctx,
+EXPORT_C int mbedtls_ccm_finish(mbedtls_ccm_context *ctx,
                        unsigned char *tag, size_t tag_len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -506,7 +506,7 @@ static int ccm_auth_crypt(mbedtls_ccm_context *ctx, int mode, size_t length,
 /*
  * Authenticated encryption
  */
-int mbedtls_ccm_star_encrypt_and_tag(mbedtls_ccm_context *ctx, size_t length,
+EXPORT_C int mbedtls_ccm_star_encrypt_and_tag(mbedtls_ccm_context *ctx, size_t length,
                                      const unsigned char *iv, size_t iv_len,
                                      const unsigned char *add, size_t add_len,
                                      const unsigned char *input, unsigned char *output,
@@ -516,7 +516,7 @@ int mbedtls_ccm_star_encrypt_and_tag(mbedtls_ccm_context *ctx, size_t length,
                           add, add_len, input, output, tag, tag_len);
 }
 
-int mbedtls_ccm_encrypt_and_tag(mbedtls_ccm_context *ctx, size_t length,
+EXPORT_C int mbedtls_ccm_encrypt_and_tag(mbedtls_ccm_context *ctx, size_t length,
                                 const unsigned char *iv, size_t iv_len,
                                 const unsigned char *add, size_t add_len,
                                 const unsigned char *input, unsigned char *output,
@@ -571,7 +571,7 @@ static int ccm_auth_decrypt(mbedtls_ccm_context *ctx, int mode, size_t length,
     return 0;
 }
 
-int mbedtls_ccm_star_auth_decrypt(mbedtls_ccm_context *ctx, size_t length,
+EXPORT_C int mbedtls_ccm_star_auth_decrypt(mbedtls_ccm_context *ctx, size_t length,
                                   const unsigned char *iv, size_t iv_len,
                                   const unsigned char *add, size_t add_len,
                                   const unsigned char *input, unsigned char *output,
@@ -582,7 +582,7 @@ int mbedtls_ccm_star_auth_decrypt(mbedtls_ccm_context *ctx, size_t length,
                             input, output, tag, tag_len);
 }
 
-int mbedtls_ccm_auth_decrypt(mbedtls_ccm_context *ctx, size_t length,
+EXPORT_C int mbedtls_ccm_auth_decrypt(mbedtls_ccm_context *ctx, size_t length,
                              const unsigned char *iv, size_t iv_len,
                              const unsigned char *add, size_t add_len,
                              const unsigned char *input, unsigned char *output,

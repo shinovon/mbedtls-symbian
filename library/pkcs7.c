@@ -44,7 +44,7 @@
 /**
  * Initializes the mbedtls_pkcs7 structure.
  */
-void mbedtls_pkcs7_init(mbedtls_pkcs7 *pkcs7)
+EXPORT_C void mbedtls_pkcs7_init(mbedtls_pkcs7 *pkcs7)
 {
     memset(pkcs7, 0, sizeof(*pkcs7));
 }
@@ -562,7 +562,7 @@ static int pkcs7_get_signed_data(unsigned char *buf, size_t buflen,
     return 0;
 }
 
-int mbedtls_pkcs7_parse_der(mbedtls_pkcs7 *pkcs7, const unsigned char *buf,
+EXPORT_C int mbedtls_pkcs7_parse_der(mbedtls_pkcs7 *pkcs7, const unsigned char *buf,
                             const size_t buflen)
 {
     unsigned char *p;
@@ -731,7 +731,7 @@ static int mbedtls_pkcs7_data_or_hash_verify(mbedtls_pkcs7 *pkcs7,
     return ret;
 }
 
-int mbedtls_pkcs7_signed_data_verify(mbedtls_pkcs7 *pkcs7,
+EXPORT_C int mbedtls_pkcs7_signed_data_verify(mbedtls_pkcs7 *pkcs7,
                                      const mbedtls_x509_crt *cert,
                                      const unsigned char *data,
                                      size_t datalen)
@@ -742,7 +742,7 @@ int mbedtls_pkcs7_signed_data_verify(mbedtls_pkcs7 *pkcs7,
     return mbedtls_pkcs7_data_or_hash_verify(pkcs7, cert, data, datalen, 0);
 }
 
-int mbedtls_pkcs7_signed_hash_verify(mbedtls_pkcs7 *pkcs7,
+EXPORT_C int mbedtls_pkcs7_signed_hash_verify(mbedtls_pkcs7 *pkcs7,
                                      const mbedtls_x509_crt *cert,
                                      const unsigned char *hash,
                                      size_t hashlen)
@@ -756,7 +756,7 @@ int mbedtls_pkcs7_signed_hash_verify(mbedtls_pkcs7 *pkcs7,
 /*
  * Unallocate all pkcs7 data
  */
-void mbedtls_pkcs7_free(mbedtls_pkcs7 *pkcs7)
+EXPORT_C void mbedtls_pkcs7_free(mbedtls_pkcs7 *pkcs7)
 {
     mbedtls_pkcs7_signer_info *signer_cur;
     mbedtls_pkcs7_signer_info *signer_prev;

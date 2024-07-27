@@ -2084,7 +2084,7 @@ static int ssl_tls13_write_server_hello_body(mbedtls_ssl_context *ssl,
     p += 2;
     MBEDTLS_SSL_DEBUG_MSG(3,
                           ("server hello, chosen ciphersuite: %s ( id=%d )",
-                           mbedtls_ssl_get_ciphersuite_name(
+EXPORT_C                            mbedtls_ssl_get_ciphersuite_name(
                                ssl->session_negotiate->ciphersuite),
                            ssl->session_negotiate->ciphersuite));
 

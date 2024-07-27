@@ -36,7 +36,7 @@
 /*
  * ASN.1 DER decoding routines
  */
-int mbedtls_asn1_get_len(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_len(unsigned char **p,
                          const unsigned char *end,
                          size_t *len)
 {
@@ -98,7 +98,7 @@ int mbedtls_asn1_get_len(unsigned char **p,
     return 0;
 }
 
-int mbedtls_asn1_get_tag(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_tag(unsigned char **p,
                          const unsigned char *end,
                          size_t *len, int tag)
 {
@@ -115,7 +115,7 @@ int mbedtls_asn1_get_tag(unsigned char **p,
     return mbedtls_asn1_get_len(p, end, len);
 }
 
-int mbedtls_asn1_get_bool(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_bool(unsigned char **p,
                           const unsigned char *end,
                           int *val)
 {
@@ -183,14 +183,14 @@ static int asn1_get_tagged_int(unsigned char **p,
     return 0;
 }
 
-int mbedtls_asn1_get_int(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_int(unsigned char **p,
                          const unsigned char *end,
                          int *val)
 {
     return asn1_get_tagged_int(p, end, MBEDTLS_ASN1_INTEGER, val);
 }
 
-int mbedtls_asn1_get_enum(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_enum(unsigned char **p,
                           const unsigned char *end,
                           int *val)
 {
@@ -198,7 +198,7 @@ int mbedtls_asn1_get_enum(unsigned char **p,
 }
 
 #if defined(MBEDTLS_BIGNUM_C)
-int mbedtls_asn1_get_mpi(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_mpi(unsigned char **p,
                          const unsigned char *end,
                          mbedtls_mpi *X)
 {
@@ -217,7 +217,7 @@ int mbedtls_asn1_get_mpi(unsigned char **p,
 }
 #endif /* MBEDTLS_BIGNUM_C */
 
-int mbedtls_asn1_get_bitstring(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_asn1_get_bitstring(unsigned char **p, const unsigned char *end,
                                mbedtls_asn1_bitstring *bs)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -255,7 +255,7 @@ int mbedtls_asn1_get_bitstring(unsigned char **p, const unsigned char *end,
  * Traverse an ASN.1 "SEQUENCE OF <tag>"
  * and call a callback for each entry found.
  */
-int mbedtls_asn1_traverse_sequence_of(
+EXPORT_C int mbedtls_asn1_traverse_sequence_of(
     unsigned char **p,
     const unsigned char *end,
     unsigned char tag_must_mask, unsigned char tag_must_val,
@@ -306,7 +306,7 @@ int mbedtls_asn1_traverse_sequence_of(
 /*
  * Get a bit string without unused bits
  */
-int mbedtls_asn1_get_bitstring_null(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_asn1_get_bitstring_null(unsigned char **p, const unsigned char *end,
                                     size_t *len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -328,7 +328,7 @@ int mbedtls_asn1_get_bitstring_null(unsigned char **p, const unsigned char *end,
     return 0;
 }
 
-void mbedtls_asn1_sequence_free(mbedtls_asn1_sequence *seq)
+EXPORT_C void mbedtls_asn1_sequence_free(mbedtls_asn1_sequence *seq)
 {
     while (seq != NULL) {
         mbedtls_asn1_sequence *next = seq->next;
@@ -374,7 +374,7 @@ static int asn1_get_sequence_of_cb(void *ctx,
 /*
  *  Parses and splits an ASN.1 "SEQUENCE OF <tag>"
  */
-int mbedtls_asn1_get_sequence_of(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_sequence_of(unsigned char **p,
                                  const unsigned char *end,
                                  mbedtls_asn1_sequence *cur,
                                  int tag)
@@ -386,7 +386,7 @@ int mbedtls_asn1_get_sequence_of(unsigned char **p,
         asn1_get_sequence_of_cb, &cb_ctx);
 }
 
-int mbedtls_asn1_get_alg(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_alg(unsigned char **p,
                          const unsigned char *end,
                          mbedtls_asn1_buf *alg, mbedtls_asn1_buf *params)
 {
@@ -434,7 +434,7 @@ int mbedtls_asn1_get_alg(unsigned char **p,
     return 0;
 }
 
-int mbedtls_asn1_get_alg_null(unsigned char **p,
+EXPORT_C int mbedtls_asn1_get_alg_null(unsigned char **p,
                               const unsigned char *end,
                               mbedtls_asn1_buf *alg)
 {
@@ -455,7 +455,7 @@ int mbedtls_asn1_get_alg_null(unsigned char **p,
 }
 
 #if !defined(MBEDTLS_DEPRECATED_REMOVED)
-void mbedtls_asn1_free_named_data(mbedtls_asn1_named_data *cur)
+EXPORT_C void mbedtls_asn1_free_named_data(mbedtls_asn1_named_data *cur)
 {
     if (cur == NULL) {
         return;
@@ -468,7 +468,7 @@ void mbedtls_asn1_free_named_data(mbedtls_asn1_named_data *cur)
 }
 #endif /* MBEDTLS_DEPRECATED_REMOVED */
 
-void mbedtls_asn1_free_named_data_list(mbedtls_asn1_named_data **head)
+EXPORT_C void mbedtls_asn1_free_named_data_list(mbedtls_asn1_named_data **head)
 {
     mbedtls_asn1_named_data *cur;
 
@@ -480,7 +480,7 @@ void mbedtls_asn1_free_named_data_list(mbedtls_asn1_named_data **head)
     }
 }
 
-void mbedtls_asn1_free_named_data_list_shallow(mbedtls_asn1_named_data *name)
+EXPORT_C void mbedtls_asn1_free_named_data_list_shallow(mbedtls_asn1_named_data *name)
 {
     for (mbedtls_asn1_named_data *next; name != NULL; name = next) {
         next = name->next;
@@ -488,7 +488,7 @@ void mbedtls_asn1_free_named_data_list_shallow(mbedtls_asn1_named_data *name)
     }
 }
 
-const mbedtls_asn1_named_data *mbedtls_asn1_find_named_data(const mbedtls_asn1_named_data *list,
+EXPORT_C const mbedtls_asn1_named_data *mbedtls_asn1_find_named_data(const mbedtls_asn1_named_data *list,
                                                             const char *oid, size_t len)
 {
     while (list != NULL) {

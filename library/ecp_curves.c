@@ -4754,7 +4754,7 @@ cleanup:
 /*
  * Set a group using well-known domain parameters
  */
-int mbedtls_ecp_group_load(mbedtls_ecp_group *grp, mbedtls_ecp_group_id id)
+EXPORT_C int mbedtls_ecp_group_load(mbedtls_ecp_group *grp, mbedtls_ecp_group_id id)
 {
     ECP_VALIDATE_RET(grp != NULL);
     mbedtls_ecp_group_free(grp);

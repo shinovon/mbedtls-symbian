@@ -68,7 +68,7 @@
 /*
  *  CertificateSerialNumber  ::=  INTEGER
  */
-int mbedtls_x509_get_serial(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_x509_get_serial(unsigned char **p, const unsigned char *end,
                             mbedtls_x509_buf *serial)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -102,7 +102,7 @@ int mbedtls_x509_get_serial(unsigned char **p, const unsigned char *end,
  *       algorithm               OBJECT IDENTIFIER,
  *       parameters              ANY DEFINED BY algorithm OPTIONAL  }
  */
-int mbedtls_x509_get_alg_null(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_x509_get_alg_null(unsigned char **p, const unsigned char *end,
                               mbedtls_x509_buf *alg)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -117,7 +117,7 @@ int mbedtls_x509_get_alg_null(unsigned char **p, const unsigned char *end,
 /*
  * Parse an algorithm identifier with (optional) parameters
  */
-int mbedtls_x509_get_alg(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_x509_get_alg(unsigned char **p, const unsigned char *end,
                          mbedtls_x509_buf *alg, mbedtls_x509_buf *params)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -499,7 +499,7 @@ static int x509_get_attr_type_value(unsigned char **p,
  * cases, this function frees all allocated memory internally and the caller
  * has no freeing responsibilities.
  */
-int mbedtls_x509_get_name(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_x509_get_name(unsigned char **p, const unsigned char *end,
                           mbedtls_x509_name *cur)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -685,7 +685,7 @@ static int x509_parse_time(unsigned char **p, size_t len, size_t yearlen,
  *       utcTime        UTCTime,
  *       generalTime    GeneralizedTime }
  */
-int mbedtls_x509_get_time(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_x509_get_time(unsigned char **p, const unsigned char *end,
                           mbedtls_x509_time *tm)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -718,7 +718,7 @@ int mbedtls_x509_get_time(unsigned char **p, const unsigned char *end,
     return x509_parse_time(p, len, year_len, tm);
 }
 
-int mbedtls_x509_get_sig(unsigned char **p, const unsigned char *end, mbedtls_x509_buf *sig)
+EXPORT_C int mbedtls_x509_get_sig(unsigned char **p, const unsigned char *end, mbedtls_x509_buf *sig)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t len;
@@ -747,7 +747,7 @@ int mbedtls_x509_get_sig(unsigned char **p, const unsigned char *end, mbedtls_x5
 /*
  * Get signature algorithm from alg OID and optional parameters
  */
-int mbedtls_x509_get_sig_alg(const mbedtls_x509_buf *sig_oid, const mbedtls_x509_buf *sig_params,
+EXPORT_C int mbedtls_x509_get_sig_alg(const mbedtls_x509_buf *sig_oid, const mbedtls_x509_buf *sig_params,
                              mbedtls_md_type_t *md_alg, mbedtls_pk_type_t *pk_alg,
                              void **sig_opts)
 {
@@ -797,7 +797,7 @@ int mbedtls_x509_get_sig_alg(const mbedtls_x509_buf *sig_oid, const mbedtls_x509
  * X.509 Extensions (No parsing of extensions, pointer should
  * be either manually updated or extensions should be parsed!)
  */
-int mbedtls_x509_get_ext(unsigned char **p, const unsigned char *end,
+EXPORT_C int mbedtls_x509_get_ext(unsigned char **p, const unsigned char *end,
                          mbedtls_x509_buf *ext, int tag)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -836,7 +836,7 @@ int mbedtls_x509_get_ext(unsigned char **p, const unsigned char *end,
  * Store the name in printable form into buf; no more
  * than size characters will be written
  */
-int mbedtls_x509_dn_gets(char *buf, size_t size, const mbedtls_x509_name *dn)
+EXPORT_C int mbedtls_x509_dn_gets(char *buf, size_t size, const mbedtls_x509_name *dn)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t i, j, n;
@@ -905,7 +905,7 @@ int mbedtls_x509_dn_gets(char *buf, size_t size, const mbedtls_x509_name *dn)
  * Store the serial in printable form into buf; no more
  * than size characters will be written
  */
-int mbedtls_x509_serial_gets(char *buf, size_t size, const mbedtls_x509_buf *serial)
+EXPORT_C int mbedtls_x509_serial_gets(char *buf, size_t size, const mbedtls_x509_buf *serial)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t i, n, nr;
@@ -939,7 +939,7 @@ int mbedtls_x509_serial_gets(char *buf, size_t size, const mbedtls_x509_buf *ser
 /*
  * Helper for writing signature algorithms
  */
-int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x509_buf *sig_oid,
+EXPORT_C int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x509_buf *sig_oid,
                               mbedtls_pk_type_t pk_alg, mbedtls_md_type_t md_alg,
                               const void *sig_opts)
 {
@@ -984,7 +984,7 @@ int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x509_buf *si
 /*
  * Helper for writing "RSA key size", "EC key size", etc
  */
-int mbedtls_x509_key_size_helper(char *buf, size_t buf_size, const char *name)
+EXPORT_C int mbedtls_x509_key_size_helper(char *buf, size_t buf_size, const char *name)
 {
     char *p = buf;
     size_t n = buf_size;
@@ -1071,7 +1071,7 @@ static int x509_check_time(const mbedtls_x509_time *before, const mbedtls_x509_t
     return 0;
 }
 
-int mbedtls_x509_time_is_past(const mbedtls_x509_time *to)
+EXPORT_C int mbedtls_x509_time_is_past(const mbedtls_x509_time *to)
 {
     mbedtls_x509_time now;
 
@@ -1082,7 +1082,7 @@ int mbedtls_x509_time_is_past(const mbedtls_x509_time *to)
     return x509_check_time(&now, to);
 }
 
-int mbedtls_x509_time_is_future(const mbedtls_x509_time *from)
+EXPORT_C int mbedtls_x509_time_is_future(const mbedtls_x509_time *from)
 {
     mbedtls_x509_time now;
 
@@ -1231,7 +1231,7 @@ static int x509_get_other_name(const mbedtls_x509_buf *subject_alt_name,
  * "dnsName", "uniformResourceIdentifier" and "hardware_module_name"
  * of type "otherName", as defined in RFC 4108.
  */
-int mbedtls_x509_get_subject_alt_name(unsigned char **p,
+EXPORT_C int mbedtls_x509_get_subject_alt_name(unsigned char **p,
                                       const unsigned char *end,
                                       mbedtls_x509_sequence *subject_alt_name)
 {
@@ -1316,7 +1316,7 @@ int mbedtls_x509_get_subject_alt_name(unsigned char **p,
     return 0;
 }
 
-int mbedtls_x509_get_ns_cert_type(unsigned char **p,
+EXPORT_C int mbedtls_x509_get_ns_cert_type(unsigned char **p,
                                   const unsigned char *end,
                                   unsigned char *ns_cert_type)
 {
@@ -1344,7 +1344,7 @@ int mbedtls_x509_get_ns_cert_type(unsigned char **p,
     return 0;
 }
 
-int mbedtls_x509_get_key_usage(unsigned char **p,
+EXPORT_C int mbedtls_x509_get_key_usage(unsigned char **p,
                                const unsigned char *end,
                                unsigned int *key_usage)
 {
@@ -1372,7 +1372,7 @@ int mbedtls_x509_get_key_usage(unsigned char **p,
     return 0;
 }
 
-int mbedtls_x509_parse_subject_alt_name(const mbedtls_x509_buf *san_buf,
+EXPORT_C int mbedtls_x509_parse_subject_alt_name(const mbedtls_x509_buf *san_buf,
                                         mbedtls_x509_subject_alternative_name *san)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -1445,7 +1445,7 @@ int mbedtls_x509_parse_subject_alt_name(const mbedtls_x509_buf *san_buf,
 }
 
 #if !defined(MBEDTLS_X509_REMOVE_INFO)
-int mbedtls_x509_info_subject_alt_name(char **buf, size_t *size,
+EXPORT_C int mbedtls_x509_info_subject_alt_name(char **buf, size_t *size,
                                        const mbedtls_x509_sequence
                                        *subject_alt_name,
                                        const char *prefix)
@@ -1586,7 +1586,7 @@ int mbedtls_x509_info_subject_alt_name(char **buf, size_t *size,
     if (ns_cert_type & (type))                 \
     PRINT_ITEM(name);
 
-int mbedtls_x509_info_cert_type(char **buf, size_t *size,
+EXPORT_C int mbedtls_x509_info_cert_type(char **buf, size_t *size,
                                 unsigned char ns_cert_type)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -1613,7 +1613,7 @@ int mbedtls_x509_info_cert_type(char **buf, size_t *size,
     if (key_usage & (code))    \
     PRINT_ITEM(name);
 
-int mbedtls_x509_info_key_usage(char **buf, size_t *size,
+EXPORT_C int mbedtls_x509_info_key_usage(char **buf, size_t *size,
                                 unsigned int key_usage)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

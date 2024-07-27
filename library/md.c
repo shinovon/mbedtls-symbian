@@ -66,7 +66,7 @@
 #endif
 
 #if defined(MBEDTLS_MD_CAN_MD5)
-const mbedtls_md_info_t mbedtls_md5_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_md5_info = {
     "MD5",
     MBEDTLS_MD_MD5,
     16,
@@ -75,7 +75,7 @@ const mbedtls_md_info_t mbedtls_md5_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_RIPEMD160)
-const mbedtls_md_info_t mbedtls_ripemd160_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_ripemd160_info = {
     "RIPEMD160",
     MBEDTLS_MD_RIPEMD160,
     20,
@@ -84,7 +84,7 @@ const mbedtls_md_info_t mbedtls_ripemd160_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA1)
-const mbedtls_md_info_t mbedtls_sha1_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_sha1_info = {
     "SHA1",
     MBEDTLS_MD_SHA1,
     20,
@@ -93,7 +93,7 @@ const mbedtls_md_info_t mbedtls_sha1_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA224)
-const mbedtls_md_info_t mbedtls_sha224_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_sha224_info = {
     "SHA224",
     MBEDTLS_MD_SHA224,
     28,
@@ -102,7 +102,7 @@ const mbedtls_md_info_t mbedtls_sha224_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA256)
-const mbedtls_md_info_t mbedtls_sha256_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_sha256_info = {
     "SHA256",
     MBEDTLS_MD_SHA256,
     32,
@@ -111,7 +111,7 @@ const mbedtls_md_info_t mbedtls_sha256_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA384)
-const mbedtls_md_info_t mbedtls_sha384_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_sha384_info = {
     "SHA384",
     MBEDTLS_MD_SHA384,
     48,
@@ -120,7 +120,7 @@ const mbedtls_md_info_t mbedtls_sha384_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA512)
-const mbedtls_md_info_t mbedtls_sha512_info = {
+EXPORT_C const mbedtls_md_info_t mbedtls_sha512_info = {
     "SHA512",
     MBEDTLS_MD_SHA512,
     64,
@@ -128,7 +128,7 @@ const mbedtls_md_info_t mbedtls_sha512_info = {
 };
 #endif
 
-const mbedtls_md_info_t *mbedtls_md_info_from_type(mbedtls_md_type_t md_type)
+EXPORT_C const mbedtls_md_info_t *mbedtls_md_info_from_type(mbedtls_md_type_t md_type)
 {
     switch (md_type) {
 #if defined(MBEDTLS_MD_CAN_MD5)
@@ -226,13 +226,13 @@ static int mbedtls_md_error_from_psa(psa_status_t status)
 }
 #endif /* MBEDTLS_MD_SOME_PSA */
 
-void mbedtls_md_init(mbedtls_md_context_t *ctx)
+EXPORT_C void mbedtls_md_init(mbedtls_md_context_t *ctx)
 {
     /* Note: this sets engine (if present) to MBEDTLS_MD_ENGINE_LEGACY */
     memset(ctx, 0, sizeof(mbedtls_md_context_t));
 }
 
-void mbedtls_md_free(mbedtls_md_context_t *ctx)
+EXPORT_C void mbedtls_md_free(mbedtls_md_context_t *ctx)
 {
     if (ctx == NULL || ctx->md_info == NULL) {
         return;
@@ -298,7 +298,7 @@ void mbedtls_md_free(mbedtls_md_context_t *ctx)
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_md_context_t));
 }
 
-int mbedtls_md_clone(mbedtls_md_context_t *dst,
+EXPORT_C int mbedtls_md_clone(mbedtls_md_context_t *dst,
                      const mbedtls_md_context_t *src)
 {
     if (dst == NULL || dst->md_info == NULL ||
@@ -374,7 +374,7 @@ int mbedtls_md_clone(mbedtls_md_context_t *dst,
     }                                                                   \
     while (0)
 
-int mbedtls_md_setup(mbedtls_md_context_t *ctx, const mbedtls_md_info_t *md_info, int hmac)
+EXPORT_C int mbedtls_md_setup(mbedtls_md_context_t *ctx, const mbedtls_md_info_t *md_info, int hmac)
 {
     if (md_info == NULL || ctx == NULL) {
         return MBEDTLS_ERR_MD_BAD_INPUT_DATA;
@@ -453,7 +453,7 @@ int mbedtls_md_setup(mbedtls_md_context_t *ctx, const mbedtls_md_info_t *md_info
 }
 #undef ALLOC
 
-int mbedtls_md_starts(mbedtls_md_context_t *ctx)
+EXPORT_C int mbedtls_md_starts(mbedtls_md_context_t *ctx)
 {
     if (ctx == NULL || ctx->md_info == NULL) {
         return MBEDTLS_ERR_MD_BAD_INPUT_DATA;
@@ -502,7 +502,7 @@ int mbedtls_md_starts(mbedtls_md_context_t *ctx)
     }
 }
 
-int mbedtls_md_update(mbedtls_md_context_t *ctx, const unsigned char *input, size_t ilen)
+EXPORT_C int mbedtls_md_update(mbedtls_md_context_t *ctx, const unsigned char *input, size_t ilen)
 {
     if (ctx == NULL || ctx->md_info == NULL) {
         return MBEDTLS_ERR_MD_BAD_INPUT_DATA;
@@ -549,7 +549,7 @@ int mbedtls_md_update(mbedtls_md_context_t *ctx, const unsigned char *input, siz
     }
 }
 
-int mbedtls_md_finish(mbedtls_md_context_t *ctx, unsigned char *output)
+EXPORT_C int mbedtls_md_finish(mbedtls_md_context_t *ctx, unsigned char *output)
 {
     if (ctx == NULL || ctx->md_info == NULL) {
         return MBEDTLS_ERR_MD_BAD_INPUT_DATA;
@@ -598,7 +598,7 @@ int mbedtls_md_finish(mbedtls_md_context_t *ctx, unsigned char *output)
     }
 }
 
-int mbedtls_md(const mbedtls_md_info_t *md_info, const unsigned char *input, size_t ilen,
+EXPORT_C int mbedtls_md(const mbedtls_md_info_t *md_info, const unsigned char *input, size_t ilen,
                unsigned char *output)
 {
     if (md_info == NULL) {
@@ -649,7 +649,7 @@ int mbedtls_md(const mbedtls_md_info_t *md_info, const unsigned char *input, siz
     }
 }
 
-unsigned char mbedtls_md_get_size(const mbedtls_md_info_t *md_info)
+EXPORT_C unsigned char mbedtls_md_get_size(const mbedtls_md_info_t *md_info)
 {
     if (md_info == NULL) {
         return 0;
@@ -658,7 +658,7 @@ unsigned char mbedtls_md_get_size(const mbedtls_md_info_t *md_info)
     return md_info->size;
 }
 
-mbedtls_md_type_t mbedtls_md_get_type(const mbedtls_md_info_t *md_info)
+EXPORT_C mbedtls_md_type_t mbedtls_md_get_type(const mbedtls_md_info_t *md_info)
 {
     if (md_info == NULL) {
         return MBEDTLS_MD_NONE;
@@ -708,12 +708,12 @@ static const int supported_digests[] = {
     MBEDTLS_MD_NONE
 };
 
-const int *mbedtls_md_list(void)
+EXPORT_C const int *mbedtls_md_list(void)
 {
     return supported_digests;
 }
 
-const mbedtls_md_info_t *mbedtls_md_info_from_string(const char *md_name)
+EXPORT_C const mbedtls_md_info_t *mbedtls_md_info_from_string(const char *md_name)
 {
     if (NULL == md_name) {
         return NULL;
@@ -758,7 +758,7 @@ const mbedtls_md_info_t *mbedtls_md_info_from_string(const char *md_name)
     return NULL;
 }
 
-const mbedtls_md_info_t *mbedtls_md_info_from_ctx(
+EXPORT_C const mbedtls_md_info_t *mbedtls_md_info_from_ctx(
     const mbedtls_md_context_t *ctx)
 {
     if (ctx == NULL) {
@@ -819,7 +819,7 @@ cleanup:
 }
 #endif /* MBEDTLS_FS_IO */
 
-int mbedtls_md_hmac_starts(mbedtls_md_context_t *ctx, const unsigned char *key, size_t keylen)
+EXPORT_C int mbedtls_md_hmac_starts(mbedtls_md_context_t *ctx, const unsigned char *key, size_t keylen)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     unsigned char sum[MBEDTLS_MD_MAX_SIZE];
@@ -867,7 +867,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_md_hmac_update(mbedtls_md_context_t *ctx, const unsigned char *input, size_t ilen)
+EXPORT_C int mbedtls_md_hmac_update(mbedtls_md_context_t *ctx, const unsigned char *input, size_t ilen)
 {
     if (ctx == NULL || ctx->md_info == NULL || ctx->hmac_ctx == NULL) {
         return MBEDTLS_ERR_MD_BAD_INPUT_DATA;
@@ -876,7 +876,7 @@ int mbedtls_md_hmac_update(mbedtls_md_context_t *ctx, const unsigned char *input
     return mbedtls_md_update(ctx, input, ilen);
 }
 
-int mbedtls_md_hmac_finish(mbedtls_md_context_t *ctx, unsigned char *output)
+EXPORT_C int mbedtls_md_hmac_finish(mbedtls_md_context_t *ctx, unsigned char *output)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     unsigned char tmp[MBEDTLS_MD_MAX_SIZE];
@@ -905,7 +905,7 @@ int mbedtls_md_hmac_finish(mbedtls_md_context_t *ctx, unsigned char *output)
     return mbedtls_md_finish(ctx, output);
 }
 
-int mbedtls_md_hmac_reset(mbedtls_md_context_t *ctx)
+EXPORT_C int mbedtls_md_hmac_reset(mbedtls_md_context_t *ctx)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     unsigned char *ipad;
@@ -922,7 +922,7 @@ int mbedtls_md_hmac_reset(mbedtls_md_context_t *ctx)
     return mbedtls_md_update(ctx, ipad, ctx->md_info->block_size);
 }
 
-int mbedtls_md_hmac(const mbedtls_md_info_t *md_info,
+EXPORT_C int mbedtls_md_hmac(const mbedtls_md_info_t *md_info,
                     const unsigned char *key, size_t keylen,
                     const unsigned char *input, size_t ilen,
                     unsigned char *output)
@@ -956,7 +956,7 @@ cleanup:
     return ret;
 }
 
-const char *mbedtls_md_get_name(const mbedtls_md_info_t *md_info)
+EXPORT_C const char *mbedtls_md_get_name(const mbedtls_md_info_t *md_info)
 {
     if (md_info == NULL) {
         return NULL;

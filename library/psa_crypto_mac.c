@@ -242,7 +242,7 @@ static psa_status_t mac_init(
     return status;
 }
 
-psa_status_t mbedtls_psa_mac_abort(mbedtls_psa_mac_operation_t *operation)
+EXPORT_C psa_status_t mbedtls_psa_mac_abort(mbedtls_psa_mac_operation_t *operation)
 {
     if (operation->alg == 0) {
         /* The object has (apparently) been initialized but it is not
@@ -327,7 +327,7 @@ static psa_status_t psa_mac_setup(mbedtls_psa_mac_operation_t *operation,
     return status;
 }
 
-psa_status_t mbedtls_psa_mac_sign_setup(
+EXPORT_C psa_status_t mbedtls_psa_mac_sign_setup(
     mbedtls_psa_mac_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -338,7 +338,7 @@ psa_status_t mbedtls_psa_mac_sign_setup(
                          key_buffer, key_buffer_size, alg);
 }
 
-psa_status_t mbedtls_psa_mac_verify_setup(
+EXPORT_C psa_status_t mbedtls_psa_mac_verify_setup(
     mbedtls_psa_mac_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -349,7 +349,7 @@ psa_status_t mbedtls_psa_mac_verify_setup(
                          key_buffer, key_buffer_size, alg);
 }
 
-psa_status_t mbedtls_psa_mac_update(
+EXPORT_C psa_status_t mbedtls_psa_mac_update(
     mbedtls_psa_mac_operation_t *operation,
     const uint8_t *input,
     size_t input_length)
@@ -411,7 +411,7 @@ static psa_status_t psa_mac_finish_internal(
     }
 }
 
-psa_status_t mbedtls_psa_mac_sign_finish(
+EXPORT_C psa_status_t mbedtls_psa_mac_sign_finish(
     mbedtls_psa_mac_operation_t *operation,
     uint8_t *mac,
     size_t mac_size,
@@ -431,7 +431,7 @@ psa_status_t mbedtls_psa_mac_sign_finish(
     return status;
 }
 
-psa_status_t mbedtls_psa_mac_verify_finish(
+EXPORT_C psa_status_t mbedtls_psa_mac_verify_finish(
     mbedtls_psa_mac_operation_t *operation,
     const uint8_t *mac,
     size_t mac_length)
@@ -463,7 +463,7 @@ cleanup:
     return status;
 }
 
-psa_status_t mbedtls_psa_mac_compute(
+EXPORT_C psa_status_t mbedtls_psa_mac_compute(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
     size_t key_buffer_size,

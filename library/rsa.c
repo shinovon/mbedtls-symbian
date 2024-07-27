@@ -70,7 +70,7 @@
 
 #if !defined(MBEDTLS_RSA_ALT)
 
-int mbedtls_rsa_import(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_import(mbedtls_rsa_context *ctx,
                        const mbedtls_mpi *N,
                        const mbedtls_mpi *P, const mbedtls_mpi *Q,
                        const mbedtls_mpi *D, const mbedtls_mpi *E)
@@ -92,7 +92,7 @@ int mbedtls_rsa_import(mbedtls_rsa_context *ctx,
     return 0;
 }
 
-int mbedtls_rsa_import_raw(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_import_raw(mbedtls_rsa_context *ctx,
                            unsigned char const *N, size_t N_len,
                            unsigned char const *P, size_t P_len,
                            unsigned char const *Q, size_t Q_len,
@@ -220,7 +220,7 @@ static int rsa_check_context(mbedtls_rsa_context const *ctx, int is_priv,
     return 0;
 }
 
-int mbedtls_rsa_complete(mbedtls_rsa_context *ctx)
+EXPORT_C int mbedtls_rsa_complete(mbedtls_rsa_context *ctx)
 {
     int ret = 0;
     int have_N, have_P, have_Q, have_D, have_E;
@@ -318,7 +318,7 @@ int mbedtls_rsa_complete(mbedtls_rsa_context *ctx)
     return rsa_check_context(ctx, is_priv, 1);
 }
 
-int mbedtls_rsa_export_raw(const mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_export_raw(const mbedtls_rsa_context *ctx,
                            unsigned char *N, size_t N_len,
                            unsigned char *P, size_t P_len,
                            unsigned char *Q, size_t Q_len,
@@ -370,7 +370,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_rsa_export(const mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_export(const mbedtls_rsa_context *ctx,
                        mbedtls_mpi *N, mbedtls_mpi *P, mbedtls_mpi *Q,
                        mbedtls_mpi *D, mbedtls_mpi *E)
 {
@@ -413,7 +413,7 @@ int mbedtls_rsa_export(const mbedtls_rsa_context *ctx,
  * write DER encoded RSA keys. The helper function mbedtls_rsa_deduce_crt
  * can be used in this case.
  */
-int mbedtls_rsa_export_crt(const mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_export_crt(const mbedtls_rsa_context *ctx,
                            mbedtls_mpi *DP, mbedtls_mpi *DQ, mbedtls_mpi *QP)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -451,7 +451,7 @@ int mbedtls_rsa_export_crt(const mbedtls_rsa_context *ctx,
 /*
  * Initialize an RSA context
  */
-void mbedtls_rsa_init(mbedtls_rsa_context *ctx)
+EXPORT_C void mbedtls_rsa_init(mbedtls_rsa_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_rsa_context));
 
@@ -469,7 +469,7 @@ void mbedtls_rsa_init(mbedtls_rsa_context *ctx)
 /*
  * Set padding for an existing RSA context
  */
-int mbedtls_rsa_set_padding(mbedtls_rsa_context *ctx, int padding,
+EXPORT_C int mbedtls_rsa_set_padding(mbedtls_rsa_context *ctx, int padding,
                             mbedtls_md_type_t hash_id)
 {
     switch (padding) {
@@ -505,7 +505,7 @@ int mbedtls_rsa_set_padding(mbedtls_rsa_context *ctx, int padding,
 /*
  * Get padding mode of initialized RSA context
  */
-int mbedtls_rsa_get_padding_mode(const mbedtls_rsa_context *ctx)
+EXPORT_C int mbedtls_rsa_get_padding_mode(const mbedtls_rsa_context *ctx)
 {
     return ctx->padding;
 }
@@ -513,7 +513,7 @@ int mbedtls_rsa_get_padding_mode(const mbedtls_rsa_context *ctx)
 /*
  * Get hash identifier of mbedtls_md_type_t type
  */
-int mbedtls_rsa_get_md_alg(const mbedtls_rsa_context *ctx)
+EXPORT_C int mbedtls_rsa_get_md_alg(const mbedtls_rsa_context *ctx)
 {
     return ctx->hash_id;
 }
@@ -521,7 +521,7 @@ int mbedtls_rsa_get_md_alg(const mbedtls_rsa_context *ctx)
 /*
  * Get length in bytes of RSA modulus
  */
-size_t mbedtls_rsa_get_len(const mbedtls_rsa_context *ctx)
+EXPORT_C size_t mbedtls_rsa_get_len(const mbedtls_rsa_context *ctx)
 {
     return ctx->len;
 }
@@ -535,7 +535,7 @@ size_t mbedtls_rsa_get_len(const mbedtls_rsa_context *ctx)
  * This generation method follows the RSA key pair generation procedure of
  * FIPS 186-4 if 2^16 < exponent < 2^256 and nbits = 2048 or nbits = 3072.
  */
-int mbedtls_rsa_gen_key(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_gen_key(mbedtls_rsa_context *ctx,
                         int (*f_rng)(void *, unsigned char *, size_t),
                         void *p_rng,
                         unsigned int nbits, int exponent)
@@ -655,7 +655,7 @@ cleanup:
 /*
  * Check a public RSA key
  */
-int mbedtls_rsa_check_pubkey(const mbedtls_rsa_context *ctx)
+EXPORT_C int mbedtls_rsa_check_pubkey(const mbedtls_rsa_context *ctx)
 {
     if (rsa_check_context(ctx, 0 /* public */, 0 /* no blinding */) != 0) {
         return MBEDTLS_ERR_RSA_KEY_CHECK_FAILED;
@@ -677,7 +677,7 @@ int mbedtls_rsa_check_pubkey(const mbedtls_rsa_context *ctx)
 /*
  * Check for the consistency of all fields in an RSA private key context
  */
-int mbedtls_rsa_check_privkey(const mbedtls_rsa_context *ctx)
+EXPORT_C int mbedtls_rsa_check_privkey(const mbedtls_rsa_context *ctx)
 {
     if (mbedtls_rsa_check_pubkey(ctx) != 0 ||
         rsa_check_context(ctx, 1 /* private */, 1 /* blinding */) != 0) {
@@ -702,7 +702,7 @@ int mbedtls_rsa_check_privkey(const mbedtls_rsa_context *ctx)
 /*
  * Check if contexts holding a public and private key match
  */
-int mbedtls_rsa_check_pub_priv(const mbedtls_rsa_context *pub,
+EXPORT_C int mbedtls_rsa_check_pub_priv(const mbedtls_rsa_context *pub,
                                const mbedtls_rsa_context *prv)
 {
     if (mbedtls_rsa_check_pubkey(pub)  != 0 ||
@@ -721,7 +721,7 @@ int mbedtls_rsa_check_pub_priv(const mbedtls_rsa_context *pub,
 /*
  * Do an RSA public key operation
  */
-int mbedtls_rsa_public(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_public(mbedtls_rsa_context *ctx,
                        const unsigned char *input,
                        unsigned char *output)
 {
@@ -856,7 +856,7 @@ cleanup:
 /*
  * Do an RSA private key operation
  */
-int mbedtls_rsa_private(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_private(mbedtls_rsa_context *ctx,
                         int (*f_rng)(void *, unsigned char *, size_t),
                         void *p_rng,
                         const unsigned char *input,
@@ -1296,7 +1296,7 @@ static int compute_hash(mbedtls_md_type_t md_alg,
 /*
  * Implementation of the PKCS#1 v2.1 RSAES-OAEP-ENCRYPT function
  */
-int mbedtls_rsa_rsaes_oaep_encrypt(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsaes_oaep_encrypt(mbedtls_rsa_context *ctx,
                                    int (*f_rng)(void *, unsigned char *, size_t),
                                    void *p_rng,
                                    const unsigned char *label, size_t label_len,
@@ -1368,7 +1368,7 @@ int mbedtls_rsa_rsaes_oaep_encrypt(mbedtls_rsa_context *ctx,
 /*
  * Implementation of the PKCS#1 v2.1 RSAES-PKCS1-V1_5-ENCRYPT function
  */
-int mbedtls_rsa_rsaes_pkcs1_v15_encrypt(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsaes_pkcs1_v15_encrypt(mbedtls_rsa_context *ctx,
                                         int (*f_rng)(void *, unsigned char *, size_t),
                                         void *p_rng, size_t ilen,
                                         const unsigned char *input,
@@ -1422,7 +1422,7 @@ int mbedtls_rsa_rsaes_pkcs1_v15_encrypt(mbedtls_rsa_context *ctx,
 /*
  * Add the message padding, then do an RSA operation
  */
-int mbedtls_rsa_pkcs1_encrypt(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_pkcs1_encrypt(mbedtls_rsa_context *ctx,
                               int (*f_rng)(void *, unsigned char *, size_t),
                               void *p_rng,
                               size_t ilen,
@@ -1451,7 +1451,7 @@ int mbedtls_rsa_pkcs1_encrypt(mbedtls_rsa_context *ctx,
 /*
  * Implementation of the PKCS#1 v2.1 RSAES-OAEP-DECRYPT function
  */
-int mbedtls_rsa_rsaes_oaep_decrypt(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsaes_oaep_decrypt(mbedtls_rsa_context *ctx,
                                    int (*f_rng)(void *, unsigned char *, size_t),
                                    void *p_rng,
                                    const unsigned char *label, size_t label_len,
@@ -1579,7 +1579,7 @@ cleanup:
 /*
  * Implementation of the PKCS#1 v2.1 RSAES-PKCS1-V1_5-DECRYPT function
  */
-int mbedtls_rsa_rsaes_pkcs1_v15_decrypt(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsaes_pkcs1_v15_decrypt(mbedtls_rsa_context *ctx,
                                         int (*f_rng)(void *, unsigned char *, size_t),
                                         void *p_rng,
                                         size_t *olen,
@@ -1620,7 +1620,7 @@ cleanup:
 /*
  * Do an RSA operation, then remove the message padding
  */
-int mbedtls_rsa_pkcs1_decrypt(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_pkcs1_decrypt(mbedtls_rsa_context *ctx,
                               int (*f_rng)(void *, unsigned char *, size_t),
                               void *p_rng,
                               size_t *olen,
@@ -1763,7 +1763,7 @@ static int rsa_rsassa_pss_sign(mbedtls_rsa_context *ctx,
  * Implementation of the PKCS#1 v2.1 RSASSA-PSS-SIGN function with
  * the option to pass in the salt length.
  */
-int mbedtls_rsa_rsassa_pss_sign_ext(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsassa_pss_sign_ext(mbedtls_rsa_context *ctx,
                                     int (*f_rng)(void *, unsigned char *, size_t),
                                     void *p_rng,
                                     mbedtls_md_type_t md_alg,
@@ -1780,7 +1780,7 @@ int mbedtls_rsa_rsassa_pss_sign_ext(mbedtls_rsa_context *ctx,
 /*
  * Implementation of the PKCS#1 v2.1 RSASSA-PSS-SIGN function
  */
-int mbedtls_rsa_rsassa_pss_sign(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsassa_pss_sign(mbedtls_rsa_context *ctx,
                                 int (*f_rng)(void *, unsigned char *, size_t),
                                 void *p_rng,
                                 mbedtls_md_type_t md_alg,
@@ -1933,7 +1933,7 @@ static int rsa_rsassa_pkcs1_v15_encode(mbedtls_md_type_t md_alg,
 /*
  * Do an RSA operation to sign the message digest
  */
-int mbedtls_rsa_rsassa_pkcs1_v15_sign(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsassa_pkcs1_v15_sign(mbedtls_rsa_context *ctx,
                                       int (*f_rng)(void *, unsigned char *, size_t),
                                       void *p_rng,
                                       mbedtls_md_type_t md_alg,
@@ -2004,7 +2004,7 @@ cleanup:
 /*
  * Do an RSA operation to sign the message digest
  */
-int mbedtls_rsa_pkcs1_sign(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_pkcs1_sign(mbedtls_rsa_context *ctx,
                            int (*f_rng)(void *, unsigned char *, size_t),
                            void *p_rng,
                            mbedtls_md_type_t md_alg,
@@ -2038,7 +2038,7 @@ int mbedtls_rsa_pkcs1_sign(mbedtls_rsa_context *ctx,
 /*
  * Implementation of the PKCS#1 v2.1 RSASSA-PSS-VERIFY function
  */
-int mbedtls_rsa_rsassa_pss_verify_ext(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsassa_pss_verify_ext(mbedtls_rsa_context *ctx,
                                       mbedtls_md_type_t md_alg,
                                       unsigned int hashlen,
                                       const unsigned char *hash,
@@ -2155,7 +2155,7 @@ int mbedtls_rsa_rsassa_pss_verify_ext(mbedtls_rsa_context *ctx,
 /*
  * Simplified PKCS#1 v2.1 RSASSA-PSS-VERIFY function
  */
-int mbedtls_rsa_rsassa_pss_verify(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsassa_pss_verify(mbedtls_rsa_context *ctx,
                                   mbedtls_md_type_t md_alg,
                                   unsigned int hashlen,
                                   const unsigned char *hash,
@@ -2183,7 +2183,7 @@ int mbedtls_rsa_rsassa_pss_verify(mbedtls_rsa_context *ctx,
 /*
  * Implementation of the PKCS#1 v2.1 RSASSA-PKCS1-v1_5-VERIFY function
  */
-int mbedtls_rsa_rsassa_pkcs1_v15_verify(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_rsassa_pkcs1_v15_verify(mbedtls_rsa_context *ctx,
                                         mbedtls_md_type_t md_alg,
                                         unsigned int hashlen,
                                         const unsigned char *hash,
@@ -2252,7 +2252,7 @@ cleanup:
 /*
  * Do an RSA operation and check the message digest
  */
-int mbedtls_rsa_pkcs1_verify(mbedtls_rsa_context *ctx,
+EXPORT_C int mbedtls_rsa_pkcs1_verify(mbedtls_rsa_context *ctx,
                              mbedtls_md_type_t md_alg,
                              unsigned int hashlen,
                              const unsigned char *hash,
@@ -2283,7 +2283,7 @@ int mbedtls_rsa_pkcs1_verify(mbedtls_rsa_context *ctx,
 /*
  * Copy the components of an RSA key
  */
-int mbedtls_rsa_copy(mbedtls_rsa_context *dst, const mbedtls_rsa_context *src)
+EXPORT_C int mbedtls_rsa_copy(mbedtls_rsa_context *dst, const mbedtls_rsa_context *src)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
@@ -2323,7 +2323,7 @@ cleanup:
 /*
  * Free the components of an RSA key
  */
-void mbedtls_rsa_free(mbedtls_rsa_context *ctx)
+EXPORT_C void mbedtls_rsa_free(mbedtls_rsa_context *ctx)
 {
     if (ctx == NULL) {
         return;

@@ -42,7 +42,7 @@
 /*
  * HMAC_DRBG context initialization
  */
-void mbedtls_hmac_drbg_init(mbedtls_hmac_drbg_context *ctx)
+EXPORT_C void mbedtls_hmac_drbg_init(mbedtls_hmac_drbg_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_hmac_drbg_context));
 
@@ -52,7 +52,7 @@ void mbedtls_hmac_drbg_init(mbedtls_hmac_drbg_context *ctx)
 /*
  * HMAC_DRBG update, using optional additional data (10.1.2.2)
  */
-int mbedtls_hmac_drbg_update(mbedtls_hmac_drbg_context *ctx,
+EXPORT_C int mbedtls_hmac_drbg_update(mbedtls_hmac_drbg_context *ctx,
                              const unsigned char *additional,
                              size_t add_len)
 {
@@ -106,7 +106,7 @@ exit:
 /*
  * Simplified HMAC_DRBG initialisation (for use with deterministic ECDSA)
  */
-int mbedtls_hmac_drbg_seed_buf(mbedtls_hmac_drbg_context *ctx,
+EXPORT_C int mbedtls_hmac_drbg_seed_buf(mbedtls_hmac_drbg_context *ctx,
                                const mbedtls_md_info_t *md_info,
                                const unsigned char *data, size_t data_len)
 {
@@ -219,7 +219,7 @@ exit:
 /*
  * HMAC_DRBG reseeding: 10.1.2.4 + 9.2
  */
-int mbedtls_hmac_drbg_reseed(mbedtls_hmac_drbg_context *ctx,
+EXPORT_C int mbedtls_hmac_drbg_reseed(mbedtls_hmac_drbg_context *ctx,
                              const unsigned char *additional, size_t len)
 {
     return hmac_drbg_reseed_core(ctx, additional, len, 0);
@@ -231,7 +231,7 @@ int mbedtls_hmac_drbg_reseed(mbedtls_hmac_drbg_context *ctx,
  * The nonce is not passed as a separate parameter but extracted
  * from the entropy source as suggested in 8.6.7.
  */
-int mbedtls_hmac_drbg_seed(mbedtls_hmac_drbg_context *ctx,
+EXPORT_C int mbedtls_hmac_drbg_seed(mbedtls_hmac_drbg_context *ctx,
                            const mbedtls_md_info_t *md_info,
                            int (*f_entropy)(void *, unsigned char *, size_t),
                            void *p_entropy,
@@ -289,7 +289,7 @@ int mbedtls_hmac_drbg_seed(mbedtls_hmac_drbg_context *ctx,
 /*
  * Set prediction resistance
  */
-void mbedtls_hmac_drbg_set_prediction_resistance(mbedtls_hmac_drbg_context *ctx,
+EXPORT_C void mbedtls_hmac_drbg_set_prediction_resistance(mbedtls_hmac_drbg_context *ctx,
                                                  int resistance)
 {
     ctx->prediction_resistance = resistance;
@@ -298,7 +298,7 @@ void mbedtls_hmac_drbg_set_prediction_resistance(mbedtls_hmac_drbg_context *ctx,
 /*
  * Set entropy length grabbed for seeding
  */
-void mbedtls_hmac_drbg_set_entropy_len(mbedtls_hmac_drbg_context *ctx, size_t len)
+EXPORT_C void mbedtls_hmac_drbg_set_entropy_len(mbedtls_hmac_drbg_context *ctx, size_t len)
 {
     ctx->entropy_len = len;
 }
@@ -306,7 +306,7 @@ void mbedtls_hmac_drbg_set_entropy_len(mbedtls_hmac_drbg_context *ctx, size_t le
 /*
  * Set reseed interval
  */
-void mbedtls_hmac_drbg_set_reseed_interval(mbedtls_hmac_drbg_context *ctx, int interval)
+EXPORT_C void mbedtls_hmac_drbg_set_reseed_interval(mbedtls_hmac_drbg_context *ctx, int interval)
 {
     ctx->reseed_interval = interval;
 }
@@ -315,7 +315,7 @@ void mbedtls_hmac_drbg_set_reseed_interval(mbedtls_hmac_drbg_context *ctx, int i
  * HMAC_DRBG random function with optional additional data:
  * 10.1.2.5 (arabic) + 9.3 (Roman)
  */
-int mbedtls_hmac_drbg_random_with_add(void *p_rng,
+EXPORT_C int mbedtls_hmac_drbg_random_with_add(void *p_rng,
                                       unsigned char *output, size_t out_len,
                                       const unsigned char *additional, size_t add_len)
 {
@@ -391,7 +391,7 @@ exit:
 /*
  * HMAC_DRBG random function
  */
-int mbedtls_hmac_drbg_random(void *p_rng, unsigned char *output, size_t out_len)
+EXPORT_C int mbedtls_hmac_drbg_random(void *p_rng, unsigned char *output, size_t out_len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     mbedtls_hmac_drbg_context *ctx = (mbedtls_hmac_drbg_context *) p_rng;
@@ -417,7 +417,7 @@ int mbedtls_hmac_drbg_random(void *p_rng, unsigned char *output, size_t out_len)
  *  This function resets HMAC_DRBG context to the state immediately
  *  after initial call of mbedtls_hmac_drbg_init().
  */
-void mbedtls_hmac_drbg_free(mbedtls_hmac_drbg_context *ctx)
+EXPORT_C void mbedtls_hmac_drbg_free(mbedtls_hmac_drbg_context *ctx)
 {
     if (ctx == NULL) {
         return;

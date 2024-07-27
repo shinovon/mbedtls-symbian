@@ -39,7 +39,7 @@
 
 #define ENTROPY_MAX_LOOP    256     /**< Maximum amount to loop before error */
 
-void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
+EXPORT_C void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
 {
     ctx->source_count = 0;
     memset(ctx->source, 0, sizeof(ctx->source));
@@ -60,7 +60,7 @@ void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
 
 #if !defined(MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES)
 #if !defined(MBEDTLS_NO_PLATFORM_ENTROPY)
-    mbedtls_entropy_add_source(ctx, mbedtls_platform_entropy_poll, NULL,
+     mbedtls_entropy_add_source(ctx, mbedtls_platform_entropy_poll, NULL,
                                MBEDTLS_ENTROPY_MIN_PLATFORM,
                                MBEDTLS_ENTROPY_SOURCE_STRONG);
 #endif
@@ -78,7 +78,7 @@ void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
 #endif /* MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES */
 }
 
-void mbedtls_entropy_free(mbedtls_entropy_context *ctx)
+EXPORT_C void mbedtls_entropy_free(mbedtls_entropy_context *ctx)
 {
     /* If the context was already free, don't call free() again.
      * This is important for mutexes which don't allow double-free. */
@@ -102,7 +102,7 @@ void mbedtls_entropy_free(mbedtls_entropy_context *ctx)
     ctx->accumulator_started = -1;
 }
 
-int mbedtls_entropy_add_source(mbedtls_entropy_context *ctx,
+EXPORT_C int mbedtls_entropy_add_source(mbedtls_entropy_context *ctx,
                                mbedtls_entropy_f_source_ptr f_source, void *p_source,
                                size_t threshold, int strong)
 {
@@ -201,7 +201,7 @@ cleanup:
     return ret;
 }
 
-int mbedtls_entropy_update_manual(mbedtls_entropy_context *ctx,
+EXPORT_C int mbedtls_entropy_update_manual(mbedtls_entropy_context *ctx,
                                   const unsigned char *data, size_t len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -277,7 +277,7 @@ cleanup:
 /*
  * Thread-safe wrapper for entropy_gather_internal()
  */
-int mbedtls_entropy_gather(mbedtls_entropy_context *ctx)
+EXPORT_C int mbedtls_entropy_gather(mbedtls_entropy_context *ctx)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
@@ -298,7 +298,7 @@ int mbedtls_entropy_gather(mbedtls_entropy_context *ctx)
     return ret;
 }
 
-int mbedtls_entropy_func(void *data, unsigned char *output, size_t len)
+EXPORT_C int mbedtls_entropy_func(void *data, unsigned char *output, size_t len)
 {
     int ret, count = 0, i, thresholds_reached;
     size_t strong_size;
