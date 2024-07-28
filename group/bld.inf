@@ -1,13 +1,3 @@
-/*
-============================================================================
- Name		 : bld.inf
- Author	     : MBed TLS contributors
- Copyright   : MBed TLS contributors
- Description : This file provides the information required for building the
-				whole of a mbedtls.
-============================================================================
-*/
-
 PRJ_PLATFORMS
 DEFAULT
 
