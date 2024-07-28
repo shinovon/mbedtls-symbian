@@ -103,7 +103,7 @@ extern "C" {
  * \retval #PSA_ERROR_DATA_INVALID \emptydescription
  * \retval #PSA_ERROR_DATA_CORRUPT \emptydescription
  */
-psa_status_t psa_crypto_init(void);
+IMPORT_C psa_status_t psa_crypto_init(void);
 
 /**@}*/
 
