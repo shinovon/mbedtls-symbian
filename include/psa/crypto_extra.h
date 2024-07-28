@@ -215,7 +215,7 @@ psa_status_t mbedtls_psa_register_se_key(
  *
  * This is an Mbed TLS extension.
  */
-void mbedtls_psa_crypto_free(void);
+IMPORT_C void mbedtls_psa_crypto_free(void);
 
 /** \brief Statistics about
  * resource consumption related to the PSA keystore.

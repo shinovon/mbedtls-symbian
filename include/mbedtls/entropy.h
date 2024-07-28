@@ -140,7 +140,7 @@ mbedtls_entropy_context;
 /**
  * \brief           Platform-specific entropy poll callback
  */
-int mbedtls_platform_entropy_poll(void *data,
+IMPORT_C int mbedtls_platform_entropy_poll(void *data,
                                   unsigned char *output, size_t len, size_t *olen);
 #endif
 
@@ -149,14 +149,14 @@ int mbedtls_platform_entropy_poll(void *data,
  *
  * \param ctx       Entropy context to initialize
  */
-void mbedtls_entropy_init(mbedtls_entropy_context *ctx);
+IMPORT_C void mbedtls_entropy_init(mbedtls_entropy_context *ctx);
 
 /**
  * \brief           Free the data in the context
  *
  * \param ctx       Entropy context to free
  */
-void mbedtls_entropy_free(mbedtls_entropy_context *ctx);
+IMPORT_C void mbedtls_entropy_free(mbedtls_entropy_context *ctx);
 
 /**
  * \brief           Adds an entropy source to poll
