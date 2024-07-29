@@ -2275,6 +2275,6 @@ EXPORT_C const mbedtls_cipher_definition_t mbedtls_cipher_definitions[] =
 
 #define NUM_CIPHERS (sizeof(mbedtls_cipher_definitions) /      \
                      sizeof(mbedtls_cipher_definitions[0]))
-EXPORT_C int mbedtls_cipher_supported[NUM_CIPHERS];
+int mbedtls_cipher_supported[NUM_CIPHERS];
 
 #endif /* MBEDTLS_CIPHER_C */
