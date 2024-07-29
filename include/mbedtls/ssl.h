@@ -2042,7 +2042,7 @@ void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
  * \param f_rng    RNG function (mandatory)
  * \param p_rng    RNG parameter
  */
-void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
                           int (*f_rng)(void *, unsigned char *, size_t),
                           void *p_rng);
 
