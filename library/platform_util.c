@@ -203,19 +203,104 @@ void (*mbedtls_test_hook_test_fail)(const char *, int, const char *);
  * Provide external definitions of some inline functions so that the compiler
  * has the option to not inline them
  */
-EXPORT_C extern inline void mbedtls_xor(unsigned char *r,
-                               const unsigned char *a,
-                               const unsigned char *b,
-                               size_t n);
+//EXPORT_C extern inline void mbedtls_xor(unsigned char *r,
+//                               const unsigned char *a,
+//                               const unsigned char *b,
+//                               size_t n);
+//
+//EXPORT_C extern inline uint16_t mbedtls_get_unaligned_uint16(const void *p);
+//
+//EXPORT_C extern inline void mbedtls_put_unaligned_uint16(void *p, uint16_t x);
+//
+//EXPORT_C extern inline uint32_t mbedtls_get_unaligned_uint32(const void *p);
+//
+//EXPORT_C extern inline void mbedtls_put_unaligned_uint32(void *p, uint32_t x);
+//
+//EXPORT_C extern inline uint64_t mbedtls_get_unaligned_uint64(const void *p);
+//
+//EXPORT_C extern inline void mbedtls_put_unaligned_uint64(void *p, uint64_t x);
 
-EXPORT_C extern inline uint16_t mbedtls_get_unaligned_uint16(const void *p);
+void mbedtls_xor(unsigned char *r, const unsigned char *a, const unsigned char *b, size_t n)
+{
+    size_t i = 0;
+#if defined(MBEDTLS_EFFICIENT_UNALIGNED_ACCESS)
+    for (; (i + 4) <= n; i += 4) {
+        uint32_t x = mbedtls_get_unaligned_uint32(a + i) ^ mbedtls_get_unaligned_uint32(b + i);
+        mbedtls_put_unaligned_uint32(r + i, x);
+    }
+#endif
+    for (; i < n; i++) {
+        r[i] = a[i] ^ b[i];
+    }
+}
 
-EXPORT_C extern inline void mbedtls_put_unaligned_uint16(void *p, uint16_t x);
+uint16_t mbedtls_get_unaligned_uint16(const void *p)
+{
+    uint16_t r;
+    memcpy(&r, p, sizeof(r));
+    return r;
+}
 
-EXPORT_C extern inline uint32_t mbedtls_get_unaligned_uint32(const void *p);
+/**
+ * Write the unsigned 16 bits integer to the given address, which need not
+ * be aligned.
+ *
+ * \param   p pointer to 2 bytes of data
+ * \param   x data to write
+ */
+void mbedtls_put_unaligned_uint16(void *p, uint16_t x)
+{
+    memcpy(p, &x, sizeof(x));
+}
 
-EXPORT_C extern inline void mbedtls_put_unaligned_uint32(void *p, uint32_t x);
+/**
+ * Read the unsigned 32 bits integer from the given address, which need not
+ * be aligned.
+ *
+ * \param   p pointer to 4 bytes of data
+ * \return  Data at the given address
+ */
+uint32_t mbedtls_get_unaligned_uint32(const void *p)
+{
+    uint32_t r;
+    memcpy(&r, p, sizeof(r));
+    return r;
+}
 
-EXPORT_C extern inline uint64_t mbedtls_get_unaligned_uint64(const void *p);
+/**
+ * Write the unsigned 32 bits integer to the given address, which need not
+ * be aligned.
+ *
+ * \param   p pointer to 4 bytes of data
+ * \param   x data to write
+ */
+void mbedtls_put_unaligned_uint32(void *p, uint32_t x)
+{
+    memcpy(p, &x, sizeof(x));
+}
 
-EXPORT_C extern inline void mbedtls_put_unaligned_uint64(void *p, uint64_t x);
+/**
+ * Read the unsigned 64 bits integer from the given address, which need not
+ * be aligned.
+ *
+ * \param   p pointer to 8 bytes of data
+ * \return  Data at the given address
+ */
+uint64_t mbedtls_get_unaligned_uint64(const void *p)
+{
+    uint64_t r;
+    memcpy(&r, p, sizeof(r));
+    return r;
+}
+
+/**
+ * Write the unsigned 64 bits integer to the given address, which need not
+ * be aligned.
+ *
+ * \param   p pointer to 8 bytes of data
+ * \param   x data to write
+ */
+void mbedtls_put_unaligned_uint64(void *p, uint64_t x)
+{
+    memcpy(p, &x, sizeof(x));
+}
