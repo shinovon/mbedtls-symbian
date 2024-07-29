@@ -5068,7 +5068,7 @@ int mbedtls_ecp_mod_p224_raw(mbedtls_mpi_uint *X, size_t X_limbs)
     if (X_limbs != 2 * 224 / biL) {
         return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
     }
-
+    {
     INIT(224);
 
     SUB(7);  SUB(11);           NEXT;   // A0 += -A7  - A11
@@ -5094,7 +5094,7 @@ int mbedtls_ecp_mod_p224_raw(mbedtls_mpi_uint *X, size_t X_limbs)
      * (see commit 73e8553 for details)*/
 
     LAST;
-
+    }
     return 0;
 }
 
@@ -5121,7 +5121,7 @@ int mbedtls_ecp_mod_p256_raw(mbedtls_mpi_uint *X, size_t X_limbs)
     if (X_limbs != 2 * 256 / biL) {
         return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
     }
-
+    {
     INIT(256);
 
     ADD(8);  ADD(9);
@@ -5175,7 +5175,7 @@ int mbedtls_ecp_mod_p256_raw(mbedtls_mpi_uint *X, size_t X_limbs)
     ADD_LAST;                                                   // A7
 
     LAST;
-
+    }
     return 0;
 }
 
@@ -5313,6 +5313,7 @@ void mbedtls_ecp_fix_negative(mbedtls_mpi *N, signed char c, size_t bits)
 
     /* Add |c| * 2^bits to the absolute value. Since c and N are
      * negative, this adds c * 2^bits. */
+    {
     mbedtls_mpi_uint msw = (mbedtls_mpi_uint) -c;
 #if defined(MBEDTLS_HAVE_INT64)
     if (bits == 224) {
@@ -5320,6 +5321,7 @@ void mbedtls_ecp_fix_negative(mbedtls_mpi *N, signed char c, size_t bits)
     }
 #endif
     N->p[bits / 8 / sizeof(mbedtls_mpi_uint)] += msw;
+    }
 }
 
 #if defined(MBEDTLS_ECP_DP_SECP384R1_ENABLED)
@@ -5410,7 +5412,7 @@ int mbedtls_ecp_mod_p521_raw(mbedtls_mpi_uint *X, size_t X_limbs)
     if (X_limbs != 2 * P521_WIDTH || X[2 * P521_WIDTH - 1] != 0) {
         return MBEDTLS_ERR_ECP_BAD_INPUT_DATA;
     }
-
+    {
     /* Step 1: Reduction to P521_WIDTH limbs */
     /* Helper references for bottom part of X */
     mbedtls_mpi_uint *X0 = X;
@@ -5440,14 +5442,14 @@ int mbedtls_ecp_mod_p521_raw(mbedtls_mpi_uint *X, size_t X_limbs)
      *
      * At this point X is reduced to P521_WIDTH limbs. What remains is to add
      * the carry (that is 2^P521_WIDTH carry) and to reduce mod P521. */
-
+    {
     /* 2^P521_WIDTH carry = 2^(512 + biL) carry = 2^(biL - 9) carry mod P521.
      * Also, recall that carry is either 0 or 1. */
     mbedtls_mpi_uint addend = carry << (biL - 9);
     /* Keep the top 9 bits and reduce the rest, using 2^521 = 1 mod P521. */
     addend += (X[P521_WIDTH - 1] >> 9);
     X[P521_WIDTH - 1] &= P521_MASK;
-
+    {
     /* Reuse the top part of X (already zeroed) as a helper array for
      * carrying out the addition. */
     mbedtls_mpi_uint *addend_arr = X + P521_WIDTH;
@@ -5455,10 +5457,9 @@ int mbedtls_ecp_mod_p521_raw(mbedtls_mpi_uint *X, size_t X_limbs)
     (void) mbedtls_mpi_core_add(X, X, addend_arr, P521_WIDTH);
     /* Both addends were less than P521 therefore X < 2 * P521. (This also means
      * that the result fit in P521_WIDTH limbs and there won't be any carry.) */
-
     /* Clear the reused part of X. */
     addend_arr[0] = 0;
-
+    }}}
     return 0;
 }
 
