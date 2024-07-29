@@ -497,7 +497,7 @@ int mbedtls_ctr_drbg_update(mbedtls_ctr_drbg_context *ctx,
  * \return    #MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED or
  *            #MBEDTLS_ERR_CTR_DRBG_REQUEST_TOO_BIG on failure.
  */
-int mbedtls_ctr_drbg_random_with_add(void *p_rng,
+IMPORT_C int mbedtls_ctr_drbg_random_with_add(void *p_rng,
                                      unsigned char *output, size_t output_len,
                                      const unsigned char *additional, size_t add_len);
 
@@ -525,7 +525,7 @@ int mbedtls_ctr_drbg_random_with_add(void *p_rng,
  * \return              #MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED or
  *                      #MBEDTLS_ERR_CTR_DRBG_REQUEST_TOO_BIG on failure.
  */
-int mbedtls_ctr_drbg_random(void *p_rng,
+IMPORT_C int mbedtls_ctr_drbg_random(void *p_rng,
                             unsigned char *output, size_t output_len);
 
 #if defined(MBEDTLS_FS_IO)

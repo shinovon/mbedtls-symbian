@@ -200,7 +200,7 @@ int mbedtls_entropy_gather(mbedtls_entropy_context *ctx);
  *
  * \return          0 if successful, or MBEDTLS_ERR_ENTROPY_SOURCE_FAILED
  */
-int mbedtls_entropy_func(void *data, unsigned char *output, size_t len);
+IMPORT_C int mbedtls_entropy_func(void *data, unsigned char *output, size_t len);
 
 /**
  * \brief           Add data to the accumulator manually
