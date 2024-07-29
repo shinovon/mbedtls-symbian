@@ -137,7 +137,8 @@ static int ssl_write_alpn_ext(mbedtls_ssl_context *ssl,
     if (ssl->conf->alpn_list == NULL) {
         return 0;
     }
-
+    {
+    const char ** cur = ssl->conf->alpn_list;
     MBEDTLS_SSL_DEBUG_MSG(3, ("client hello, adding alpn extension"));
 
 
@@ -156,7 +157,7 @@ static int ssl_write_alpn_ext(mbedtls_ssl_context *ssl,
      *     ProtocolName protocol_name_list<2..2^16-1>
      * } ProtocolNameList;
      */
-    for (const char **cur = ssl->conf->alpn_list; *cur != NULL; cur++) {
+    for (; *cur != NULL; cur++) {
         /*
          * mbedtls_ssl_conf_set_alpn_protocols() checked that the length of
          * protocol names is less than 255.
@@ -176,6 +177,7 @@ static int ssl_write_alpn_ext(mbedtls_ssl_context *ssl,
 
     /* Extension length = *out_len - 2 (ext_type) - 2 (ext_len) */
     MBEDTLS_PUT_UINT16_BE(*out_len - 4, buf, 2);
+    }
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3)
     mbedtls_ssl_tls13_set_hs_sent_ext_mask(ssl, MBEDTLS_TLS_EXT_ALPN);
@@ -320,6 +322,8 @@ static int ssl_write_client_hello_cipher_suites(
     const int *ciphersuite_list;
     unsigned char *cipher_suites; /* Start of the cipher_suites list */
     size_t cipher_suites_len;
+    size_t i;
+    int renegotiating;
 
     *tls12_uses_ec = 0;
     *out_len = 0;
@@ -342,7 +346,7 @@ static int ssl_write_client_hello_cipher_suites(
      * CipherSuite cipher_suites<2..2^16-2>;
      */
     cipher_suites = p;
-    for (size_t i = 0; ciphersuite_list[i] != 0; i++) {
+    for (i = 0; ciphersuite_list[i] != 0; i++) {
         int cipher_suite = ciphersuite_list[i];
         const mbedtls_ssl_ciphersuite_t *ciphersuite_info;
 
@@ -373,7 +377,7 @@ static int ssl_write_client_hello_cipher_suites(
     /*
      * Add TLS_EMPTY_RENEGOTIATION_INFO_SCSV
      */
-    int renegotiating = 0;
+    renegotiating = 0;
 #if defined(MBEDTLS_SSL_RENEGOTIATION)
     renegotiating = (ssl->renego_status != MBEDTLS_SSL_INITIAL_HANDSHAKE);
 #endif
@@ -439,10 +443,6 @@ static int ssl_write_client_hello_body(mbedtls_ssl_context *ssl,
     unsigned char *p_extensions_len; /* Pointer to extensions length */
     size_t output_len;               /* Length of buffer used by function */
     size_t extensions_len;           /* Length of the list of extensions*/
-    int tls12_uses_ec = 0;
-
-    *out_len = 0;
-    *binders_len = 0;
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1_2)
     unsigned char propose_tls12 =
@@ -456,6 +456,10 @@ static int ssl_write_client_hello_body(mbedtls_ssl_context *ssl,
         &&
         (MBEDTLS_SSL_VERSION_TLS1_3 <= ssl->tls_version);
 #endif
+    int tls12_uses_ec = 0;
+
+    *out_len = 0;
+    *binders_len = 0;
 
     /*
      * Write client_version (TLS 1.2) or legacy_version (TLS 1.3)
@@ -810,6 +814,7 @@ static int ssl_prepare_client_hello(mbedtls_ssl_context *ssl)
         }
 
 #if defined(MBEDTLS_SSL_SESSION_TICKETS)
+        {
         /*
          * RFC 5077 section 3.4: "When presenting a ticket, the client MAY
          * generate and include a Session ID in the TLS ClientHello."
@@ -825,6 +830,7 @@ static int ssl_prepare_client_hello(mbedtls_ssl_context *ssl)
                 (session_negotiate->ticket_len != 0)) {
                 session_id_len = 32;
             }
+        }
         }
 #endif /* MBEDTLS_SSL_SESSION_TICKETS */
     }

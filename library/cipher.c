@@ -1491,6 +1491,7 @@ EXPORT_C int mbedtls_cipher_auth_encrypt_ext(mbedtls_cipher_context_t *ctx,
                                     unsigned char *output, size_t output_len,
                                     size_t *olen, size_t tag_len)
 {
+	int ret;
 #if defined(MBEDTLS_NIST_KW_C)
     if (
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
@@ -1521,7 +1522,7 @@ EXPORT_C int mbedtls_cipher_auth_encrypt_ext(mbedtls_cipher_context_t *ctx,
         return MBEDTLS_ERR_CIPHER_BAD_INPUT_DATA;
     }
 
-    int ret = mbedtls_cipher_aead_encrypt(ctx, iv, iv_len, ad, ad_len,
+    ret = mbedtls_cipher_aead_encrypt(ctx, iv, iv_len, ad, ad_len,
                                           input, ilen, output, olen,
                                           output + ilen, tag_len);
     *olen += tag_len;

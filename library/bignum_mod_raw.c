@@ -282,11 +282,12 @@ EXPORT_C void mbedtls_mpi_mod_raw_neg(mbedtls_mpi_uint *X,
                              const mbedtls_mpi_uint *A,
                              const mbedtls_mpi_mod_modulus *N)
 {
+	mbedtls_mpi_uint borrow;
     mbedtls_mpi_core_sub(X, N->p, A, N->limbs);
 
     /* If A=0 initially, then X=N now. Detect this by
      * subtracting N and catching the carry. */
-    mbedtls_mpi_uint borrow = mbedtls_mpi_core_sub(X, X, N->p, N->limbs);
+    borrow = mbedtls_mpi_core_sub(X, X, N->p, N->limbs);
     (void) mbedtls_mpi_core_add_if(X, N->p, N->limbs, (unsigned) borrow);
 }
 /* END MERGE SLOT 7 */

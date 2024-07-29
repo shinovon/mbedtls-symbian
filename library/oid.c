@@ -821,6 +821,7 @@ EXPORT_C int mbedtls_oid_get_numeric_string(char *buf, size_t size,
     char *p = buf;
     size_t n = size;
     unsigned int value = 0;
+    size_t i;
 
     if (size > INT_MAX) {
         /* Avoid overflow computing return value */
@@ -832,7 +833,7 @@ EXPORT_C int mbedtls_oid_get_numeric_string(char *buf, size_t size,
         return MBEDTLS_ERR_ASN1_OUT_OF_DATA;
     }
 
-    for (size_t i = 0; i < oid->len; i++) {
+    for (i = 0; i < oid->len; i++) {
         /* Prevent overflow in value. */
         if (value > (UINT_MAX >> 7)) {
             return MBEDTLS_ERR_ASN1_INVALID_DATA;

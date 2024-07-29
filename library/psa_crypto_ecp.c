@@ -500,7 +500,7 @@ EXPORT_C psa_status_t mbedtls_psa_key_agreement_ecdh(
     if (!PSA_KEY_TYPE_IS_ECC_KEY_PAIR(attributes->core.type) ||
         !PSA_ALG_IS_ECDH(alg)) {
         return PSA_ERROR_INVALID_ARGUMENT;
-    }
+    } else {
     mbedtls_ecp_keypair *ecp = NULL;
     status = mbedtls_psa_ecp_load_representation(
         attributes->core.type,
@@ -510,7 +510,7 @@ EXPORT_C psa_status_t mbedtls_psa_key_agreement_ecdh(
         &ecp);
     if (status != PSA_SUCCESS) {
         return status;
-    }
+    } else {
     mbedtls_ecp_keypair *their_key = NULL;
     mbedtls_ecdh_context ecdh;
     size_t bits = 0;
@@ -560,6 +560,8 @@ exit:
     mbedtls_ecp_keypair_free(ecp);
     mbedtls_free(ecp);
     return status;
+    }
+    }
 }
 #endif /* MBEDTLS_PSA_BUILTIN_ALG_ECDH */
 

@@ -30,6 +30,7 @@
 
 EXPORT_C int mbedtls_asn1_write_len(unsigned char **p, const unsigned char *start, size_t len)
 {
+    int len_is_valid = 1;
     if (len < 0x80) {
         if (*p - start < 1) {
             return MBEDTLS_ERR_ASN1_BUF_TOO_SMALL;
@@ -72,7 +73,6 @@ EXPORT_C int mbedtls_asn1_write_len(unsigned char **p, const unsigned char *star
         return 4;
     }
 
-    int len_is_valid = 1;
 #if SIZE_MAX > 0xFFFFFFFF
     len_is_valid = (len <= 0xFFFFFFFF);
 #endif

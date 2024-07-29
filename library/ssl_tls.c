@@ -1154,19 +1154,20 @@ static int ssl_handshake_init(mbedtls_ssl_context *ssl)
     /* Heap allocate and translate curve_list from internal to IANA group ids */
     if (ssl->conf->curve_list != NULL) {
         size_t length;
+        size_t i;
         const mbedtls_ecp_group_id *curve_list = ssl->conf->curve_list;
 
         for (length = 0;  (curve_list[length] != MBEDTLS_ECP_DP_NONE) &&
              (length < MBEDTLS_ECP_DP_MAX); length++) {
         }
-
+        {
         /* Leave room for zero termination */
         uint16_t *group_list = mbedtls_calloc(length + 1, sizeof(uint16_t));
         if (group_list == NULL) {
             return MBEDTLS_ERR_SSL_ALLOC_FAILED;
         }
 
-        for (size_t i = 0; i < length; i++) {
+        for (i = 0; i < length; i++) {
             uint16_t tls_id = mbedtls_ssl_get_tls_id_from_ecp_group_id(
                 curve_list[i]);
             if (tls_id == 0) {
@@ -1180,6 +1181,7 @@ static int ssl_handshake_init(mbedtls_ssl_context *ssl)
 
         ssl->handshake->group_list = group_list;
         ssl->handshake->group_list_heap_allocated = 1;
+        }
     } else {
         ssl->handshake->group_list = ssl->conf->group_list;
         ssl->handshake->group_list_heap_allocated = 0;
@@ -5642,7 +5644,8 @@ EXPORT_C int mbedtls_ssl_get_psa_curve_info_from_tls_id(uint16_t tls_id,
                                                psa_ecc_family_t *family,
                                                size_t *bits)
 {
-    for (int i = 0; tls_id_match_table[i].tls_id != 0; i++) {
+	int i;
+    for (i = 0; tls_id_match_table[i].tls_id != 0; i++) {
         if (tls_id_match_table[i].tls_id == tls_id) {
             if (family != NULL) {
                 *family = tls_id_match_table[i].psa_family;
@@ -5659,7 +5662,8 @@ EXPORT_C int mbedtls_ssl_get_psa_curve_info_from_tls_id(uint16_t tls_id,
 
 EXPORT_C mbedtls_ecp_group_id mbedtls_ssl_get_ecp_group_id_from_tls_id(uint16_t tls_id)
 {
-    for (int i = 0; tls_id_match_table[i].tls_id != 0; i++) {
+	int i;
+    for (i = 0; tls_id_match_table[i].tls_id != 0; i++) {
         if (tls_id_match_table[i].tls_id == tls_id) {
             return tls_id_match_table[i].ecp_group_id;
         }
@@ -5670,7 +5674,8 @@ EXPORT_C mbedtls_ecp_group_id mbedtls_ssl_get_ecp_group_id_from_tls_id(uint16_t 
 
 EXPORT_C uint16_t mbedtls_ssl_get_tls_id_from_ecp_group_id(mbedtls_ecp_group_id grp_id)
 {
-    for (int i = 0; tls_id_match_table[i].ecp_group_id != MBEDTLS_ECP_DP_NONE;
+	int i;
+    for (i = 0; tls_id_match_table[i].ecp_group_id != MBEDTLS_ECP_DP_NONE;
          i++) {
         if (tls_id_match_table[i].ecp_group_id == grp_id) {
             return tls_id_match_table[i].tls_id;
@@ -6431,7 +6436,7 @@ static int ssl_compute_master(mbedtls_ssl_handshake_params *handshake,
         } else {
             alg = PSA_ALG_TLS12_PSK_TO_MS(PSA_ALG_SHA_256);
         }
-
+        {
         size_t other_secret_len = 0;
         unsigned char *other_secret = NULL;
 
@@ -6461,6 +6466,7 @@ static int ssl_compute_master(mbedtls_ssl_handshake_params *handshake,
                                           (size_t) strlen(lbl),
                                           other_secret, other_secret_len,
                                           master_secret_len);
+        }
         if (status != PSA_SUCCESS) {
             psa_key_derivation_abort(&derivation);
             return MBEDTLS_ERR_SSL_HW_ACCEL_FAILED;
@@ -8389,6 +8395,7 @@ static int ssl_tls12_populate_transform(mbedtls_ssl_transform *transform,
     defined(MBEDTLS_CHACHAPOLY_C)
     if (ssl_mode == MBEDTLS_SSL_MODE_AEAD) {
         size_t explicit_ivlen;
+        int is_chachapoly;
 
         transform->maclen = 0;
         mac_key_len = 0;
@@ -8403,7 +8410,7 @@ static int ssl_tls12_populate_transform(mbedtls_ssl_transform *transform,
          */
         transform->ivlen = 12;
 
-        int is_chachapoly = 0;
+        is_chachapoly = 0;
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
         is_chachapoly = (key_type == PSA_KEY_TYPE_CHACHA20);
 #else
@@ -9408,6 +9415,7 @@ EXPORT_C int mbedtls_ssl_write_sig_alg_ext(mbedtls_ssl_context *ssl, unsigned ch
      * Write supported_signature_algorithms
      */
     supported_sig_alg = p;
+    {
     const uint16_t *sig_alg = mbedtls_ssl_get_sig_algs(ssl);
     if (sig_alg == NULL) {
         return MBEDTLS_ERR_SSL_BAD_CONFIG;
@@ -9444,7 +9452,7 @@ EXPORT_C int mbedtls_ssl_write_sig_alg_ext(mbedtls_ssl_context *ssl, unsigned ch
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3)
     mbedtls_ssl_tls13_set_hs_sent_ext_mask(ssl, MBEDTLS_TLS_EXT_SIG_ALG);
 #endif /* MBEDTLS_SSL_PROTO_TLS1_3 */
-
+    }
     return 0;
 }
 #endif /* MBEDTLS_SSL_HANDSHAKE_WITH_CERT_ENABLED */
@@ -9576,9 +9584,10 @@ int mbedtls_ssl_parse_alpn_ext(mbedtls_ssl_context *ssl,
 
         p += protocol_name_len;
     }
-
+    {
     /* Use our order of preference */
-    for (const char **alpn = ssl->conf->alpn_list; *alpn != NULL; alpn++) {
+    const char **alpn = ssl->conf->alpn_list;
+    for (; *alpn != NULL; alpn++) {
         size_t const alpn_len = strlen(*alpn);
         p = protocol_name_list;
         while (p < protocol_name_list_end) {
@@ -9591,6 +9600,7 @@ int mbedtls_ssl_parse_alpn_ext(mbedtls_ssl_context *ssl,
 
             p += protocol_name_len;
         }
+    }
     }
 
     /* If we get here, no match was found */

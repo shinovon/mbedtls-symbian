@@ -180,7 +180,7 @@ static psa_status_t cmac_setup(mbedtls_psa_mac_operation_t *operation,
         return PSA_ERROR_NOT_SUPPORTED;
     }
 #endif
-
+    {
     const mbedtls_cipher_info_t *cipher_info =
         mbedtls_cipher_info_from_psa(
             PSA_ALG_CMAC,
@@ -200,6 +200,7 @@ static psa_status_t cmac_setup(mbedtls_psa_mac_operation_t *operation,
     ret = mbedtls_cipher_cmac_starts(&operation->ctx.cmac,
                                      key_buffer,
                                      psa_get_key_bits(attributes));
+    }
 exit:
     return mbedtls_to_psa_error(ret);
 }

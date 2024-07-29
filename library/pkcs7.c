@@ -394,6 +394,8 @@ static int pkcs7_get_signers_info_set(unsigned char **p, unsigned char *end,
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     int count = 0;
     size_t len = 0;
+    mbedtls_pkcs7_signer_info *prev;
+    mbedtls_pkcs7_signer_info *signer;
 
     ret = mbedtls_asn1_get_tag(p, end, &len, MBEDTLS_ASN1_CONSTRUCTED
                                | MBEDTLS_ASN1_SET);
@@ -414,7 +416,7 @@ static int pkcs7_get_signers_info_set(unsigned char **p, unsigned char *end,
     }
     count++;
 
-    mbedtls_pkcs7_signer_info *prev = signers_set;
+    prev = signers_set;
     while (*p != end_set) {
         mbedtls_pkcs7_signer_info *signer =
             mbedtls_calloc(1, sizeof(mbedtls_pkcs7_signer_info));
@@ -437,7 +439,7 @@ static int pkcs7_get_signers_info_set(unsigned char **p, unsigned char *end,
 
 cleanup:
     pkcs7_free_signer_info(signers_set);
-    mbedtls_pkcs7_signer_info *signer = signers_set->next;
+    signer = signers_set->next;
     while (signer != NULL) {
         prev = signer;
         signer = signer->next;
@@ -498,7 +500,7 @@ static int pkcs7_get_signed_data(unsigned char *buf, size_t buflen,
     if (ret != 0) {
         return MBEDTLS_ERR_PKCS7_INVALID_ALG;
     }
-
+    {
     mbedtls_pkcs7_buf content_type;
     memset(&content_type, 0, sizeof(content_type));
     ret = pkcs7_get_content_info_type(&p, end, &end_content_info, &content_type);
@@ -557,6 +559,7 @@ static int pkcs7_get_signed_data(unsigned char *buf, size_t buflen,
     /* Don't permit trailing data */
     if (p != end) {
         return MBEDTLS_ERR_PKCS7_INVALID_FORMAT;
+    }
     }
 
     return 0;

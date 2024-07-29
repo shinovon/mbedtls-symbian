@@ -182,6 +182,7 @@ EXPORT_C int mbedtls_mpi_mod_mul(mbedtls_mpi_mod_residue *X,
                         const mbedtls_mpi_mod_residue *B,
                         const mbedtls_mpi_mod_modulus *N)
 {
+	mbedtls_mpi_uint *T;
     if (N->limbs == 0) {
         return MBEDTLS_ERR_MPI_BAD_INPUT_DATA;
     }
@@ -190,7 +191,7 @@ EXPORT_C int mbedtls_mpi_mod_mul(mbedtls_mpi_mod_residue *X,
         return MBEDTLS_ERR_MPI_BAD_INPUT_DATA;
     }
 
-    mbedtls_mpi_uint *T = mbedtls_calloc(N->limbs * 2 + 1, ciL);
+    T = mbedtls_calloc(N->limbs * 2 + 1, ciL);
     if (T == NULL) {
         return MBEDTLS_ERR_MPI_ALLOC_FAILED;
     }
@@ -271,6 +272,9 @@ EXPORT_C int mbedtls_mpi_mod_inv(mbedtls_mpi_mod_residue *X,
                         const mbedtls_mpi_mod_residue *A,
                         const mbedtls_mpi_mod_modulus *N)
 {
+	size_t working_limbs;
+	mbedtls_mpi_uint *working_memory;
+	int ret;
     if (X->limbs != N->limbs || A->limbs != N->limbs) {
         return MBEDTLS_ERR_MPI_BAD_INPUT_DATA;
     }
@@ -280,16 +284,16 @@ EXPORT_C int mbedtls_mpi_mod_inv(mbedtls_mpi_mod_residue *X,
         return MBEDTLS_ERR_MPI_BAD_INPUT_DATA;
     }
 
-    size_t working_limbs =
+    working_limbs =
         mbedtls_mpi_mod_raw_inv_prime_working_limbs(N->limbs);
 
-    mbedtls_mpi_uint *working_memory = mbedtls_calloc(working_limbs,
+    working_memory = mbedtls_calloc(working_limbs,
                                                       sizeof(mbedtls_mpi_uint));
     if (working_memory == NULL) {
         return MBEDTLS_ERR_MPI_ALLOC_FAILED;
     }
 
-    int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+    ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
     switch (N->int_rep) {
         case MBEDTLS_MPI_MOD_REP_MONTGOMERY:
