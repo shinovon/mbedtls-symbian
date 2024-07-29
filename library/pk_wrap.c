@@ -359,10 +359,10 @@ static int rsa_sign_wrap(void *ctx, mbedtls_md_type_t md_alg,
                          unsigned char *sig, size_t sig_size, size_t *sig_len,
                          int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
 {
+    psa_algorithm_t psa_md_alg;
     ((void) f_rng);
     ((void) p_rng);
 
-    psa_algorithm_t psa_md_alg;
     psa_md_alg = mbedtls_hash_info_psa_from_md(md_alg);
     if (psa_md_alg == 0) {
         return MBEDTLS_ERR_PK_BAD_INPUT_DATA;

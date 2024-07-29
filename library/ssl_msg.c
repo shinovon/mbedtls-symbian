@@ -817,6 +817,7 @@ EXPORT_C int mbedtls_ssl_encrypt_buf(mbedtls_ssl_context *ssl,
             MBEDTLS_SSL_DEBUG_MSG(1, ("Buffer provided for encrypted record not large enough"));
             return MBEDTLS_ERR_SSL_BUFFER_TOO_SMALL;
         }
+        {
 #if defined(MBEDTLS_SSL_PROTO_TLS1_2)
         unsigned char mac[MBEDTLS_SSL_MAC_ADD];
         int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -894,6 +895,7 @@ hmac_failed_etm_disabled:
         if (ret != 0) {
             MBEDTLS_SSL_DEBUG_RET(1, "mbedtls_md_hmac_xxx", ret);
             return ret;
+        }
         }
     }
 #endif /* MBEDTLS_SSL_SOME_SUITES_USE_MAC */
@@ -1712,7 +1714,7 @@ hmac_failed_etm_enabled:
 
         /* Regardless of the validity of the padding,
          * we have data_len >= padlen here. */
-
+        {
 #if defined(MBEDTLS_SSL_PROTO_TLS1_2)
         /* The padding check involves a series of up to 256
          * consecutive memory reads at the end of the record
@@ -1755,6 +1757,7 @@ hmac_failed_etm_enabled:
          * padlen hasn't been changed and the previous assertion
          * data_len >= padlen still holds. */
         rec->data_len -= padlen;
+        }
     } else
 #endif /* MBEDTLS_SSL_SOME_SUITES_USE_CBC */
     {
@@ -1793,7 +1796,7 @@ hmac_failed_etm_enabled:
         ssl_extract_add_data_from_record(add_data, &add_data_len, rec,
                                          transform->tls_version,
                                          transform->taglen);
-
+        {
 #if defined(MBEDTLS_SSL_PROTO_TLS1_2)
         /*
          * The next two sizes are the minimum and maximum values of
@@ -1830,7 +1833,7 @@ hmac_failed_etm_enabled:
                                  min_len, max_len,
                                  transform->maclen);
 #endif /* MBEDTLS_SSL_PROTO_TLS1_2 */
-
+        }
 #if defined(MBEDTLS_SSL_DEBUG_ALL)
         MBEDTLS_SSL_DEBUG_BUF(4, "expected mac", mac_expect, transform->maclen);
         MBEDTLS_SSL_DEBUG_BUF(4, "message  mac", mac_peer, transform->maclen);

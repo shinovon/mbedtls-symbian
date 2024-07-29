@@ -2012,6 +2012,7 @@ static int ssl_get_ecdh_params_from_cert(mbedtls_ssl_context *ssl)
     peer_key = mbedtls_pk_ec(*peer_pk);
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
+    {
     size_t olen = 0;
     uint16_t tls_id = 0;
     psa_ecc_family_t ecc_family;
@@ -2047,6 +2048,7 @@ static int ssl_get_ecdh_params_from_cert(mbedtls_ssl_context *ssl)
     }
 
     ssl->handshake->ecdh_psa_peerkey_len = olen;
+    }
 #else
     if ((ret = mbedtls_ecdh_get_params(&ssl->handshake->ecdh_ctx, peer_key,
                                        MBEDTLS_ECDH_THEIRS)) != 0) {
@@ -2784,7 +2786,7 @@ static int ssl_write_client_key_exchange(mbedtls_ssl_context *ssl)
         if (status != PSA_SUCCESS) {
             return MBEDTLS_ERR_SSL_HW_ACCEL_FAILED;
         }
-
+        {
         /* Export the public part of the ECDH private key from PSA.
          * The export format is an ECPoint structure as expected by TLS,
          * but we just need to add a length byte before that. */
@@ -2821,6 +2823,7 @@ static int ssl_write_client_key_exchange(mbedtls_ssl_context *ssl)
 
         if (status != PSA_SUCCESS || destruction_status != PSA_SUCCESS) {
             return MBEDTLS_ERR_SSL_HW_ACCEL_FAILED;
+        }
         }
 #else
         /*
@@ -2906,7 +2909,7 @@ ecdh_calc_secret:
              * ciphersuites we offered, so this should never happen. */
             return MBEDTLS_ERR_SSL_INTERNAL_ERROR;
         }
-
+        {
         /* uint16 to store content length */
         const size_t content_len_size = 2;
 
@@ -2918,7 +2921,7 @@ ecdh_calc_secret:
                                   ("psk identity too long or SSL buffer too short"));
             return MBEDTLS_ERR_SSL_BUFFER_TOO_SMALL;
         }
-
+        {
         unsigned char *p = ssl->out_msg + header_len;
 
         *p++ = MBEDTLS_BYTE_1(ssl->conf->psk_identity_len);
@@ -2956,7 +2959,7 @@ ecdh_calc_secret:
         if (status != PSA_SUCCESS) {
             return PSA_TO_MBEDTLS_ERR(status);
         }
-
+        {
         /* Export the public part of the ECDH private key from PSA.
          * The export format is an ECPoint structure as expected by TLS,
          * but we just need to add a length byte before that. */
@@ -2983,6 +2986,7 @@ ecdh_calc_secret:
          * - a uint16 containing the length (in octets) of the PSK
          * - the PSK itself
          */
+        {
         unsigned char *pms = ssl->handshake->premaster;
         const unsigned char * const pms_end = pms +
                                               sizeof(ssl->handshake->premaster);
@@ -3011,6 +3015,7 @@ ecdh_calc_secret:
         /* Write the ECDH computation length before the ECDH computation */
         MBEDTLS_PUT_UINT16_BE(zlen, pms, 0);
         pms += zlen_size + zlen;
+        }}}}
     } else
 #endif /* MBEDTLS_USE_PSA_CRYPTO &&
           MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED */
@@ -3083,6 +3088,7 @@ ecdh_calc_secret:
             }
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
+            {
             unsigned char *pms = ssl->handshake->premaster;
             unsigned char *pms_end = pms + sizeof(ssl->handshake->premaster);
             size_t pms_len;
@@ -3098,6 +3104,7 @@ ecdh_calc_secret:
             pms += 2 + pms_len;
 
             MBEDTLS_SSL_DEBUG_MPI(3, "DHM: K ", &ssl->handshake->dhm_ctx.K);
+            }
 #endif
         } else
 #endif /* MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED */

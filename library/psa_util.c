@@ -115,7 +115,8 @@ EXPORT_C int psa_status_to_mbedtls(psa_status_t status,
                           size_t local_errors_num,
                           int (*fallback_f)(psa_status_t))
 {
-    for (size_t i = 0; i < local_errors_num; i++) {
+	size_t i;
+    for (i = 0; i < local_errors_num; i++) {
         if (status == local_translations[i].psa_status) {
             return local_translations[i].mbedtls_error;
         }

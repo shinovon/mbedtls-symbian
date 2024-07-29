@@ -1277,7 +1277,7 @@ static int mbedtls_ecp_sw_derive_y(const mbedtls_ecp_group *grp,
         mbedtls_mpi_get_bit(&grp->P, 1) != 1) {
         return MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE;
     }
-
+    {
     int ret;
     mbedtls_mpi exp;
     mbedtls_mpi_init(&exp);
@@ -1305,6 +1305,7 @@ cleanup:
 
     mbedtls_mpi_free(&exp);
     return ret;
+    }
 }
 
 /*
@@ -1334,6 +1335,7 @@ static int ecp_normalize_jac(const mbedtls_ecp_group *grp, mbedtls_ecp_point *pt
 #if defined(MBEDTLS_ECP_NO_FALLBACK) && defined(MBEDTLS_ECP_NORMALIZE_JAC_ALT)
     return MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE;
 #else
+    {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     mbedtls_mpi T;
     mbedtls_mpi_init(&T);
@@ -1351,6 +1353,7 @@ cleanup:
     mbedtls_mpi_free(&T);
 
     return ret;
+    }
 #endif /* !defined(MBEDTLS_ECP_NO_FALLBACK) || !defined(MBEDTLS_ECP_NORMALIZE_JAC_ALT) */
 }
 
@@ -1381,6 +1384,7 @@ static int ecp_normalize_jac_many(const mbedtls_ecp_group *grp,
 #if defined(MBEDTLS_ECP_NO_FALLBACK) && defined(MBEDTLS_ECP_NORMALIZE_JAC_MANY_ALT)
     return MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE;
 #else
+    {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t i;
     mbedtls_mpi *c, t;
@@ -1455,6 +1459,7 @@ cleanup:
     mbedtls_free(c);
 
     return ret;
+    }
 #endif /* !defined(MBEDTLS_ECP_NO_FALLBACK) || !defined(MBEDTLS_ECP_NORMALIZE_JAC_MANY_ALT) */
 }
 
@@ -2395,7 +2400,7 @@ cleanup:
         }
         mbedtls_free(T);
     }
-
+    {
     /* prevent caller from using invalid value */
     int should_free_R = (ret != 0);
 #if defined(MBEDTLS_ECP_RESTARTABLE)
@@ -2411,6 +2416,7 @@ cleanup:
     ECP_RS_LEAVE(rsm);
 
     return ret;
+    }
 }
 
 #endif /* MBEDTLS_ECP_SHORT_WEIERSTRASS_ENABLED */
@@ -2655,7 +2661,7 @@ static int ecp_mul_restartable_internal(mbedtls_ecp_group *grp, mbedtls_ecp_poin
         MBEDTLS_MPI_CHK(mbedtls_internal_ecp_init(grp));
     }
 #endif /* MBEDTLS_ECP_INTERNAL_ALT */
-
+    {
     int restarting = 0;
 #if defined(MBEDTLS_ECP_RESTARTABLE)
     restarting = (rs_ctx != NULL && rs_ctx->rsm != NULL);
@@ -2668,6 +2674,7 @@ static int ecp_mul_restartable_internal(mbedtls_ecp_group *grp, mbedtls_ecp_poin
         /* Common sanity checks */
         MBEDTLS_MPI_CHK(mbedtls_ecp_check_privkey(grp, m));
         MBEDTLS_MPI_CHK(mbedtls_ecp_check_pubkey(grp, P));
+    }
     }
 
     ret = MBEDTLS_ERR_ECP_BAD_INPUT_DATA;

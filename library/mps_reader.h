@@ -129,10 +129,28 @@
 
 struct mbedtls_mps_reader;
 typedef struct mbedtls_mps_reader mbedtls_mps_reader;
+union acc_share;
+typedef union acc_share acc_share;
 
 /*
  * Structure definitions
  */
+
+union acc_share {
+	mbedtls_mps_stored_size_t acc_remaining;
+	/*!< This indicates the amount of data still
+	 *   to be gathered in the accumulator. It is
+	 *   only used in producing mode.
+	 *   Must be at most acc_len - acc_available.  */
+	mbedtls_mps_stored_size_t frag_offset;
+	/*!< If an accumulator is present and in use, this
+	 *   field indicates the offset of the current
+	 *   fragment from the beginning of the
+	 *   accumulator. If no accumulator is present
+	 *   or the accumulator is not in use, this is \c 0.
+	 *   It is only used in consuming mode.
+	 *   Must not be larger than \c acc_available. */
+};
 
 struct mbedtls_mps_reader {
     unsigned char *frag;  /*!< The fragment of incoming data managed by
@@ -205,21 +223,7 @@ struct mbedtls_mps_reader {
      *   get request can be served from the
      *   accumulator or not.
      *   Must not be larger than \c acc_len.           */
-    union {
-        mbedtls_mps_stored_size_t acc_remaining;
-        /*!< This indicates the amount of data still
-         *   to be gathered in the accumulator. It is
-         *   only used in producing mode.
-         *   Must be at most acc_len - acc_available.  */
-        mbedtls_mps_stored_size_t frag_offset;
-        /*!< If an accumulator is present and in use, this
-         *   field indicates the offset of the current
-         *   fragment from the beginning of the
-         *   accumulator. If no accumulator is present
-         *   or the accumulator is not in use, this is \c 0.
-         *   It is only used in consuming mode.
-         *   Must not be larger than \c acc_available. */
-    } acc_share;
+    acc_share acc_share;
 };
 
 /*

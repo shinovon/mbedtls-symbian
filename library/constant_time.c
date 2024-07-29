@@ -746,11 +746,13 @@ EXPORT_C int mbedtls_mpi_safe_cond_assign(mbedtls_mpi *X,
                                  unsigned char assign)
 {
     int ret = 0;
+    size_t i;
+    mbedtls_mpi_uint limb_mask;
     MPI_VALIDATE_RET(X != NULL);
     MPI_VALIDATE_RET(Y != NULL);
 
     /* all-bits 1 if assign is 1, all-bits 0 if assign is 0 */
-    mbedtls_mpi_uint limb_mask = mbedtls_ct_mpi_uint_mask(assign);
+    limb_mask = mbedtls_ct_mpi_uint_mask(assign);
 
     MBEDTLS_MPI_CHK(mbedtls_mpi_grow(X, Y->n));
 
@@ -758,7 +760,7 @@ EXPORT_C int mbedtls_mpi_safe_cond_assign(mbedtls_mpi *X,
 
     mbedtls_mpi_core_cond_assign(X->p, Y->p, Y->n, assign);
 
-    for (size_t i = Y->n; i < X->n; i++) {
+    for (i = Y->n; i < X->n; i++) {
         X->p[i] &= ~limb_mask;
     }
 
@@ -806,12 +808,13 @@ EXPORT_C unsigned mbedtls_mpi_core_lt_ct(const mbedtls_mpi_uint *A,
                                 size_t limbs)
 {
     unsigned ret, cond, done;
+    size_t i;
 
     /* The value of any of these variables is either 0 or 1 for the rest of
      * their scope. */
     ret = cond = done = 0;
 
-    for (size_t i = limbs; i > 0; i--) {
+    for (i = limbs; i > 0; i--) {
         /*
          * If B[i - 1] < A[i - 1] then A < B is false and the result must
          * remain 0.

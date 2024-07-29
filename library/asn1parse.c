@@ -379,7 +379,9 @@ EXPORT_C int mbedtls_asn1_get_sequence_of(unsigned char **p,
                                  mbedtls_asn1_sequence *cur,
                                  int tag)
 {
-    asn1_get_sequence_of_cb_ctx_t cb_ctx = { tag, cur };
+    asn1_get_sequence_of_cb_ctx_t cb_ctx;// = { tag, cur };
+    cb_ctx.tag = tag;
+    cb_ctx.cur = cur;
     memset(cur, 0, sizeof(mbedtls_asn1_sequence));
     return mbedtls_asn1_traverse_sequence_of(
         p, end, 0xFF, tag, 0, 0,
@@ -482,7 +484,8 @@ EXPORT_C void mbedtls_asn1_free_named_data_list(mbedtls_asn1_named_data **head)
 
 EXPORT_C void mbedtls_asn1_free_named_data_list_shallow(mbedtls_asn1_named_data *name)
 {
-    for (mbedtls_asn1_named_data *next; name != NULL; name = next) {
+	mbedtls_asn1_named_data *next;
+    for (; name != NULL; name = next) {
         next = name->next;
         mbedtls_free(name);
     }

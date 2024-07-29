@@ -124,16 +124,19 @@ static inline void mps_reader_zero(mbedtls_mps_reader *rd)
      * It's also more suitable for FV efforts since it
      * doesn't require reasoning about structs being
      * interpreted as unstructured binary blobs. */
-    static mbedtls_mps_reader const zero =
-    { .frag          = NULL,
-      .frag_len      = 0,
-      .commit        = 0,
-      .end           = 0,
-      .pending       = 0,
-      .acc           = NULL,
-      .acc_len       = 0,
-      .acc_available = 0,
-      .acc_share     = { .acc_remaining = 0 } };
+	static acc_share a;
+	
+    static mbedtls_mps_reader zero;
+    zero.frag          = NULL;
+	zero.frag_len      = 0;
+	zero.commit        = 0;
+	zero.end           = 0;
+	zero.pending       = 0;
+	zero.acc           = NULL;
+	zero.acc_len       = 0;
+	zero.acc_available = 0;
+	a.acc_remaining = 0;
+	zero.acc_share     = a;
     *rd = zero;
 }
 

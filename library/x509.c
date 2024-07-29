@@ -961,7 +961,7 @@ EXPORT_C int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x50
         const mbedtls_pk_rsassa_pss_options *pss_opts;
 
         pss_opts = (const mbedtls_pk_rsassa_pss_options *) sig_opts;
-
+        {
         const char *name = md_type_to_string(md_alg);
         const char *mgf_name = md_type_to_string(pss_opts->mgf1_hash_id);
 
@@ -970,6 +970,7 @@ EXPORT_C int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x50
                                mgf_name ? mgf_name : "???",
                                (unsigned int) pss_opts->expected_salt_len);
         MBEDTLS_X509_SAFE_SNPRINTF;
+        }
     }
 #else
     ((void) pk_alg);

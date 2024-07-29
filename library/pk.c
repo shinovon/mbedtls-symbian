@@ -315,6 +315,7 @@ int mbedtls_pk_can_do_ext(const mbedtls_pk_context *ctx, psa_algorithm_t alg,
         return (key_usage & usage) == usage;
     }
 
+    {
     const mbedtls_svc_key_id_t *key = (const mbedtls_svc_key_id_t *) ctx->pk_ctx;
     psa_key_attributes_t attributes = PSA_KEY_ATTRIBUTES_INIT;
     psa_algorithm_t key_alg, key_alg2;
@@ -364,7 +365,7 @@ int mbedtls_pk_can_do_ext(const mbedtls_pk_context *ctx, psa_algorithm_t alg,
             return 1;
         }
     }
-
+    }
     return 0;
 }
 #endif /* MBEDTLS_USE_PSA_CRYPTO */
@@ -483,6 +484,7 @@ EXPORT_C int mbedtls_pk_verify_ext(mbedtls_pk_type_t type, const void *options,
                           const unsigned char *hash, size_t hash_len,
                           const unsigned char *sig, size_t sig_len)
 {
+	int ret;
     if ((md_alg != MBEDTLS_MD_NONE || hash_len != 0) && hash == NULL) {
         return MBEDTLS_ERR_PK_BAD_INPUT_DATA;
     }
@@ -505,7 +507,8 @@ EXPORT_C int mbedtls_pk_verify_ext(mbedtls_pk_type_t type, const void *options,
     }
 
 #if defined(MBEDTLS_RSA_C) && defined(MBEDTLS_PKCS1_V21)
-    int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+    ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
+    {
     const mbedtls_pk_rsassa_pss_options *pss_opts;
 
     if (md_alg == MBEDTLS_MD_NONE && UINT_MAX < hash_len) {
@@ -591,6 +594,7 @@ EXPORT_C int mbedtls_pk_verify_ext(mbedtls_pk_type_t type, const void *options,
         }
 
         return 0;
+    }
     }
 #else
     return MBEDTLS_ERR_PK_FEATURE_UNAVAILABLE;

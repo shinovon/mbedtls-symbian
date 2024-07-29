@@ -815,6 +815,7 @@ EXPORT_C int mbedtls_sha512_finish(mbedtls_sha512_context *ctx,
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     unsigned used;
     uint64_t high, low;
+    int truncated;
 
     /*
      * Add padding: 0x80 then 0x00 until 16 bytes remain for the length
@@ -861,7 +862,7 @@ EXPORT_C int mbedtls_sha512_finish(mbedtls_sha512_context *ctx,
     sha512_put_uint64_be(ctx->state[4], output, 32);
     sha512_put_uint64_be(ctx->state[5], output, 40);
 
-    int truncated = 0;
+    truncated = 0;
 #if defined(MBEDTLS_SHA384_C)
     truncated = ctx->is384;
 #endif
