@@ -93,7 +93,7 @@ typedef struct {
 
 /* Default profile. Do not remove items unless there are serious security
  * concerns. */
-EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default =
+const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default =
 {
     /* Hashes from SHA-256 and above. Note that this selection
      * should be aligned with ssl_preset_default_hashes in ssl_tls.c. */
@@ -119,7 +119,7 @@ EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_default =
 
 /* Next-generation profile. Currently identical to the default, but may
  * be tightened at any time. */
-EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next =
+const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next =
 {
     /* Hashes from SHA-256 and above. */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_MD_SHA256) |
@@ -144,7 +144,7 @@ EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_next =
 /*
  * NSA Suite B Profile
  */
-EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
+const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
 {
     /* Only SHA-256 and 384 */
     MBEDTLS_X509_ID_FLAG(MBEDTLS_MD_SHA256) |
@@ -165,7 +165,7 @@ EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_suiteb =
 /*
  * Empty / all-forbidden profile
  */
-EXPORT_C const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_none =
+const mbedtls_x509_crt_profile mbedtls_x509_crt_profile_none =
 {
     0,
     0,

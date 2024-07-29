@@ -614,7 +614,7 @@ static void rsa_debug(const void *ctx, mbedtls_pk_debug_item *items)
 #endif
 }
 
-EXPORT_C const mbedtls_pk_info_t mbedtls_rsa_info = {
+const mbedtls_pk_info_t mbedtls_rsa_info = {
     MBEDTLS_PK_RSA,
     "RSA",
     rsa_get_bitlen,
@@ -1128,7 +1128,7 @@ static void eckey_debug(const void *ctx, mbedtls_pk_debug_item *items)
     items->value = &(((mbedtls_ecp_keypair *) ctx)->Q);
 }
 
-EXPORT_C const mbedtls_pk_info_t mbedtls_eckey_info = {
+const mbedtls_pk_info_t mbedtls_eckey_info = {
     MBEDTLS_PK_ECKEY,
     "EC",
     eckey_get_bitlen,
@@ -1168,7 +1168,7 @@ static int eckeydh_can_do(mbedtls_pk_type_t type)
            type == MBEDTLS_PK_ECKEY_DH;
 }
 
-EXPORT_C const mbedtls_pk_info_t mbedtls_eckeydh_info = {
+const mbedtls_pk_info_t mbedtls_eckeydh_info = {
     MBEDTLS_PK_ECKEY_DH,
     "EC_DH",
     eckey_get_bitlen,         /* Same underlying key structure */
@@ -1250,7 +1250,7 @@ static void ecdsa_rs_free(void *ctx)
 }
 #endif /* MBEDTLS_ECDSA_C && MBEDTLS_ECP_RESTARTABLE */
 
-EXPORT_C const mbedtls_pk_info_t mbedtls_ecdsa_info = {
+const mbedtls_pk_info_t mbedtls_ecdsa_info = {
     MBEDTLS_PK_ECDSA,
     "ECDSA",
     eckey_get_bitlen,     /* Compatible key structures */
@@ -1389,7 +1389,7 @@ static void rsa_alt_free_wrap(void *ctx)
     mbedtls_free(ctx);
 }
 
-EXPORT_C const mbedtls_pk_info_t mbedtls_rsa_alt_info = {
+const mbedtls_pk_info_t mbedtls_rsa_alt_info = {
     MBEDTLS_PK_RSA_ALT,
     "RSA-alt",
     rsa_alt_get_bitlen,

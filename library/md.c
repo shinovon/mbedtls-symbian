@@ -66,7 +66,7 @@
 #endif
 
 #if defined(MBEDTLS_MD_CAN_MD5)
-EXPORT_C const mbedtls_md_info_t mbedtls_md5_info = {
+const mbedtls_md_info_t mbedtls_md5_info = {
     "MD5",
     MBEDTLS_MD_MD5,
     16,
@@ -75,7 +75,7 @@ EXPORT_C const mbedtls_md_info_t mbedtls_md5_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_RIPEMD160)
-EXPORT_C const mbedtls_md_info_t mbedtls_ripemd160_info = {
+const mbedtls_md_info_t mbedtls_ripemd160_info = {
     "RIPEMD160",
     MBEDTLS_MD_RIPEMD160,
     20,
@@ -84,7 +84,7 @@ EXPORT_C const mbedtls_md_info_t mbedtls_ripemd160_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA1)
-EXPORT_C const mbedtls_md_info_t mbedtls_sha1_info = {
+const mbedtls_md_info_t mbedtls_sha1_info = {
     "SHA1",
     MBEDTLS_MD_SHA1,
     20,
@@ -93,7 +93,7 @@ EXPORT_C const mbedtls_md_info_t mbedtls_sha1_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA224)
-EXPORT_C const mbedtls_md_info_t mbedtls_sha224_info = {
+const mbedtls_md_info_t mbedtls_sha224_info = {
     "SHA224",
     MBEDTLS_MD_SHA224,
     28,
@@ -102,7 +102,7 @@ EXPORT_C const mbedtls_md_info_t mbedtls_sha224_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA256)
-EXPORT_C const mbedtls_md_info_t mbedtls_sha256_info = {
+const mbedtls_md_info_t mbedtls_sha256_info = {
     "SHA256",
     MBEDTLS_MD_SHA256,
     32,
@@ -111,7 +111,7 @@ EXPORT_C const mbedtls_md_info_t mbedtls_sha256_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA384)
-EXPORT_C const mbedtls_md_info_t mbedtls_sha384_info = {
+const mbedtls_md_info_t mbedtls_sha384_info = {
     "SHA384",
     MBEDTLS_MD_SHA384,
     48,
@@ -120,7 +120,7 @@ EXPORT_C const mbedtls_md_info_t mbedtls_sha384_info = {
 #endif
 
 #if defined(MBEDTLS_MD_CAN_SHA512)
-EXPORT_C const mbedtls_md_info_t mbedtls_sha512_info = {
+const mbedtls_md_info_t mbedtls_sha512_info = {
     "SHA512",
     MBEDTLS_MD_SHA512,
     64,
