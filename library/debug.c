@@ -386,4 +386,6 @@ void mbedtls_debug_printf_ecdh(const mbedtls_ssl_context *ssl, int level,
 }
 #endif /* MBEDTLS_ECDH_C */
 
-#endif /* MBEDTLS_DEBUG_C */
+#else /* MBEDTLS_DEBUG_C */
+EXPORT_C void mbedtls_debug_set_threshold(int threshold) {}
+#endif
