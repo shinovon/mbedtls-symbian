@@ -34,7 +34,7 @@
 
 static int debug_threshold = 0;
 
-void mbedtls_debug_set_threshold(int threshold)
+EXPORT_C void mbedtls_debug_set_threshold(int threshold)
 {
     debug_threshold = threshold;
 }

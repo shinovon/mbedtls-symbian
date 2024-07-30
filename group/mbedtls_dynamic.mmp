@@ -4,6 +4,7 @@ TARGETTYPE	  DLL
 UID			 0x1000008d 0x20292B6B
 
 USERINCLUDE ../include
+
 SYSTEMINCLUDE /epoc32/include
 SYSTEMINCLUDE /epoc32/include/stdapis
 
@@ -13,6 +14,7 @@ MACRO __SYMBIAN32__
 LIBRARY libc.lib
 LIBRARY libpthread.lib
 LIBRARY euser.lib
+
 CAPABILITY All -Tcb
 
 EPOCALLOWDLLDATA 

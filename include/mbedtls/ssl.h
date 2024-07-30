@@ -2060,7 +2060,7 @@ IMPORT_C void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
  * \param f_dbg    debug function
  * \param p_dbg    debug parameter
  */
-void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
                           void (*f_dbg)(void *, int, const char *, int, const char *),
                           void  *p_dbg);
 
