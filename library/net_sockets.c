@@ -184,7 +184,11 @@ EXPORT_C int mbedtls_net_connect(mbedtls_net_context *ctx, const char *host,
 
     /* Do name resolution with both IPv6 and IPv4 */
     memset(&hints, 0, sizeof(hints));
+#ifdef __SYMBIAN32__
+    hints.ai_family = AF_INET;
+#else
     hints.ai_family = AF_UNSPEC;
+#endif
     hints.ai_socktype = proto == MBEDTLS_NET_PROTO_UDP ? SOCK_DGRAM : SOCK_STREAM;
     hints.ai_protocol = proto == MBEDTLS_NET_PROTO_UDP ? IPPROTO_UDP : IPPROTO_TCP;
 
@@ -230,7 +234,11 @@ EXPORT_C int mbedtls_net_bind(mbedtls_net_context *ctx, const char *bind_ip, con
 
     /* Bind to IPv6 and/or IPv4, but only in the desired protocol */
     memset(&hints, 0, sizeof(hints));
+#ifdef __SYMBIAN32__
+    hints.ai_family = AF_INET;
+#else
     hints.ai_family = AF_UNSPEC;
+#endif
     hints.ai_socktype = proto == MBEDTLS_NET_PROTO_UDP ? SOCK_DGRAM : SOCK_STREAM;
     hints.ai_protocol = proto == MBEDTLS_NET_PROTO_UDP ? IPPROTO_UDP : IPPROTO_TCP;
     if (bind_ip == NULL) {

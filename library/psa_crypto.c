@@ -118,7 +118,7 @@ typedef struct {
 static psa_global_data_t global_data;
 
 #if !defined(MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG)
-EXPORT_C mbedtls_psa_drbg_context_t *const mbedtls_psa_random_state =
+mbedtls_psa_drbg_context_t *const mbedtls_psa_random_state =
     &global_data.rng.drbg;
 #endif
 
