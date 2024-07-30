@@ -1860,7 +1860,7 @@ const char *mbedtls_ssl_get_ciphersuite_name(const int ciphersuite_id);
  *
  * \return              the ID with the ciphersuite or 0 if not found
  */
-int mbedtls_ssl_get_ciphersuite_id(const char *ciphersuite_name);
+IMPORT_C int mbedtls_ssl_get_ciphersuite_id(const char *ciphersuite_name);
 
 /**
  * \brief          Initialize an SSL context
@@ -2205,7 +2205,7 @@ IMPORT_C void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
  *                    applies to the next handshake.
  * \return            A negative error code on failure.
  */
-int mbedtls_ssl_set_cid(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_set_cid(mbedtls_ssl_context *ssl,
                         int enable,
                         unsigned char const *own_cid,
                         size_t own_cid_len);
@@ -2239,7 +2239,7 @@ int mbedtls_ssl_set_cid(mbedtls_ssl_context *ssl,
  * \return            \c 0 on success.
  * \return            A negative error code on failure.
  */
-int mbedtls_ssl_get_own_cid(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_get_own_cid(mbedtls_ssl_context *ssl,
                             int *enabled,
                             unsigned char own_cid[MBEDTLS_SSL_CID_OUT_LEN_MAX],
                             size_t *own_cid_len);
@@ -2281,7 +2281,7 @@ int mbedtls_ssl_get_own_cid(mbedtls_ssl_context *ssl,
  * \return            \c 0 on success.
  * \return            A negative error code on failure.
  */
-int mbedtls_ssl_get_peer_cid(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_get_peer_cid(mbedtls_ssl_context *ssl,
                              int *enabled,
                              unsigned char peer_cid[MBEDTLS_SSL_CID_OUT_LEN_MAX],
                              size_t *peer_cid_len);
@@ -3008,7 +3008,7 @@ void mbedtls_ssl_conf_handshake_timeout(mbedtls_ssl_config *conf, uint32_t min, 
  * \param f_get_cache    session get callback
  * \param f_set_cache    session set callback
  */
-void mbedtls_ssl_conf_session_cache(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_session_cache(mbedtls_ssl_config *conf,
                                     void *p_cache,
                                     mbedtls_ssl_cache_get_t *f_get_cache,
                                     mbedtls_ssl_cache_set_t *f_set_cache);
@@ -3060,7 +3060,7 @@ void mbedtls_ssl_conf_session_cache(mbedtls_ssl_config *conf,
  * \sa             mbedtls_ssl_get_session()
  * \sa             mbedtls_ssl_session_load()
  */
-int mbedtls_ssl_set_session(mbedtls_ssl_context *ssl, const mbedtls_ssl_session *session);
+IMPORT_C int mbedtls_ssl_set_session(mbedtls_ssl_context *ssl, const mbedtls_ssl_session *session);
 #endif /* MBEDTLS_SSL_CLI_C */
 
 /**
@@ -3095,7 +3095,7 @@ int mbedtls_ssl_set_session(mbedtls_ssl_context *ssl, const mbedtls_ssl_session 
  * \return         Another negative value for other kinds of errors (for
  *                 example, unsupported features in the embedded certificate).
  */
-int mbedtls_ssl_session_load(mbedtls_ssl_session *session,
+IMPORT_C int mbedtls_ssl_session_load(mbedtls_ssl_session *session,
                              const unsigned char *buf,
                              size_t len);
 
@@ -3124,7 +3124,7 @@ int mbedtls_ssl_session_load(mbedtls_ssl_session *session,
  * \return         \c 0 if successful.
  * \return         #MBEDTLS_ERR_SSL_BUFFER_TOO_SMALL if \p buf is too small.
  */
-int mbedtls_ssl_session_save(const mbedtls_ssl_session *session,
+IMPORT_C int mbedtls_ssl_session_save(const mbedtls_ssl_session *session,
                              unsigned char *buf,
                              size_t buf_len,
                              size_t *olen);
@@ -3170,7 +3170,7 @@ int mbedtls_ssl_session_save(const mbedtls_ssl_session *session,
  *                      and \c MBEDTLS_TLS1_3_XXX macros defined in
  *                      ssl_ciphersuites.h.
  */
-void mbedtls_ssl_conf_ciphersuites(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_ciphersuites(mbedtls_ssl_config *conf,
                                    const int *ciphersuites);
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3)
@@ -3284,7 +3284,7 @@ void mbedtls_ssl_conf_cert_profile(mbedtls_ssl_config *conf,
  * \param ca_chain trusted CA chain (meaning all fully trusted top-level CAs)
  * \param ca_crl   trusted CA CRLs
  */
-void mbedtls_ssl_conf_ca_chain(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_ca_chain(mbedtls_ssl_config *conf,
                                mbedtls_x509_crt *ca_chain,
                                mbedtls_x509_crl *ca_crl);
 
