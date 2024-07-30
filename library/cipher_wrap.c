@@ -2125,7 +2125,7 @@ static const mbedtls_cipher_info_t aes_256_nist_kwp_info = {
 };
 #endif /* MBEDTLS_NIST_KW_C */
 
-EXPORT_C const mbedtls_cipher_definition_t mbedtls_cipher_definitions[] =
+const mbedtls_cipher_definition_t mbedtls_cipher_definitions[] =
 {
 #if defined(MBEDTLS_AES_C)
     { MBEDTLS_CIPHER_AES_128_ECB,          &aes_128_ecb_info },
