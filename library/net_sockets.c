@@ -33,7 +33,7 @@
 
 #if !defined(unix) && !defined(__unix__) && !defined(__unix) && \
     !defined(__APPLE__) && !defined(_WIN32) && !defined(__QNXNTO__) && \
-    !defined(__HAIKU__) && !defined(__midipix__)
+    !defined(__HAIKU__) && !defined(__midipix__) && !defined(__SYMBIAN32__)
 #error "This module only works on Unix and Windows, see MBEDTLS_NET_C in mbedtls_config.h"
 #endif
 
@@ -88,6 +88,7 @@ static int wsa_init_done = 0;
 #include <fcntl.h>
 #include <netdb.h>
 #include <errno.h>
+#include <sys/select.h>
 
 #define IS_EINTR(ret) ((ret) == EINTR)
 
@@ -163,7 +164,7 @@ static int check_fd(int fd, int for_select)
 /*
  * Initialize a context
  */
-void mbedtls_net_init(mbedtls_net_context *ctx)
+EXPORT_C void mbedtls_net_init(mbedtls_net_context *ctx)
 {
     ctx->fd = -1;
 }
@@ -171,7 +172,7 @@ void mbedtls_net_init(mbedtls_net_context *ctx)
 /*
  * Initiate a TCP connection with host:port and the given protocol
  */
-int mbedtls_net_connect(mbedtls_net_context *ctx, const char *host,
+EXPORT_C int mbedtls_net_connect(mbedtls_net_context *ctx, const char *host,
                         const char *port, int proto)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -218,7 +219,7 @@ int mbedtls_net_connect(mbedtls_net_context *ctx, const char *host,
 /*
  * Create a listening socket on bind_ip:port
  */
-int mbedtls_net_bind(mbedtls_net_context *ctx, const char *bind_ip, const char *port, int proto)
+EXPORT_C int mbedtls_net_bind(mbedtls_net_context *ctx, const char *bind_ip, const char *port, int proto)
 {
     int n, ret;
     struct addrinfo hints, *addr_list, *cur;
@@ -330,7 +331,7 @@ static int net_would_block(const mbedtls_net_context *ctx)
 /*
  * Accept a connection from a remote client
  */
-int mbedtls_net_accept(mbedtls_net_context *bind_ctx,
+EXPORT_C int mbedtls_net_accept(mbedtls_net_context *bind_ctx,
                        mbedtls_net_context *client_ctx,
                        void *client_ip, size_t buf_size, size_t *ip_len)
 {
@@ -440,7 +441,7 @@ int mbedtls_net_accept(mbedtls_net_context *bind_ctx,
 /*
  * Set the socket blocking or non-blocking
  */
-int mbedtls_net_set_block(mbedtls_net_context *ctx)
+EXPORT_C int mbedtls_net_set_block(mbedtls_net_context *ctx)
 {
 #if (defined(_WIN32) || defined(_WIN32_WCE)) && !defined(EFIX64) && \
     !defined(EFI32)
@@ -451,7 +452,7 @@ int mbedtls_net_set_block(mbedtls_net_context *ctx)
 #endif
 }
 
-int mbedtls_net_set_nonblock(mbedtls_net_context *ctx)
+EXPORT_C int mbedtls_net_set_nonblock(mbedtls_net_context *ctx)
 {
 #if (defined(_WIN32) || defined(_WIN32_WCE)) && !defined(EFIX64) && \
     !defined(EFI32)
@@ -466,7 +467,7 @@ int mbedtls_net_set_nonblock(mbedtls_net_context *ctx)
  * Check if data is available on the socket
  */
 
-int mbedtls_net_poll(mbedtls_net_context *ctx, uint32_t rw, uint32_t timeout)
+EXPORT_C int mbedtls_net_poll(mbedtls_net_context *ctx, uint32_t rw, uint32_t timeout)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     struct timeval tv;
@@ -533,7 +534,7 @@ int mbedtls_net_poll(mbedtls_net_context *ctx, uint32_t rw, uint32_t timeout)
 /*
  * Portable usleep helper
  */
-void mbedtls_net_usleep(unsigned long usec)
+EXPORT_C void mbedtls_net_usleep(unsigned long usec)
 {
 #if defined(_WIN32)
     Sleep((usec + 999) / 1000);
@@ -553,7 +554,7 @@ void mbedtls_net_usleep(unsigned long usec)
 /*
  * Read at most 'len' characters
  */
-int mbedtls_net_recv(void *ctx, unsigned char *buf, size_t len)
+EXPORT_C int mbedtls_net_recv(void *ctx, unsigned char *buf, size_t len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     int fd = ((mbedtls_net_context *) ctx)->fd;
@@ -594,7 +595,7 @@ int mbedtls_net_recv(void *ctx, unsigned char *buf, size_t len)
 /*
  * Read at most 'len' characters, blocking for at most 'timeout' ms
  */
-int mbedtls_net_recv_timeout(void *ctx, unsigned char *buf,
+EXPORT_C int mbedtls_net_recv_timeout(void *ctx, unsigned char *buf,
                              size_t len, uint32_t timeout)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -642,7 +643,7 @@ int mbedtls_net_recv_timeout(void *ctx, unsigned char *buf,
 /*
  * Write at most 'len' characters
  */
-int mbedtls_net_send(void *ctx, const unsigned char *buf, size_t len)
+EXPORT_C int mbedtls_net_send(void *ctx, const unsigned char *buf, size_t len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     int fd = ((mbedtls_net_context *) ctx)->fd;
@@ -683,7 +684,7 @@ int mbedtls_net_send(void *ctx, const unsigned char *buf, size_t len)
 /*
  * Close the connection
  */
-void mbedtls_net_close(mbedtls_net_context *ctx)
+EXPORT_C void mbedtls_net_close(mbedtls_net_context *ctx)
 {
     if (ctx->fd == -1) {
         return;
@@ -697,7 +698,7 @@ void mbedtls_net_close(mbedtls_net_context *ctx)
 /*
  * Gracefully close the connection
  */
-void mbedtls_net_free(mbedtls_net_context *ctx)
+EXPORT_C void mbedtls_net_free(mbedtls_net_context *ctx)
 {
     if (ctx->fd == -1) {
         return;

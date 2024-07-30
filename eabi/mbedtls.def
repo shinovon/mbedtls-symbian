@@ -992,4 +992,17 @@ EXPORTS
 	psa_verify_message_builtin @ 991 NONAME
 	psa_wipe_all_key_slots @ 992 NONAME
 	psa_wipe_key_slot @ 993 NONAME
+	mbedtls_net_accept @ 994 NONAME
+	mbedtls_net_bind @ 995 NONAME
+	mbedtls_net_close @ 996 NONAME
+	mbedtls_net_connect @ 997 NONAME
+	mbedtls_net_free @ 998 NONAME
+	mbedtls_net_init @ 999 NONAME
+	mbedtls_net_poll @ 1000 NONAME
+	mbedtls_net_recv @ 1001 NONAME
+	mbedtls_net_recv_timeout @ 1002 NONAME
+	mbedtls_net_send @ 1003 NONAME
+	mbedtls_net_set_block @ 1004 NONAME
+	mbedtls_net_set_nonblock @ 1005 NONAME
+	mbedtls_net_usleep @ 1006 NONAME
 
