@@ -26,8 +26,6 @@
 #ifndef MBEDTLS_BUILD_INFO_H
 #define MBEDTLS_BUILD_INFO_H
 
-#include <e32def.h>
-
 /*
  * This set of compile-time defines can be used to determine the version number
  * of the Mbed TLS library used. Run-time variables for the same can be found in
@@ -59,6 +57,18 @@
 #if (defined(__ARMCC_VERSION) || defined(_MSC_VER)) && \
     !defined(inline) && !defined(__cplusplus)
 #define inline __inline
+#endif
+
+#ifdef __SYMBIAN32__
+#include <e32def.h>
+#else
+#ifndef EXPORT_C
+#define EXPORT_C
+#endif
+
+#ifndef IMPORT_C
+#define IMPORT_C
+#endif
 #endif
 
 #if !defined(MBEDTLS_CONFIG_FILE)
