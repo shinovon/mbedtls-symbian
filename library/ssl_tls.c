@@ -3988,7 +3988,7 @@ static int ssl_write_hello_request(mbedtls_ssl_context *ssl)
  * If the handshake doesn't complete due to waiting for I/O, it will continue
  * during the next calls to mbedtls_ssl_renegotiate() or mbedtls_ssl_read() respectively.
  */
-int mbedtls_ssl_start_renegotiation(mbedtls_ssl_context *ssl)
+EXPORT_C int mbedtls_ssl_start_renegotiation(mbedtls_ssl_context *ssl)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
@@ -4028,7 +4028,7 @@ int mbedtls_ssl_start_renegotiation(mbedtls_ssl_context *ssl)
  * Renegotiate current connection on client,
  * or request renegotiation on server
  */
-int mbedtls_ssl_renegotiate(mbedtls_ssl_context *ssl)
+EXPORT_C int mbedtls_ssl_renegotiate(mbedtls_ssl_context *ssl)
 {
     int ret = MBEDTLS_ERR_SSL_FEATURE_UNAVAILABLE;
 
