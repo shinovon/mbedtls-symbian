@@ -4308,7 +4308,7 @@ void mbedtls_ssl_conf_new_session_tickets(mbedtls_ssl_config *conf,
  * \param renegotiation     Enable or disable (MBEDTLS_SSL_RENEGOTIATION_ENABLED or
  *                                             MBEDTLS_SSL_RENEGOTIATION_DISABLED)
  */
-void mbedtls_ssl_conf_renegotiation(mbedtls_ssl_config *conf, int renegotiation);
+IMPORT_C void mbedtls_ssl_conf_renegotiation(mbedtls_ssl_config *conf, int renegotiation);
 #endif /* MBEDTLS_SSL_RENEGOTIATION */
 
 /**
@@ -4338,7 +4338,7 @@ void mbedtls_ssl_conf_renegotiation(mbedtls_ssl_config *conf, int renegotiation)
  *                                        SSL_ALLOW_LEGACY_RENEGOTIATION or
  *                                        MBEDTLS_SSL_LEGACY_BREAK_HANDSHAKE)
  */
-void mbedtls_ssl_conf_legacy_renegotiation(mbedtls_ssl_config *conf, int allow_legacy);
+IMPORT_C void mbedtls_ssl_conf_legacy_renegotiation(mbedtls_ssl_config *conf, int allow_legacy);
 
 #if defined(MBEDTLS_SSL_RENEGOTIATION)
 /**
@@ -4378,7 +4378,7 @@ void mbedtls_ssl_conf_legacy_renegotiation(mbedtls_ssl_config *conf, int allow_l
  *                 enforce renegotiation, or a non-negative value to enforce
  *                 it but allow for a grace period of max_records records.
  */
-void mbedtls_ssl_conf_renegotiation_enforced(mbedtls_ssl_config *conf, int max_records);
+IMPORT_C void mbedtls_ssl_conf_renegotiation_enforced(mbedtls_ssl_config *conf, int max_records);
 
 /**
  * \brief          Set record counter threshold for periodic renegotiation.
@@ -4405,7 +4405,7 @@ void mbedtls_ssl_conf_renegotiation_enforced(mbedtls_ssl_config *conf, int max_r
  * \param conf     SSL configuration
  * \param period   The threshold value: a big-endian 64-bit number.
  */
-void mbedtls_ssl_conf_renegotiation_period(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_renegotiation_period(mbedtls_ssl_config *conf,
                                            const unsigned char period[8]);
 #endif /* MBEDTLS_SSL_RENEGOTIATION */
 
@@ -4447,7 +4447,7 @@ void mbedtls_ssl_conf_renegotiation_period(mbedtls_ssl_config *conf,
  *                 that all internal data has been processed.
  *
  */
-int mbedtls_ssl_check_pending(const mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_check_pending(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Return the number of application data bytes
@@ -4464,7 +4464,7 @@ int mbedtls_ssl_check_pending(const mbedtls_ssl_context *ssl);
  *                 amount of data fitting into the input buffer.
  *
  */
-size_t mbedtls_ssl_get_bytes_avail(const mbedtls_ssl_context *ssl);
+IMPORT_C size_t mbedtls_ssl_get_bytes_avail(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Return the result of the certificate verification
@@ -4478,7 +4478,7 @@ size_t mbedtls_ssl_get_bytes_avail(const mbedtls_ssl_context *ssl);
  * \return         A bitwise combination of \c MBEDTLS_X509_BADCERT_XXX
  *                 and \c MBEDTLS_X509_BADCRL_XXX failure flags; see x509.h.
  */
-uint32_t mbedtls_ssl_get_verify_result(const mbedtls_ssl_context *ssl);
+IMPORT_C uint32_t mbedtls_ssl_get_verify_result(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Return the id of the current ciphersuite
@@ -4487,7 +4487,7 @@ uint32_t mbedtls_ssl_get_verify_result(const mbedtls_ssl_context *ssl);
  *
  * \return         a ciphersuite id
  */
-int mbedtls_ssl_get_ciphersuite_id_from_ssl(const mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_get_ciphersuite_id_from_ssl(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Return the name of the current ciphersuite
@@ -4533,7 +4533,7 @@ const char *mbedtls_ssl_get_version(const mbedtls_ssl_context *ssl);
  *
  * \return         Current maximum record expansion in bytes
  */
-int mbedtls_ssl_get_record_expansion(const mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_get_record_expansion(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Return the current maximum outgoing record payload in bytes.
@@ -4560,7 +4560,7 @@ int mbedtls_ssl_get_record_expansion(const mbedtls_ssl_context *ssl);
  * \return         Current maximum payload for an outgoing record,
  *                 or a negative error code.
  */
-int mbedtls_ssl_get_max_out_record_payload(const mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_get_max_out_record_payload(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Return the current maximum incoming record payload in bytes.
@@ -4580,7 +4580,7 @@ int mbedtls_ssl_get_max_out_record_payload(const mbedtls_ssl_context *ssl);
  * \return         Current maximum payload for an incoming record,
  *                 or a negative error code.
  */
-int mbedtls_ssl_get_max_in_record_payload(const mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_get_max_in_record_payload(const mbedtls_ssl_context *ssl);
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
 /**
@@ -4651,7 +4651,7 @@ const mbedtls_x509_crt *mbedtls_ssl_get_peer_cert(const mbedtls_ssl_context *ssl
  * \sa             mbedtls_ssl_set_session()
  * \sa             mbedtls_ssl_session_save()
  */
-int mbedtls_ssl_get_session(const mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_get_session(const mbedtls_ssl_context *ssl,
                             mbedtls_ssl_session *session);
 #endif /* MBEDTLS_SSL_CLI_C */
 
@@ -4761,7 +4761,7 @@ static inline int mbedtls_ssl_is_handshake_over(mbedtls_ssl_context *ssl)
  *                 re-using it for a new connection; the current connection
  *                 must be closed.
  */
-int mbedtls_ssl_handshake_step(mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_handshake_step(mbedtls_ssl_context *ssl);
 
 #if defined(MBEDTLS_SSL_RENEGOTIATION)
 /**
@@ -4787,7 +4787,7 @@ int mbedtls_ssl_handshake_step(mbedtls_ssl_context *ssl);
  *                 must be closed.
  *
  */
-int mbedtls_ssl_renegotiate(mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_renegotiate(mbedtls_ssl_context *ssl);
 #endif /* MBEDTLS_SSL_RENEGOTIATION */
 
 /**
@@ -4947,7 +4947,7 @@ IMPORT_C int mbedtls_ssl_write(mbedtls_ssl_context *ssl, const unsigned char *bu
  *                 call \c mbedtls_ssl_session_reset() on it before re-using it
  *                 for a new connection; the current connection must be closed.
  */
-int mbedtls_ssl_send_alert_message(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_send_alert_message(mbedtls_ssl_context *ssl,
                                    unsigned char level,
                                    unsigned char message);
 /**
@@ -5012,7 +5012,7 @@ IMPORT_C int mbedtls_ssl_close_notify(mbedtls_ssl_context *ssl);
  *                 \p ssl. But this is not mandatory.
  *
  */
-int mbedtls_ssl_read_early_data(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_read_early_data(mbedtls_ssl_context *ssl,
                                 unsigned char *buf, size_t len);
 #endif /* MBEDTLS_SSL_SRV_C */
 
@@ -5073,7 +5073,7 @@ int mbedtls_ssl_read_early_data(mbedtls_ssl_context *ssl,
  *                 mbedtls_ssl_get_early_data_status() with the handshake
  *                 completed.
  */
-int mbedtls_ssl_write_early_data(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_write_early_data(mbedtls_ssl_context *ssl,
                                  const unsigned char *buf, size_t len);
 
 #define MBEDTLS_SSL_EARLY_DATA_STATUS_NOT_SENT  0
@@ -5105,7 +5105,7 @@ int mbedtls_ssl_write_early_data(mbedtls_ssl_context *ssl,
  *                 application data by calling mbedtls_ssl_write().
  *
  */
-int mbedtls_ssl_get_early_data_status(mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_get_early_data_status(mbedtls_ssl_context *ssl);
 #endif /* MBEDTLS_SSL_CLI_C */
 
 #endif /* MBEDTLS_SSL_EARLY_DATA */
@@ -5174,7 +5174,7 @@ IMPORT_C void mbedtls_ssl_free(mbedtls_ssl_context *ssl);
  *                 or the connection does not use DTLS 1.2 with an AEAD
  *                 ciphersuite, or renegotiation is enabled.
  */
-int mbedtls_ssl_context_save(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_context_save(mbedtls_ssl_context *ssl,
                              unsigned char *buf,
                              size_t buf_len,
                              size_t *olen);
@@ -5247,7 +5247,7 @@ int mbedtls_ssl_context_save(mbedtls_ssl_context *ssl,
  *                 comes from a different Mbed TLS version or build.
  * \return         #MBEDTLS_ERR_SSL_BAD_INPUT_DATA if input data is invalid.
  */
-int mbedtls_ssl_context_load(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_context_load(mbedtls_ssl_context *ssl,
                              const unsigned char *buf,
                              size_t len);
 #endif /* MBEDTLS_SSL_CONTEXT_SERIALIZATION */
