@@ -996,4 +996,5 @@ EXPORTS
 	psa_verify_message_builtin @ 995 NONAME
 	psa_wipe_all_key_slots @ 996 NONAME
 	psa_wipe_key_slot @ 997 NONAME
+	mbedtls_debug_set_threshold @ 998 NONAME
 
