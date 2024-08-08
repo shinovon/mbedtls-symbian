@@ -150,7 +150,7 @@ extern "C" {
  *                              - 3 Informational
  *                              - 4 Verbose
  */
-void mbedtls_debug_set_threshold(int threshold);
+IMPORT_C void mbedtls_debug_set_threshold(int threshold);
 
 /**
  * \brief    Print a message to the debug output. This function is always used
