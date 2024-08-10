@@ -54,12 +54,12 @@ static const  unsigned char NIST_KW_ICV2[] = { 0xA6, 0x59, 0x59, 0xA6 };
 /*
  * Initialize context
  */
-void mbedtls_nist_kw_init(mbedtls_nist_kw_context *ctx)
+EXPORT_C void mbedtls_nist_kw_init(mbedtls_nist_kw_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_nist_kw_context));
 }
 
-int mbedtls_nist_kw_setkey(mbedtls_nist_kw_context *ctx,
+EXPORT_C int mbedtls_nist_kw_setkey(mbedtls_nist_kw_context *ctx,
                            mbedtls_cipher_id_t cipher,
                            const unsigned char *key,
                            unsigned int keybits,
@@ -111,7 +111,7 @@ int mbedtls_nist_kw_setkey(mbedtls_nist_kw_context *ctx,
 /*
  * Free context
  */
-void mbedtls_nist_kw_free(mbedtls_nist_kw_context *ctx)
+EXPORT_C void mbedtls_nist_kw_free(mbedtls_nist_kw_context *ctx)
 {
     mbedtls_cipher_free(&ctx->cipher_ctx);
     mbedtls_platform_zeroize(ctx, sizeof(mbedtls_nist_kw_context));
@@ -133,7 +133,7 @@ static void calc_a_xor_t(unsigned char A[KW_SEMIBLOCK_LENGTH], uint64_t t)
  * KW-AE as defined in SP 800-38F section 6.2
  * KWP-AE as defined in SP 800-38F section 6.3
  */
-int mbedtls_nist_kw_wrap(mbedtls_nist_kw_context *ctx,
+EXPORT_C int mbedtls_nist_kw_wrap(mbedtls_nist_kw_context *ctx,
                          mbedtls_nist_kw_mode_t mode,
                          const unsigned char *input, size_t in_len,
                          unsigned char *output, size_t *out_len, size_t out_size)
@@ -327,7 +327,7 @@ cleanup:
  * KW-AD as defined in SP 800-38F section 6.2
  * KWP-AD as defined in SP 800-38F section 6.3
  */
-int mbedtls_nist_kw_unwrap(mbedtls_nist_kw_context *ctx,
+EXPORT_C int mbedtls_nist_kw_unwrap(mbedtls_nist_kw_context *ctx,
                            mbedtls_nist_kw_mode_t mode,
                            const unsigned char *input, size_t in_len,
                            unsigned char *output, size_t *out_len, size_t out_size)

@@ -80,7 +80,7 @@ mbedtls_aria_context;
  *
  * \param ctx      The ARIA context to initialize. This must not be \c NULL.
  */
-void mbedtls_aria_init(mbedtls_aria_context *ctx);
+IMPORT_C void mbedtls_aria_init(mbedtls_aria_context *ctx);
 
 /**
  * \brief          This function releases and clears the specified ARIA context.
@@ -89,7 +89,7 @@ void mbedtls_aria_init(mbedtls_aria_context *ctx);
  *                 case this function returns immediately. If it is not \c NULL,
  *                 it must point to an initialized ARIA context.
  */
-void mbedtls_aria_free(mbedtls_aria_context *ctx);
+IMPORT_C void mbedtls_aria_free(mbedtls_aria_context *ctx);
 
 /**
  * \brief          This function sets the encryption key.
@@ -106,7 +106,7 @@ void mbedtls_aria_free(mbedtls_aria_context *ctx);
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_aria_setkey_enc(mbedtls_aria_context *ctx,
+IMPORT_C int mbedtls_aria_setkey_enc(mbedtls_aria_context *ctx,
                             const unsigned char *key,
                             unsigned int keybits);
 
@@ -125,7 +125,7 @@ int mbedtls_aria_setkey_enc(mbedtls_aria_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_aria_setkey_dec(mbedtls_aria_context *ctx,
+IMPORT_C int mbedtls_aria_setkey_dec(mbedtls_aria_context *ctx,
                             const unsigned char *key,
                             unsigned int keybits);
 
@@ -149,7 +149,7 @@ int mbedtls_aria_setkey_dec(mbedtls_aria_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_aria_crypt_ecb(mbedtls_aria_context *ctx,
+IMPORT_C int mbedtls_aria_crypt_ecb(mbedtls_aria_context *ctx,
                            const unsigned char input[MBEDTLS_ARIA_BLOCKSIZE],
                            unsigned char output[MBEDTLS_ARIA_BLOCKSIZE]);
 
@@ -195,7 +195,7 @@ int mbedtls_aria_crypt_ecb(mbedtls_aria_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_aria_crypt_cbc(mbedtls_aria_context *ctx,
+IMPORT_C int mbedtls_aria_crypt_cbc(mbedtls_aria_context *ctx,
                            int mode,
                            size_t length,
                            unsigned char iv[MBEDTLS_ARIA_BLOCKSIZE],
@@ -245,7 +245,7 @@ int mbedtls_aria_crypt_cbc(mbedtls_aria_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_aria_crypt_cfb128(mbedtls_aria_context *ctx,
+IMPORT_C int mbedtls_aria_crypt_cfb128(mbedtls_aria_context *ctx,
                               int mode,
                               size_t length,
                               size_t *iv_off,
@@ -332,7 +332,7 @@ int mbedtls_aria_crypt_cfb128(mbedtls_aria_context *ctx,
  * \return                 \c 0 on success.
  * \return                 A negative error code on failure.
  */
-int mbedtls_aria_crypt_ctr(mbedtls_aria_context *ctx,
+IMPORT_C int mbedtls_aria_crypt_ctr(mbedtls_aria_context *ctx,
                            size_t length,
                            size_t *nc_off,
                            unsigned char nonce_counter[MBEDTLS_ARIA_BLOCKSIZE],

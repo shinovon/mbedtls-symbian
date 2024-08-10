@@ -406,7 +406,7 @@ EXPORT_C int mbedtls_ecdsa_sign(mbedtls_ecp_group *grp, mbedtls_mpi *r, mbedtls_
  * note:    The f_rng_blind parameter must not be NULL.
  *
  */
-int mbedtls_ecdsa_sign_det_restartable(mbedtls_ecp_group *grp,
+EXPORT_C int mbedtls_ecdsa_sign_det_restartable(mbedtls_ecp_group *grp,
                                        mbedtls_mpi *r, mbedtls_mpi *s,
                                        const mbedtls_mpi *d, const unsigned char *buf, size_t blen,
                                        mbedtls_md_type_t md_alg,
@@ -479,7 +479,7 @@ cleanup:
 /*
  * Deterministic signature wrapper
  */
-int mbedtls_ecdsa_sign_det_ext(mbedtls_ecp_group *grp, mbedtls_mpi *r,
+EXPORT_C int mbedtls_ecdsa_sign_det_ext(mbedtls_ecp_group *grp, mbedtls_mpi *r,
                                mbedtls_mpi *s, const mbedtls_mpi *d,
                                const unsigned char *buf, size_t blen,
                                mbedtls_md_type_t md_alg,

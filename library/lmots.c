@@ -75,7 +75,7 @@ static const unsigned char D_MESSAGE_CONSTANT_BYTES[D_CONST_LEN] = { 0x81, 0x81 
 int (*mbedtls_lmots_sign_private_key_invalidated_hook)(unsigned char *) = NULL;
 #endif /* defined(MBEDTLS_TEST_HOOKS) */
 
-void mbedtls_lms_unsigned_int_to_network_bytes(unsigned int val, size_t len,
+EXPORT_C void mbedtls_lms_unsigned_int_to_network_bytes(unsigned int val, size_t len,
                                                unsigned char *bytes)
 {
     size_t idx;
@@ -85,7 +85,7 @@ void mbedtls_lms_unsigned_int_to_network_bytes(unsigned int val, size_t len,
     }
 }
 
-unsigned int mbedtls_lms_network_bytes_to_unsigned_int(size_t len,
+EXPORT_C unsigned int mbedtls_lms_network_bytes_to_unsigned_int(size_t len,
                                                        const unsigned char *bytes)
 {
     size_t idx;
@@ -395,7 +395,7 @@ exit:
 }
 
 #if !defined(MBEDTLS_DEPRECATED_REMOVED)
-int mbedtls_lms_error_from_psa(psa_status_t status)
+EXPORT_C int mbedtls_lms_error_from_psa(psa_status_t status)
 {
     switch (status) {
         case PSA_SUCCESS:
@@ -414,17 +414,17 @@ int mbedtls_lms_error_from_psa(psa_status_t status)
 }
 #endif /* !MBEDTLS_DEPRECATED_REMOVED */
 
-void mbedtls_lmots_public_init(mbedtls_lmots_public_t *ctx)
+EXPORT_C void mbedtls_lmots_public_init(mbedtls_lmots_public_t *ctx)
 {
     memset(ctx, 0, sizeof(*ctx));
 }
 
-void mbedtls_lmots_public_free(mbedtls_lmots_public_t *ctx)
+EXPORT_C void mbedtls_lmots_public_free(mbedtls_lmots_public_t *ctx)
 {
     mbedtls_platform_zeroize(ctx, sizeof(*ctx));
 }
 
-int mbedtls_lmots_import_public_key(mbedtls_lmots_public_t *ctx,
+EXPORT_C int mbedtls_lmots_import_public_key(mbedtls_lmots_public_t *ctx,
                                     const unsigned char *key, size_t key_len)
 {
     if (key_len < MBEDTLS_LMOTS_SIG_TYPE_OFFSET + MBEDTLS_LMOTS_TYPE_LEN) {
@@ -456,7 +456,7 @@ int mbedtls_lmots_import_public_key(mbedtls_lmots_public_t *ctx,
     return 0;
 }
 
-int mbedtls_lmots_export_public_key(const mbedtls_lmots_public_t *ctx,
+EXPORT_C int mbedtls_lmots_export_public_key(const mbedtls_lmots_public_t *ctx,
                                     unsigned char *key, size_t key_size,
                                     size_t *key_len)
 {
@@ -490,7 +490,7 @@ int mbedtls_lmots_export_public_key(const mbedtls_lmots_public_t *ctx,
     return 0;
 }
 
-int mbedtls_lmots_calculate_public_key_candidate(const mbedtls_lmots_parameters_t *params,
+EXPORT_C int mbedtls_lmots_calculate_public_key_candidate(const mbedtls_lmots_parameters_t *params,
                                                  const unsigned char  *msg,
                                                  size_t msg_size,
                                                  const unsigned char *sig,
@@ -540,7 +540,7 @@ int mbedtls_lmots_calculate_public_key_candidate(const mbedtls_lmots_parameters_
     return 0;
 }
 
-int mbedtls_lmots_verify(const mbedtls_lmots_public_t *ctx,
+EXPORT_C int mbedtls_lmots_verify(const mbedtls_lmots_public_t *ctx,
                          const unsigned char *msg, size_t msg_size,
                          const unsigned char *sig, size_t sig_size)
 {

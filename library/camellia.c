@@ -576,7 +576,7 @@ EXPORT_C int mbedtls_camellia_crypt_cbc(mbedtls_camellia_context *ctx,
 /*
  * Camellia-CFB128 buffer encryption/decryption
  */
-int mbedtls_camellia_crypt_cfb128(mbedtls_camellia_context *ctx,
+EXPORT_C int mbedtls_camellia_crypt_cfb128(mbedtls_camellia_context *ctx,
                                   int mode,
                                   size_t length,
                                   size_t *iv_off,
@@ -629,7 +629,7 @@ int mbedtls_camellia_crypt_cfb128(mbedtls_camellia_context *ctx,
 /*
  * Camellia-CTR buffer encryption/decryption
  */
-int mbedtls_camellia_crypt_ctr(mbedtls_camellia_context *ctx,
+EXPORT_C int mbedtls_camellia_crypt_ctr(mbedtls_camellia_context *ctx,
                                size_t length,
                                size_t *nc_off,
                                unsigned char nonce_counter[16],

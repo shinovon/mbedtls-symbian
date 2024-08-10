@@ -1959,7 +1959,7 @@ EXPORT_C mbedtls_pk_type_t mbedtls_ssl_get_ciphersuite_sig_pk_alg(const mbedtls_
 }
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
-psa_algorithm_t mbedtls_ssl_get_ciphersuite_sig_pk_psa_alg(const mbedtls_ssl_ciphersuite_t *info)
+EXPORT_C psa_algorithm_t mbedtls_ssl_get_ciphersuite_sig_pk_psa_alg(const mbedtls_ssl_ciphersuite_t *info)
 {
     switch (info->key_exchange) {
         case MBEDTLS_KEY_EXCHANGE_RSA:
@@ -1982,7 +1982,7 @@ psa_algorithm_t mbedtls_ssl_get_ciphersuite_sig_pk_psa_alg(const mbedtls_ssl_cip
     }
 }
 
-psa_key_usage_t mbedtls_ssl_get_ciphersuite_sig_pk_psa_usage(const mbedtls_ssl_ciphersuite_t *info)
+EXPORT_C psa_key_usage_t mbedtls_ssl_get_ciphersuite_sig_pk_psa_usage(const mbedtls_ssl_ciphersuite_t *info)
 {
     switch (info->key_exchange) {
         case MBEDTLS_KEY_EXCHANGE_RSA:
