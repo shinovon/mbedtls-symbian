@@ -1812,7 +1812,7 @@ void mbedtls_ssl_handshake_wrapup_free_hs_transform(mbedtls_ssl_context *ssl);
 
 #if defined(MBEDTLS_SSL_RENEGOTIATION)
 MBEDTLS_CHECK_RETURN_CRITICAL
-int mbedtls_ssl_start_renegotiation(mbedtls_ssl_context *ssl);
+IMPORT_C int mbedtls_ssl_start_renegotiation(mbedtls_ssl_context *ssl);
 #endif /* MBEDTLS_SSL_RENEGOTIATION */
 
 #if defined(MBEDTLS_SSL_PROTO_DTLS)
@@ -2661,7 +2661,7 @@ int mbedtls_ssl_validate_ciphersuite(
 
 #if defined(MBEDTLS_SSL_SERVER_NAME_INDICATION)
 MBEDTLS_CHECK_RETURN_CRITICAL
-int mbedtls_ssl_parse_server_name_ext(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_parse_server_name_ext(mbedtls_ssl_context *ssl,
                                       const unsigned char *buf,
                                       const unsigned char *end);
 #endif /* MBEDTLS_SSL_SERVER_NAME_INDICATION */
@@ -2678,13 +2678,13 @@ int mbedtls_ssl_tls13_parse_record_size_limit_ext(mbedtls_ssl_context *ssl,
 
 #if defined(MBEDTLS_SSL_ALPN)
 MBEDTLS_CHECK_RETURN_CRITICAL
-int mbedtls_ssl_parse_alpn_ext(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_parse_alpn_ext(mbedtls_ssl_context *ssl,
                                const unsigned char *buf,
                                const unsigned char *end);
 
 
 MBEDTLS_CHECK_RETURN_CRITICAL
-int mbedtls_ssl_write_alpn_ext(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_write_alpn_ext(mbedtls_ssl_context *ssl,
                                unsigned char *buf,
                                unsigned char *end,
                                size_t *out_len);

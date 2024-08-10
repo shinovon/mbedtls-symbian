@@ -145,7 +145,7 @@ EXPORT_C int mbedtls_pk_error_from_psa_rsa(psa_status_t status)
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
 #if defined(PSA_WANT_KEY_TYPE_ECC_PUBLIC_KEY)
-int mbedtls_pk_error_from_psa_ecdsa(psa_status_t status)
+EXPORT_C int mbedtls_pk_error_from_psa_ecdsa(psa_status_t status)
 {
     switch (status) {
         case PSA_ERROR_NOT_PERMITTED:

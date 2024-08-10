@@ -82,7 +82,7 @@ EXPORT_C void mbedtls_pk_free(mbedtls_pk_context *ctx)
 /*
  * Initialize a restart context
  */
-void mbedtls_pk_restart_init(mbedtls_pk_restart_ctx *ctx)
+EXPORT_C void mbedtls_pk_restart_init(mbedtls_pk_restart_ctx *ctx)
 {
     ctx->pk_info = NULL;
     ctx->rs_ctx = NULL;
@@ -91,7 +91,7 @@ void mbedtls_pk_restart_init(mbedtls_pk_restart_ctx *ctx)
 /*
  * Free the components of a restart context
  */
-void mbedtls_pk_restart_free(mbedtls_pk_restart_ctx *ctx)
+EXPORT_C void mbedtls_pk_restart_free(mbedtls_pk_restart_ctx *ctx)
 {
     if (ctx == NULL || ctx->pk_info == NULL ||
         ctx->pk_info->rs_free_func == NULL) {
@@ -153,7 +153,7 @@ EXPORT_C int mbedtls_pk_setup(mbedtls_pk_context *ctx, const mbedtls_pk_info_t *
 /*
  * Initialise a PSA-wrapping context
  */
-int mbedtls_pk_setup_opaque(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_setup_opaque(mbedtls_pk_context *ctx,
                             const mbedtls_svc_key_id_t key)
 {
     const mbedtls_pk_info_t *info = NULL;
@@ -244,7 +244,7 @@ EXPORT_C int mbedtls_pk_can_do(const mbedtls_pk_context *ctx, mbedtls_pk_type_t 
 /*
  * Tell if a PK can do the operations of the given PSA algorithm
  */
-int mbedtls_pk_can_do_ext(const mbedtls_pk_context *ctx, psa_algorithm_t alg,
+EXPORT_C int mbedtls_pk_can_do_ext(const mbedtls_pk_context *ctx, psa_algorithm_t alg,
                           psa_key_usage_t usage)
 {
     psa_key_usage_t key_usage;
@@ -860,7 +860,7 @@ EXPORT_C mbedtls_pk_type_t mbedtls_pk_get_type(const mbedtls_pk_context *ctx)
  *
  * Currently only works for EC & RSA private keys.
  */
-int mbedtls_pk_wrap_as_opaque(mbedtls_pk_context *pk,
+EXPORT_C int mbedtls_pk_wrap_as_opaque(mbedtls_pk_context *pk,
                               mbedtls_svc_key_id_t *key,
                               psa_algorithm_t alg,
                               psa_key_usage_t usage,

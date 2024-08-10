@@ -487,13 +487,13 @@ EXPORT_C void mbedtls_aes_free(mbedtls_aes_context *ctx)
 }
 
 #if defined(MBEDTLS_CIPHER_MODE_XTS)
-void mbedtls_aes_xts_init(mbedtls_aes_xts_context *ctx)
+EXPORT_C void mbedtls_aes_xts_init(mbedtls_aes_xts_context *ctx)
 {
     mbedtls_aes_init(&ctx->crypt);
     mbedtls_aes_init(&ctx->tweak);
 }
 
-void mbedtls_aes_xts_free(mbedtls_aes_xts_context *ctx)
+EXPORT_C void mbedtls_aes_xts_free(mbedtls_aes_xts_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -752,7 +752,7 @@ static int mbedtls_aes_xts_decode_keys(const unsigned char *key,
     return 0;
 }
 
-int mbedtls_aes_xts_setkey_enc(mbedtls_aes_xts_context *ctx,
+EXPORT_C int mbedtls_aes_xts_setkey_enc(mbedtls_aes_xts_context *ctx,
                                const unsigned char *key,
                                unsigned int keybits)
 {
@@ -776,7 +776,7 @@ int mbedtls_aes_xts_setkey_enc(mbedtls_aes_xts_context *ctx,
     return mbedtls_aes_setkey_enc(&ctx->crypt, key1, key1bits);
 }
 
-int mbedtls_aes_xts_setkey_dec(mbedtls_aes_xts_context *ctx,
+EXPORT_C int mbedtls_aes_xts_setkey_dec(mbedtls_aes_xts_context *ctx,
                                const unsigned char *key,
                                unsigned int keybits)
 {
@@ -1216,7 +1216,7 @@ static void mbedtls_gf128mul_x_ble(unsigned char r[16],
 /*
  * AES-XTS buffer encryption/decryption
  */
-int mbedtls_aes_crypt_xts(mbedtls_aes_xts_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_xts(mbedtls_aes_xts_context *ctx,
                           int mode,
                           size_t length,
                           const unsigned char data_unit[16],
@@ -1319,7 +1319,7 @@ int mbedtls_aes_crypt_xts(mbedtls_aes_xts_context *ctx,
 /*
  * AES-CFB128 buffer encryption/decryption
  */
-int mbedtls_aes_crypt_cfb128(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_cfb128(mbedtls_aes_context *ctx,
                              int mode,
                              size_t length,
                              size_t *iv_off,
@@ -1381,7 +1381,7 @@ exit:
 /*
  * AES-CFB8 buffer encryption/decryption
  */
-int mbedtls_aes_crypt_cfb8(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_cfb8(mbedtls_aes_context *ctx,
                            int mode,
                            size_t length,
                            unsigned char iv[16],
@@ -1425,7 +1425,7 @@ exit:
 /*
  * AES-OFB (Output Feedback Mode) buffer encryption/decryption
  */
-int mbedtls_aes_crypt_ofb(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_ofb(mbedtls_aes_context *ctx,
                           size_t length,
                           size_t *iv_off,
                           unsigned char iv[16],
@@ -1464,7 +1464,7 @@ exit:
 /*
  * AES-CTR buffer encryption/decryption
  */
-int mbedtls_aes_crypt_ctr(mbedtls_aes_context *ctx,
+EXPORT_C int mbedtls_aes_crypt_ctr(mbedtls_aes_context *ctx,
                           size_t length,
                           size_t *nc_off,
                           unsigned char nonce_counter[16],

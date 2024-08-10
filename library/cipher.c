@@ -215,7 +215,7 @@ EXPORT_C int mbedtls_cipher_setup(mbedtls_cipher_context_t *ctx,
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
 #if !defined(MBEDTLS_DEPRECATED_REMOVED)
-int mbedtls_cipher_setup_psa(mbedtls_cipher_context_t *ctx,
+EXPORT_C int mbedtls_cipher_setup_psa(mbedtls_cipher_context_t *ctx,
                              const mbedtls_cipher_info_t *cipher_info,
                              size_t taglen)
 {
