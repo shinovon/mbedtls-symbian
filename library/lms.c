@@ -227,17 +227,17 @@ exit:
     return PSA_TO_MBEDTLS_ERR(status);
 }
 
-void mbedtls_lms_public_init(mbedtls_lms_public_t *ctx)
+EXPORT_C void mbedtls_lms_public_init(mbedtls_lms_public_t *ctx)
 {
     memset(ctx, 0, sizeof(*ctx));
 }
 
-void mbedtls_lms_public_free(mbedtls_lms_public_t *ctx)
+EXPORT_C void mbedtls_lms_public_free(mbedtls_lms_public_t *ctx)
 {
     mbedtls_platform_zeroize(ctx, sizeof(*ctx));
 }
 
-int mbedtls_lms_import_public_key(mbedtls_lms_public_t *ctx,
+EXPORT_C int mbedtls_lms_import_public_key(mbedtls_lms_public_t *ctx,
                                   const unsigned char *key, size_t key_size)
 {
     mbedtls_lms_algorithm_type_t type;
@@ -272,7 +272,7 @@ int mbedtls_lms_import_public_key(mbedtls_lms_public_t *ctx,
     return 0;
 }
 
-int mbedtls_lms_export_public_key(const mbedtls_lms_public_t *ctx,
+EXPORT_C int mbedtls_lms_export_public_key(const mbedtls_lms_public_t *ctx,
                                   unsigned char *key,
                                   size_t key_size, size_t *key_len)
 {
@@ -304,7 +304,7 @@ int mbedtls_lms_export_public_key(const mbedtls_lms_public_t *ctx,
     return 0;
 }
 
-int mbedtls_lms_verify(const mbedtls_lms_public_t *ctx,
+EXPORT_C int mbedtls_lms_verify(const mbedtls_lms_public_t *ctx,
                        const unsigned char *msg, size_t msg_size,
                        const unsigned char *sig, size_t sig_size)
 {

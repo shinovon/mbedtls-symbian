@@ -1470,7 +1470,7 @@
  *
  * Comment to disable the context serialization APIs.
  */
-//#define MBEDTLS_SSL_CONTEXT_SERIALIZATION
+#define MBEDTLS_SSL_CONTEXT_SERIALIZATION
 
 /**
  * \def MBEDTLS_SSL_DEBUG_ALL

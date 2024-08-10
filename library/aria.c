@@ -587,7 +587,7 @@ EXPORT_C int mbedtls_aria_crypt_cbc(mbedtls_aria_context *ctx,
 /*
  * ARIA-CFB128 buffer encryption/decryption
  */
-int mbedtls_aria_crypt_cfb128(mbedtls_aria_context *ctx,
+EXPORT_C int mbedtls_aria_crypt_cfb128(mbedtls_aria_context *ctx,
                               int mode,
                               size_t length,
                               size_t *iv_off,
@@ -649,7 +649,7 @@ int mbedtls_aria_crypt_cfb128(mbedtls_aria_context *ctx,
 /*
  * ARIA-CTR buffer encryption/decryption
  */
-int mbedtls_aria_crypt_ctr(mbedtls_aria_context *ctx,
+EXPORT_C int mbedtls_aria_crypt_ctr(mbedtls_aria_context *ctx,
                            size_t length,
                            size_t *nc_off,
                            unsigned char nonce_counter[MBEDTLS_ARIA_BLOCKSIZE],

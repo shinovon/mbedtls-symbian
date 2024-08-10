@@ -204,7 +204,7 @@ int mbedtls_camellia_crypt_cbc(mbedtls_camellia_context *ctx,
  * \return         \c 0 if successful.
  * \return         A negative error code on failure.
  */
-int mbedtls_camellia_crypt_cfb128(mbedtls_camellia_context *ctx,
+IMPORT_C int mbedtls_camellia_crypt_cfb128(mbedtls_camellia_context *ctx,
                                   int mode,
                                   size_t length,
                                   size_t *iv_off,
@@ -288,7 +288,7 @@ int mbedtls_camellia_crypt_cfb128(mbedtls_camellia_context *ctx,
  * \return              \c 0 if successful.
  * \return              A negative error code on failure.
  */
-int mbedtls_camellia_crypt_ctr(mbedtls_camellia_context *ctx,
+IMPORT_C int mbedtls_camellia_crypt_ctr(mbedtls_camellia_context *ctx,
                                size_t length,
                                size_t *nc_off,
                                unsigned char nonce_counter[16],
