@@ -4613,7 +4613,7 @@ IMPORT_C int mbedtls_ssl_get_max_in_record_payload(const mbedtls_ssl_context *ss
  *                 If you want to use the certificate across API calls,
  *                 you must make a copy.
  */
-const mbedtls_x509_crt *mbedtls_ssl_get_peer_cert(const mbedtls_ssl_context *ssl);
+IMPORT_C const mbedtls_x509_crt *mbedtls_ssl_get_peer_cert(const mbedtls_ssl_context *ssl);
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
 
 #if defined(MBEDTLS_SSL_CLI_C)
