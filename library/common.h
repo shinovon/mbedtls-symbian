@@ -21,6 +21,18 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#ifdef __SYMBIAN32__
+#include <e32def.h>
+#else
+#ifndef EXPORT_C
+#define EXPORT_C
+#endif
+
+#ifndef IMPORT_C
+#define IMPORT_C
+#endif
+#endif
+
 /* Define `inline` on some non-C99-compliant compilers. */
 #if (defined(__ARMCC_VERSION) || defined(_MSC_VER)) && \
     !defined(inline) && !defined(__cplusplus)

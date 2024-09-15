@@ -1,0 +1,18 @@
+&EN
+
+#{"MBedTLS library v2"},(0x20292B6C),2,0,0
+
+[0x101F7961], 0, 0, 0, {"S60ProductID"}
+[0x1028315F], 0, 0, 0, {"S60ProductID"}
+[0x20022E6D], 0, 0, 0, {"S60ProductID"}
+
+%{"nnproject"}
+:"nnproject"
+
+; Check OpenC versions
+IF( version(0x10282872, <, 1, 5, 0) ) OR
+  ( version(0x20009a80, <, 1, 5, 0) )
+    "incompatible_openc.txt"-"", FT, FORCEABORT
+ENDIF
+
+"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls2.dll"-"c:\sys\bin\mbedtls2.dll"
