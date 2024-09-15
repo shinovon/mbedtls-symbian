@@ -23,4 +23,6 @@ EXPORTS
 	mbedtls_ssl_handshake @ 22 NONAME
 	mbedtls_ssl_set_hostname @ 23 NONAME
 	mbedtls_hardware_poll @ 24 NONAME
+	mbedtls_psa_crypto_free @ 25 NONAME
+	psa_crypto_init @ 26 NONAME
 
