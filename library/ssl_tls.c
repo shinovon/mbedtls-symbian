@@ -3811,7 +3811,7 @@ static int ssl_cookie_check_dummy(void *ctx,
 /*
  * Initialize an SSL context
  */
-void mbedtls_ssl_init(mbedtls_ssl_context *ssl)
+EXPORT_C void mbedtls_ssl_init(mbedtls_ssl_context *ssl)
 {
     memset(ssl, 0, sizeof(mbedtls_ssl_context));
 }
@@ -3820,7 +3820,7 @@ void mbedtls_ssl_init(mbedtls_ssl_context *ssl)
  * Setup an SSL context
  */
 
-int mbedtls_ssl_setup(mbedtls_ssl_context *ssl,
+EXPORT_C int mbedtls_ssl_setup(mbedtls_ssl_context *ssl,
                       const mbedtls_ssl_config *conf)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -4081,13 +4081,13 @@ void mbedtls_ssl_conf_handshake_timeout(mbedtls_ssl_config *conf,
 }
 #endif
 
-void mbedtls_ssl_conf_authmode(mbedtls_ssl_config *conf, int authmode)
+EXPORT_C void mbedtls_ssl_conf_authmode(mbedtls_ssl_config *conf, int authmode)
 {
     conf->authmode   = authmode;
 }
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
-void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
+EXPORT_C void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
                              int (*f_vrfy)(void *, mbedtls_x509_crt *, int, uint32_t *),
                              void *p_vrfy)
 {
@@ -4096,7 +4096,7 @@ void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
 }
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
 
-void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
+EXPORT_C void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
                           int (*f_rng)(void *, unsigned char *, size_t),
                           void *p_rng)
 {
@@ -4104,7 +4104,7 @@ void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
     conf->p_rng      = p_rng;
 }
 
-void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
+EXPORT_C void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
                           void (*f_dbg)(void *, int, const char *, int, const char *),
                           void  *p_dbg)
 {
@@ -4112,7 +4112,7 @@ void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
     conf->p_dbg      = p_dbg;
 }
 
-void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
+EXPORT_C void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
                          void *p_bio,
                          mbedtls_ssl_send_t *f_send,
                          mbedtls_ssl_recv_t *f_recv,
@@ -4618,7 +4618,7 @@ void mbedtls_ssl_conf_curves(mbedtls_ssl_config *conf,
 #endif /* MBEDTLS_ECP_C */
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
-int mbedtls_ssl_set_hostname(mbedtls_ssl_context *ssl, const char *hostname)
+EXPORT_C int mbedtls_ssl_set_hostname(mbedtls_ssl_context *ssl, const char *hostname)
 {
     /* Initialize to suppress unnecessary compiler warning */
     size_t hostname_len = 0;
@@ -5796,7 +5796,7 @@ int mbedtls_ssl_handshake_step(mbedtls_ssl_context *ssl)
 /*
  * Perform the SSL handshake
  */
-int mbedtls_ssl_handshake(mbedtls_ssl_context *ssl)
+EXPORT_C int mbedtls_ssl_handshake(mbedtls_ssl_context *ssl)
 {
     int ret = 0;
 
@@ -6756,7 +6756,7 @@ int mbedtls_ssl_context_load(mbedtls_ssl_context *context,
 /*
  * Free an SSL context
  */
-void mbedtls_ssl_free(mbedtls_ssl_context *ssl)
+EXPORT_C void mbedtls_ssl_free(mbedtls_ssl_context *ssl)
 {
     if (ssl == NULL) {
         return;
@@ -6842,7 +6842,7 @@ void mbedtls_ssl_free(mbedtls_ssl_context *ssl)
 /*
  * Initialize mbedtls_ssl_config
  */
-void mbedtls_ssl_config_init(mbedtls_ssl_config *conf)
+EXPORT_C void mbedtls_ssl_config_init(mbedtls_ssl_config *conf)
 {
     memset(conf, 0, sizeof(mbedtls_ssl_config));
 }
@@ -6895,7 +6895,7 @@ static const mbedtls_ecp_group_id ssl_preset_suiteb_curves[] = {
 /*
  * Load default in mbedtls_ssl_config
  */
-int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
+EXPORT_C int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
                                 int endpoint, int transport, int preset)
 {
 #if defined(MBEDTLS_DHM_C) && defined(MBEDTLS_SSL_SRV_C)
@@ -7056,7 +7056,7 @@ int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
 /*
  * Free mbedtls_ssl_config
  */
-void mbedtls_ssl_config_free(mbedtls_ssl_config *conf)
+EXPORT_C void mbedtls_ssl_config_free(mbedtls_ssl_config *conf)
 {
 #if defined(MBEDTLS_DHM_C)
     mbedtls_mpi_free(&conf->dhm_P);

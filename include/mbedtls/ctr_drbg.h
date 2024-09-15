@@ -215,7 +215,7 @@ mbedtls_ctr_drbg_context;
  *
  * \param ctx           The CTR_DRBG context to initialize.
  */
-void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx);
+IMPORT_C void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx);
 
 /**
  * \brief               This function seeds and sets up the CTR_DRBG
@@ -316,7 +316,7 @@ void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx);
  * \return              \c 0 on success.
  * \return              #MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED on failure.
  */
-int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
                           int (*f_entropy)(void *, unsigned char *, size_t),
                           void *p_entropy,
                           const unsigned char *custom,
@@ -328,7 +328,7 @@ int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
  *
  * \param ctx           The CTR_DRBG context to clear.
  */
-void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx);
+IMPORT_C void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx);
 
 /**
  * \brief               This function turns prediction resistance on or off.
@@ -516,7 +516,7 @@ int mbedtls_ctr_drbg_random_with_add(void *p_rng,
  * \return              #MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED or
  *                      #MBEDTLS_ERR_CTR_DRBG_REQUEST_TOO_BIG on failure.
  */
-int mbedtls_ctr_drbg_random(void *p_rng,
+IMPORT_C int mbedtls_ctr_drbg_random(void *p_rng,
                             unsigned char *output, size_t output_len);
 
 

@@ -1,0 +1,26 @@
+EXPORTS
+	mbedtls_ctr_drbg_random @ 1 NONAME
+	mbedtls_entropy_free @ 2 NONAME
+	mbedtls_entropy_func @ 3 NONAME
+	mbedtls_entropy_init @ 4 NONAME
+	mbedtls_ssl_close_notify @ 5 NONAME
+	mbedtls_ssl_conf_authmode @ 6 NONAME
+	mbedtls_ssl_conf_dbg @ 7 NONAME
+	mbedtls_ssl_conf_rng @ 8 NONAME
+	mbedtls_ssl_conf_verify @ 9 NONAME
+	mbedtls_ssl_free @ 10 NONAME
+	mbedtls_ssl_init @ 11 NONAME
+	mbedtls_ssl_read @ 12 NONAME
+	mbedtls_ssl_set_bio @ 13 NONAME
+	mbedtls_ssl_setup @ 14 NONAME
+	mbedtls_ssl_write @ 15 NONAME
+	mbedtls_ctr_drbg_free @ 16 NONAME
+	mbedtls_ctr_drbg_init @ 17 NONAME
+	mbedtls_ctr_drbg_seed @ 18 NONAME
+	mbedtls_ssl_config_defaults @ 19 NONAME
+	mbedtls_ssl_config_free @ 20 NONAME
+	mbedtls_ssl_config_init @ 21 NONAME
+	mbedtls_ssl_handshake @ 22 NONAME
+	mbedtls_ssl_set_hostname @ 23 NONAME
+	mbedtls_hardware_poll @ 24 NONAME
+
