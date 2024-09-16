@@ -38,7 +38,7 @@
 
 #define ENTROPY_MAX_LOOP    256     /**< Maximum amount to loop before error */
 
-EXPORT_C void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
+void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
 {
     ctx->source_count = 0;
     memset(ctx->source, 0, sizeof(ctx->source));
@@ -95,7 +95,7 @@ EXPORT_C void mbedtls_entropy_init(mbedtls_entropy_context *ctx)
 #endif /* MBEDTLS_NO_DEFAULT_ENTROPY_SOURCES */
 }
 
-EXPORT_C void mbedtls_entropy_free(mbedtls_entropy_context *ctx)
+void mbedtls_entropy_free(mbedtls_entropy_context *ctx)
 {
     /* If the context was already free, don't call free() again.
      * This is important for mutexes which don't allow double-free. */
@@ -318,7 +318,7 @@ int mbedtls_entropy_gather(mbedtls_entropy_context *ctx)
     return ret;
 }
 
-EXPORT_C int mbedtls_entropy_func(void *data, unsigned char *output, size_t len)
+int mbedtls_entropy_func(void *data, unsigned char *output, size_t len)
 {
     int ret, count = 0, i, thresholds_reached;
     size_t strong_size;

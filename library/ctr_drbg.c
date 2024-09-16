@@ -30,7 +30,7 @@
 /*
  * CTR_DRBG context initialization
  */
-EXPORT_C void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx)
+void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx)
 {
     memset(ctx, 0, sizeof(mbedtls_ctr_drbg_context));
     /* Indicate that the entropy nonce length is not set explicitly.
@@ -44,7 +44,7 @@ EXPORT_C void mbedtls_ctr_drbg_init(mbedtls_ctr_drbg_context *ctx)
  *  This function resets CTR_DRBG context to the state immediately
  *  after initial call of mbedtls_ctr_drbg_init().
  */
-EXPORT_C void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx)
+void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx)
 {
     if (ctx == NULL) {
         return;
@@ -432,7 +432,7 @@ static size_t good_nonce_len(size_t entropy_len)
  * and with outputs
  *   ctx = initial_working_state
  */
-EXPORT_C int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
+int mbedtls_ctr_drbg_seed(mbedtls_ctr_drbg_context *ctx,
                           int (*f_entropy)(void *, unsigned char *, size_t),
                           void *p_entropy,
                           const unsigned char *custom,
@@ -577,7 +577,7 @@ exit:
     return ret;
 }
 
-EXPORT_C int mbedtls_ctr_drbg_random(void *p_rng, unsigned char *output,
+int mbedtls_ctr_drbg_random(void *p_rng, unsigned char *output,
                             size_t output_len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;

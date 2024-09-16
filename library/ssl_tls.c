@@ -538,7 +538,6 @@ exit:
 }
 #endif /* MBEDTLS_SSL_PROTO_TLS1) || MBEDTLS_SSL_PROTO_TLS1_1 */
 
-#if defined(MBEDTLS_SSL_PROTO_TLS1_2)
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
 
 static psa_status_t setup_psa_key_derivation(psa_key_derivation_operation_t *derivation,
@@ -795,7 +794,6 @@ static int tls_prf_sha384(const unsigned char *secret, size_t slen,
                            label, random, rlen, dstbuf, dlen);
 }
 #endif /* MBEDTLS_SHA512_C && !MBEDTLS_SHA512_NO_SHA384 */
-#endif /* MBEDTLS_SSL_PROTO_TLS1_2 */
 
 static void ssl_update_checksum_start(mbedtls_ssl_context *, const unsigned char *, size_t);
 
@@ -3811,7 +3809,7 @@ static int ssl_cookie_check_dummy(void *ctx,
 /*
  * Initialize an SSL context
  */
-EXPORT_C void mbedtls_ssl_init(mbedtls_ssl_context *ssl)
+void mbedtls_ssl_init(mbedtls_ssl_context *ssl)
 {
     memset(ssl, 0, sizeof(mbedtls_ssl_context));
 }
@@ -3820,7 +3818,7 @@ EXPORT_C void mbedtls_ssl_init(mbedtls_ssl_context *ssl)
  * Setup an SSL context
  */
 
-EXPORT_C int mbedtls_ssl_setup(mbedtls_ssl_context *ssl,
+int mbedtls_ssl_setup(mbedtls_ssl_context *ssl,
                       const mbedtls_ssl_config *conf)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -4081,13 +4079,13 @@ void mbedtls_ssl_conf_handshake_timeout(mbedtls_ssl_config *conf,
 }
 #endif
 
-EXPORT_C void mbedtls_ssl_conf_authmode(mbedtls_ssl_config *conf, int authmode)
+void mbedtls_ssl_conf_authmode(mbedtls_ssl_config *conf, int authmode)
 {
     conf->authmode   = authmode;
 }
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
-EXPORT_C void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
+void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
                              int (*f_vrfy)(void *, mbedtls_x509_crt *, int, uint32_t *),
                              void *p_vrfy)
 {
@@ -4096,7 +4094,7 @@ EXPORT_C void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
 }
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
 
-EXPORT_C void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
+void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
                           int (*f_rng)(void *, unsigned char *, size_t),
                           void *p_rng)
 {
@@ -4104,7 +4102,7 @@ EXPORT_C void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
     conf->p_rng      = p_rng;
 }
 
-EXPORT_C void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
+void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
                           void (*f_dbg)(void *, int, const char *, int, const char *),
                           void  *p_dbg)
 {
@@ -4112,7 +4110,7 @@ EXPORT_C void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
     conf->p_dbg      = p_dbg;
 }
 
-EXPORT_C void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
+void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
                          void *p_bio,
                          mbedtls_ssl_send_t *f_send,
                          mbedtls_ssl_recv_t *f_recv,
@@ -4618,7 +4616,7 @@ void mbedtls_ssl_conf_curves(mbedtls_ssl_config *conf,
 #endif /* MBEDTLS_ECP_C */
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
-EXPORT_C int mbedtls_ssl_set_hostname(mbedtls_ssl_context *ssl, const char *hostname)
+int mbedtls_ssl_set_hostname(mbedtls_ssl_context *ssl, const char *hostname)
 {
     /* Initialize to suppress unnecessary compiler warning */
     size_t hostname_len = 0;
@@ -5796,7 +5794,7 @@ int mbedtls_ssl_handshake_step(mbedtls_ssl_context *ssl)
 /*
  * Perform the SSL handshake
  */
-EXPORT_C int mbedtls_ssl_handshake(mbedtls_ssl_context *ssl)
+int mbedtls_ssl_handshake(mbedtls_ssl_context *ssl)
 {
     int ret = 0;
 
@@ -6435,7 +6433,6 @@ static tls_prf_fn ssl_tls12prf_from_cs(int ciphersuite_id)
 #endif
     return NULL;
 }
-
 #endif /* MBEDTLS_SHA256_C ||
           (MBEDTLS_SHA512_C && !MBEDTLS_SHA512_NO_SHA384) */
 
@@ -6756,7 +6753,7 @@ int mbedtls_ssl_context_load(mbedtls_ssl_context *context,
 /*
  * Free an SSL context
  */
-EXPORT_C void mbedtls_ssl_free(mbedtls_ssl_context *ssl)
+void mbedtls_ssl_free(mbedtls_ssl_context *ssl)
 {
     if (ssl == NULL) {
         return;
@@ -6842,7 +6839,7 @@ EXPORT_C void mbedtls_ssl_free(mbedtls_ssl_context *ssl)
 /*
  * Initialize mbedtls_ssl_config
  */
-EXPORT_C void mbedtls_ssl_config_init(mbedtls_ssl_config *conf)
+void mbedtls_ssl_config_init(mbedtls_ssl_config *conf)
 {
     memset(conf, 0, sizeof(mbedtls_ssl_config));
 }
@@ -6895,7 +6892,7 @@ static const mbedtls_ecp_group_id ssl_preset_suiteb_curves[] = {
 /*
  * Load default in mbedtls_ssl_config
  */
-EXPORT_C int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
+int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
                                 int endpoint, int transport, int preset)
 {
 #if defined(MBEDTLS_DHM_C) && defined(MBEDTLS_SSL_SRV_C)
@@ -7056,7 +7053,7 @@ EXPORT_C int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
 /*
  * Free mbedtls_ssl_config
  */
-EXPORT_C void mbedtls_ssl_config_free(mbedtls_ssl_config *conf)
+void mbedtls_ssl_config_free(mbedtls_ssl_config *conf)
 {
 #if defined(MBEDTLS_DHM_C)
     mbedtls_mpi_free(&conf->dhm_P);

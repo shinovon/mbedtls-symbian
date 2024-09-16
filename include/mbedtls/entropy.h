@@ -138,14 +138,14 @@ mbedtls_entropy_context;
  *
  * \param ctx       Entropy context to initialize
  */
-IMPORT_C void mbedtls_entropy_init(mbedtls_entropy_context *ctx);
+void mbedtls_entropy_init(mbedtls_entropy_context *ctx);
 
 /**
  * \brief           Free the data in the context
  *
  * \param ctx       Entropy context to free
  */
-IMPORT_C void mbedtls_entropy_free(mbedtls_entropy_context *ctx);
+void mbedtls_entropy_free(mbedtls_entropy_context *ctx);
 
 /**
  * \brief           Adds an entropy source to poll
@@ -189,7 +189,7 @@ int mbedtls_entropy_gather(mbedtls_entropy_context *ctx);
  *
  * \return          0 if successful, or MBEDTLS_ERR_ENTROPY_SOURCE_FAILED
  */
-IMPORT_C int mbedtls_entropy_func(void *data, unsigned char *output, size_t len);
+int mbedtls_entropy_func(void *data, unsigned char *output, size_t len);
 
 /**
  * \brief           Add data to the accumulator manually

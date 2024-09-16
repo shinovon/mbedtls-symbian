@@ -1519,7 +1519,7 @@ int mbedtls_ssl_get_ciphersuite_id(const char *ciphersuite_name);
  *
  * \param ssl      SSL context
  */
-IMPORT_C void mbedtls_ssl_init(mbedtls_ssl_context *ssl);
+void mbedtls_ssl_init(mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Set up an SSL context for use
@@ -1545,7 +1545,7 @@ IMPORT_C void mbedtls_ssl_init(mbedtls_ssl_context *ssl);
  * \return         0 if successful, or MBEDTLS_ERR_SSL_ALLOC_FAILED if
  *                 memory allocation failed
  */
-IMPORT_C int mbedtls_ssl_setup(mbedtls_ssl_context *ssl,
+int mbedtls_ssl_setup(mbedtls_ssl_context *ssl,
                       const mbedtls_ssl_config *conf);
 
 /**
@@ -1640,7 +1640,7 @@ void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
  * \param f_rng    RNG function
  * \param p_rng    RNG parameter
  */
-IMPORT_C void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
+void mbedtls_ssl_conf_rng(mbedtls_ssl_config *conf,
                           int (*f_rng)(void *, unsigned char *, size_t),
                           void *p_rng);
 
@@ -1692,7 +1692,7 @@ void mbedtls_ssl_conf_dbg(mbedtls_ssl_config *conf,
  *                 \c mbedtls_net_recv_timeout() that are suitable to be used
  *                 here.
  */
-IMPORT_C void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
+void mbedtls_ssl_set_bio(mbedtls_ssl_context *ssl,
                          void *p_bio,
                          mbedtls_ssl_send_t *f_send,
                          mbedtls_ssl_recv_t *f_recv,
@@ -3123,7 +3123,7 @@ void mbedtls_ssl_conf_sig_hashes(mbedtls_ssl_config *conf,
  *                 when NULL). On allocation failure hostname is cleared.
  *                 On too long input failure, old hostname is unchanged.
  */
-IMPORT_C int mbedtls_ssl_set_hostname(mbedtls_ssl_context *ssl, const char *hostname);
+int mbedtls_ssl_set_hostname(mbedtls_ssl_context *ssl, const char *hostname);
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
 
 #if defined(MBEDTLS_SSL_SERVER_NAME_INDICATION)
@@ -3980,7 +3980,7 @@ int mbedtls_ssl_get_session(const mbedtls_ssl_context *ssl, mbedtls_ssl_session 
  *                 subsystem must have been initialized by calling
  *                 psa_crypto_init() before calling this function.
  */
-IMPORT_C int mbedtls_ssl_handshake(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_handshake(mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Perform a single step of the SSL handshake
@@ -4108,7 +4108,7 @@ int mbedtls_ssl_renegotiate(mbedtls_ssl_context *ssl);
  *                   \c mbedtls_ssl_check_pending to check for remaining records.
  *
  */
-IMPORT_C int mbedtls_ssl_read(mbedtls_ssl_context *ssl, unsigned char *buf, size_t len);
+int mbedtls_ssl_read(mbedtls_ssl_context *ssl, unsigned char *buf, size_t len);
 
 /**
  * \brief          Try to write exactly 'len' application data bytes
@@ -4170,7 +4170,7 @@ IMPORT_C int mbedtls_ssl_read(mbedtls_ssl_context *ssl, unsigned char *buf, size
  * \note           Attempting to write 0 bytes will result in an empty TLS
  *                 application record being sent.
  */
-IMPORT_C int mbedtls_ssl_write(mbedtls_ssl_context *ssl, const unsigned char *buf, size_t len);
+int mbedtls_ssl_write(mbedtls_ssl_context *ssl, const unsigned char *buf, size_t len);
 
 /**
  * \brief           Send an alert message
@@ -4204,14 +4204,14 @@ int mbedtls_ssl_send_alert_message(mbedtls_ssl_context *ssl,
  *                 call \c mbedtls_ssl_session_reset() on it before re-using it
  *                 for a new connection; the current connection must be closed.
  */
-IMPORT_C int mbedtls_ssl_close_notify(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_close_notify(mbedtls_ssl_context *ssl);
 
 /**
  * \brief          Free referenced items in an SSL context and clear memory
  *
  * \param ssl      SSL context
  */
-IMPORT_C void mbedtls_ssl_free(mbedtls_ssl_context *ssl);
+void mbedtls_ssl_free(mbedtls_ssl_context *ssl);
 
 #if defined(MBEDTLS_SSL_CONTEXT_SERIALIZATION)
 /**
@@ -4347,7 +4347,7 @@ int mbedtls_ssl_context_load(mbedtls_ssl_context *ssl,
  *
  * \param conf     SSL configuration context
  */
-IMPORT_C void mbedtls_ssl_config_init(mbedtls_ssl_config *conf);
+void mbedtls_ssl_config_init(mbedtls_ssl_config *conf);
 
 /**
  * \brief          Load reasonable default SSL configuration values.
@@ -4364,7 +4364,7 @@ IMPORT_C void mbedtls_ssl_config_init(mbedtls_ssl_config *conf);
  * \return         0 if successful, or
  *                 MBEDTLS_ERR_XXX_ALLOC_FAILED on memory allocation error.
  */
-IMPORT_C int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
+int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
                                 int endpoint, int transport, int preset);
 
 /**
@@ -4372,7 +4372,7 @@ IMPORT_C int mbedtls_ssl_config_defaults(mbedtls_ssl_config *conf,
  *
  * \param conf     SSL configuration context
  */
-IMPORT_C void mbedtls_ssl_config_free(mbedtls_ssl_config *conf);
+void mbedtls_ssl_config_free(mbedtls_ssl_config *conf);
 
 /**
  * \brief          Initialize SSL session structure

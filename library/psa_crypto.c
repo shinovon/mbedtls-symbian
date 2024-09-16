@@ -5959,7 +5959,7 @@ psa_status_t mbedtls_psa_crypto_configure_entropy_sources(
 }
 #endif /* !defined(MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG) */
 
-EXPORT_C void mbedtls_psa_crypto_free(void)
+void mbedtls_psa_crypto_free(void)
 {
     psa_wipe_all_key_slots();
     if (global_data.rng_state != RNG_NOT_INITIALIZED) {
@@ -5999,7 +5999,7 @@ static psa_status_t psa_crypto_recover_transaction(
 }
 #endif /* PSA_CRYPTO_STORAGE_HAS_TRANSACTIONS */
 
-EXPORT_C psa_status_t psa_crypto_init(void)
+psa_status_t psa_crypto_init(void)
 {
     psa_status_t status;
 

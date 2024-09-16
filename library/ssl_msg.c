@@ -5170,7 +5170,7 @@ static int ssl_check_ctr_renegotiate(mbedtls_ssl_context *ssl)
 /*
  * Receive application data decrypted from the SSL layer
  */
-EXPORT_C int mbedtls_ssl_read(mbedtls_ssl_context *ssl, unsigned char *buf, size_t len)
+int mbedtls_ssl_read(mbedtls_ssl_context *ssl, unsigned char *buf, size_t len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n;
@@ -5563,7 +5563,7 @@ static int ssl_write_split(mbedtls_ssl_context *ssl,
 /*
  * Write application data (public-facing wrapper)
  */
-EXPORT_C int mbedtls_ssl_write(mbedtls_ssl_context *ssl, const unsigned char *buf, size_t len)
+int mbedtls_ssl_write(mbedtls_ssl_context *ssl, const unsigned char *buf, size_t len)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
@@ -5601,7 +5601,7 @@ EXPORT_C int mbedtls_ssl_write(mbedtls_ssl_context *ssl, const unsigned char *bu
 /*
  * Notify the peer that the connection is being closed
  */
-EXPORT_C int mbedtls_ssl_close_notify(mbedtls_ssl_context *ssl)
+int mbedtls_ssl_close_notify(mbedtls_ssl_context *ssl)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
 
