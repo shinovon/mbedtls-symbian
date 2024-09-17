@@ -40,7 +40,7 @@
                                                            psa_generic_status_to_mbedtls)
 
 #define MBEDTLS_SSL_TLS1_3_LABEL(name, string)       \
-    .name = string,
+    string,
 
 struct mbedtls_ssl_tls13_labels_struct const mbedtls_ssl_tls13_labels =
 {
