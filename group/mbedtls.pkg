@@ -1,6 +1,6 @@
 &EN
 
-#{"MBedTLS library"},(0x20292B6B),1,1,3
+#{"MBedTLS library"},(0x20292B6B),1,2,0
 
 [0x101F7961], 0, 0, 0, {"S60ProductID"}
 [0x1028315F], 0, 0, 0, {"S60ProductID"}

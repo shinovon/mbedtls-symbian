@@ -1230,7 +1230,6 @@ int mbedtls_ssl_tls13_write_client_hello_exts(mbedtls_ssl_context *ssl,
 
 int mbedtls_ssl_tls13_finalize_client_hello(mbedtls_ssl_context *ssl)
 {
-    ((void) ssl);
 
 #if defined(MBEDTLS_SSL_EARLY_DATA)
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
@@ -1238,6 +1237,7 @@ int mbedtls_ssl_tls13_finalize_client_hello(mbedtls_ssl_context *ssl)
     const unsigned char *psk;
     size_t psk_len;
     const mbedtls_ssl_ciphersuite_t *ciphersuite_info;
+    ((void) ssl);
 
     if (ssl->early_data_status == MBEDTLS_SSL_EARLY_DATA_STATUS_REJECTED) {
 #if defined(MBEDTLS_SSL_TLS1_3_COMPATIBILITY_MODE)
@@ -1299,7 +1299,9 @@ int mbedtls_ssl_tls13_finalize_client_hello(mbedtls_ssl_context *ssl)
         }
 
     }
-#endif /* MBEDTLS_SSL_EARLY_DATA */
+#else /* MBEDTLS_SSL_EARLY_DATA */
+    ((void) ssl);
+#endif
     return 0;
 }
 /*

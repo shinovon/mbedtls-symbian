@@ -1712,7 +1712,7 @@
  * production.
  *
  */
-//#define MBEDTLS_SSL_EARLY_DATA
+#define MBEDTLS_SSL_EARLY_DATA
 
 /**
  * \def MBEDTLS_SSL_MAX_EARLY_DATA_SIZE
