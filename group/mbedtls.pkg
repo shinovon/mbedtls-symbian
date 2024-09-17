@@ -1,6 +1,6 @@
 &EN
 
-#{"MBedTLS library"},(0x20292B6B),1,1,1
+#{"MBedTLS library"},(0x20292B6B),1,1,3
 
 [0x101F7961], 0, 0, 0, {"S60ProductID"}
 [0x1028315F], 0, 0, 0, {"S60ProductID"}
@@ -10,9 +10,8 @@
 :"nnproject"
 
 ; Check OpenC versions
-IF( version(0x10282872, <, 1, 5, 0) ) OR
-  ( version(0x20009a80, <, 1, 5, 0) )
+IF( version(0x20009a80, <, 1, 5, 0) ) AND NOT EXISTS("C:\sys\bin\libc.dll")
     "incompatible_openc.txt"-"", FT, FORCEABORT
 ENDIF
 
-"$(EPOCROOT)Epoc32\release\armv5\urel\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
+"$(EPOCROOT)Epoc32\release\$(PLATFORM)\urel\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
