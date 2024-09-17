@@ -590,6 +590,11 @@ static int ssl_tls13_validate_certificate(mbedtls_ssl_context *ssl)
         authmode = ssl->conf->authmode;
     }
 #endif
+#if defined(MBEDTLS_SSL_CLI_C)
+    if (ssl->conf->endpoint == MBEDTLS_SSL_IS_CLIENT) {
+        authmode = ssl->conf->authmode;
+    }
+#endif
 
     /*
      * If the peer hasn't sent a certificate ( i.e. it sent
@@ -683,9 +688,8 @@ static int ssl_tls13_validate_certificate(mbedtls_ssl_context *ssl)
      * functions, are treated as fatal and lead to a failure of
      * mbedtls_ssl_tls13_parse_certificate even if verification was optional.
      */
-    if (authmode == MBEDTLS_SSL_VERIFY_OPTIONAL &&
-        (ret == MBEDTLS_ERR_X509_CERT_VERIFY_FAILED ||
-         ret == MBEDTLS_ERR_SSL_BAD_CERTIFICATE)) {
+    if ((authmode == MBEDTLS_SSL_VERIFY_NONE || authmode == MBEDTLS_SSL_VERIFY_OPTIONAL) &&
+        (ret == MBEDTLS_ERR_X509_CERT_VERIFY_FAILED || ret == MBEDTLS_ERR_SSL_BAD_CERTIFICATE)) {
         ret = 0;
     }
 
