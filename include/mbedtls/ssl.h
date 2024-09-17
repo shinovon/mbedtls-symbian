@@ -4260,7 +4260,7 @@ void mbedtls_ssl_conf_preference_order(mbedtls_ssl_config *conf, int order);
  * \param use_tickets   Enable or disable (MBEDTLS_SSL_SESSION_TICKETS_ENABLED or
  *                                         MBEDTLS_SSL_SESSION_TICKETS_DISABLED)
  */
-void mbedtls_ssl_conf_session_tickets(mbedtls_ssl_config *conf, int use_tickets);
+IMPORT_C void mbedtls_ssl_conf_session_tickets(mbedtls_ssl_config *conf, int use_tickets);
 #endif /* MBEDTLS_SSL_SESSION_TICKETS &&
           MBEDTLS_SSL_CLI_C */
 
