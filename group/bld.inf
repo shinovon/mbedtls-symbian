@@ -4,4 +4,5 @@ DEFAULT
 PRJ_EXPORTS
 
 PRJ_MMPFILES
-mbedtls_dynamic.mmp
+mbedtls.mmp
+mbedtls_tls13.mmp
