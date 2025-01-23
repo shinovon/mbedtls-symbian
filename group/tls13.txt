@@ -1,0 +1,1 @@
+Note that TLS 1.3 doesn't work with Java SSL patch and may cause instabilities with some applications.
