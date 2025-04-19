@@ -3,3 +3,7 @@
 TARGET		  mbedtls.dll
 TARGETTYPE	  DLL
 UID			 0x1000008d 0x20292B6B
+
+#if defined(SYMBIAN_OE_LIBSTDCPP) && !defined(NO_PIPS)
+MACRO PIPS
+#endif

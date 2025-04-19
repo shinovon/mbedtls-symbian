@@ -1,5 +1,5 @@
 #ifdef PIPS
-#include <sys/stdint.h>
+#include <stdapis/sys/stdint.h>
 #else
 #ifndef _SYS_STDINT_H_
 #define _SYS_STDINT_H_

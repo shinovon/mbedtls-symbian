@@ -1,0 +1,6 @@
+#define NO_PIPS
+#include "mbedtls_common.mmh"
+
+TARGET		  mbedtls_stl.dll
+TARGETTYPE	  DLL
+UID			 0x1000008d 0x20292B6C
