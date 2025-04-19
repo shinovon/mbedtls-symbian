@@ -3954,6 +3954,6 @@
  */
 //#define MBEDTLS_ECDH_VARIANT_EVEREST_ENABLED
 
-#define MBEDTLS_HAVE_INT64
+//#define MBEDTLS_HAVE_INT64
 
 /** \} name SECTION: Module configuration options */
