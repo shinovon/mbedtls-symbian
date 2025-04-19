@@ -1063,6 +1063,4 @@ EXPORTS
 	psa_verify_message_builtin @ 1062 NONAME
 	psa_wipe_all_key_slots @ 1063 NONAME
 	psa_wipe_key_slot @ 1064 NONAME
-	mbedtls_ssl_conf_tls13_key_exchange_modes @ 1065 NONAME
-	mbedtls_ssl_tls13_conf_early_data @ 1066 NONAME
 
