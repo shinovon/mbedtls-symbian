@@ -204,7 +204,9 @@
  * Uncomment to prevent default assignment of standard functions in the
  * platform layer.
  */
-//#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+#ifndef PIPS
+#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
+#endif
 
 /**
  * \def MBEDTLS_PLATFORM_EXIT_ALT
@@ -234,8 +236,10 @@
 //#define MBEDTLS_PLATFORM_TIME_ALT
 //#define MBEDTLS_PLATFORM_FPRINTF_ALT
 //#define MBEDTLS_PLATFORM_PRINTF_ALT
-//#define MBEDTLS_PLATFORM_SNPRINTF_ALT
-//#define MBEDTLS_PLATFORM_VSNPRINTF_ALT
+#ifndef PIPS
+#define MBEDTLS_PLATFORM_SNPRINTF_ALT
+#define MBEDTLS_PLATFORM_VSNPRINTF_ALT
+#endif
 //#define MBEDTLS_PLATFORM_NV_SEED_ALT
 //#define MBEDTLS_PLATFORM_SETUP_TEARDOWN_ALT
 
@@ -1944,7 +1948,9 @@
  *
  * Uncomment this to enable pthread mutexes.
  */
+#ifdef PIPS
 #define MBEDTLS_THREADING_PTHREAD
+#endif
 
 /**
  * \def MBEDTLS_USE_PSA_CRYPTO
@@ -2768,7 +2774,9 @@
  *
  * This module provides networking routines.
  */
+#ifdef PIPS
 #define MBEDTLS_NET_C
+#endif
 
 /**
  * \def MBEDTLS_OID_C
@@ -3339,7 +3347,9 @@
  *
  * Enable this layer to allow use of mutexes within mbed TLS
  */
+#ifdef PIPS
 #define MBEDTLS_THREADING_C
+#endif
 
 /**
  * \def MBEDTLS_TIMING_C

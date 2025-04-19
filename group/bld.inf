@@ -5,4 +5,4 @@ PRJ_EXPORTS
 
 PRJ_MMPFILES
 mbedtls.mmp
-mbedtls_tls13.mmp
+//mbedtls_tls13.mmp
