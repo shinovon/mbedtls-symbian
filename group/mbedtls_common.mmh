@@ -8,25 +8,8 @@ SMPSAFE
 PAGED
 #endif
 
-
 LIBRARY euser.lib
 SYSTEMINCLUDE /epoc32/include
-
-#if defined(SYMBIAN_OE_LIBSTDCPP) && !defined(NO_PIPS)
-SYSTEMINCLUDE /epoc32/include/stdapis
-MACRO SYMBIAN_OE_POSIX_SIGNALS
-
-LIBRARY libc.lib
-LIBRARY libpthread.lib
-
-DEFFILE ./eabi/mbedtls.def
-#else
-SYSTEMINCLUDE /epoc32/include/libc
-
-LIBRARY estlib.lib
-
-DEFFILE ./eabi/mbedtls_stdlib.def
-#endif
 
 CAPABILITY All -Tcb
 

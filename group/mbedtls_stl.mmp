@@ -4,3 +4,9 @@
 TARGET		  mbedtls_stl.dll
 TARGETTYPE	  DLL
 UID			 0x1000008d 0x20292B6C
+
+DEFFILE ./eabi/mbedtls_stl.def
+
+SYSTEMINCLUDE /epoc32/include/libc
+
+LIBRARY estlib.lib

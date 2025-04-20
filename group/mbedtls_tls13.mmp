@@ -4,7 +4,13 @@ TARGET		  mbedtls_tls13.dll
 TARGETTYPE	  DLL
 UID			 0x1000008d 0x20292B6B
 
-MACRO MBEDTLS_SSL_PROTO_TLS1_3
-#if defined(SYMBIAN_OE_LIBSTDCPP) && !defined(NO_PIPS)
+DEFFILE ./eabi/mbedtls.def
+
+SYSTEMINCLUDE /epoc32/include/stdapis
+MACRO SYMBIAN_OE_POSIX_SIGNALS
 MACRO PIPS
-#endif
+
+LIBRARY libc.lib
+LIBRARY libpthread.lib
+
+MACRO MBEDTLS_SSL_PROTO_TLS1_3
