@@ -481,7 +481,7 @@
  *
  * Uncomment to use your own hardware entropy collector.
  */
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(__SYMBIAN32__)
 #include "windows.h"
 #if WINAPI_PARTITION_PHONE_APP != 0 || WINAPI_PARTITION_PC_APP != 0
 #define MBEDTLS_ENTROPY_HARDWARE_ALT
@@ -1091,7 +1091,7 @@
  *
  * Uncomment this macro to disable the built-in platform entropy functions.
  */
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(__SYMBIAN32__)
 #include "windows.h"
 #if WINAPI_PARTITION_PHONE_APP != 0 || WINAPI_PARTITION_PC_APP != 0
 #define MBEDTLS_NO_PLATFORM_ENTROPY

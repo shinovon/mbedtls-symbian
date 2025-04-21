@@ -31,7 +31,7 @@
 #error "This module only works on Unix and Windows, see MBEDTLS_TIMING_C in mbedtls_config.h"
 #endif
 
-#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
+#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32) && !defined(__SYMBIAN32__)
 
 #include <windows.h>
 #include <process.h>
@@ -73,7 +73,7 @@ struct _hr_time {
  *                 get_timer(0) }` the value time1+time2 is only approximately
  *                 the delay since the first reset.
  */
-#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
+#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32) && !defined(__SYMBIAN32__)
 
 EXPORT_C unsigned long mbedtls_timing_get_timer(struct mbedtls_timing_hr_time *val, int reset)
 {

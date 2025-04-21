@@ -1,4 +1,5 @@
 USERINCLUDE ../include
+USERINCLUDE ../include/psa
 
 MACRO __SYMBIAN32__
 

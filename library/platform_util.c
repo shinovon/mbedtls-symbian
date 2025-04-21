@@ -45,7 +45,7 @@
 #endif
 #include <string.h>
 
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(__SYMBIAN32__)
 #include <windows.h>
 #endif
 

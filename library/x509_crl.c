@@ -45,7 +45,7 @@
 #include "mbedtls/platform.h"
 
 #if defined(MBEDTLS_HAVE_TIME)
-#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)
+#if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32) && !defined(__SYMBIAN32__)
 #include <windows.h>
 #else
 #include <time.h>
