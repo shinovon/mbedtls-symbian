@@ -4,6 +4,7 @@ DEFAULT
 PRJ_EXPORTS
 
 PRJ_MMPFILES
-mbedtls.mmp
 mbedtls_stl.mmp
+// comment lines below when bulding for platform without PIPS
+mbedtls.mmp
 mbedtls_tls13.mmp

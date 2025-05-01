@@ -51,7 +51,7 @@
  * we keep it private by only defining it in this file
  */
 
-#if !(defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)) && !defined(__SYMBIAN32__)
+#if !(defined(_WIN32) && !defined(EFIX64) && !defined(EFI32))
 #define THREADING_USE_GMTIME
 #endif /* ! ( defined(_WIN32) && !defined(EFIX64) && !defined(EFI32) ) */
 
