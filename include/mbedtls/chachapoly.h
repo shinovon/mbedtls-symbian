@@ -113,7 +113,7 @@ mbedtls_chachapoly_context;
  *
  * \param ctx       The ChachaPoly context to initialize. Must not be \c NULL.
  */
-void mbedtls_chachapoly_init(mbedtls_chachapoly_context *ctx);
+IMPORT_C void mbedtls_chachapoly_init(mbedtls_chachapoly_context *ctx);
 
 /**
  * \brief           This function releases and clears the specified
@@ -122,7 +122,7 @@ void mbedtls_chachapoly_init(mbedtls_chachapoly_context *ctx);
  * \param ctx       The ChachaPoly context to clear. This may be \c NULL, in which
  *                  case this function is a no-op.
  */
-void mbedtls_chachapoly_free(mbedtls_chachapoly_context *ctx);
+IMPORT_C void mbedtls_chachapoly_free(mbedtls_chachapoly_context *ctx);
 
 /**
  * \brief           This function sets the ChaCha20-Poly1305
@@ -135,7 +135,7 @@ void mbedtls_chachapoly_free(mbedtls_chachapoly_context *ctx);
  * \return          \c 0 on success.
  * \return          A negative error code on failure.
  */
-int mbedtls_chachapoly_setkey(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_setkey(mbedtls_chachapoly_context *ctx,
                               const unsigned char key[32]);
 
 /**
@@ -163,7 +163,7 @@ int mbedtls_chachapoly_setkey(mbedtls_chachapoly_context *ctx,
  * \return          \c 0 on success.
  * \return          A negative error code on failure.
  */
-int mbedtls_chachapoly_starts(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_starts(mbedtls_chachapoly_context *ctx,
                               const unsigned char nonce[12],
                               mbedtls_chachapoly_mode_t mode);
 
@@ -206,7 +206,7 @@ int mbedtls_chachapoly_starts(mbedtls_chachapoly_context *ctx,
  *                  if the operations has not been started or has been
  *                  finished, or if the AAD has been finished.
  */
-int mbedtls_chachapoly_update_aad(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_update_aad(mbedtls_chachapoly_context *ctx,
                                   const unsigned char *aad,
                                   size_t aad_len);
 
@@ -241,7 +241,7 @@ int mbedtls_chachapoly_update_aad(mbedtls_chachapoly_context *ctx,
  *                  finished.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_chachapoly_update(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_update(mbedtls_chachapoly_context *ctx,
                               size_t len,
                               const unsigned char *input,
                               unsigned char *output);
@@ -262,7 +262,7 @@ int mbedtls_chachapoly_update(mbedtls_chachapoly_context *ctx,
  *                  finished.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_chachapoly_finish(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_finish(mbedtls_chachapoly_context *ctx,
                               unsigned char mac[16]);
 
 /**
@@ -294,7 +294,7 @@ int mbedtls_chachapoly_finish(mbedtls_chachapoly_context *ctx,
  * \return          \c 0 on success.
  * \return          A negative error code on failure.
  */
-int mbedtls_chachapoly_encrypt_and_tag(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_encrypt_and_tag(mbedtls_chachapoly_context *ctx,
                                        size_t length,
                                        const unsigned char nonce[12],
                                        const unsigned char *aad,
@@ -328,7 +328,7 @@ int mbedtls_chachapoly_encrypt_and_tag(mbedtls_chachapoly_context *ctx,
  *                  if the data was not authentic.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_chachapoly_auth_decrypt(mbedtls_chachapoly_context *ctx,
+IMPORT_C int mbedtls_chachapoly_auth_decrypt(mbedtls_chachapoly_context *ctx,
                                     size_t length,
                                     const unsigned char nonce[12],
                                     const unsigned char *aad,

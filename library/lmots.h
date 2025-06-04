@@ -64,7 +64,7 @@ extern int (*mbedtls_lmots_sign_private_key_invalidated_hook)(unsigned char *);
  * \param len                The length of the string.
  * \param bytes              The string to output into.
  */
-void mbedtls_lms_unsigned_int_to_network_bytes(unsigned int val, size_t len,
+IMPORT_C void mbedtls_lms_unsigned_int_to_network_bytes(unsigned int val, size_t len,
                                                unsigned char *bytes);
 
 /**
@@ -76,7 +76,7 @@ void mbedtls_lms_unsigned_int_to_network_bytes(unsigned int val, size_t len,
  *
  * \return                   The corresponding LMS error code.
  */
-unsigned int mbedtls_lms_network_bytes_to_unsigned_int(size_t len,
+IMPORT_C unsigned int mbedtls_lms_network_bytes_to_unsigned_int(size_t len,
                                                        const unsigned char *bytes);
 
 #if !defined(MBEDTLS_DEPRECATED_REMOVED)
@@ -88,7 +88,7 @@ unsigned int mbedtls_lms_network_bytes_to_unsigned_int(size_t len,
  *
  * \return                   The corresponding LMS error code.
  */
-int MBEDTLS_DEPRECATED mbedtls_lms_error_from_psa(psa_status_t status);
+IMPORT_C int MBEDTLS_DEPRECATED mbedtls_lms_error_from_psa(psa_status_t status);
 #endif
 
 /**
@@ -97,7 +97,7 @@ int MBEDTLS_DEPRECATED mbedtls_lms_error_from_psa(psa_status_t status);
  * \param ctx                The uninitialized LMOTS context that will then be
  *                           initialized.
  */
-void mbedtls_lmots_public_init(mbedtls_lmots_public_t *ctx);
+IMPORT_C void mbedtls_lmots_public_init(mbedtls_lmots_public_t *ctx);
 
 /**
  * \brief                    This function uninitializes a public LMOTS context
@@ -105,7 +105,7 @@ void mbedtls_lmots_public_init(mbedtls_lmots_public_t *ctx);
  * \param ctx                The initialized LMOTS context that will then be
  *                           uninitialized.
  */
-void mbedtls_lmots_public_free(mbedtls_lmots_public_t *ctx);
+IMPORT_C void mbedtls_lmots_public_free(mbedtls_lmots_public_t *ctx);
 
 /**
  * \brief                    This function imports an LMOTS public key into a
@@ -125,7 +125,7 @@ void mbedtls_lmots_public_free(mbedtls_lmots_public_t *ctx);
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lmots_import_public_key(mbedtls_lmots_public_t *ctx,
+IMPORT_C int mbedtls_lmots_import_public_key(mbedtls_lmots_public_t *ctx,
                                     const unsigned char *key, size_t key_size);
 
 /**
@@ -147,7 +147,7 @@ int mbedtls_lmots_import_public_key(mbedtls_lmots_public_t *ctx,
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lmots_export_public_key(const mbedtls_lmots_public_t *ctx,
+IMPORT_C int mbedtls_lmots_export_public_key(const mbedtls_lmots_public_t *ctx,
                                     unsigned char *key, size_t key_size,
                                     size_t *key_len);
 
@@ -176,7 +176,7 @@ int mbedtls_lmots_export_public_key(const mbedtls_lmots_public_t *ctx,
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lmots_calculate_public_key_candidate(const mbedtls_lmots_parameters_t *params,
+IMPORT_C int mbedtls_lmots_calculate_public_key_candidate(const mbedtls_lmots_parameters_t *params,
                                                  const unsigned char *msg,
                                                  size_t msg_size,
                                                  const unsigned char *sig,
@@ -210,7 +210,7 @@ int mbedtls_lmots_calculate_public_key_candidate(const mbedtls_lmots_parameters_
  * \return         \c 0 on successful verification.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lmots_verify(const mbedtls_lmots_public_t *ctx,
+IMPORT_C int mbedtls_lmots_verify(const mbedtls_lmots_public_t *ctx,
                          const unsigned char *msg,
                          size_t msg_size, const unsigned char *sig,
                          size_t sig_size);

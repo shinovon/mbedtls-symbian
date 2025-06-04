@@ -448,7 +448,7 @@ mbedtls_platform_context;
  *
  * \return  \c 0 on success.
  */
-int mbedtls_platform_setup(mbedtls_platform_context *ctx);
+IMPORT_C int mbedtls_platform_setup(mbedtls_platform_context *ctx);
 /**
  * \brief   This function performs any platform teardown operations.
  *

@@ -1850,7 +1850,7 @@ struct mbedtls_ssl_context {
  *
  * \return              a string containing the ciphersuite name
  */
-const char *mbedtls_ssl_get_ciphersuite_name(const int ciphersuite_id);
+IMPORT_C const char *mbedtls_ssl_get_ciphersuite_name(const int ciphersuite_id);
 
 /**
  * \brief               Return the ID of the ciphersuite associated with the
@@ -1981,7 +1981,7 @@ IMPORT_C void mbedtls_ssl_conf_authmode(mbedtls_ssl_config *conf, int authmode);
  * \warning This interface is experimental and may change without notice.
  *
  */
-void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
                                        int early_data_enabled);
 
 #if defined(MBEDTLS_SSL_SRV_C)
@@ -2008,7 +2008,7 @@ void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
  * \warning This interface is experimental and may change without notice.
  *
  */
-void mbedtls_ssl_tls13_conf_max_early_data_size(
+IMPORT_C void mbedtls_ssl_tls13_conf_max_early_data_size(
     mbedtls_ssl_config *conf, uint32_t max_early_data_size);
 #endif /* MBEDTLS_SSL_SRV_C */
 
@@ -2030,7 +2030,7 @@ void mbedtls_ssl_tls13_conf_max_early_data_size(
  * \param f_vrfy   The verification callback to use during CRT verification.
  * \param p_vrfy   The opaque context to be passed to the callback.
  */
-void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_verify(mbedtls_ssl_config *conf,
                              int (*f_vrfy)(void *, mbedtls_x509_crt *, int, uint32_t *),
                              void *p_vrfy);
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
@@ -2327,7 +2327,7 @@ IMPORT_C int mbedtls_ssl_get_peer_cid(mbedtls_ssl_context *ssl,
  * \param ssl      SSL context
  * \param mtu      Value of the path MTU in bytes
  */
-void mbedtls_ssl_set_mtu(mbedtls_ssl_context *ssl, uint16_t mtu);
+IMPORT_C void mbedtls_ssl_set_mtu(mbedtls_ssl_context *ssl, uint16_t mtu);
 #endif /* MBEDTLS_SSL_PROTO_DTLS */
 
 #if defined(MBEDTLS_X509_CRT_PARSE_C)
@@ -2349,7 +2349,7 @@ void mbedtls_ssl_set_mtu(mbedtls_ssl_context *ssl, uint16_t mtu);
  * \param f_vrfy   The verification callback to use during CRT verification.
  * \param p_vrfy   The opaque context to be passed to the callback.
  */
-void mbedtls_ssl_set_verify(mbedtls_ssl_context *ssl,
+IMPORT_C void mbedtls_ssl_set_verify(mbedtls_ssl_context *ssl,
                             int (*f_vrfy)(void *, mbedtls_x509_crt *, int, uint32_t *),
                             void *p_vrfy);
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
@@ -2370,7 +2370,7 @@ void mbedtls_ssl_set_verify(mbedtls_ssl_context *ssl,
  * \note           With non-blocking I/O, you may also skip this function
  *                 altogether and handle timeouts at the application layer.
  */
-void mbedtls_ssl_conf_read_timeout(mbedtls_ssl_config *conf, uint32_t timeout);
+IMPORT_C void mbedtls_ssl_conf_read_timeout(mbedtls_ssl_config *conf, uint32_t timeout);
 
 /**
  * \brief          Check whether a buffer contains a valid and authentic record
@@ -2416,7 +2416,7 @@ void mbedtls_ssl_conf_read_timeout(mbedtls_ssl_config *conf, uint32_t timeout);
  *                 In this case, the SSL context becomes unusable and needs
  *                 to be freed or reset before reuse.
  */
-int mbedtls_ssl_check_record(mbedtls_ssl_context const *ssl,
+IMPORT_C int mbedtls_ssl_check_record(mbedtls_ssl_context const *ssl,
                              unsigned char *buf,
                              size_t buflen);
 
@@ -2440,7 +2440,7 @@ int mbedtls_ssl_check_record(mbedtls_ssl_context const *ssl,
  * \note           See also the "DTLS tutorial" article in our knowledge base.
  *                 https://mbed-tls.readthedocs.io/en/latest/kb/how-to/dtls-tutorial
  */
-void mbedtls_ssl_set_timer_cb(mbedtls_ssl_context *ssl,
+IMPORT_C void mbedtls_ssl_set_timer_cb(mbedtls_ssl_context *ssl,
                               void *p_timer,
                               mbedtls_ssl_set_timer_t *f_set_timer,
                               mbedtls_ssl_get_timer_t *f_get_timer);
@@ -2532,7 +2532,7 @@ typedef int mbedtls_ssl_ticket_parse_t(void *p_ticket,
  * \param f_ticket_parse    Callback for parsing a ticket
  * \param p_ticket          Context shared by the two callbacks
  */
-void mbedtls_ssl_conf_session_tickets_cb(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_session_tickets_cb(mbedtls_ssl_config *conf,
                                          mbedtls_ssl_ticket_write_t *f_ticket_write,
                                          mbedtls_ssl_ticket_parse_t *f_ticket_parse,
                                          void *p_ticket);
@@ -2556,7 +2556,7 @@ void mbedtls_ssl_conf_session_tickets_cb(mbedtls_ssl_config *conf,
  * \param p_export_keys  The opaque context pointer to be passed to the
  *                       callback \p f_export_keys.
  */
-void mbedtls_ssl_set_export_keys_cb(mbedtls_ssl_context *ssl,
+IMPORT_C void mbedtls_ssl_set_export_keys_cb(mbedtls_ssl_context *ssl,
                                     mbedtls_ssl_export_keys_t *f_export_keys,
                                     void *p_export_keys);
 
@@ -2717,7 +2717,7 @@ static inline uintptr_t mbedtls_ssl_get_user_data_n(
  *                          mbedtls_ssl_conf_get_async_config_data(). The
  *                          library stores this value without dereferencing it.
  */
-void mbedtls_ssl_conf_async_private_cb(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_async_private_cb(mbedtls_ssl_config *conf,
                                        mbedtls_ssl_async_sign_t *f_async_sign,
                                        mbedtls_ssl_async_decrypt_t *f_async_decrypt,
                                        mbedtls_ssl_async_resume_t *f_async_resume,
@@ -2732,7 +2732,7 @@ void mbedtls_ssl_conf_async_private_cb(mbedtls_ssl_config *conf,
  * \return          The configuration data set by
  *                  mbedtls_ssl_conf_async_private_cb().
  */
-void *mbedtls_ssl_conf_get_async_config_data(const mbedtls_ssl_config *conf);
+IMPORT_C void *mbedtls_ssl_conf_get_async_config_data(const mbedtls_ssl_config *conf);
 
 /**
  * \brief           Retrieve the asynchronous operation user context.
@@ -2748,7 +2748,7 @@ void *mbedtls_ssl_conf_get_async_config_data(const mbedtls_ssl_config *conf);
  *                  called during the current handshake, this function returns
  *                  \c NULL.
  */
-void *mbedtls_ssl_get_async_operation_data(const mbedtls_ssl_context *ssl);
+IMPORT_C void *mbedtls_ssl_get_async_operation_data(const mbedtls_ssl_context *ssl);
 
 /**
  * \brief           Retrieve the asynchronous operation user context.
@@ -2761,7 +2761,7 @@ void *mbedtls_ssl_get_async_operation_data(const mbedtls_ssl_context *ssl);
  *                  Call mbedtls_ssl_get_async_operation_data() later during the
  *                  same handshake to retrieve this value.
  */
-void mbedtls_ssl_set_async_operation_data(mbedtls_ssl_context *ssl,
+IMPORT_C void mbedtls_ssl_set_async_operation_data(mbedtls_ssl_context *ssl,
                                           void *ctx);
 #endif /* MBEDTLS_SSL_ASYNC_PRIVATE */
 
@@ -2829,7 +2829,7 @@ typedef int mbedtls_ssl_cookie_check_t(void *ctx,
  * \param f_cookie_check    Cookie check callback
  * \param p_cookie          Context for both callbacks
  */
-void mbedtls_ssl_conf_dtls_cookies(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_dtls_cookies(mbedtls_ssl_config *conf,
                                    mbedtls_ssl_cookie_write_t *f_cookie_write,
                                    mbedtls_ssl_cookie_check_t *f_cookie_check,
                                    void *p_cookie);
@@ -2853,7 +2853,7 @@ void mbedtls_ssl_conf_dtls_cookies(mbedtls_ssl_config *conf,
  *                 MBEDTLS_ERR_SSL_BAD_INPUT_DATA if used on client,
  *                 MBEDTLS_ERR_SSL_ALLOC_FAILED if out of memory.
  */
-int mbedtls_ssl_set_client_transport_id(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_set_client_transport_id(mbedtls_ssl_context *ssl,
                                         const unsigned char *info,
                                         size_t ilen);
 
@@ -2875,7 +2875,7 @@ int mbedtls_ssl_set_client_transport_id(mbedtls_ssl_context *ssl,
  *                 packets and needs information about them to adjust its
  *                 transmission strategy, then you'll want to disable this.
  */
-void mbedtls_ssl_conf_dtls_anti_replay(mbedtls_ssl_config *conf, char mode);
+IMPORT_C void mbedtls_ssl_conf_dtls_anti_replay(mbedtls_ssl_config *conf, char mode);
 #endif /* MBEDTLS_SSL_DTLS_ANTI_REPLAY */
 
 /**
@@ -2901,7 +2901,7 @@ void mbedtls_ssl_conf_dtls_anti_replay(mbedtls_ssl_config *conf, char mode);
  *                 might make us waste resources checking authentication on
  *                 many bogus packets.
  */
-void mbedtls_ssl_conf_dtls_badmac_limit(mbedtls_ssl_config *conf, unsigned limit);
+IMPORT_C void mbedtls_ssl_conf_dtls_badmac_limit(mbedtls_ssl_config *conf, unsigned limit);
 
 #if defined(MBEDTLS_SSL_PROTO_DTLS)
 
@@ -2933,7 +2933,7 @@ void mbedtls_ssl_conf_dtls_badmac_limit(mbedtls_ssl_config *conf, unsigned limit
  *                 are currently always sent in separate datagrams.
  *
  */
-void mbedtls_ssl_set_datagram_packing(mbedtls_ssl_context *ssl,
+IMPORT_C void mbedtls_ssl_set_datagram_packing(mbedtls_ssl_context *ssl,
                                       unsigned allow_packing);
 
 /**
@@ -2967,7 +2967,7 @@ void mbedtls_ssl_set_datagram_packing(mbedtls_ssl_context *ssl,
  *                 goes: send ... 1s -> resend ... 2s -> resend ... 4s ->
  *                 resend ... 5s -> give up and return a timeout error.
  */
-void mbedtls_ssl_conf_handshake_timeout(mbedtls_ssl_config *conf, uint32_t min, uint32_t max);
+IMPORT_C void mbedtls_ssl_conf_handshake_timeout(mbedtls_ssl_config *conf, uint32_t min, uint32_t max);
 #endif /* MBEDTLS_SSL_PROTO_DTLS */
 
 #if defined(MBEDTLS_SSL_SRV_C)
@@ -3216,7 +3216,7 @@ IMPORT_C void mbedtls_ssl_conf_ciphersuites(mbedtls_ssl_config *conf,
  *
  */
 
-void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
                                                const int kex_modes);
 #endif /* MBEDTLS_SSL_PROTO_TLS1_3 */
 
@@ -3255,7 +3255,7 @@ void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
  * \return              #MBEDTLS_ERR_SSL_BAD_INPUT_DATA if \p own_cid_len
  *                      is too large.
  */
-int mbedtls_ssl_conf_cid(mbedtls_ssl_config *conf, size_t len,
+IMPORT_C int mbedtls_ssl_conf_cid(mbedtls_ssl_config *conf, size_t len,
                          int ignore_other_cids);
 #endif /* MBEDTLS_SSL_DTLS_CONNECTION_ID */
 
@@ -3270,7 +3270,7 @@ int mbedtls_ssl_conf_cid(mbedtls_ssl_config *conf, size_t len,
  * \param conf     SSL configuration
  * \param profile  Profile to use
  */
-void mbedtls_ssl_conf_cert_profile(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_cert_profile(mbedtls_ssl_config *conf,
                                    const mbedtls_x509_crt_profile *profile);
 
 /**
@@ -3360,7 +3360,7 @@ void mbedtls_ssl_conf_dn_hints(mbedtls_ssl_config *conf,
  *                 to guarantee this (for example through a mutex
  *                 contained in the callback context pointed to by \p p_ca_cb).
  */
-void mbedtls_ssl_conf_ca_cb(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_ca_cb(mbedtls_ssl_config *conf,
                             mbedtls_x509_crt_ca_cb_t f_ca_cb,
                             void *p_ca_cb);
 #endif /* MBEDTLS_X509_TRUSTED_CERTIFICATE_CALLBACK */
@@ -3401,7 +3401,7 @@ void mbedtls_ssl_conf_ca_cb(mbedtls_ssl_config *conf,
  *
  * \return         0 on success or MBEDTLS_ERR_SSL_ALLOC_FAILED
  */
-int mbedtls_ssl_conf_own_cert(mbedtls_ssl_config *conf,
+IMPORT_C int mbedtls_ssl_conf_own_cert(mbedtls_ssl_config *conf,
                               mbedtls_x509_crt *own_cert,
                               mbedtls_pk_context *pk_key);
 #endif /* MBEDTLS_X509_CRT_PARSE_C */
@@ -3439,7 +3439,7 @@ int mbedtls_ssl_conf_own_cert(mbedtls_ssl_config *conf,
  *                 can be configured. In this case, the old PSK(s) remain intact.
  * \return         Another negative error code on other kinds of failure.
  */
-int mbedtls_ssl_conf_psk(mbedtls_ssl_config *conf,
+IMPORT_C int mbedtls_ssl_conf_psk(mbedtls_ssl_config *conf,
                          const unsigned char *psk, size_t psk_len,
                          const unsigned char *psk_identity, size_t psk_identity_len);
 
@@ -3481,7 +3481,7 @@ int mbedtls_ssl_conf_psk(mbedtls_ssl_config *conf,
  *                 can be configured. In this case, the old PSK(s) remain intact.
  * \return         Another negative error code on other kinds of failure.
  */
-int mbedtls_ssl_conf_psk_opaque(mbedtls_ssl_config *conf,
+IMPORT_C int mbedtls_ssl_conf_psk_opaque(mbedtls_ssl_config *conf,
                                 mbedtls_svc_key_id_t psk,
                                 const unsigned char *psk_identity,
                                 size_t psk_identity_len);
@@ -3503,7 +3503,7 @@ int mbedtls_ssl_conf_psk_opaque(mbedtls_ssl_config *conf,
  * \return         \c 0 if successful.
  * \return         An \c MBEDTLS_ERR_SSL_XXX error code on failure.
  */
-int mbedtls_ssl_set_hs_psk(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_set_hs_psk(mbedtls_ssl_context *ssl,
                            const unsigned char *psk, size_t psk_len);
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
@@ -3527,7 +3527,7 @@ int mbedtls_ssl_set_hs_psk(mbedtls_ssl_context *ssl,
  * \return         \c 0 if successful.
  * \return         An \c MBEDTLS_ERR_SSL_XXX error code on failure.
  */
-int mbedtls_ssl_set_hs_psk_opaque(mbedtls_ssl_context *ssl,
+IMPORT_C int mbedtls_ssl_set_hs_psk_opaque(mbedtls_ssl_context *ssl,
                                   mbedtls_svc_key_id_t psk);
 #endif /* MBEDTLS_USE_PSA_CRYPTO */
 
@@ -3570,7 +3570,7 @@ int mbedtls_ssl_set_hs_psk_opaque(mbedtls_ssl_context *ssl,
  * \param p_psk    A pointer to an opaque structure to be passed to
  *                 the callback, for example a PSK store.
  */
-void mbedtls_ssl_conf_psk_cb(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_psk_cb(mbedtls_ssl_config *conf,
                              int (*f_psk)(void *, mbedtls_ssl_context *, const unsigned char *,
                                           size_t),
                              void *p_psk);
@@ -3591,7 +3591,7 @@ void mbedtls_ssl_conf_psk_cb(mbedtls_ssl_config *conf,
  *
  * \return         0 if successful
  */
-int mbedtls_ssl_conf_dh_param_bin(mbedtls_ssl_config *conf,
+IMPORT_C int mbedtls_ssl_conf_dh_param_bin(mbedtls_ssl_config *conf,
                                   const unsigned char *dhm_P, size_t P_len,
                                   const unsigned char *dhm_G,  size_t G_len);
 
@@ -3604,7 +3604,7 @@ int mbedtls_ssl_conf_dh_param_bin(mbedtls_ssl_config *conf,
  *
  * \return         0 if successful
  */
-int mbedtls_ssl_conf_dh_param_ctx(mbedtls_ssl_config *conf, mbedtls_dhm_context *dhm_ctx);
+IMPORT_C int mbedtls_ssl_conf_dh_param_ctx(mbedtls_ssl_config *conf, mbedtls_dhm_context *dhm_ctx);
 #endif /* MBEDTLS_DHM_C && defined(MBEDTLS_SSL_SRV_C) */
 
 #if defined(MBEDTLS_DHM_C) && defined(MBEDTLS_SSL_CLI_C)
@@ -3616,7 +3616,7 @@ int mbedtls_ssl_conf_dh_param_ctx(mbedtls_ssl_config *conf, mbedtls_dhm_context 
  * \param conf     SSL configuration
  * \param bitlen   Minimum bit length of the DHM prime
  */
-void mbedtls_ssl_conf_dhm_min_bitlen(mbedtls_ssl_config *conf,
+IMPORT_C void mbedtls_ssl_conf_dhm_min_bitlen(mbedtls_ssl_config *conf,
                                      unsigned int bitlen);
 #endif /* MBEDTLS_DHM_C && MBEDTLS_SSL_CLI_C */
 

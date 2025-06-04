@@ -106,7 +106,7 @@
  *
  * \return      The number of leading zero bits in \p a.
  */
-size_t mbedtls_mpi_core_clz(mbedtls_mpi_uint a);
+IMPORT_C size_t mbedtls_mpi_core_clz(mbedtls_mpi_uint a);
 
 /** Return the minimum number of bits required to represent the value held
  * in the MPI.
@@ -118,7 +118,7 @@ size_t mbedtls_mpi_core_clz(mbedtls_mpi_uint a);
  *
  * \return      The number of bits in \p A.
  */
-size_t mbedtls_mpi_core_bitlen(const mbedtls_mpi_uint *A, size_t A_limbs);
+ IMPORT_C size_t mbedtls_mpi_core_bitlen(const mbedtls_mpi_uint *A, size_t A_limbs);
 
 /** Convert a big-endian byte array aligned to the size of mbedtls_mpi_uint
  * into the storage form used by mbedtls_mpi.
@@ -126,7 +126,7 @@ size_t mbedtls_mpi_core_bitlen(const mbedtls_mpi_uint *A, size_t A_limbs);
  * \param[in,out] A     The address of the MPI.
  * \param A_limbs       The number of limbs of \p A.
  */
-void mbedtls_mpi_core_bigendian_to_host(mbedtls_mpi_uint *A,
+IMPORT_C void mbedtls_mpi_core_bigendian_to_host(mbedtls_mpi_uint *A,
                                         size_t A_limbs);
 
 /** \brief         Compare a machine integer with an MPI.
@@ -141,7 +141,7 @@ void mbedtls_mpi_core_bigendian_to_host(mbedtls_mpi_uint *A,
  *
  * \return         1 if \p min is less than or equal to \p A, otherwise 0.
  */
-unsigned mbedtls_mpi_core_uint_le_mpi(mbedtls_mpi_uint min,
+IMPORT_C unsigned mbedtls_mpi_core_uint_le_mpi(mbedtls_mpi_uint min,
                                       const mbedtls_mpi_uint *A,
                                       size_t A_limbs);
 
@@ -166,7 +166,7 @@ unsigned mbedtls_mpi_core_uint_le_mpi(mbedtls_mpi_uint min,
  *                 is indeterminate, and the resulting value in \p X might be
  *                 neither its original value nor the value in \p A.
  */
-void mbedtls_mpi_core_cond_assign(mbedtls_mpi_uint *X,
+IMPORT_C void mbedtls_mpi_core_cond_assign(mbedtls_mpi_uint *X,
                                   const mbedtls_mpi_uint *A,
                                   size_t limbs,
                                   unsigned char assign);
@@ -192,7 +192,7 @@ void mbedtls_mpi_core_cond_assign(mbedtls_mpi_uint *X,
  *                 is indeterminate, and both \p X and \p Y might end up with
  *                 values different to either of the original ones.
  */
-void mbedtls_mpi_core_cond_swap(mbedtls_mpi_uint *X,
+IMPORT_C void mbedtls_mpi_core_cond_swap(mbedtls_mpi_uint *X,
                                 mbedtls_mpi_uint *Y,
                                 size_t limbs,
                                 unsigned char swap);
@@ -211,7 +211,7 @@ void mbedtls_mpi_core_cond_swap(mbedtls_mpi_uint *X,
  * \return       #MBEDTLS_ERR_MPI_BUFFER_TOO_SMALL if \p X isn't
  *               large enough to hold the value in \p input.
  */
-int mbedtls_mpi_core_read_le(mbedtls_mpi_uint *X,
+IMPORT_C int mbedtls_mpi_core_read_le(mbedtls_mpi_uint *X,
                              size_t X_limbs,
                              const unsigned char *input,
                              size_t input_length);
@@ -233,7 +233,7 @@ int mbedtls_mpi_core_read_le(mbedtls_mpi_uint *X,
  * \return       #MBEDTLS_ERR_MPI_BUFFER_TOO_SMALL if \p X isn't
  *               large enough to hold the value in \p input.
  */
-int mbedtls_mpi_core_read_be(mbedtls_mpi_uint *X,
+IMPORT_C int mbedtls_mpi_core_read_be(mbedtls_mpi_uint *X,
                              size_t X_limbs,
                              const unsigned char *input,
                              size_t input_length);
@@ -253,7 +253,7 @@ int mbedtls_mpi_core_read_be(mbedtls_mpi_uint *X,
  * \return       #MBEDTLS_ERR_MPI_BUFFER_TOO_SMALL if \p output isn't
  *               large enough to hold the value of \p A.
  */
-int mbedtls_mpi_core_write_le(const mbedtls_mpi_uint *A,
+IMPORT_C int mbedtls_mpi_core_write_le(const mbedtls_mpi_uint *A,
                               size_t A_limbs,
                               unsigned char *output,
                               size_t output_length);
@@ -273,7 +273,7 @@ int mbedtls_mpi_core_write_le(const mbedtls_mpi_uint *A,
  * \return       #MBEDTLS_ERR_MPI_BUFFER_TOO_SMALL if \p output isn't
  *               large enough to hold the value of \p A.
  */
-int mbedtls_mpi_core_write_be(const mbedtls_mpi_uint *A,
+IMPORT_C int mbedtls_mpi_core_write_be(const mbedtls_mpi_uint *A,
                               size_t A_limbs,
                               unsigned char *output,
                               size_t output_length);
@@ -290,7 +290,7 @@ int mbedtls_mpi_core_write_be(const mbedtls_mpi_uint *A,
  * \param limbs         The number of limbs of \p X. This must be at least 1.
  * \param count         The number of bits to shift by.
  */
-void mbedtls_mpi_core_shift_r(mbedtls_mpi_uint *X, size_t limbs,
+IMPORT_C void mbedtls_mpi_core_shift_r(mbedtls_mpi_uint *X, size_t limbs,
                               size_t count);
 
 /**
@@ -310,7 +310,7 @@ void mbedtls_mpi_core_shift_r(mbedtls_mpi_uint *X, size_t limbs,
  *
  * \return          1 if `A + B >= 2^(biL*limbs)`, 0 otherwise.
  */
-mbedtls_mpi_uint mbedtls_mpi_core_add(mbedtls_mpi_uint *X,
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_add(mbedtls_mpi_uint *X,
                                       const mbedtls_mpi_uint *A,
                                       const mbedtls_mpi_uint *B,
                                       size_t limbs);
@@ -345,7 +345,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_add(mbedtls_mpi_uint *X,
  *
  * \return           1 if `X + cond * A >= 2^(biL*limbs)`, 0 otherwise.
  */
-mbedtls_mpi_uint mbedtls_mpi_core_add_if(mbedtls_mpi_uint *X,
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_add_if(mbedtls_mpi_uint *X,
                                          const mbedtls_mpi_uint *A,
                                          size_t limbs,
                                          unsigned cond);
@@ -368,7 +368,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_add_if(mbedtls_mpi_uint *X,
  * \return          1 if `A < B`.
  *                  0 if `A >= B`.
  */
-mbedtls_mpi_uint mbedtls_mpi_core_sub(mbedtls_mpi_uint *X,
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_sub(mbedtls_mpi_uint *X,
                                       const mbedtls_mpi_uint *A,
                                       const mbedtls_mpi_uint *B,
                                       size_t limbs);
@@ -394,7 +394,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_sub(mbedtls_mpi_uint *X,
  *
  * \return           The carry at the end of the operation.
  */
-mbedtls_mpi_uint mbedtls_mpi_core_mla(mbedtls_mpi_uint *X, size_t X_limbs,
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_mla(mbedtls_mpi_uint *X, size_t X_limbs,
                                       const mbedtls_mpi_uint *A, size_t A_limbs,
                                       mbedtls_mpi_uint b);
 
@@ -407,7 +407,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_mla(mbedtls_mpi_uint *X, size_t X_limbs,
  *
  * \return       The initialisation value for fast Montgomery modular multiplication
  */
-mbedtls_mpi_uint mbedtls_mpi_core_montmul_init(const mbedtls_mpi_uint *N);
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_montmul_init(const mbedtls_mpi_uint *N);
 
 /**
  * \brief Montgomery multiplication: X = A * B * R^-1 mod N (HAC 14.36)
@@ -444,7 +444,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_montmul_init(const mbedtls_mpi_uint *N);
  *                          It must not alias or otherwise overlap any of the
  *                          other parameters.
  */
-void mbedtls_mpi_core_montmul(mbedtls_mpi_uint *X,
+IMPORT_C void mbedtls_mpi_core_montmul(mbedtls_mpi_uint *X,
                               const mbedtls_mpi_uint *A,
                               const mbedtls_mpi_uint *B, size_t B_limbs,
                               const mbedtls_mpi_uint *N, size_t AN_limbs,
@@ -465,7 +465,7 @@ void mbedtls_mpi_core_montmul(mbedtls_mpi_uint *X,
  * \return        #MBEDTLS_ERR_MPI_DIVISION_BY_ZERO if \p N modulus is zero.
  * \return        #MBEDTLS_ERR_MPI_NEGATIVE_VALUE if \p N modulus is negative.
  */
-int mbedtls_mpi_core_get_mont_r2_unsafe(mbedtls_mpi *X,
+IMPORT_C int mbedtls_mpi_core_get_mont_r2_unsafe(mbedtls_mpi *X,
                                         const mbedtls_mpi *N);
 
 #if defined(MBEDTLS_TEST_HOOKS)
@@ -507,7 +507,7 @@ void mbedtls_mpi_core_ct_uint_table_lookup(mbedtls_mpi_uint *dest,
  *                 as a big-endian representation of an MPI; this can
  *                 be relevant in applications like deterministic ECDSA.
  */
-int mbedtls_mpi_core_fill_random(mbedtls_mpi_uint *X, size_t X_limbs,
+IMPORT_C int mbedtls_mpi_core_fill_random(mbedtls_mpi_uint *X, size_t X_limbs,
                                  size_t bytes,
                                  int (*f_rng)(void *, unsigned char *, size_t),
                                  void *p_rng);
@@ -542,7 +542,7 @@ int mbedtls_mpi_core_fill_random(mbedtls_mpi_uint *X, size_t X_limbs,
  *                 is significantly larger than \p min, which is the case
  *                 for all usual cryptographic applications.
  */
-int mbedtls_mpi_core_random(mbedtls_mpi_uint *X,
+IMPORT_C int mbedtls_mpi_core_random(mbedtls_mpi_uint *X,
                             mbedtls_mpi_uint min,
                             const mbedtls_mpi_uint *N,
                             size_t limbs,
@@ -568,7 +568,7 @@ int mbedtls_mpi_core_random(mbedtls_mpi_uint *X,
  * \return         The number of limbs of working memory required by
  *                 `mbedtls_mpi_core_exp_mod()`.
  */
-size_t mbedtls_mpi_core_exp_mod_working_limbs(size_t AN_limbs, size_t E_limbs);
+IMPORT_C size_t mbedtls_mpi_core_exp_mod_working_limbs(size_t AN_limbs, size_t E_limbs);
 
 /**
  * \brief            Perform a modular exponentiation with secret exponent:
@@ -597,7 +597,7 @@ size_t mbedtls_mpi_core_exp_mod_working_limbs(size_t AN_limbs, size_t E_limbs);
  *                   longer needed, and before freeing it if it was dynamically
  *                   allocated.
  */
-void mbedtls_mpi_core_exp_mod(mbedtls_mpi_uint *X,
+IMPORT_C void mbedtls_mpi_core_exp_mod(mbedtls_mpi_uint *X,
                               const mbedtls_mpi_uint *A,
                               const mbedtls_mpi_uint *N, size_t AN_limbs,
                               const mbedtls_mpi_uint *E, size_t E_limbs,
@@ -624,7 +624,7 @@ void mbedtls_mpi_core_exp_mod(mbedtls_mpi_uint *X,
  * \return          1 if `A < b`.
  *                  0 if `A >= b`.
  */
-mbedtls_mpi_uint mbedtls_mpi_core_sub_int(mbedtls_mpi_uint *X,
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_sub_int(mbedtls_mpi_uint *X,
                                           const mbedtls_mpi_uint *A,
                                           mbedtls_mpi_uint b,
                                           size_t limbs);
@@ -639,7 +639,7 @@ mbedtls_mpi_uint mbedtls_mpi_core_sub_int(mbedtls_mpi_uint *X,
  * \return        0 if `A == 0`
  *                non-0 (may be any value) if `A != 0`.
  */
-mbedtls_mpi_uint mbedtls_mpi_core_check_zero_ct(const mbedtls_mpi_uint *A,
+IMPORT_C mbedtls_mpi_uint mbedtls_mpi_core_check_zero_ct(const mbedtls_mpi_uint *A,
                                                 size_t limbs);
 
 /**
@@ -690,7 +690,7 @@ static inline size_t mbedtls_mpi_core_montmul_working_limbs(size_t AN_limbs)
  *                          It must not alias or otherwise overlap any of the
  *                          other parameters.
  */
-void mbedtls_mpi_core_to_mont_rep(mbedtls_mpi_uint *X,
+IMPORT_C void mbedtls_mpi_core_to_mont_rep(mbedtls_mpi_uint *X,
                                   const mbedtls_mpi_uint *A,
                                   const mbedtls_mpi_uint *N,
                                   size_t AN_limbs,
@@ -727,7 +727,7 @@ void mbedtls_mpi_core_to_mont_rep(mbedtls_mpi_uint *X,
  *                          It must not alias or otherwise overlap any of the
  *                          other parameters.
  */
-void mbedtls_mpi_core_from_mont_rep(mbedtls_mpi_uint *X,
+IMPORT_C void mbedtls_mpi_core_from_mont_rep(mbedtls_mpi_uint *X,
                                     const mbedtls_mpi_uint *A,
                                     const mbedtls_mpi_uint *N,
                                     size_t AN_limbs,

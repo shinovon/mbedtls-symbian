@@ -528,7 +528,7 @@ int mbedtls_ecp_restart_is_enabled(void);
 /*
  * Get the type of a curve
  */
-mbedtls_ecp_curve_type mbedtls_ecp_get_type(const mbedtls_ecp_group *grp);
+IMPORT_C mbedtls_ecp_curve_type mbedtls_ecp_get_type(const mbedtls_ecp_group *grp);
 
 /**
  * \brief           This function retrieves the information defined in
@@ -542,7 +542,7 @@ mbedtls_ecp_curve_type mbedtls_ecp_get_type(const mbedtls_ecp_group *grp);
  *
  * \return          A statically allocated array. The last entry is 0.
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_list(void);
+IMPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_list(void);
 
 /**
  * \brief           This function retrieves the list of internal group
@@ -558,7 +558,7 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_list(void);
  * \return          A statically allocated array,
  *                  terminated with MBEDTLS_ECP_DP_NONE.
  */
-const mbedtls_ecp_group_id *mbedtls_ecp_grp_id_list(void);
+IMPORT_C const mbedtls_ecp_group_id *mbedtls_ecp_grp_id_list(void);
 
 /**
  * \brief           This function retrieves curve information from an internal
@@ -569,7 +569,7 @@ const mbedtls_ecp_group_id *mbedtls_ecp_grp_id_list(void);
  * \return          The associated curve information on success.
  * \return          NULL on failure.
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_grp_id(mbedtls_ecp_group_id grp_id);
+IMPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_grp_id(mbedtls_ecp_group_id grp_id);
 
 /**
  * \brief           This function retrieves curve information from a TLS
@@ -580,7 +580,7 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_grp_id(mbedtls_ecp_gro
  * \return          The associated curve information on success.
  * \return          NULL on failure.
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_tls_id(uint16_t tls_id);
+IMPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_tls_id(uint16_t tls_id);
 
 /**
  * \brief           This function retrieves curve information from a
@@ -591,14 +591,14 @@ const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_tls_id(uint16_t tls_id
  * \return          The associated curve information on success.
  * \return          NULL on failure.
  */
-const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_name(const char *name);
+IMPORT_C const mbedtls_ecp_curve_info *mbedtls_ecp_curve_info_from_name(const char *name);
 
 /**
  * \brief           This function initializes a point as zero.
  *
  * \param pt        The point to initialize.
  */
-void mbedtls_ecp_point_init(mbedtls_ecp_point *pt);
+IMPORT_C void mbedtls_ecp_point_init(mbedtls_ecp_point *pt);
 
 /**
  * \brief           This function initializes an ECP group context
@@ -609,21 +609,21 @@ void mbedtls_ecp_point_init(mbedtls_ecp_point *pt);
  *                  mbedtls_ecp_group_load() or mbedtls_ecp_tls_read_group()
  *                  functions.
  */
-void mbedtls_ecp_group_init(mbedtls_ecp_group *grp);
+IMPORT_C void mbedtls_ecp_group_init(mbedtls_ecp_group *grp);
 
 /**
  * \brief           This function initializes a key pair as an invalid one.
  *
  * \param key       The key pair to initialize.
  */
-void mbedtls_ecp_keypair_init(mbedtls_ecp_keypair *key);
+IMPORT_C void mbedtls_ecp_keypair_init(mbedtls_ecp_keypair *key);
 
 /**
  * \brief           This function frees the components of a point.
  *
  * \param pt        The point to free.
  */
-void mbedtls_ecp_point_free(mbedtls_ecp_point *pt);
+IMPORT_C void mbedtls_ecp_point_free(mbedtls_ecp_point *pt);
 
 /**
  * \brief           This function frees the components of an ECP group.
@@ -632,7 +632,7 @@ void mbedtls_ecp_point_free(mbedtls_ecp_point *pt);
  *                  case this function returns immediately. If it is not
  *                  \c NULL, it must point to an initialized ECP group.
  */
-void mbedtls_ecp_group_free(mbedtls_ecp_group *grp);
+IMPORT_C void mbedtls_ecp_group_free(mbedtls_ecp_group *grp);
 
 /**
  * \brief           This function frees the components of a key pair.
@@ -641,7 +641,7 @@ void mbedtls_ecp_group_free(mbedtls_ecp_group *grp);
  *                  case this function returns immediately. If it is not
  *                  \c NULL, it must point to an initialized ECP key pair.
  */
-void mbedtls_ecp_keypair_free(mbedtls_ecp_keypair *key);
+IMPORT_C void mbedtls_ecp_keypair_free(mbedtls_ecp_keypair *key);
 
 #if defined(MBEDTLS_ECP_RESTARTABLE)
 /**
@@ -673,7 +673,7 @@ void mbedtls_ecp_restart_free(mbedtls_ecp_restart_ctx *ctx);
  * \return          #MBEDTLS_ERR_MPI_ALLOC_FAILED on memory-allocation failure.
  * \return          Another negative error code for other kinds of failure.
  */
-int mbedtls_ecp_copy(mbedtls_ecp_point *P, const mbedtls_ecp_point *Q);
+IMPORT_C int mbedtls_ecp_copy(mbedtls_ecp_point *P, const mbedtls_ecp_point *Q);
 
 /**
  * \brief           This function copies the contents of group \p src into
@@ -686,7 +686,7 @@ int mbedtls_ecp_copy(mbedtls_ecp_point *P, const mbedtls_ecp_point *Q);
  * \return          #MBEDTLS_ERR_MPI_ALLOC_FAILED on memory-allocation failure.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_group_copy(mbedtls_ecp_group *dst,
+IMPORT_C int mbedtls_ecp_group_copy(mbedtls_ecp_group *dst,
                            const mbedtls_ecp_group *src);
 
 /**
@@ -698,7 +698,7 @@ int mbedtls_ecp_group_copy(mbedtls_ecp_group *dst,
  * \return          #MBEDTLS_ERR_MPI_ALLOC_FAILED on memory-allocation failure.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_set_zero(mbedtls_ecp_point *pt);
+IMPORT_C int mbedtls_ecp_set_zero(mbedtls_ecp_point *pt);
 
 /**
  * \brief           This function checks if a point is the point at infinity.
@@ -709,7 +709,7 @@ int mbedtls_ecp_set_zero(mbedtls_ecp_point *pt);
  * \return          \c 0 if the point is non-zero.
  * \return          A negative error code on failure.
  */
-int mbedtls_ecp_is_zero(mbedtls_ecp_point *pt);
+IMPORT_C int mbedtls_ecp_is_zero(mbedtls_ecp_point *pt);
 
 /**
  * \brief           This function compares two points.
@@ -723,7 +723,7 @@ int mbedtls_ecp_is_zero(mbedtls_ecp_point *pt);
  * \return          \c 0 if the points are equal.
  * \return          #MBEDTLS_ERR_ECP_BAD_INPUT_DATA if the points are not equal.
  */
-int mbedtls_ecp_point_cmp(const mbedtls_ecp_point *P,
+IMPORT_C int mbedtls_ecp_point_cmp(const mbedtls_ecp_point *P,
                           const mbedtls_ecp_point *Q);
 
 /**
@@ -738,7 +738,7 @@ int mbedtls_ecp_point_cmp(const mbedtls_ecp_point *P,
  * \return          \c 0 on success.
  * \return          An \c MBEDTLS_ERR_MPI_XXX error code on failure.
  */
-int mbedtls_ecp_point_read_string(mbedtls_ecp_point *P, int radix,
+IMPORT_C int mbedtls_ecp_point_read_string(mbedtls_ecp_point *P, int radix,
                                   const char *x, const char *y);
 
 /**
@@ -766,7 +766,7 @@ int mbedtls_ecp_point_read_string(mbedtls_ecp_point *P, int radix,
  *                  or the export for the given group is not implemented.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_point_write_binary(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_point_write_binary(const mbedtls_ecp_group *grp,
                                    const mbedtls_ecp_point *P,
                                    int format, size_t *olen,
                                    unsigned char *buf, size_t buflen);
@@ -796,7 +796,7 @@ int mbedtls_ecp_point_write_binary(const mbedtls_ecp_group *grp,
  * \return          #MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE if the import for the
  *                  given group is not implemented.
  */
-int mbedtls_ecp_point_read_binary(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_point_read_binary(const mbedtls_ecp_group *grp,
                                   mbedtls_ecp_point *P,
                                   const unsigned char *buf, size_t ilen);
 
@@ -818,7 +818,7 @@ int mbedtls_ecp_point_read_binary(const mbedtls_ecp_group *grp,
  *                  failure.
  * \return          #MBEDTLS_ERR_ECP_BAD_INPUT_DATA if input is invalid.
  */
-int mbedtls_ecp_tls_read_point(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_tls_read_point(const mbedtls_ecp_group *grp,
                                mbedtls_ecp_point *pt,
                                const unsigned char **buf, size_t len);
 
@@ -844,7 +844,7 @@ int mbedtls_ecp_tls_read_point(const mbedtls_ecp_group *grp,
  *                  is too small to hold the exported point.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_tls_write_point(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_tls_write_point(const mbedtls_ecp_group *grp,
                                 const mbedtls_ecp_point *pt,
                                 int format, size_t *olen,
                                 unsigned char *buf, size_t blen);
@@ -866,7 +866,7 @@ int mbedtls_ecp_tls_write_point(const mbedtls_ecp_group *grp,
  *                  correspond to a known group.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_group_load(mbedtls_ecp_group *grp, mbedtls_ecp_group_id id);
+IMPORT_C int mbedtls_ecp_group_load(mbedtls_ecp_group *grp, mbedtls_ecp_group_id id);
 
 /**
  * \brief           This function sets up an ECP group context from a TLS
@@ -885,7 +885,7 @@ int mbedtls_ecp_group_load(mbedtls_ecp_group *grp, mbedtls_ecp_group_id id);
  *                  recognized.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_tls_read_group(mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_tls_read_group(mbedtls_ecp_group *grp,
                                const unsigned char **buf, size_t len);
 
 /**
@@ -906,7 +906,7 @@ int mbedtls_ecp_tls_read_group(mbedtls_ecp_group *grp,
  *                  recognized.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_tls_read_group_id(mbedtls_ecp_group_id *grp,
+IMPORT_C int mbedtls_ecp_tls_read_group_id(mbedtls_ecp_group_id *grp,
                                   const unsigned char **buf,
                                   size_t len);
 /**
@@ -927,7 +927,7 @@ int mbedtls_ecp_tls_read_group_id(mbedtls_ecp_group_id *grp,
  *                  buffer is too small to hold the exported group.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_tls_write_group(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_tls_write_group(const mbedtls_ecp_group *grp,
                                 size_t *olen,
                                 unsigned char *buf, size_t blen);
 
@@ -960,7 +960,7 @@ int mbedtls_ecp_tls_write_group(const mbedtls_ecp_group *grp,
  * \return          #MBEDTLS_ERR_MPI_ALLOC_FAILED on memory-allocation failure.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_mul(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
+IMPORT_C int mbedtls_ecp_mul(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
                     const mbedtls_mpi *m, const mbedtls_ecp_point *P,
                     int (*f_rng)(void *, unsigned char *, size_t), void *p_rng);
 
@@ -994,7 +994,7 @@ int mbedtls_ecp_mul(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
  *                  operations was reached: see \c mbedtls_ecp_set_max_ops().
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_mul_restartable(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
+IMPORT_C int mbedtls_ecp_mul_restartable(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
                                 const mbedtls_mpi *m, const mbedtls_ecp_point *P,
                                 int (*f_rng)(void *, unsigned char *, size_t), void *p_rng,
                                 mbedtls_ecp_restart_ctx *rs_ctx);
@@ -1035,7 +1035,7 @@ int mbedtls_ecp_mul_restartable(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
  *                  designate a short Weierstrass curve.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_muladd(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
+IMPORT_C int mbedtls_ecp_muladd(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
                        const mbedtls_mpi *m, const mbedtls_ecp_point *P,
                        const mbedtls_mpi *n, const mbedtls_ecp_point *Q);
 
@@ -1079,7 +1079,7 @@ int mbedtls_ecp_muladd(mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
  *                  operations was reached: see \c mbedtls_ecp_set_max_ops().
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_muladd_restartable(
+IMPORT_C int mbedtls_ecp_muladd_restartable(
     mbedtls_ecp_group *grp, mbedtls_ecp_point *R,
     const mbedtls_mpi *m, const mbedtls_ecp_point *P,
     const mbedtls_mpi *n, const mbedtls_ecp_point *Q,
@@ -1113,7 +1113,7 @@ int mbedtls_ecp_muladd_restartable(
  *                  a valid public key for the given curve.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_check_pubkey(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_check_pubkey(const mbedtls_ecp_group *grp,
                              const mbedtls_ecp_point *pt);
 
 /**
@@ -1135,7 +1135,7 @@ int mbedtls_ecp_check_pubkey(const mbedtls_ecp_group *grp,
  *                  private key for the given curve.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_check_privkey(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_check_privkey(const mbedtls_ecp_group *grp,
                               const mbedtls_mpi *d);
 
 /**
@@ -1153,7 +1153,7 @@ int mbedtls_ecp_check_privkey(const mbedtls_ecp_group *grp,
  * \return          An \c MBEDTLS_ERR_ECP_XXX or \c MBEDTLS_MPI_XXX error code
  *                  on failure.
  */
-int mbedtls_ecp_gen_privkey(const mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_gen_privkey(const mbedtls_ecp_group *grp,
                             mbedtls_mpi *d,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng);
@@ -1185,7 +1185,7 @@ int mbedtls_ecp_gen_privkey(const mbedtls_ecp_group *grp,
  * \return          An \c MBEDTLS_ERR_ECP_XXX or \c MBEDTLS_MPI_XXX error code
  *                  on failure.
  */
-int mbedtls_ecp_gen_keypair_base(mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_gen_keypair_base(mbedtls_ecp_group *grp,
                                  const mbedtls_ecp_point *G,
                                  mbedtls_mpi *d, mbedtls_ecp_point *Q,
                                  int (*f_rng)(void *, unsigned char *, size_t),
@@ -1214,7 +1214,7 @@ int mbedtls_ecp_gen_keypair_base(mbedtls_ecp_group *grp,
  * \return          An \c MBEDTLS_ERR_ECP_XXX or \c MBEDTLS_MPI_XXX error code
  *                  on failure.
  */
-int mbedtls_ecp_gen_keypair(mbedtls_ecp_group *grp, mbedtls_mpi *d,
+IMPORT_C int mbedtls_ecp_gen_keypair(mbedtls_ecp_group *grp, mbedtls_mpi *d,
                             mbedtls_ecp_point *Q,
                             int (*f_rng)(void *, unsigned char *, size_t),
                             void *p_rng);
@@ -1232,7 +1232,7 @@ int mbedtls_ecp_gen_keypair(mbedtls_ecp_group *grp, mbedtls_mpi *d,
  * \return          An \c MBEDTLS_ERR_ECP_XXX or \c MBEDTLS_MPI_XXX error code
  *                  on failure.
  */
-int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
+IMPORT_C int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
                         int (*f_rng)(void *, unsigned char *, size_t),
                         void *p_rng);
 
@@ -1254,7 +1254,7 @@ int mbedtls_ecp_gen_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
  *                  the group is not implemented.
  * \return          Another negative error code on different kinds of failure.
  */
-int mbedtls_ecp_read_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
+IMPORT_C int mbedtls_ecp_read_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
                          const unsigned char *buf, size_t buflen);
 
 /**
@@ -1273,7 +1273,7 @@ int mbedtls_ecp_read_key(mbedtls_ecp_group_id grp_id, mbedtls_ecp_keypair *key,
  *                  the group is not implemented.
  * \return          Another negative error code on different kinds of failure.
  */
-int mbedtls_ecp_write_key(mbedtls_ecp_keypair *key,
+IMPORT_C int mbedtls_ecp_write_key(mbedtls_ecp_keypair *key,
                           unsigned char *buf, size_t buflen);
 
 /**
@@ -1296,7 +1296,7 @@ int mbedtls_ecp_write_key(mbedtls_ecp_keypair *key,
  * \return          An \c MBEDTLS_ERR_ECP_XXX or an \c MBEDTLS_ERR_MPI_XXX
  *                  error code on calculation failure.
  */
-int mbedtls_ecp_check_pub_priv(
+IMPORT_C int mbedtls_ecp_check_pub_priv(
     const mbedtls_ecp_keypair *pub, const mbedtls_ecp_keypair *prv,
     int (*f_rng)(void *, unsigned char *, size_t), void *p_rng);
 
@@ -1317,7 +1317,7 @@ int mbedtls_ecp_check_pub_priv(
  *                  correspond to a known group.
  * \return          Another negative error code on other kinds of failure.
  */
-int mbedtls_ecp_export(const mbedtls_ecp_keypair *key, mbedtls_ecp_group *grp,
+IMPORT_C int mbedtls_ecp_export(const mbedtls_ecp_keypair *key, mbedtls_ecp_group *grp,
                        mbedtls_mpi *d, mbedtls_ecp_point *Q);
 
 #if defined(MBEDTLS_SELF_TEST)

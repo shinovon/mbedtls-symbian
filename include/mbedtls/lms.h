@@ -250,7 +250,7 @@ typedef struct {
  * \param ctx                The uninitialized LMS context that will then be
  *                           initialized.
  */
-void mbedtls_lms_public_init(mbedtls_lms_public_t *ctx);
+IMPORT_C void mbedtls_lms_public_init(mbedtls_lms_public_t *ctx);
 
 /**
  * \brief                    This function uninitializes an LMS public context
@@ -258,7 +258,7 @@ void mbedtls_lms_public_init(mbedtls_lms_public_t *ctx);
  * \param ctx                The initialized LMS context that will then be
  *                           uninitialized.
  */
-void mbedtls_lms_public_free(mbedtls_lms_public_t *ctx);
+IMPORT_C void mbedtls_lms_public_free(mbedtls_lms_public_t *ctx);
 
 /**
  * \brief                    This function imports an LMS public key into a
@@ -279,7 +279,7 @@ void mbedtls_lms_public_free(mbedtls_lms_public_t *ctx);
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lms_import_public_key(mbedtls_lms_public_t *ctx,
+IMPORT_C int mbedtls_lms_import_public_key(mbedtls_lms_public_t *ctx,
                                   const unsigned char *key, size_t key_size);
 
 /**
@@ -305,7 +305,7 @@ int mbedtls_lms_import_public_key(mbedtls_lms_public_t *ctx,
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lms_export_public_key(const mbedtls_lms_public_t *ctx,
+IMPORT_C int mbedtls_lms_export_public_key(const mbedtls_lms_public_t *ctx,
                                   unsigned char *key, size_t key_size,
                                   size_t *key_len);
 
@@ -329,7 +329,7 @@ int mbedtls_lms_export_public_key(const mbedtls_lms_public_t *ctx,
  * \return         \c 0 on successful verification.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lms_verify(const mbedtls_lms_public_t *ctx,
+IMPORT_C int mbedtls_lms_verify(const mbedtls_lms_public_t *ctx,
                        const unsigned char *msg, size_t msg_size,
                        const unsigned char *sig, size_t sig_size);
 
@@ -339,7 +339,7 @@ int mbedtls_lms_verify(const mbedtls_lms_public_t *ctx,
  *
  * \param ctx                The uninitialized LMS private context that will
  *                           then be initialized. */
-void mbedtls_lms_private_init(mbedtls_lms_private_t *ctx);
+IMPORT_C void mbedtls_lms_private_init(mbedtls_lms_private_t *ctx);
 
 /**
  * \brief                    This function uninitializes an LMS private context
@@ -347,7 +347,7 @@ void mbedtls_lms_private_init(mbedtls_lms_private_t *ctx);
  * \param ctx                The initialized LMS private context that will then
  *                           be uninitialized.
  */
-void mbedtls_lms_private_free(mbedtls_lms_private_t *ctx);
+IMPORT_C void mbedtls_lms_private_free(mbedtls_lms_private_t *ctx);
 
 /**
  * \brief                    This function generates an LMS private key, and
@@ -373,7 +373,7 @@ void mbedtls_lms_private_free(mbedtls_lms_private_t *ctx);
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lms_generate_private_key(mbedtls_lms_private_t *ctx,
+IMPORT_C int mbedtls_lms_generate_private_key(mbedtls_lms_private_t *ctx,
                                      mbedtls_lms_algorithm_type_t type,
                                      mbedtls_lmots_algorithm_type_t otstype,
                                      int (*f_rng)(void *, unsigned char *, size_t),
@@ -398,7 +398,7 @@ int mbedtls_lms_generate_private_key(mbedtls_lms_private_t *ctx,
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lms_calculate_public_key(mbedtls_lms_public_t *ctx,
+IMPORT_C int mbedtls_lms_calculate_public_key(mbedtls_lms_public_t *ctx,
                                      const mbedtls_lms_private_t *priv_ctx);
 
 /**
@@ -438,7 +438,7 @@ int mbedtls_lms_calculate_public_key(mbedtls_lms_public_t *ctx,
  * \return         \c 0 on success.
  * \return         A non-zero error code on failure.
  */
-int mbedtls_lms_sign(mbedtls_lms_private_t *ctx,
+IMPORT_C int mbedtls_lms_sign(mbedtls_lms_private_t *ctx,
                      int (*f_rng)(void *, unsigned char *, size_t),
                      void *p_rng, const unsigned char *msg,
                      unsigned int msg_size, unsigned char *sig, size_t sig_size,

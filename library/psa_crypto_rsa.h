@@ -34,7 +34,7 @@
  *                          contents of the context and the context itself
  *                          when done.
  */
-psa_status_t mbedtls_psa_rsa_load_representation(psa_key_type_t type,
+IMPORT_C psa_status_t mbedtls_psa_rsa_load_representation(psa_key_type_t type,
                                                  const uint8_t *data,
                                                  size_t data_length,
                                                  mbedtls_rsa_context **p_rsa);
@@ -65,7 +65,7 @@ psa_status_t mbedtls_psa_rsa_load_representation(psa_key_type_t type,
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_rsa_import_key(
+IMPORT_C psa_status_t mbedtls_psa_rsa_import_key(
     const psa_key_attributes_t *attributes,
     const uint8_t *data, size_t data_length,
     uint8_t *key_buffer, size_t key_buffer_size,
@@ -79,7 +79,7 @@ psa_status_t mbedtls_psa_rsa_import_key(
  * \param[in] data_size     The length of the buffer to export to
  * \param[out] data_length  The amount of bytes written to \p data
  */
-psa_status_t mbedtls_psa_rsa_export_key(psa_key_type_t type,
+IMPORT_C psa_status_t mbedtls_psa_rsa_export_key(psa_key_type_t type,
                                         mbedtls_rsa_context *rsa,
                                         uint8_t *data,
                                         size_t data_size,
@@ -109,7 +109,7 @@ psa_status_t mbedtls_psa_rsa_export_key(psa_key_type_t type,
  * \retval #PSA_ERROR_STORAGE_FAILURE \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t mbedtls_psa_rsa_export_public_key(
+IMPORT_C psa_status_t mbedtls_psa_rsa_export_public_key(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     uint8_t *data, size_t data_size, size_t *data_length);
@@ -133,7 +133,7 @@ psa_status_t mbedtls_psa_rsa_export_public_key(
  * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of \p key_buffer is too small.
  */
-psa_status_t mbedtls_psa_rsa_generate_key(
+IMPORT_C psa_status_t mbedtls_psa_rsa_generate_key(
     const psa_key_attributes_t *attributes,
     uint8_t *key_buffer, size_t key_buffer_size, size_t *key_buffer_length);
 
@@ -170,7 +170,7 @@ psa_status_t mbedtls_psa_rsa_generate_key(
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY \emptydescription
  */
-psa_status_t mbedtls_psa_rsa_sign_hash(
+IMPORT_C psa_status_t mbedtls_psa_rsa_sign_hash(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *hash, size_t hash_length,
@@ -206,7 +206,7 @@ psa_status_t mbedtls_psa_rsa_sign_hash(
  * \retval #PSA_ERROR_INVALID_ARGUMENT \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t mbedtls_psa_rsa_verify_hash(
+IMPORT_C psa_status_t mbedtls_psa_rsa_verify_hash(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *hash, size_t hash_length,
@@ -256,7 +256,7 @@ psa_status_t mbedtls_psa_rsa_verify_hash(
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t mbedtls_psa_asymmetric_encrypt(const psa_key_attributes_t *attributes,
+IMPORT_C psa_status_t mbedtls_psa_asymmetric_encrypt(const psa_key_attributes_t *attributes,
                                             const uint8_t *key_buffer,
                                             size_t key_buffer_size,
                                             psa_algorithm_t alg,
@@ -314,7 +314,7 @@ psa_status_t mbedtls_psa_asymmetric_encrypt(const psa_key_attributes_t *attribut
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t mbedtls_psa_asymmetric_decrypt(const psa_key_attributes_t *attributes,
+IMPORT_C psa_status_t mbedtls_psa_asymmetric_decrypt(const psa_key_attributes_t *attributes,
                                             const uint8_t *key_buffer,
                                             size_t key_buffer_size,
                                             psa_algorithm_t alg,

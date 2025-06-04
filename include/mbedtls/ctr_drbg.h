@@ -352,7 +352,7 @@ IMPORT_C void mbedtls_ctr_drbg_free(mbedtls_ctr_drbg_context *ctx);
  * \param ctx           The CTR_DRBG context.
  * \param resistance    #MBEDTLS_CTR_DRBG_PR_ON or #MBEDTLS_CTR_DRBG_PR_OFF.
  */
-void mbedtls_ctr_drbg_set_prediction_resistance(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C void mbedtls_ctr_drbg_set_prediction_resistance(mbedtls_ctr_drbg_context *ctx,
                                                 int resistance);
 
 /**
@@ -379,7 +379,7 @@ void mbedtls_ctr_drbg_set_prediction_resistance(mbedtls_ctr_drbg_context *ctx,
  *                      and at most the maximum length accepted by the
  *                      entropy function that is set in the context.
  */
-void mbedtls_ctr_drbg_set_entropy_len(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C void mbedtls_ctr_drbg_set_entropy_len(mbedtls_ctr_drbg_context *ctx,
                                       size_t len);
 
 /**
@@ -401,7 +401,7 @@ void mbedtls_ctr_drbg_set_entropy_len(mbedtls_ctr_drbg_context *ctx,
  * \return              #MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED
  *                      if the initial seeding has already taken place.
  */
-int mbedtls_ctr_drbg_set_nonce_len(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C int mbedtls_ctr_drbg_set_nonce_len(mbedtls_ctr_drbg_context *ctx,
                                    size_t len);
 
 /**
@@ -416,7 +416,7 @@ int mbedtls_ctr_drbg_set_nonce_len(mbedtls_ctr_drbg_context *ctx,
  * \param ctx           The CTR_DRBG context.
  * \param interval      The reseed interval.
  */
-void mbedtls_ctr_drbg_set_reseed_interval(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C void mbedtls_ctr_drbg_set_reseed_interval(mbedtls_ctr_drbg_context *ctx,
                                           int interval);
 
 /**
@@ -439,7 +439,7 @@ void mbedtls_ctr_drbg_set_reseed_interval(mbedtls_ctr_drbg_context *ctx,
  * \return              \c 0 on success.
  * \return              #MBEDTLS_ERR_CTR_DRBG_ENTROPY_SOURCE_FAILED on failure.
  */
-int mbedtls_ctr_drbg_reseed(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C int mbedtls_ctr_drbg_reseed(mbedtls_ctr_drbg_context *ctx,
                             const unsigned char *additional, size_t len);
 
 /**
@@ -462,7 +462,7 @@ int mbedtls_ctr_drbg_reseed(mbedtls_ctr_drbg_context *ctx,
  *                     #MBEDTLS_CTR_DRBG_MAX_SEED_INPUT.
  * \return             An error from the underlying AES cipher on failure.
  */
-int mbedtls_ctr_drbg_update(mbedtls_ctr_drbg_context *ctx,
+IMPORT_C int mbedtls_ctr_drbg_update(mbedtls_ctr_drbg_context *ctx,
                             const unsigned char *additional,
                             size_t add_len);
 

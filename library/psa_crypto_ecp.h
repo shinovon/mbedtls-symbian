@@ -42,7 +42,7 @@
  *                          contents of the context and the context itself
  *                          when done.
  */
-psa_status_t mbedtls_psa_ecp_load_representation(psa_key_type_t type,
+IMPORT_C psa_status_t mbedtls_psa_ecp_load_representation(psa_key_type_t type,
                                                  size_t curve_bits,
                                                  const uint8_t *data,
                                                  size_t data_length,
@@ -55,7 +55,7 @@ psa_status_t mbedtls_psa_ecp_load_representation(psa_key_type_t type,
  * \return PSA_SUCCESS on success, otherwise an MPI error.
  */
 
-psa_status_t mbedtls_psa_ecp_load_public_part(mbedtls_ecp_keypair *ecp);
+IMPORT_C psa_status_t mbedtls_psa_ecp_load_public_part(mbedtls_ecp_keypair *ecp);
 
 /** Import an ECP key in binary format.
  *
@@ -83,7 +83,7 @@ psa_status_t mbedtls_psa_ecp_load_public_part(mbedtls_ecp_keypair *ecp);
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_ecp_import_key(
+IMPORT_C psa_status_t mbedtls_psa_ecp_import_key(
     const psa_key_attributes_t *attributes,
     const uint8_t *data, size_t data_length,
     uint8_t *key_buffer, size_t key_buffer_size,
@@ -97,7 +97,7 @@ psa_status_t mbedtls_psa_ecp_import_key(
  * \param[in] data_size     The length of the buffer to export to
  * \param[out] data_length  The amount of bytes written to \p data
  */
-psa_status_t mbedtls_psa_ecp_export_key(psa_key_type_t type,
+IMPORT_C psa_status_t mbedtls_psa_ecp_export_key(psa_key_type_t type,
                                         mbedtls_ecp_keypair *ecp,
                                         uint8_t *data,
                                         size_t data_size,
@@ -127,7 +127,7 @@ psa_status_t mbedtls_psa_ecp_export_key(psa_key_type_t type,
  * \retval #PSA_ERROR_STORAGE_FAILURE \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t mbedtls_psa_ecp_export_public_key(
+IMPORT_C psa_status_t mbedtls_psa_ecp_export_public_key(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     uint8_t *data, size_t data_size, size_t *data_length);
@@ -151,7 +151,7 @@ psa_status_t mbedtls_psa_ecp_export_public_key(
  * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of \p key_buffer is too small.
  */
-psa_status_t mbedtls_psa_ecp_generate_key(
+IMPORT_C psa_status_t mbedtls_psa_ecp_generate_key(
     const psa_key_attributes_t *attributes,
     uint8_t *key_buffer, size_t key_buffer_size, size_t *key_buffer_length);
 
@@ -187,7 +187,7 @@ psa_status_t mbedtls_psa_ecp_generate_key(
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY \emptydescription
  */
-psa_status_t mbedtls_psa_ecdsa_sign_hash(
+IMPORT_C psa_status_t mbedtls_psa_ecdsa_sign_hash(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *hash, size_t hash_length,
@@ -222,7 +222,7 @@ psa_status_t mbedtls_psa_ecdsa_sign_hash(
  * \retval #PSA_ERROR_INVALID_ARGUMENT \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t mbedtls_psa_ecdsa_verify_hash(
+IMPORT_C psa_status_t mbedtls_psa_ecdsa_verify_hash(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *hash, size_t hash_length,
@@ -270,7 +270,7 @@ psa_status_t mbedtls_psa_ecdsa_verify_hash(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_key_agreement_ecdh(
+IMPORT_C psa_status_t mbedtls_psa_key_agreement_ecdh(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *peer_key, size_t peer_key_length,

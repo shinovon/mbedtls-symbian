@@ -115,7 +115,7 @@ static inline int psa_key_handle_is_null(psa_key_handle_t handle)
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_open_key(mbedtls_svc_key_id_t key,
+IMPORT_C psa_status_t psa_open_key(mbedtls_svc_key_id_t key,
                           psa_key_handle_t *handle);
 
 /** Close a key handle.
@@ -156,7 +156,7 @@ psa_status_t psa_open_key(mbedtls_svc_key_id_t key,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_close_key(psa_key_handle_t handle);
+IMPORT_C psa_status_t psa_close_key(psa_key_handle_t handle);
 
 #ifdef __cplusplus
 }

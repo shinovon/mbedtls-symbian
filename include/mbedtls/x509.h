@@ -313,7 +313,7 @@ mbedtls_x509_subject_alternative_name;
  * \return         The length of the string written (not including the
  *                 terminated nul byte), or a negative error code.
  */
-int mbedtls_x509_dn_gets(char *buf, size_t size, const mbedtls_x509_name *dn);
+IMPORT_C int mbedtls_x509_dn_gets(char *buf, size_t size, const mbedtls_x509_name *dn);
 
 /**
  * \brief          Return the next relative DN in an X509 name.
@@ -346,7 +346,7 @@ static inline mbedtls_x509_name *mbedtls_x509_dn_get_next(
  * \return         The length of the string written (not including the
  *                 terminated nul byte), or a negative error code.
  */
-int mbedtls_x509_serial_gets(char *buf, size_t size, const mbedtls_x509_buf *serial);
+IMPORT_C int mbedtls_x509_serial_gets(char *buf, size_t size, const mbedtls_x509_buf *serial);
 
 /**
  * \brief          Check a given mbedtls_x509_time against the system time
@@ -360,7 +360,7 @@ int mbedtls_x509_serial_gets(char *buf, size_t size, const mbedtls_x509_buf *ser
  * \return         1 if the given time is in the past or an error occurred,
  *                 0 otherwise.
  */
-int mbedtls_x509_time_is_past(const mbedtls_x509_time *to);
+IMPORT_C int mbedtls_x509_time_is_past(const mbedtls_x509_time *to);
 
 /**
  * \brief          Check a given mbedtls_x509_time against the system time
@@ -374,7 +374,7 @@ int mbedtls_x509_time_is_past(const mbedtls_x509_time *to);
  * \return         1 if the given time is in the future or an error occurred,
  *                 0 otherwise.
  */
-int mbedtls_x509_time_is_future(const mbedtls_x509_time *from);
+IMPORT_C int mbedtls_x509_time_is_future(const mbedtls_x509_time *from);
 
 /**
  * \brief          This function parses an item in the SubjectAlternativeNames
@@ -404,7 +404,7 @@ int mbedtls_x509_time_is_future(const mbedtls_x509_time *from);
  *                 SAN type.
  * \return         Another negative value for any other failure.
  */
-int mbedtls_x509_parse_subject_alt_name(const mbedtls_x509_buf *san_buf,
+IMPORT_C int mbedtls_x509_parse_subject_alt_name(const mbedtls_x509_buf *san_buf,
                                         mbedtls_x509_subject_alternative_name *san);
 
 /** \} addtogroup x509_module */
@@ -413,60 +413,60 @@ int mbedtls_x509_parse_subject_alt_name(const mbedtls_x509_buf *san_buf,
  * Internal module functions. You probably do not want to use these unless you
  * know you do.
  */
-int mbedtls_x509_get_name(unsigned char **p, const unsigned char *end,
+IMPORT_C int mbedtls_x509_get_name(unsigned char **p, const unsigned char *end,
                           mbedtls_x509_name *cur);
-int mbedtls_x509_get_alg_null(unsigned char **p, const unsigned char *end,
+IMPORT_C int mbedtls_x509_get_alg_null(unsigned char **p, const unsigned char *end,
                               mbedtls_x509_buf *alg);
-int mbedtls_x509_get_alg(unsigned char **p, const unsigned char *end,
+IMPORT_C int mbedtls_x509_get_alg(unsigned char **p, const unsigned char *end,
                          mbedtls_x509_buf *alg, mbedtls_x509_buf *params);
 #if defined(MBEDTLS_X509_RSASSA_PSS_SUPPORT)
-int mbedtls_x509_get_rsassa_pss_params(const mbedtls_x509_buf *params,
+IMPORT_C int mbedtls_x509_get_rsassa_pss_params(const mbedtls_x509_buf *params,
                                        mbedtls_md_type_t *md_alg, mbedtls_md_type_t *mgf_md,
                                        int *salt_len);
 #endif
-int mbedtls_x509_get_sig(unsigned char **p, const unsigned char *end, mbedtls_x509_buf *sig);
-int mbedtls_x509_get_sig_alg(const mbedtls_x509_buf *sig_oid, const mbedtls_x509_buf *sig_params,
+IMPORT_C int mbedtls_x509_get_sig(unsigned char **p, const unsigned char *end, mbedtls_x509_buf *sig);
+IMPORT_C int mbedtls_x509_get_sig_alg(const mbedtls_x509_buf *sig_oid, const mbedtls_x509_buf *sig_params,
                              mbedtls_md_type_t *md_alg, mbedtls_pk_type_t *pk_alg,
                              void **sig_opts);
-int mbedtls_x509_get_time(unsigned char **p, const unsigned char *end,
+IMPORT_C int mbedtls_x509_get_time(unsigned char **p, const unsigned char *end,
                           mbedtls_x509_time *t);
-int mbedtls_x509_get_serial(unsigned char **p, const unsigned char *end,
+IMPORT_C int mbedtls_x509_get_serial(unsigned char **p, const unsigned char *end,
                             mbedtls_x509_buf *serial);
-int mbedtls_x509_get_ext(unsigned char **p, const unsigned char *end,
+IMPORT_C int mbedtls_x509_get_ext(unsigned char **p, const unsigned char *end,
                          mbedtls_x509_buf *ext, int tag);
 #if !defined(MBEDTLS_X509_REMOVE_INFO)
-int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x509_buf *sig_oid,
+IMPORT_C int mbedtls_x509_sig_alg_gets(char *buf, size_t size, const mbedtls_x509_buf *sig_oid,
                               mbedtls_pk_type_t pk_alg, mbedtls_md_type_t md_alg,
                               const void *sig_opts);
 #endif
-int mbedtls_x509_key_size_helper(char *buf, size_t buf_size, const char *name);
-int mbedtls_x509_string_to_names(mbedtls_asn1_named_data **head, const char *name);
-int mbedtls_x509_set_extension(mbedtls_asn1_named_data **head, const char *oid, size_t oid_len,
+IMPORT_C int mbedtls_x509_key_size_helper(char *buf, size_t buf_size, const char *name);
+IMPORT_C int mbedtls_x509_string_to_names(mbedtls_asn1_named_data **head, const char *name);
+IMPORT_C int mbedtls_x509_set_extension(mbedtls_asn1_named_data **head, const char *oid, size_t oid_len,
                                int critical, const unsigned char *val,
                                size_t val_len);
-int mbedtls_x509_write_extensions(unsigned char **p, unsigned char *start,
+IMPORT_C int mbedtls_x509_write_extensions(unsigned char **p, unsigned char *start,
                                   mbedtls_asn1_named_data *first);
-int mbedtls_x509_write_names(unsigned char **p, unsigned char *start,
+IMPORT_C int mbedtls_x509_write_names(unsigned char **p, unsigned char *start,
                              mbedtls_asn1_named_data *first);
-int mbedtls_x509_write_sig(unsigned char **p, unsigned char *start,
+IMPORT_C int mbedtls_x509_write_sig(unsigned char **p, unsigned char *start,
                            const char *oid, size_t oid_len,
                            unsigned char *sig, size_t size);
-int mbedtls_x509_get_ns_cert_type(unsigned char **p,
+IMPORT_C int mbedtls_x509_get_ns_cert_type(unsigned char **p,
                                   const unsigned char *end,
                                   unsigned char *ns_cert_type);
-int mbedtls_x509_get_key_usage(unsigned char **p,
+IMPORT_C int mbedtls_x509_get_key_usage(unsigned char **p,
                                const unsigned char *end,
                                unsigned int *key_usage);
-int mbedtls_x509_get_subject_alt_name(unsigned char **p,
+IMPORT_C int mbedtls_x509_get_subject_alt_name(unsigned char **p,
                                       const unsigned char *end,
                                       mbedtls_x509_sequence *subject_alt_name);
-int mbedtls_x509_info_subject_alt_name(char **buf, size_t *size,
+IMPORT_C int mbedtls_x509_info_subject_alt_name(char **buf, size_t *size,
                                        const mbedtls_x509_sequence
                                        *subject_alt_name,
                                        const char *prefix);
-int mbedtls_x509_info_cert_type(char **buf, size_t *size,
+IMPORT_C int mbedtls_x509_info_cert_type(char **buf, size_t *size,
                                 unsigned char ns_cert_type);
-int mbedtls_x509_info_key_usage(char **buf, size_t *size,
+IMPORT_C int mbedtls_x509_info_key_usage(char **buf, size_t *size,
                                 unsigned int key_usage);
 
 #define MBEDTLS_X509_SAFE_SNPRINTF                          \

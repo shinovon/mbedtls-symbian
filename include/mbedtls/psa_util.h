@@ -373,11 +373,11 @@ extern const mbedtls_error_pair_t psa_to_pk_ecdsa_errors[7];
 
 /* Generic fallback function for error translation,
  * when the received state was not module-specific. */
-int psa_generic_status_to_mbedtls(psa_status_t status);
+IMPORT_C int psa_generic_status_to_mbedtls(psa_status_t status);
 
 /* This function iterates over provided local error translations,
  * and if no match was found - calls the fallback error translation function. */
-int psa_status_to_mbedtls(psa_status_t status,
+IMPORT_C int psa_status_to_mbedtls(psa_status_t status,
                           const mbedtls_error_pair_t *local_translations,
                           size_t local_errors_num,
                           int (*fallback_f)(psa_status_t));
@@ -385,7 +385,7 @@ int psa_status_to_mbedtls(psa_status_t status,
 /* The second out of three-stage error handling functions of the pk module,
  * acts as a fallback after RSA / ECDSA error translation, and if no match
  * is found, it itself calls psa_generic_status_to_mbedtls. */
-int psa_pk_status_to_mbedtls(psa_status_t status);
+IMPORT_C int psa_pk_status_to_mbedtls(psa_status_t status);
 
 /* Utility macro to shorten the defines of error translator in modules. */
 #define PSA_TO_MBEDTLS_ERR_LIST(status, error_list, fallback_f)       \

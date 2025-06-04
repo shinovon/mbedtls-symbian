@@ -55,7 +55,7 @@
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_mac_compute(
+IMPORT_C psa_status_t mbedtls_psa_mac_compute(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
     size_t key_buffer_size,
@@ -94,7 +94,7 @@ psa_status_t mbedtls_psa_mac_compute(
  * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
  */
-psa_status_t mbedtls_psa_mac_sign_setup(
+IMPORT_C psa_status_t mbedtls_psa_mac_sign_setup(
     mbedtls_psa_mac_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -129,7 +129,7 @@ psa_status_t mbedtls_psa_mac_sign_setup(
  * \retval #PSA_ERROR_BAD_STATE
  *         The operation state is not valid (it must be inactive).
  */
-psa_status_t mbedtls_psa_mac_verify_setup(
+IMPORT_C psa_status_t mbedtls_psa_mac_verify_setup(
     mbedtls_psa_mac_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -161,7 +161,7 @@ psa_status_t mbedtls_psa_mac_verify_setup(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_mac_update(
+IMPORT_C psa_status_t mbedtls_psa_mac_update(
     mbedtls_psa_mac_operation_t *operation,
     const uint8_t *input,
     size_t input_length);
@@ -203,7 +203,7 @@ psa_status_t mbedtls_psa_mac_update(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_mac_sign_finish(
+IMPORT_C psa_status_t mbedtls_psa_mac_sign_finish(
     mbedtls_psa_mac_operation_t *operation,
     uint8_t *mac,
     size_t mac_size,
@@ -244,7 +244,7 @@ psa_status_t mbedtls_psa_mac_sign_finish(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_mac_verify_finish(
+IMPORT_C psa_status_t mbedtls_psa_mac_verify_finish(
     mbedtls_psa_mac_operation_t *operation,
     const uint8_t *mac,
     size_t mac_length);
@@ -270,7 +270,7 @@ psa_status_t mbedtls_psa_mac_verify_finish(
  * \retval #PSA_SUCCESS \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_mac_abort(
+IMPORT_C psa_status_t mbedtls_psa_mac_abort(
     mbedtls_psa_mac_operation_t *operation);
 
 #endif /* PSA_CRYPTO_MAC_H */

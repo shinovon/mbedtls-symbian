@@ -99,7 +99,7 @@ mbedtls_ssl_ticket_context;
  *
  * \param ctx       Context to be initialized
  */
-void mbedtls_ssl_ticket_init(mbedtls_ssl_ticket_context *ctx);
+IMPORT_C void mbedtls_ssl_ticket_init(mbedtls_ssl_ticket_context *ctx);
 
 /**
  * \brief           Prepare context to be actually used
@@ -123,7 +123,7 @@ void mbedtls_ssl_ticket_init(mbedtls_ssl_ticket_context *ctx);
  * \return          0 if successful,
  *                  or a specific MBEDTLS_ERR_XXX error code
  */
-int mbedtls_ssl_ticket_setup(mbedtls_ssl_ticket_context *ctx,
+IMPORT_C int mbedtls_ssl_ticket_setup(mbedtls_ssl_ticket_context *ctx,
                              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng,
                              mbedtls_cipher_type_t cipher,
                              uint32_t lifetime);
@@ -160,7 +160,7 @@ int mbedtls_ssl_ticket_setup(mbedtls_ssl_ticket_context *ctx,
  * \return          0 if successful,
  *                  or a specific MBEDTLS_ERR_XXX error code
  */
-int mbedtls_ssl_ticket_rotate(mbedtls_ssl_ticket_context *ctx,
+IMPORT_C int mbedtls_ssl_ticket_rotate(mbedtls_ssl_ticket_context *ctx,
                               const unsigned char *name, size_t nlength,
                               const unsigned char *k, size_t klength,
                               uint32_t lifetime);

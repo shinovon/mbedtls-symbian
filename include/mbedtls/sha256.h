@@ -67,7 +67,7 @@ mbedtls_sha256_context;
  *
  * \param ctx      The SHA-256 context to initialize. This must not be \c NULL.
  */
-void mbedtls_sha256_init(mbedtls_sha256_context *ctx);
+IMPORT_C void mbedtls_sha256_init(mbedtls_sha256_context *ctx);
 
 /**
  * \brief          This function clears a SHA-256 context.
@@ -76,7 +76,7 @@ void mbedtls_sha256_init(mbedtls_sha256_context *ctx);
  *                 case this function returns immediately. If it is not \c NULL,
  *                 it must point to an initialized SHA-256 context.
  */
-void mbedtls_sha256_free(mbedtls_sha256_context *ctx);
+IMPORT_C void mbedtls_sha256_free(mbedtls_sha256_context *ctx);
 
 /**
  * \brief          This function clones the state of a SHA-256 context.
@@ -84,7 +84,7 @@ void mbedtls_sha256_free(mbedtls_sha256_context *ctx);
  * \param dst      The destination context. This must be initialized.
  * \param src      The context to clone. This must be initialized.
  */
-void mbedtls_sha256_clone(mbedtls_sha256_context *dst,
+IMPORT_C void mbedtls_sha256_clone(mbedtls_sha256_context *dst,
                           const mbedtls_sha256_context *src);
 
 /**
@@ -102,7 +102,7 @@ void mbedtls_sha256_clone(mbedtls_sha256_context *dst,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_sha256_starts(mbedtls_sha256_context *ctx, int is224);
+IMPORT_C int mbedtls_sha256_starts(mbedtls_sha256_context *ctx, int is224);
 
 /**
  * \brief          This function feeds an input buffer into an ongoing
@@ -117,7 +117,7 @@ int mbedtls_sha256_starts(mbedtls_sha256_context *ctx, int is224);
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_sha256_update(mbedtls_sha256_context *ctx,
+IMPORT_C int mbedtls_sha256_update(mbedtls_sha256_context *ctx,
                           const unsigned char *input,
                           size_t ilen);
 
@@ -134,7 +134,7 @@ int mbedtls_sha256_update(mbedtls_sha256_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_sha256_finish(mbedtls_sha256_context *ctx,
+IMPORT_C int mbedtls_sha256_finish(mbedtls_sha256_context *ctx,
                           unsigned char *output);
 
 /**
@@ -174,7 +174,7 @@ int mbedtls_internal_sha256_process(mbedtls_sha256_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_sha256(const unsigned char *input,
+IMPORT_C int mbedtls_sha256(const unsigned char *input,
                    size_t ilen,
                    unsigned char *output,
                    int is224);

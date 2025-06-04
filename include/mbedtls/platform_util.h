@@ -167,7 +167,7 @@ MBEDTLS_DEPRECATED typedef int mbedtls_deprecated_numeric_constant_t;
  * \param len   Length of the buffer in bytes
  *
  */
-void mbedtls_platform_zeroize(void *buf, size_t len);
+IMPORT_C void mbedtls_platform_zeroize(void *buf, size_t len);
 
 #if defined(MBEDTLS_HAVE_TIME_DATE)
 /**
@@ -196,7 +196,7 @@ void mbedtls_platform_zeroize(void *buf, size_t len);
  * \return      Pointer to an object of type struct tm on success, otherwise
  *              NULL
  */
-struct tm *mbedtls_platform_gmtime_r(const mbedtls_time_t *tt,
+IMPORT_C struct tm *mbedtls_platform_gmtime_r(const mbedtls_time_t *tt,
                                      struct tm *tm_buf);
 #endif /* MBEDTLS_HAVE_TIME_DATE */
 

@@ -76,7 +76,7 @@ mbedtls_sha1_context;
  *                 This must not be \c NULL.
  *
  */
-void mbedtls_sha1_init(mbedtls_sha1_context *ctx);
+IMPORT_C void mbedtls_sha1_init(mbedtls_sha1_context *ctx);
 
 /**
  * \brief          This function clears a SHA-1 context.
@@ -91,7 +91,7 @@ void mbedtls_sha1_init(mbedtls_sha1_context *ctx);
  *                 SHA-1 context.
  *
  */
-void mbedtls_sha1_free(mbedtls_sha1_context *ctx);
+IMPORT_C void mbedtls_sha1_free(mbedtls_sha1_context *ctx);
 
 /**
  * \brief          This function clones the state of a SHA-1 context.
@@ -104,7 +104,7 @@ void mbedtls_sha1_free(mbedtls_sha1_context *ctx);
  * \param src      The SHA-1 context to clone from. This must be initialized.
  *
  */
-void mbedtls_sha1_clone(mbedtls_sha1_context *dst,
+IMPORT_C void mbedtls_sha1_clone(mbedtls_sha1_context *dst,
                         const mbedtls_sha1_context *src);
 
 /**
@@ -120,7 +120,7 @@ void mbedtls_sha1_clone(mbedtls_sha1_context *dst,
  * \return         A negative error code on failure.
  *
  */
-int mbedtls_sha1_starts(mbedtls_sha1_context *ctx);
+IMPORT_C int mbedtls_sha1_starts(mbedtls_sha1_context *ctx);
 
 /**
  * \brief          This function feeds an input buffer into an ongoing SHA-1
@@ -139,7 +139,7 @@ int mbedtls_sha1_starts(mbedtls_sha1_context *ctx);
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_sha1_update(mbedtls_sha1_context *ctx,
+IMPORT_C int mbedtls_sha1_update(mbedtls_sha1_context *ctx,
                         const unsigned char *input,
                         size_t ilen);
 
@@ -159,7 +159,7 @@ int mbedtls_sha1_update(mbedtls_sha1_context *ctx,
  * \return         \c 0 on success.
  * \return         A negative error code on failure.
  */
-int mbedtls_sha1_finish(mbedtls_sha1_context *ctx,
+IMPORT_C int mbedtls_sha1_finish(mbedtls_sha1_context *ctx,
                         unsigned char output[20]);
 
 /**
@@ -177,7 +177,7 @@ int mbedtls_sha1_finish(mbedtls_sha1_context *ctx,
  * \return         A negative error code on failure.
  *
  */
-int mbedtls_internal_sha1_process(mbedtls_sha1_context *ctx,
+IMPORT_C int mbedtls_internal_sha1_process(mbedtls_sha1_context *ctx,
                                   const unsigned char data[64]);
 
 /**
@@ -203,7 +203,7 @@ int mbedtls_internal_sha1_process(mbedtls_sha1_context *ctx,
  * \return         A negative error code on failure.
  *
  */
-int mbedtls_sha1(const unsigned char *input,
+IMPORT_C int mbedtls_sha1(const unsigned char *input,
                  size_t ilen,
                  unsigned char output[20]);
 

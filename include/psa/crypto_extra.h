@@ -500,7 +500,7 @@ psa_status_t mbedtls_psa_inject_entropy(const uint8_t *seed,
  * \retval #PSA_ERROR_NOT_SUPPORTED \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
+IMPORT_C psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
                                            psa_key_type_t type,
                                            const uint8_t *data,
                                            size_t data_length);
@@ -528,7 +528,7 @@ psa_status_t psa_set_key_domain_parameters(psa_key_attributes_t *attributes,
  * \retval #PSA_SUCCESS \emptydescription
  * \retval #PSA_ERROR_BUFFER_TOO_SMALL \emptydescription
  */
-psa_status_t psa_get_key_domain_parameters(
+IMPORT_C psa_status_t psa_get_key_domain_parameters(
     const psa_key_attributes_t *attributes,
     uint8_t *data,
     size_t data_size,
@@ -659,7 +659,7 @@ static inline psa_ecc_family_t mbedtls_ecc_group_to_psa(mbedtls_ecp_group_id grp
  * \return              #MBEDTLS_ECP_DP_NONE if \p bits is not
  *                      correct for \p curve.
  */
-mbedtls_ecp_group_id mbedtls_ecc_group_of_psa(psa_ecc_family_t curve,
+IMPORT_C mbedtls_ecp_group_id mbedtls_ecc_group_of_psa(psa_ecc_family_t curve,
                                               size_t bits,
                                               int bits_is_sloppy);
 #endif /* MBEDTLS_ECP_C */
@@ -1310,7 +1310,7 @@ static psa_pake_operation_t psa_pake_operation_init(void);
  * \retval #PSA_ERROR_BAD_STATE
  *         Password hasn't been set yet.
  */
-psa_status_t psa_crypto_driver_pake_get_password_len(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_password_len(
     const psa_crypto_driver_pake_inputs_t *inputs,
     size_t *password_len);
 
@@ -1326,7 +1326,7 @@ psa_status_t psa_crypto_driver_pake_get_password_len(
  * \retval #PSA_ERROR_BAD_STATE
  *         Password hasn't been set yet.
  */
-psa_status_t psa_crypto_driver_pake_get_password(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_password(
     const psa_crypto_driver_pake_inputs_t *inputs,
     uint8_t *buffer, size_t buffer_size, size_t *buffer_length);
 
@@ -1340,7 +1340,7 @@ psa_status_t psa_crypto_driver_pake_get_password(
  * \retval #PSA_ERROR_BAD_STATE
  *         Role hasn't been set yet.
  */
-psa_status_t psa_crypto_driver_pake_get_role(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_role(
     const psa_crypto_driver_pake_inputs_t *inputs,
     psa_pake_role_t *role);
 
@@ -1354,7 +1354,7 @@ psa_status_t psa_crypto_driver_pake_get_role(
  * \retval #PSA_ERROR_BAD_STATE
  *         User id hasn't been set yet.
  */
-psa_status_t psa_crypto_driver_pake_get_user_len(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_user_len(
     const psa_crypto_driver_pake_inputs_t *inputs,
     size_t *user_len);
 
@@ -1368,7 +1368,7 @@ psa_status_t psa_crypto_driver_pake_get_user_len(
  * \retval #PSA_ERROR_BAD_STATE
  *         Peer id hasn't been set yet.
  */
-psa_status_t psa_crypto_driver_pake_get_peer_len(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_peer_len(
     const psa_crypto_driver_pake_inputs_t *inputs,
     size_t *peer_len);
 
@@ -1386,7 +1386,7 @@ psa_status_t psa_crypto_driver_pake_get_peer_len(
  * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p user_id is too small.
  */
-psa_status_t psa_crypto_driver_pake_get_user(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_user(
     const psa_crypto_driver_pake_inputs_t *inputs,
     uint8_t *user_id, size_t user_id_size, size_t *user_id_len);
 
@@ -1404,7 +1404,7 @@ psa_status_t psa_crypto_driver_pake_get_user(
  * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of the \p peer_id is too small.
  */
-psa_status_t psa_crypto_driver_pake_get_peer(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_peer(
     const psa_crypto_driver_pake_inputs_t *inputs,
     uint8_t *peer_id, size_t peer_id_size, size_t *peer_id_length);
 
@@ -1418,7 +1418,7 @@ psa_status_t psa_crypto_driver_pake_get_peer(
  * \retval #PSA_ERROR_BAD_STATE
  *         Cipher_suite hasn't been set yet.
  */
-psa_status_t psa_crypto_driver_pake_get_cipher_suite(
+IMPORT_C psa_status_t psa_crypto_driver_pake_get_cipher_suite(
     const psa_crypto_driver_pake_inputs_t *inputs,
     psa_pake_cipher_suite_t *cipher_suite);
 
@@ -1492,7 +1492,7 @@ psa_status_t psa_crypto_driver_pake_get_cipher_suite(
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_setup(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_setup(psa_pake_operation_t *operation,
                             const psa_pake_cipher_suite_t *cipher_suite);
 
 /** Set the password for a password-authenticated key exchange from key ID.
@@ -1581,7 +1581,7 @@ psa_status_t psa_pake_set_password_key(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_set_user(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_set_user(psa_pake_operation_t *operation,
                                const uint8_t *user_id,
                                size_t user_id_len);
 
@@ -1624,7 +1624,7 @@ psa_status_t psa_pake_set_user(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_set_peer(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_set_peer(psa_pake_operation_t *operation,
                                const uint8_t *peer_id,
                                size_t peer_id_len);
 
@@ -1666,7 +1666,7 @@ psa_status_t psa_pake_set_peer(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_set_role(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_set_role(psa_pake_operation_t *operation,
                                psa_pake_role_t role);
 
 /** Get output for a step of a password-authenticated key exchange.
@@ -1724,7 +1724,7 @@ psa_status_t psa_pake_set_role(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_output(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_output(psa_pake_operation_t *operation,
                              psa_pake_step_t step,
                              uint8_t *output,
                              size_t output_size,
@@ -1779,7 +1779,7 @@ psa_status_t psa_pake_output(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_input(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_input(psa_pake_operation_t *operation,
                             psa_pake_step_t step,
                             const uint8_t *input,
                             size_t input_length);
@@ -1842,7 +1842,7 @@ psa_status_t psa_pake_input(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_get_implicit_key(psa_pake_operation_t *operation,
+IMPORT_C psa_status_t psa_pake_get_implicit_key(psa_pake_operation_t *operation,
                                        psa_key_derivation_operation_t *output);
 
 /** Abort a PAKE operation.
@@ -1869,7 +1869,7 @@ psa_status_t psa_pake_get_implicit_key(psa_pake_operation_t *operation,
  *         It is implementation-dependent whether a failure to initialize
  *         results in this error code.
  */
-psa_status_t psa_pake_abort(psa_pake_operation_t *operation);
+IMPORT_C psa_status_t psa_pake_abort(psa_pake_operation_t *operation);
 
 /**@}*/
 

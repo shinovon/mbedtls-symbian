@@ -205,7 +205,7 @@ static inline psa_key_slot_number_t psa_key_slot_get_slot_number(
  *         already fully wiped.
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t psa_wipe_key_slot(psa_key_slot_t *slot);
+IMPORT_C psa_status_t psa_wipe_key_slot(psa_key_slot_t *slot);
 
 /** Try to allocate a buffer to an empty key slot.
  *
@@ -219,11 +219,11 @@ psa_status_t psa_wipe_key_slot(psa_key_slot_t *slot);
  * \retval #PSA_ERROR_ALREADY_EXISTS
  *         Trying to allocate a buffer to a non-empty key slot.
  */
-psa_status_t psa_allocate_buffer_to_slot(psa_key_slot_t *slot,
+IMPORT_C psa_status_t psa_allocate_buffer_to_slot(psa_key_slot_t *slot,
                                          size_t buffer_length);
 
 /** Wipe key data from a slot. Preserves metadata such as the policy. */
-psa_status_t psa_remove_key_data_from_memory(psa_key_slot_t *slot);
+IMPORT_C psa_status_t psa_remove_key_data_from_memory(psa_key_slot_t *slot);
 
 /** Copy key data (in export format) into an empty key slot.
  *
@@ -242,7 +242,7 @@ psa_status_t psa_remove_key_data_from_memory(psa_key_slot_t *slot);
  * \retval #PSA_ERROR_ALREADY_EXISTS
  *         There was other key material already present in the slot.
  */
-psa_status_t psa_copy_key_material_into_slot(psa_key_slot_t *slot,
+IMPORT_C psa_status_t psa_copy_key_material_into_slot(psa_key_slot_t *slot,
                                              const uint8_t *data,
                                              size_t data_length);
 
@@ -255,7 +255,7 @@ psa_status_t psa_copy_key_material_into_slot(psa_key_slot_t *slot,
  *
  * \return              The corresponding PSA error code
  */
-psa_status_t mbedtls_to_psa_error(int ret);
+IMPORT_C psa_status_t mbedtls_to_psa_error(int ret);
 
 /** Import a key in binary format.
  *
@@ -283,7 +283,7 @@ psa_status_t mbedtls_to_psa_error(int ret);
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t psa_import_key_into_slot(
+IMPORT_C psa_status_t psa_import_key_into_slot(
     const psa_key_attributes_t *attributes,
     const uint8_t *data, size_t data_length,
     uint8_t *key_buffer, size_t key_buffer_size,
@@ -311,7 +311,7 @@ psa_status_t psa_import_key_into_slot(
  * \retval #PSA_ERROR_STORAGE_FAILURE \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t psa_export_key_internal(
+IMPORT_C psa_status_t psa_export_key_internal(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     uint8_t *data, size_t data_size, size_t *data_length);
@@ -339,7 +339,7 @@ psa_status_t psa_export_key_internal(
  * \retval #PSA_ERROR_STORAGE_FAILURE \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t psa_export_public_key_internal(
+IMPORT_C psa_status_t psa_export_public_key_internal(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     uint8_t *data, size_t data_size, size_t *data_length);
@@ -364,7 +364,7 @@ psa_status_t psa_export_public_key_internal(
  * \retval #PSA_ERROR_BUFFER_TOO_SMALL
  *         The size of \p key_buffer is too small.
  */
-psa_status_t psa_generate_key_internal(const psa_key_attributes_t *attributes,
+IMPORT_C psa_status_t psa_generate_key_internal(const psa_key_attributes_t *attributes,
                                        uint8_t *key_buffer,
                                        size_t key_buffer_size,
                                        size_t *key_buffer_length);
@@ -406,7 +406,7 @@ psa_status_t psa_generate_key_internal(const psa_key_attributes_t *attributes,
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY \emptydescription
  */
-psa_status_t psa_sign_message_builtin(
+IMPORT_C psa_status_t psa_sign_message_builtin(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *input, size_t input_length,
@@ -443,7 +443,7 @@ psa_status_t psa_sign_message_builtin(
  * \retval #PSA_ERROR_INVALID_ARGUMENT \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t psa_verify_message_builtin(
+IMPORT_C psa_status_t psa_verify_message_builtin(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *input, size_t input_length,
@@ -482,7 +482,7 @@ psa_status_t psa_verify_message_builtin(
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY \emptydescription
  */
-psa_status_t psa_sign_hash_builtin(
+IMPORT_C psa_status_t psa_sign_hash_builtin(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *hash, size_t hash_length,
@@ -517,7 +517,7 @@ psa_status_t psa_sign_hash_builtin(
  * \retval #PSA_ERROR_INVALID_ARGUMENT \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t psa_verify_hash_builtin(
+IMPORT_C psa_status_t psa_verify_hash_builtin(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg, const uint8_t *hash, size_t hash_length,
@@ -540,7 +540,7 @@ psa_status_t psa_verify_hash_builtin(
  *         The type and/or the size in bits of the key or the combination of
  *         the two is not supported.
  */
-psa_status_t psa_validate_unstructured_key_bit_size(psa_key_type_t type,
+IMPORT_C psa_status_t psa_validate_unstructured_key_bit_size(psa_key_type_t type,
                                                     size_t bits);
 
 /** Perform a key agreement and return the raw shared secret, using
@@ -589,7 +589,7 @@ psa_status_t psa_validate_unstructured_key_bit_size(psa_key_type_t type,
  * \retval #PSA_ERROR_STORAGE_FAILURE \emptydescription
  * \retval #PSA_ERROR_BAD_STATE \emptydescription
  */
-psa_status_t psa_key_agreement_raw_builtin(
+IMPORT_C psa_status_t psa_key_agreement_raw_builtin(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
     size_t key_buffer_size,
@@ -615,7 +615,7 @@ psa_status_t psa_key_agreement_raw_builtin(
  *                              is obviously the least amount of work done per
  *                              call.
  */
-void mbedtls_psa_interruptible_set_max_ops(uint32_t max_ops);
+IMPORT_C void mbedtls_psa_interruptible_set_max_ops(uint32_t max_ops);
 
 /**
  * \brief Get the maximum number of ops allowed to be executed by an
@@ -629,7 +629,7 @@ void mbedtls_psa_interruptible_set_max_ops(uint32_t max_ops);
  * \return                      Maximum number of ops allowed to be executed
  *                              by an interruptible function in a single call.
  */
-uint32_t mbedtls_psa_interruptible_get_max_ops(void);
+IMPORT_C uint32_t mbedtls_psa_interruptible_get_max_ops(void);
 
 /**
  * \brief Get the number of ops that a hash signing operation has taken for the
@@ -649,7 +649,7 @@ uint32_t mbedtls_psa_interruptible_get_max_ops(void);
  *                              in the last call to \c
  *                              mbedtls_psa_sign_hash_complete().
  */
-uint32_t mbedtls_psa_sign_hash_get_num_ops(
+IMPORT_C uint32_t mbedtls_psa_sign_hash_get_num_ops(
     const mbedtls_psa_sign_hash_interruptible_operation_t *operation);
 
 /**
@@ -670,7 +670,7 @@ uint32_t mbedtls_psa_sign_hash_get_num_ops(
  *                              in the last call to \c
  *                              mbedtls_psa_verify_hash_complete().
  */
-uint32_t mbedtls_psa_verify_hash_get_num_ops(
+IMPORT_C uint32_t mbedtls_psa_verify_hash_get_num_ops(
     const mbedtls_psa_verify_hash_interruptible_operation_t *operation);
 
 /**
@@ -705,7 +705,7 @@ uint32_t mbedtls_psa_verify_hash_get_num_ops(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
  *         There was insufficient memory to load the key representation.
  */
-psa_status_t mbedtls_psa_sign_hash_start(
+IMPORT_C psa_status_t mbedtls_psa_sign_hash_start(
     mbedtls_psa_sign_hash_interruptible_operation_t *operation,
     const psa_key_attributes_t *attributes, const uint8_t *key_buffer,
     size_t key_buffer_size, psa_algorithm_t alg,
@@ -752,7 +752,7 @@ psa_status_t mbedtls_psa_sign_hash_start(
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_ENTROPY \emptydescription
  */
-psa_status_t mbedtls_psa_sign_hash_complete(
+IMPORT_C psa_status_t mbedtls_psa_sign_hash_complete(
     mbedtls_psa_sign_hash_interruptible_operation_t *operation,
     uint8_t *signature, size_t signature_size,
     size_t *signature_length);
@@ -772,7 +772,7 @@ psa_status_t mbedtls_psa_sign_hash_complete(
  * \retval #PSA_SUCCESS
  *         The operation was aborted successfully.
  */
-psa_status_t mbedtls_psa_sign_hash_abort(
+IMPORT_C psa_status_t mbedtls_psa_sign_hash_abort(
     mbedtls_psa_sign_hash_interruptible_operation_t *operation);
 
 /**
@@ -810,7 +810,7 @@ psa_status_t mbedtls_psa_sign_hash_abort(
  *        There was insufficient memory either to load the key representation,
  *        or to prepare the operation.
  */
-psa_status_t mbedtls_psa_verify_hash_start(
+IMPORT_C psa_status_t mbedtls_psa_verify_hash_start(
     mbedtls_psa_verify_hash_interruptible_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
@@ -847,7 +847,7 @@ psa_status_t mbedtls_psa_verify_hash_start(
  * \retval #PSA_ERROR_INVALID_ARGUMENT \emptydescription
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY \emptydescription
  */
-psa_status_t mbedtls_psa_verify_hash_complete(
+IMPORT_C psa_status_t mbedtls_psa_verify_hash_complete(
     mbedtls_psa_verify_hash_interruptible_operation_t *operation);
 
 /**
@@ -865,7 +865,7 @@ psa_status_t mbedtls_psa_verify_hash_complete(
  * \retval #PSA_SUCCESS
  *         The operation was aborted successfully.
  */
-psa_status_t mbedtls_psa_verify_hash_abort(
+IMPORT_C psa_status_t mbedtls_psa_verify_hash_abort(
     mbedtls_psa_verify_hash_interruptible_operation_t *operation);
 
 #endif /* PSA_CRYPTO_CORE_H */

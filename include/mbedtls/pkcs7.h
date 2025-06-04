@@ -159,7 +159,7 @@ mbedtls_pkcs7;
  *
  * \param pkcs7    mbedtls_pkcs7 structure.
  */
-void mbedtls_pkcs7_init(mbedtls_pkcs7 *pkcs7);
+IMPORT_C void mbedtls_pkcs7_init(mbedtls_pkcs7 *pkcs7);
 
 /**
  * \brief          Parse a single DER formatted PKCS #7 detached signature.
@@ -177,7 +177,7 @@ void mbedtls_pkcs7_init(mbedtls_pkcs7 *pkcs7);
  * \return         The \c mbedtls_pkcs7_type of \p buf, if successful.
  * \return         A negative error code on failure.
  */
-int mbedtls_pkcs7_parse_der(mbedtls_pkcs7 *pkcs7, const unsigned char *buf,
+IMPORT_C int mbedtls_pkcs7_parse_der(mbedtls_pkcs7 *pkcs7, const unsigned char *buf,
                             const size_t buflen);
 
 /**
@@ -205,7 +205,7 @@ int mbedtls_pkcs7_parse_der(mbedtls_pkcs7 *pkcs7, const unsigned char *buf,
  *
  * \return         0 if the signature verifies, or a negative error code on failure.
  */
-int mbedtls_pkcs7_signed_data_verify(mbedtls_pkcs7 *pkcs7,
+IMPORT_C int mbedtls_pkcs7_signed_data_verify(mbedtls_pkcs7 *pkcs7,
                                      const mbedtls_x509_crt *cert,
                                      const unsigned char *data,
                                      size_t datalen);
@@ -234,7 +234,7 @@ int mbedtls_pkcs7_signed_data_verify(mbedtls_pkcs7 *pkcs7,
  *
  * \return         0 if the signature verifies, or a negative error code on failure.
  */
-int mbedtls_pkcs7_signed_hash_verify(mbedtls_pkcs7 *pkcs7,
+IMPORT_C int mbedtls_pkcs7_signed_hash_verify(mbedtls_pkcs7 *pkcs7,
                                      const mbedtls_x509_crt *cert,
                                      const unsigned char *hash, size_t hashlen);
 
@@ -244,7 +244,7 @@ int mbedtls_pkcs7_signed_hash_verify(mbedtls_pkcs7 *pkcs7,
  *
  * \param pkcs7    mbedtls_pkcs7 structure to free.
  */
-void mbedtls_pkcs7_free(mbedtls_pkcs7 *pkcs7);
+IMPORT_C void mbedtls_pkcs7_free(mbedtls_pkcs7 *pkcs7);
 
 #ifdef __cplusplus
 }

@@ -55,7 +55,7 @@ int mbedtls_platform_entropy_poll(void *data,
  *
  * \note            This must accept NULL as its first argument.
  */
-int mbedtls_hardware_poll(void *data,
+IMPORT_C int mbedtls_hardware_poll(void *data,
                           unsigned char *output, size_t len, size_t *olen);
 #endif
 

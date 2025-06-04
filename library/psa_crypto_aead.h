@@ -76,7 +76,7 @@
  *         ciphertext_size is too small.
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_aead_encrypt(
+IMPORT_C psa_status_t mbedtls_psa_aead_encrypt(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg,
@@ -139,7 +139,7 @@ psa_status_t mbedtls_psa_aead_encrypt(
  *         plaintext_size is too small.
  * \retval #PSA_ERROR_CORRUPTION_DETECTED \emptydescription
  */
-psa_status_t mbedtls_psa_aead_decrypt(
+IMPORT_C psa_status_t mbedtls_psa_aead_decrypt(
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer, size_t key_buffer_size,
     psa_algorithm_t alg,
@@ -184,7 +184,7 @@ psa_status_t mbedtls_psa_aead_decrypt(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
  *         Failed to allocate memory for key material
  */
-psa_status_t mbedtls_psa_aead_encrypt_setup(
+IMPORT_C psa_status_t mbedtls_psa_aead_encrypt_setup(
     mbedtls_psa_aead_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -227,7 +227,7 @@ psa_status_t mbedtls_psa_aead_encrypt_setup(
  * \retval #PSA_ERROR_INSUFFICIENT_MEMORY
  *         Failed to allocate memory for key material
  */
-psa_status_t mbedtls_psa_aead_decrypt_setup(
+IMPORT_C psa_status_t mbedtls_psa_aead_decrypt_setup(
     mbedtls_psa_aead_operation_t *operation,
     const psa_key_attributes_t *attributes,
     const uint8_t *key_buffer,
@@ -262,7 +262,7 @@ psa_status_t mbedtls_psa_aead_decrypt_setup(
  *         Algorithm previously set is not supported in this configuration of
  *         the library.
  */
-psa_status_t mbedtls_psa_aead_set_nonce(
+IMPORT_C psa_status_t mbedtls_psa_aead_set_nonce(
     mbedtls_psa_aead_operation_t *operation,
     const uint8_t *nonce,
     size_t nonce_length);
@@ -303,7 +303,7 @@ psa_status_t mbedtls_psa_aead_set_nonce(
  *         Algorithm previously set is not supported in this configuration of
  *         the library.
  */
-psa_status_t mbedtls_psa_aead_set_lengths(
+IMPORT_C psa_status_t mbedtls_psa_aead_set_lengths(
     mbedtls_psa_aead_operation_t *operation,
     size_t ad_length,
     size_t plaintext_length);
@@ -340,7 +340,7 @@ psa_status_t mbedtls_psa_aead_set_lengths(
  *         Algorithm previously set is not supported in this configuration of
  *         the library.
  */
-psa_status_t mbedtls_psa_aead_update_ad(
+IMPORT_C psa_status_t mbedtls_psa_aead_update_ad(
     mbedtls_psa_aead_operation_t *operation,
     const uint8_t *input,
     size_t input_length);
@@ -400,7 +400,7 @@ psa_status_t mbedtls_psa_aead_update_ad(
  *         #PSA_AEAD_UPDATE_OUTPUT_MAX_SIZE(\p input_length) can be used to
  *         determine the required buffer size.
  */
-psa_status_t mbedtls_psa_aead_update(
+IMPORT_C psa_status_t mbedtls_psa_aead_update(
     mbedtls_psa_aead_operation_t *operation,
     const uint8_t *input,
     size_t input_length,
@@ -472,7 +472,7 @@ psa_status_t mbedtls_psa_aead_update(
  *         #PSA_AEAD_TAG_MAX_SIZE can be used to determine the required \p tag
  *         buffer size.
  */
-psa_status_t mbedtls_psa_aead_finish(
+IMPORT_C psa_status_t mbedtls_psa_aead_finish(
     mbedtls_psa_aead_operation_t *operation,
     uint8_t *ciphertext,
     size_t ciphertext_size,
@@ -505,7 +505,7 @@ psa_status_t mbedtls_psa_aead_finish(
  * \retval #PSA_SUCCESS
  *         Success.
  */
-psa_status_t mbedtls_psa_aead_abort(
+IMPORT_C psa_status_t mbedtls_psa_aead_abort(
     mbedtls_psa_aead_operation_t *operation);
 
 #endif /* PSA_CRYPTO_AEAD_H */

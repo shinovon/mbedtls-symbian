@@ -87,7 +87,7 @@ mbedtls_gcm_context;
  *
  * \param ctx       The GCM context to initialize. This must not be \c NULL.
  */
-void mbedtls_gcm_init(mbedtls_gcm_context *ctx);
+IMPORT_C void mbedtls_gcm_init(mbedtls_gcm_context *ctx);
 
 /**
  * \brief           This function associates a GCM context with a
@@ -105,7 +105,7 @@ void mbedtls_gcm_init(mbedtls_gcm_context *ctx);
  * \return          \c 0 on success.
  * \return          A cipher-specific error code on failure.
  */
-int mbedtls_gcm_setkey(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_setkey(mbedtls_gcm_context *ctx,
                        mbedtls_cipher_id_t cipher,
                        const unsigned char *key,
                        unsigned int keybits);
@@ -161,7 +161,7 @@ int mbedtls_gcm_setkey(mbedtls_gcm_context *ctx,
  *                  not valid or a cipher-specific error code if the encryption
  *                  or decryption failed.
  */
-int mbedtls_gcm_crypt_and_tag(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_crypt_and_tag(mbedtls_gcm_context *ctx,
                               int mode,
                               size_t length,
                               const unsigned char *iv,
@@ -206,7 +206,7 @@ int mbedtls_gcm_crypt_and_tag(mbedtls_gcm_context *ctx,
  *                  not valid or a cipher-specific error code if the decryption
  *                  failed.
  */
-int mbedtls_gcm_auth_decrypt(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_auth_decrypt(mbedtls_gcm_context *ctx,
                              size_t length,
                              const unsigned char *iv,
                              size_t iv_len,
@@ -230,7 +230,7 @@ int mbedtls_gcm_auth_decrypt(mbedtls_gcm_context *ctx,
  *
  * \return          \c 0 on success.
  */
-int mbedtls_gcm_starts(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_starts(mbedtls_gcm_context *ctx,
                        int mode,
                        const unsigned char *iv,
                        size_t iv_len);
@@ -255,7 +255,7 @@ int mbedtls_gcm_starts(mbedtls_gcm_context *ctx,
  *
  * \return          \c 0 on success.
  */
-int mbedtls_gcm_update_ad(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_update_ad(mbedtls_gcm_context *ctx,
                           const unsigned char *add,
                           size_t add_len);
 
@@ -310,7 +310,7 @@ int mbedtls_gcm_update_ad(mbedtls_gcm_context *ctx,
  *                 unsupported input/output buffer overlap detected,
  *                 or \p output_size too small.
  */
-int mbedtls_gcm_update(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_update(mbedtls_gcm_context *ctx,
                        const unsigned char *input, size_t input_length,
                        unsigned char *output, size_t output_size,
                        size_t *output_length);
@@ -348,7 +348,7 @@ int mbedtls_gcm_update(mbedtls_gcm_context *ctx,
  *                  invalid value of \p tag_len,
  *                  or \p output_size too small.
  */
-int mbedtls_gcm_finish(mbedtls_gcm_context *ctx,
+IMPORT_C int mbedtls_gcm_finish(mbedtls_gcm_context *ctx,
                        unsigned char *output, size_t output_size,
                        size_t *output_length,
                        unsigned char *tag, size_t tag_len);
@@ -360,7 +360,7 @@ int mbedtls_gcm_finish(mbedtls_gcm_context *ctx,
  * \param ctx       The GCM context to clear. If this is \c NULL, the call has
  *                  no effect. Otherwise, this must be initialized.
  */
-void mbedtls_gcm_free(mbedtls_gcm_context *ctx);
+IMPORT_C void mbedtls_gcm_free(mbedtls_gcm_context *ctx);
 
 #if defined(MBEDTLS_SELF_TEST)
 
