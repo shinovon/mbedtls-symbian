@@ -3,11 +3,9 @@ USERINCLUDE ../include/psa
 
 MACRO __SYMBIAN32__
 
-#ifdef EKA2
 EPOCALLOWDLLDATA
 SMPSAFE
 PAGED
-#endif
 
 LIBRARY euser.lib
 SYSTEMINCLUDE /epoc32/include
@@ -24,3 +22,7 @@ OPTION CW  -lang c99 -w off -undefine _WIN32 -relax_pointers
 OPTION MSVC /W0
 OPTION GCC  -w
 OPTION ARMCC -O2 -Otime
+#ifdef ARMCC_4_0
+OPTION_REPLACE ARMCC  --import_all_vtbl
+OPTION ARMCC --visibility_inlines_hidden
+#endif
