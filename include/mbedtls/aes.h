@@ -45,7 +45,7 @@
 #include "mbedtls/platform_util.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 /* padlock.c and aesni.c rely on these values! */
 #define MBEDTLS_AES_ENCRYPT     1 /**< AES encryption. */

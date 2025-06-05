@@ -36,7 +36,7 @@
 #include "mbedtls/error.h"
 #include "mbedtls/constant_time.h"
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <string.h>
 
 #include "mbedtls/platform.h"

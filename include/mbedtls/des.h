@@ -32,7 +32,7 @@
 #include "mbedtls/platform_util.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #define MBEDTLS_DES_ENCRYPT     1
 #define MBEDTLS_DES_DECRYPT     0

@@ -22,7 +22,7 @@
 #define PSA_CRYPTO_ITS_H
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #include <psa/crypto_types.h>
 #include <psa/crypto_values.h>

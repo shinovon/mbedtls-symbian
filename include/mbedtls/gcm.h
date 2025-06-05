@@ -36,7 +36,7 @@
 
 #include "mbedtls/cipher.h"
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #define MBEDTLS_GCM_ENCRYPT     1
 #define MBEDTLS_GCM_DECRYPT     0

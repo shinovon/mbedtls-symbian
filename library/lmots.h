@@ -32,7 +32,7 @@
 
 #include "mbedtls/lms.h"
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <stddef.h>
 
 

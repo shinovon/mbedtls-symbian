@@ -28,7 +28,7 @@
 #include "mbedtls/build_info.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 /** SHA-512 input data was malformed. */
 #define MBEDTLS_ERR_SHA512_BAD_INPUT_DATA                 -0x0075

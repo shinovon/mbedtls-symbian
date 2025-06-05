@@ -43,7 +43,7 @@
 #include "mbedtls/config_psa.h"
 
 /* PSA requires several types which C99 provides in stdint.h. */
-#include <stdint.h>
+#include <mbedtls/stdint.h>
 
 #if defined(MBEDTLS_PSA_CRYPTO_KEY_ID_ENCODES_OWNER)
 

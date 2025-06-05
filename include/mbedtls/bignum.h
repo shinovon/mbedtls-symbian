@@ -26,7 +26,7 @@
 #include "mbedtls/build_info.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #if defined(MBEDTLS_FS_IO)
 #include <stdio.h>

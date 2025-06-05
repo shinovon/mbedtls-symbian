@@ -35,7 +35,7 @@
 
 #include "mbedtls/build_info.h"
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <stddef.h>
 
 /** Invalid input parameter(s). */

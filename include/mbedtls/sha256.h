@@ -29,7 +29,7 @@
 #include "mbedtls/build_info.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 /** SHA-256 input data was malformed. */
 #define MBEDTLS_ERR_SHA256_BAD_INPUT_DATA                 -0x0074

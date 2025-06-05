@@ -28,7 +28,7 @@
 
 #include <assert.h>
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <stddef.h>
 
 /** Helper to define a function as static except when building invasive tests.

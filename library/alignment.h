@@ -23,7 +23,7 @@
 #ifndef MBEDTLS_LIBRARY_ALIGNMENT_H
 #define MBEDTLS_LIBRARY_ALIGNMENT_H
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <string.h>
 #include <stdlib.h>
 

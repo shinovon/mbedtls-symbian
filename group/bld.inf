@@ -69,6 +69,7 @@ PRJ_EXPORTS
 ../include/mbedtls/x509_crt.h mbedtls/
 ../include/mbedtls/x509_csr.h mbedtls/
 ../include/mbedtls/x509.h mbedtls/
+../include/mbedtls/stdint.h mbedtls/
 
 ../include/psa/crypto_builtin_composites.h psa/
 ../include/psa/crypto_builtin_primitives.h psa/

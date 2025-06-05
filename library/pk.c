@@ -51,7 +51,7 @@
 #endif
 
 #include <limits.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 /*
  * Initialise a mbedtls_pk_context

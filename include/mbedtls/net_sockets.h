@@ -44,7 +44,7 @@
 #include "mbedtls/ssl.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 /** Failed to open a socket. */
 #define MBEDTLS_ERR_NET_SOCKET_FAILED                     -0x0042

@@ -22,7 +22,7 @@
 
 #if defined(MBEDTLS_PSA_CRYPTO_SE_C)
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <string.h>
 
 #include "psa/crypto_se_driver.h"

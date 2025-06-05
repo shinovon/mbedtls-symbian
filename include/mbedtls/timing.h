@@ -25,7 +25,7 @@
 
 #include "mbedtls/build_info.h"
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -40,7 +40,7 @@
 
 #include <string.h>
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #if defined(MBEDTLS_HAVE_TIME)
 #include "mbedtls/platform_time.h"

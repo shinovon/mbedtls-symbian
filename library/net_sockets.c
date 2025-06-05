@@ -108,7 +108,7 @@ static int wsa_init_done = 0;
 #include <time.h>
 #endif
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 /*
  * Prepare for using the sockets interface

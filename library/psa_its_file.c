@@ -31,7 +31,7 @@
 #include "psa_crypto_its.h"
 
 #include <limits.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <stdio.h>
 #include <string.h>
 

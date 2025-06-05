@@ -27,7 +27,7 @@
 #ifndef MBEDTLS_LMS_H
 #define MBEDTLS_LMS_H
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <stddef.h>
 
 #include "mbedtls/private_access.h"

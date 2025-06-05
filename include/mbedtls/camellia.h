@@ -26,7 +26,7 @@
 #include "mbedtls/build_info.h"
 
 #include <stddef.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #include "mbedtls/platform_util.h"
 

@@ -33,7 +33,7 @@
 #error "mbed TLS requires a platform with 8-bit chars"
 #endif
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 
 #if defined(_WIN32) && !defined(__SYMBIAN32__)
 #if !defined(MBEDTLS_PLATFORM_C)

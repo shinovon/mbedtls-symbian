@@ -44,7 +44,7 @@
 #include "crypto_platform.h"
 #endif
 
-#include <stdint.h>
+#include <mbedtls/stdint.h>
 
 /** \defgroup error Error codes
  * @{

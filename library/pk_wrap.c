@@ -64,7 +64,7 @@
 #include "mbedtls/platform.h"
 
 #include <limits.h>
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <string.h>
 
 #if !defined(MBEDTLS_DEPRECATED_REMOVED)

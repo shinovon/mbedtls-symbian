@@ -21,7 +21,7 @@
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3)
 
-#include <stdint.h>
+#include "mbedtls/stdint.h"
 #include <string.h>
 
 #include "mbedtls/hkdf.h"
