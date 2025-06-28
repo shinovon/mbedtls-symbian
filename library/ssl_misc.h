@@ -1877,10 +1877,10 @@ static inline int mbedtls_ssl_conf_is_hybrid_tls12_tls13(const mbedtls_ssl_confi
 extern const uint8_t mbedtls_ssl_tls13_hello_retry_request_magic[
     MBEDTLS_SERVER_HELLO_RANDOM_LEN];
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_process_finished_message(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_process_finished_message(mbedtls_ssl_context *ssl);
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_finished_message(mbedtls_ssl_context *ssl);
-IMPORT_C void mbedtls_ssl_tls13_handshake_wrapup(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_write_finished_message(mbedtls_ssl_context *ssl);
+void mbedtls_ssl_tls13_handshake_wrapup(mbedtls_ssl_context *ssl);
 
 /**
  * \brief Given an SSL context and its associated configuration, write the TLS
@@ -1892,7 +1892,7 @@ IMPORT_C void mbedtls_ssl_tls13_handshake_wrapup(mbedtls_ssl_context *ssl);
  * \param[out]  out_len Length of the data written into the buffer \p buf
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_client_hello_exts(mbedtls_ssl_context *ssl,
+int mbedtls_ssl_tls13_write_client_hello_exts(mbedtls_ssl_context *ssl,
                                               unsigned char *buf,
                                               unsigned char *end,
                                               size_t *out_len);
@@ -1903,7 +1903,7 @@ IMPORT_C int mbedtls_ssl_tls13_write_client_hello_exts(mbedtls_ssl_context *ssl,
  * \param ssl       SSL context
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_handshake_client_step(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_handshake_client_step(mbedtls_ssl_context *ssl);
 
 /**
  * \brief           TLS 1.3 server side state machine entry
@@ -1911,7 +1911,7 @@ IMPORT_C int mbedtls_ssl_tls13_handshake_client_step(mbedtls_ssl_context *ssl);
  * \param ssl       SSL context
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_handshake_server_step(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_handshake_server_step(mbedtls_ssl_context *ssl);
 
 
 /*
@@ -2049,7 +2049,7 @@ static inline int mbedtls_ssl_tls13_key_exchange_mode_with_ephemeral(
  * Fetch TLS 1.3 handshake message header
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_fetch_handshake_msg(mbedtls_ssl_context *ssl,
+int mbedtls_ssl_tls13_fetch_handshake_msg(mbedtls_ssl_context *ssl,
                                           unsigned hs_type,
                                           unsigned char **buf,
                                           size_t *buf_len);
@@ -2058,20 +2058,20 @@ IMPORT_C int mbedtls_ssl_tls13_fetch_handshake_msg(mbedtls_ssl_context *ssl,
  * Handler of TLS 1.3 server certificate message
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_process_certificate(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_process_certificate(mbedtls_ssl_context *ssl);
 
 #if defined(MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_EPHEMERAL_ENABLED)
 /*
  * Handler of TLS 1.3 write Certificate message
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_certificate(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_write_certificate(mbedtls_ssl_context *ssl);
 
 /*
  * Handler of TLS 1.3 write Certificate Verify message
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_certificate_verify(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_write_certificate_verify(mbedtls_ssl_context *ssl);
 
 #endif /* MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_EPHEMERAL_ENABLED */
 
@@ -2079,20 +2079,20 @@ IMPORT_C int mbedtls_ssl_tls13_write_certificate_verify(mbedtls_ssl_context *ssl
  * Generic handler of Certificate Verify
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_process_certificate_verify(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_process_certificate_verify(mbedtls_ssl_context *ssl);
 
 /*
  * Write of dummy-CCS's for middlebox compatibility
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_change_cipher_spec(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_write_change_cipher_spec(mbedtls_ssl_context *ssl);
 
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_reset_transcript_for_hrr(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_reset_transcript_for_hrr(mbedtls_ssl_context *ssl);
 
 #if defined(MBEDTLS_ECDH_C)
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_generate_and_write_ecdh_key_exchange(
+int mbedtls_ssl_tls13_generate_and_write_ecdh_key_exchange(
     mbedtls_ssl_context *ssl,
     uint16_t named_group,
     unsigned char *buf,
@@ -2101,7 +2101,7 @@ IMPORT_C int mbedtls_ssl_tls13_generate_and_write_ecdh_key_exchange(
 #endif /* MBEDTLS_ECDH_C */
 
 #if defined(MBEDTLS_SSL_EARLY_DATA)
-IMPORT_C int mbedtls_ssl_tls13_write_early_data_ext(mbedtls_ssl_context *ssl,
+int mbedtls_ssl_tls13_write_early_data_ext(mbedtls_ssl_context *ssl,
                                            unsigned char *buf,
                                            const unsigned char *end,
                                            size_t *out_len);
@@ -2621,7 +2621,7 @@ mbedtls_ssl_mode_t mbedtls_ssl_get_mode_from_ciphersuite(
 #if defined(MBEDTLS_ECDH_C)
 
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_read_public_ecdhe_share(mbedtls_ssl_context *ssl,
+int mbedtls_ssl_tls13_read_public_ecdhe_share(mbedtls_ssl_context *ssl,
                                               const unsigned char *buf,
                                               size_t buf_len);
 
@@ -2713,7 +2713,7 @@ int mbedtls_ssl_check_dtls_clihlo_cookie(
  *                          the extension.
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_identities_of_pre_shared_key_ext(
+int mbedtls_ssl_tls13_write_identities_of_pre_shared_key_ext(
     mbedtls_ssl_context *ssl,
     unsigned char *buf, unsigned char *end,
     size_t *out_len, size_t *binders_len);
@@ -2728,7 +2728,7 @@ IMPORT_C int mbedtls_ssl_tls13_write_identities_of_pre_shared_key_ext(
  * \param[in]   end     End address of the buffer where to write the binders
  */
 MBEDTLS_CHECK_RETURN_CRITICAL
-IMPORT_C int mbedtls_ssl_tls13_write_binders_of_pre_shared_key_ext(
+int mbedtls_ssl_tls13_write_binders_of_pre_shared_key_ext(
     mbedtls_ssl_context *ssl,
     unsigned char *buf, unsigned char *end);
 #endif /* MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_SOME_PSK_ENABLED */
@@ -2764,7 +2764,7 @@ static inline void mbedtls_ssl_session_clear_ticket_flags(
 #endif /* MBEDTLS_SSL_PROTO_TLS1_3 && MBEDTLS_SSL_SESSION_TICKETS */
 
 #if defined(MBEDTLS_SSL_CLI_C) && defined(MBEDTLS_SSL_PROTO_TLS1_3)
-IMPORT_C int mbedtls_ssl_tls13_finalize_client_hello(mbedtls_ssl_context *ssl);
+int mbedtls_ssl_tls13_finalize_client_hello(mbedtls_ssl_context *ssl);
 #endif
 
 #endif /* ssl_misc.h */

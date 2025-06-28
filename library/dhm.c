@@ -637,7 +637,7 @@ static int load_file(const char *path, unsigned char **buf, size_t *n)
 /*
  * Load and parse DHM parameters
  */
-int mbedtls_dhm_parse_dhmfile(mbedtls_dhm_context *dhm, const char *path)
+EXPORT_C int mbedtls_dhm_parse_dhmfile(mbedtls_dhm_context *dhm, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n;

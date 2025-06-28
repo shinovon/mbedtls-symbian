@@ -1782,14 +1782,14 @@ EXPORT_C void mbedtls_ssl_conf_ciphersuites(mbedtls_ssl_config *conf,
 }
 
 #if defined(MBEDTLS_SSL_PROTO_TLS1_3)
-EXPORT_C void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
+void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
                                                const int kex_modes)
 {
     conf->tls13_kex_modes = kex_modes & MBEDTLS_SSL_TLS1_3_KEY_EXCHANGE_MODE_ALL;
 }
 
 #if defined(MBEDTLS_SSL_EARLY_DATA)
-EXPORT_C void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
+void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
                                        int early_data_enabled)
 {
     conf->early_data_enabled = early_data_enabled;

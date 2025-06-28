@@ -58,7 +58,7 @@
  * A terminating null byte is always appended. It is included in the announced
  * length only if the data looks like it is PEM encoded.
  */
-int mbedtls_pk_load_file(const char *path, unsigned char **buf, size_t *n)
+EXPORT_C int mbedtls_pk_load_file(const char *path, unsigned char **buf, size_t *n)
 {
     FILE *f;
     long size;
@@ -108,7 +108,7 @@ int mbedtls_pk_load_file(const char *path, unsigned char **buf, size_t *n)
 /*
  * Load and parse a private key
  */
-int mbedtls_pk_parse_keyfile(mbedtls_pk_context *ctx,
+EXPORT_C int mbedtls_pk_parse_keyfile(mbedtls_pk_context *ctx,
                              const char *path, const char *pwd,
                              int (*f_rng)(void *, unsigned char *, size_t), void *p_rng)
 {
@@ -136,7 +136,7 @@ int mbedtls_pk_parse_keyfile(mbedtls_pk_context *ctx,
 /*
  * Load and parse a public key
  */
-int mbedtls_pk_parse_public_keyfile(mbedtls_pk_context *ctx, const char *path)
+EXPORT_C int mbedtls_pk_parse_public_keyfile(mbedtls_pk_context *ctx, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n;

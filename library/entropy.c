@@ -455,7 +455,7 @@ int mbedtls_entropy_update_nv_seed(mbedtls_entropy_context *ctx)
 #endif /* MBEDTLS_ENTROPY_NV_SEED */
 
 #if defined(MBEDTLS_FS_IO)
-int mbedtls_entropy_write_seed_file(mbedtls_entropy_context *ctx, const char *path)
+EXPORT_C int mbedtls_entropy_write_seed_file(mbedtls_entropy_context *ctx, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     FILE *f = NULL;
@@ -491,7 +491,7 @@ exit:
     return ret;
 }
 
-int mbedtls_entropy_update_seed_file(mbedtls_entropy_context *ctx, const char *path)
+EXPORT_C int mbedtls_entropy_update_seed_file(mbedtls_entropy_context *ctx, const char *path)
 {
     int ret = 0;
     FILE *f;

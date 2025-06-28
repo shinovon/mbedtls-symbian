@@ -1063,4 +1063,27 @@ EXPORTS
 	psa_verify_message_builtin @ 1062 NONAME
 	psa_wipe_all_key_slots @ 1063 NONAME
 	psa_wipe_key_slot @ 1064 NONAME
+	mbedtls_ctr_drbg_update_seed_file @ 1065 NONAME
+	mbedtls_ctr_drbg_write_seed_file @ 1066 NONAME
+	mbedtls_dhm_parse_dhmfile @ 1067 NONAME
+	mbedtls_entropy_update_seed_file @ 1068 NONAME
+	mbedtls_entropy_write_seed_file @ 1069 NONAME
+	mbedtls_hmac_drbg_update_seed_file @ 1070 NONAME
+	mbedtls_hmac_drbg_write_seed_file @ 1071 NONAME
+	mbedtls_md_file @ 1072 NONAME
+	mbedtls_mpi_read_file @ 1073 NONAME
+	mbedtls_mpi_write_file @ 1074 NONAME
+	mbedtls_pem_free @ 1075 NONAME
+	mbedtls_pem_read_buffer @ 1076 NONAME
+	mbedtls_pem_write_buffer @ 1077 NONAME
+	mbedtls_pk_parse_keyfile @ 1078 NONAME
+	mbedtls_pk_parse_public_keyfile @ 1079 NONAME
+	mbedtls_pk_write_key_pem @ 1080 NONAME
+	mbedtls_pk_write_pubkey_pem @ 1081 NONAME
+	mbedtls_x509_crl_parse_file @ 1082 NONAME
+	mbedtls_x509_crt_parse_file @ 1083 NONAME
+	mbedtls_x509_crt_parse_path @ 1084 NONAME
+	mbedtls_x509_csr_parse_file @ 1085 NONAME
+	mbedtls_x509write_crt_pem @ 1086 NONAME
+	mbedtls_x509write_csr_pem @ 1087 NONAME
 

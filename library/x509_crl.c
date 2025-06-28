@@ -575,7 +575,7 @@ EXPORT_C int mbedtls_x509_crl_parse(mbedtls_x509_crl *chain, const unsigned char
 /*
  * Load one or more CRLs and add them to the chained list
  */
-int mbedtls_x509_crl_parse_file(mbedtls_x509_crl *chain, const char *path)
+EXPORT_C int mbedtls_x509_crl_parse_file(mbedtls_x509_crl *chain, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n;

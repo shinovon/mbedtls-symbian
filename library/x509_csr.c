@@ -448,7 +448,7 @@ EXPORT_C int mbedtls_x509_csr_parse(mbedtls_x509_csr *csr, const unsigned char *
 /*
  * Load a CSR into the structure
  */
-int mbedtls_x509_csr_parse_file(mbedtls_x509_csr *csr, const char *path)
+EXPORT_C int mbedtls_x509_csr_parse_file(mbedtls_x509_csr *csr, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n;

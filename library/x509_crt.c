@@ -1387,7 +1387,7 @@ EXPORT_C int mbedtls_x509_crt_parse(mbedtls_x509_crt *chain,
 /*
  * Load one or more certificates and add them to the chained list
  */
-int mbedtls_x509_crt_parse_file(mbedtls_x509_crt *chain, const char *path)
+EXPORT_C int mbedtls_x509_crt_parse_file(mbedtls_x509_crt *chain, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n;
@@ -1405,7 +1405,7 @@ int mbedtls_x509_crt_parse_file(mbedtls_x509_crt *chain, const char *path)
     return ret;
 }
 
-int mbedtls_x509_crt_parse_path(mbedtls_x509_crt *chain, const char *path)
+EXPORT_C int mbedtls_x509_crt_parse_path(mbedtls_x509_crt *chain, const char *path)
 {
     int ret = 0;
 #if defined(_WIN32) && !defined(EFIX64) && !defined(EFI32)

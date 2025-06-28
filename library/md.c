@@ -769,7 +769,7 @@ EXPORT_C const mbedtls_md_info_t *mbedtls_md_info_from_ctx(
 }
 
 #if defined(MBEDTLS_FS_IO)
-int mbedtls_md_file(const mbedtls_md_info_t *md_info, const char *path, unsigned char *output)
+EXPORT_C int mbedtls_md_file(const mbedtls_md_info_t *md_info, const char *path, unsigned char *output)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     FILE *f;

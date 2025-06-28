@@ -594,7 +594,7 @@ EXPORT_C int mbedtls_ctr_drbg_random(void *p_rng, unsigned char *output,
 }
 
 #if defined(MBEDTLS_FS_IO)
-int mbedtls_ctr_drbg_write_seed_file(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C int mbedtls_ctr_drbg_write_seed_file(mbedtls_ctr_drbg_context *ctx,
                                      const char *path)
 {
     int ret = MBEDTLS_ERR_CTR_DRBG_FILE_IO_ERROR;
@@ -627,7 +627,7 @@ exit:
     return ret;
 }
 
-int mbedtls_ctr_drbg_update_seed_file(mbedtls_ctr_drbg_context *ctx,
+EXPORT_C int mbedtls_ctr_drbg_update_seed_file(mbedtls_ctr_drbg_context *ctx,
                                       const char *path)
 {
     int ret = 0;

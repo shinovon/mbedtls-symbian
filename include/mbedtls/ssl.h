@@ -1981,7 +1981,7 @@ IMPORT_C void mbedtls_ssl_conf_authmode(mbedtls_ssl_config *conf, int authmode);
  * \warning This interface is experimental and may change without notice.
  *
  */
-IMPORT_C void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
+void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
                                        int early_data_enabled);
 
 #if defined(MBEDTLS_SSL_SRV_C)
@@ -2008,7 +2008,7 @@ IMPORT_C void mbedtls_ssl_tls13_conf_early_data(mbedtls_ssl_config *conf,
  * \warning This interface is experimental and may change without notice.
  *
  */
-IMPORT_C void mbedtls_ssl_tls13_conf_max_early_data_size(
+void mbedtls_ssl_tls13_conf_max_early_data_size(
     mbedtls_ssl_config *conf, uint32_t max_early_data_size);
 #endif /* MBEDTLS_SSL_SRV_C */
 
@@ -3216,7 +3216,7 @@ IMPORT_C void mbedtls_ssl_conf_ciphersuites(mbedtls_ssl_config *conf,
  *
  */
 
-IMPORT_C void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
+void mbedtls_ssl_conf_tls13_key_exchange_modes(mbedtls_ssl_config *conf,
                                                const int kex_modes);
 #endif /* MBEDTLS_SSL_PROTO_TLS1_3 */
 

@@ -579,7 +579,7 @@ cleanup:
 /*
  * Read X from an opened file
  */
-int mbedtls_mpi_read_file(mbedtls_mpi *X, int radix, FILE *fin)
+EXPORT_C int mbedtls_mpi_read_file(mbedtls_mpi *X, int radix, FILE *fin)
 {
     mbedtls_mpi_uint d;
     size_t slen;
@@ -627,7 +627,7 @@ int mbedtls_mpi_read_file(mbedtls_mpi *X, int radix, FILE *fin)
 /*
  * Write X into an opened file (or stdout if fout == NULL)
  */
-int mbedtls_mpi_write_file(const char *p, const mbedtls_mpi *X, int radix, FILE *fout)
+EXPORT_C int mbedtls_mpi_write_file(const char *p, const mbedtls_mpi *X, int radix, FILE *fout)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     size_t n, slen, plen;

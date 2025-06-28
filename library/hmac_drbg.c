@@ -435,7 +435,7 @@ EXPORT_C void mbedtls_hmac_drbg_free(mbedtls_hmac_drbg_context *ctx)
 }
 
 #if defined(MBEDTLS_FS_IO)
-int mbedtls_hmac_drbg_write_seed_file(mbedtls_hmac_drbg_context *ctx, const char *path)
+EXPORT_C int mbedtls_hmac_drbg_write_seed_file(mbedtls_hmac_drbg_context *ctx, const char *path)
 {
     int ret = MBEDTLS_ERR_ERROR_CORRUPTION_DETECTED;
     FILE *f;
@@ -466,7 +466,7 @@ exit:
     return ret;
 }
 
-int mbedtls_hmac_drbg_update_seed_file(mbedtls_hmac_drbg_context *ctx, const char *path)
+EXPORT_C int mbedtls_hmac_drbg_update_seed_file(mbedtls_hmac_drbg_context *ctx, const char *path)
 {
     int ret = 0;
     FILE *f = NULL;

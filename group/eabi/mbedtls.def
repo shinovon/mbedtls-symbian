@@ -1076,4 +1076,27 @@ EXPORTS
 	mbedtls_lms_error_from_psa @ 1075 NONAME
 	mbedtls_ssl_conf_max_frag_len @ 1076 NONAME
 	mbedtls_ssl_get_alpn_protocol @ 1077 NONAME
+	mbedtls_ctr_drbg_update_seed_file @ 1078 NONAME
+	mbedtls_ctr_drbg_write_seed_file @ 1079 NONAME
+	mbedtls_dhm_parse_dhmfile @ 1080 NONAME
+	mbedtls_entropy_update_seed_file @ 1081 NONAME
+	mbedtls_entropy_write_seed_file @ 1082 NONAME
+	mbedtls_hmac_drbg_update_seed_file @ 1083 NONAME
+	mbedtls_hmac_drbg_write_seed_file @ 1084 NONAME
+	mbedtls_md_file @ 1085 NONAME
+	mbedtls_mpi_read_file @ 1086 NONAME
+	mbedtls_mpi_write_file @ 1087 NONAME
+	mbedtls_pem_free @ 1088 NONAME
+	mbedtls_pem_read_buffer @ 1089 NONAME
+	mbedtls_pem_write_buffer @ 1090 NONAME
+	mbedtls_pk_parse_keyfile @ 1091 NONAME
+	mbedtls_pk_parse_public_keyfile @ 1092 NONAME
+	mbedtls_pk_write_key_pem @ 1093 NONAME
+	mbedtls_pk_write_pubkey_pem @ 1094 NONAME
+	mbedtls_x509_crl_parse_file @ 1095 NONAME
+	mbedtls_x509_crt_parse_file @ 1096 NONAME
+	mbedtls_x509_crt_parse_path @ 1097 NONAME
+	mbedtls_x509_csr_parse_file @ 1098 NONAME
+	mbedtls_x509write_crt_pem @ 1099 NONAME
+	mbedtls_x509write_csr_pem @ 1100 NONAME
 
