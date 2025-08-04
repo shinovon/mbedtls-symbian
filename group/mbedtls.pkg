@@ -16,9 +16,10 @@ ENDIF
 
 !({"TLS 1.2 only"})
 
+"cacert.pem"-"c:\resource\mbedtls\cacerts\cacert.pem"
 IF option1
-"$(EPOCROOT)Epoc32\release\$(PLATFORM)\urel\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
+"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
 ELSE
 "tls13.txt"-"", FT, TC
-"$(EPOCROOT)Epoc32\release\$(PLATFORM)\urel\mbedtls_tls13.dll"-"c:\sys\bin\mbedtls.dll"
+"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_tls13.dll"-"c:\sys\bin\mbedtls.dll"
 ENDIF

@@ -3956,4 +3956,6 @@
 
 //#define MBEDTLS_HAVE_INT64
 
+#define MBEDTLS_CA_PATH "C:/resource/mbedtls/cacerts/"
+
 /** \} name SECTION: Module configuration options */
