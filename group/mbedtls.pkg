@@ -14,10 +14,12 @@ IF( version(0x20009a80, <, 1, 5, 0) ) AND NOT (EXISTS("Z:\sys\bin\libc.dll") OR 
     "incompatible_openc.txt"-"", FT, FORCEABORT
 ENDIF
 
-!({"TLS 1.2 only"})
+!({"CA certificates"}, {"TLS 1.2 only"})
 
-"cacert.pem"-"c:\resource\mbedtls\cacerts\cacert.pem"
 IF option1
+"cacert.pem"-"c:\resource\mbedtls\cacerts\cacert.pem"
+ENDIF
+IF option2
 "$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
 ELSE
 "tls13.txt"-"", FT, TC
