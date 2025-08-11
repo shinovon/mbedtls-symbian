@@ -23,6 +23,6 @@ OPTION MSVC /W0
 OPTION GCC  -w
 OPTION ARMCC -O2 -Otime
 #ifdef ARMCC_4_0
-OPTION_REPLACE ARMCC  --import_all_vtbl
+OPTION_REPLACE ARMCC --import_all_vtbl
 OPTION ARMCC --visibility_inlines_hidden
 #endif

@@ -542,7 +542,7 @@ IMPORT_C int mbedtls_x509_crt_parse(mbedtls_x509_crt *chain, const unsigned char
  * \return         0 if all certificates parsed successfully, a positive number
  *                 if partly successful or a specific X509 or PEM error code
  */
-int mbedtls_x509_crt_parse_file(mbedtls_x509_crt *chain, const char *path);
+IMPORT_C int mbedtls_x509_crt_parse_file(mbedtls_x509_crt *chain, const char *path);
 
 /**
  * \brief          Load one or more certificate files from a path and add them
@@ -557,7 +557,7 @@ int mbedtls_x509_crt_parse_file(mbedtls_x509_crt *chain, const char *path);
  * \return         0 if all certificates parsed successfully, a positive number
  *                 if partly successful or a specific X509 or PEM error code
  */
-int mbedtls_x509_crt_parse_path(mbedtls_x509_crt *chain, const char *path);
+IMPORT_C int mbedtls_x509_crt_parse_path(mbedtls_x509_crt *chain, const char *path);
 
 #endif /* MBEDTLS_FS_IO */
 #if !defined(MBEDTLS_X509_REMOVE_INFO)
