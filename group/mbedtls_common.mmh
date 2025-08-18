@@ -25,4 +25,6 @@ OPTION ARMCC -O2 -Otime
 #ifdef ARMCC_4_0
 OPTION_REPLACE ARMCC --import_all_vtbl
 OPTION ARMCC --visibility_inlines_hidden
+ARMFPU softvfp
 #endif
+OPTION_REPLACE ARMCC --export_all_vtbl

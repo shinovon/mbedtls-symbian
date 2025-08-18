@@ -350,7 +350,7 @@ exit:
 
 #endif /* PEM_RFC1421 */
 
-int mbedtls_pem_read_buffer(mbedtls_pem_context *ctx, const char *header, const char *footer,
+EXPORT_C int mbedtls_pem_read_buffer(mbedtls_pem_context *ctx, const char *header, const char *footer,
                             const unsigned char *data, const unsigned char *pwd,
                             size_t pwdlen, size_t *use_len)
 {
@@ -564,7 +564,7 @@ int mbedtls_pem_read_buffer(mbedtls_pem_context *ctx, const char *header, const 
     return 0;
 }
 
-void mbedtls_pem_free(mbedtls_pem_context *ctx)
+EXPORT_C void mbedtls_pem_free(mbedtls_pem_context *ctx)
 {
     if (ctx->buf != NULL) {
         mbedtls_platform_zeroize(ctx->buf, ctx->buflen);
@@ -577,7 +577,7 @@ void mbedtls_pem_free(mbedtls_pem_context *ctx)
 #endif /* MBEDTLS_PEM_PARSE_C */
 
 #if defined(MBEDTLS_PEM_WRITE_C)
-int mbedtls_pem_write_buffer(const char *header, const char *footer,
+EXPORT_C int mbedtls_pem_write_buffer(const char *header, const char *footer,
                              const unsigned char *der_data, size_t der_len,
                              unsigned char *buf, size_t buf_len, size_t *olen)
 {

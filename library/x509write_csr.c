@@ -411,7 +411,7 @@ EXPORT_C int mbedtls_x509write_csr_der(mbedtls_x509write_csr *ctx, unsigned char
 #define PEM_END_CSR             "-----END CERTIFICATE REQUEST-----\n"
 
 #if defined(MBEDTLS_PEM_WRITE_C)
-int mbedtls_x509write_csr_pem(mbedtls_x509write_csr *ctx, unsigned char *buf, size_t size,
+EXPORT_C int mbedtls_x509write_csr_pem(mbedtls_x509write_csr *ctx, unsigned char *buf, size_t size,
                               int (*f_rng)(void *, unsigned char *, size_t),
                               void *p_rng)
 {

@@ -1015,7 +1015,7 @@ IMPORT_C int mbedtls_pk_write_pubkey(unsigned char **p, unsigned char *start,
  * know you do.
  */
 #if defined(MBEDTLS_FS_IO)
-int mbedtls_pk_load_file(const char *path, unsigned char **buf, size_t *n);
+IMPORT_C int mbedtls_pk_load_file(const char *path, unsigned char **buf, size_t *n);
 #endif
 
 #if defined(MBEDTLS_USE_PSA_CRYPTO)
