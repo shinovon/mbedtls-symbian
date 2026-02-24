@@ -1,6 +1,6 @@
-#ifndef __SYMBIAN32__
+#if !defined(__SYMBIAN32__)
 #include <stdint.h>
-#else if defined(PIPS)
+#elif defined(PIPS)
 #include <stdapis/sys/stdint.h>
 #else
 #ifndef _SYS_STDINT_H_
