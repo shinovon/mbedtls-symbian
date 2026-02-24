@@ -1,4 +1,6 @@
-#ifdef PIPS
+#ifndef __SYMBIAN32__
+#include <stdint.h>
+#else if defined(PIPS)
 #include <stdapis/sys/stdint.h>
 #else
 #ifndef _SYS_STDINT_H_

@@ -204,7 +204,7 @@
  * Uncomment to prevent default assignment of standard functions in the
  * platform layer.
  */
-#ifndef PIPS
+#if !defined(PIPS) && defined(__SYMBIAN32__)
 #define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
 #endif
 
@@ -236,7 +236,7 @@
 //#define MBEDTLS_PLATFORM_TIME_ALT
 //#define MBEDTLS_PLATFORM_FPRINTF_ALT
 //#define MBEDTLS_PLATFORM_PRINTF_ALT
-#ifndef PIPS
+#if !defined(PIPS) && defined(__SYMBIAN32__)
 #define MBEDTLS_PLATFORM_SNPRINTF_ALT
 #define MBEDTLS_PLATFORM_VSNPRINTF_ALT
 #endif
@@ -1948,7 +1948,7 @@
  *
  * Uncomment this to enable pthread mutexes.
  */
-#ifdef PIPS
+#if defined(PIPS) || !defined(__SYMBIAN32__)
 #define MBEDTLS_THREADING_PTHREAD
 #endif
 
@@ -2774,7 +2774,7 @@
  *
  * This module provides networking routines.
  */
-#ifdef PIPS
+#if defined(PIPS) || !defined(__SYMBIAN32__)
 #define MBEDTLS_NET_C
 #endif
 
@@ -3347,7 +3347,7 @@
  *
  * Enable this layer to allow use of mutexes within mbed TLS
  */
-#ifdef PIPS
+#if defined(PIPS) || !defined(__SYMBIAN32__)
 #define MBEDTLS_THREADING_C
 #endif
 
