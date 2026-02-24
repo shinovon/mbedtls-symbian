@@ -61,7 +61,7 @@
 
 #ifdef __SYMBIAN32__
 #include <e32def.h>
-#else
+#elif !defined(MBEDTLS_STATIC)
 #ifndef EXPORT_C
 #define EXPORT_C
 #endif
@@ -69,6 +69,19 @@
 #ifndef IMPORT_C
 #define IMPORT_C
 #endif
+#endif
+
+#if defined(MBEDTLS_STATIC)
+#ifdef EXPORT_C
+#undef EXPORT_C
+#endif
+
+#ifdef IMPORT_C
+#undef IMPORT_C
+#endif
+
+#define EXPORT_C
+#define IMPORT_C
 #endif
 
 #if !defined(MBEDTLS_CONFIG_FILE)
