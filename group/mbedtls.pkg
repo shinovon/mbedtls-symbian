@@ -9,29 +9,26 @@
 %{"nnproject"}
 :"nnproject"
 
-!({"CA certificates"}, {"TLS 1.2 only"}, {"PIPS version"})
+!({"CA certificates"}, {"TLS 1.2 only"})
 
 IF option1
 	"cacert.pem"-"c:\resource\mbedtls\cacerts\cacert.pem"
 ENDIF
-IF option3
-	; Check OpenC versions
-	IF( version(0x20009a80, <, 1, 5, 0) ) AND NOT (EXISTS("Z:\sys\bin\libc.dll") OR EXISTS("C:\sys\bin\libc.dll"))
-	    "incompatible_openc.txt"-"", FT, FORCEABORT
-	ENDIF
-	
-	IF option2
-		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
-	ELSE
-		"tls13.txt"-"", FT, TC
-		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_tls13.dll"-"c:\sys\bin\mbedtls.dll"
-	ENDIF
-	
-ELSE
+
+IF( version(0x20009a80, <, 1, 5, 0) ) ; old or missing openc
+	; estlib
 	IF option2
 		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_stlib.dll"-"c:\sys\bin\mbedtls.dll"
 	ELSE
 		"tls13.txt"-"", FT, TC
 		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_stlib_tls13.dll"-"c:\sys\bin\mbedtls.dll"
+	ENDIF
+ELSE
+	; pips
+	IF option2
+		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
+	ELSE
+		"tls13.txt"-"", FT, TC
+		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_tls13.dll"-"c:\sys\bin\mbedtls.dll"
 	ENDIF
 ENDIF
