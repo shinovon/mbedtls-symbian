@@ -61,6 +61,10 @@
 
 #ifdef __SYMBIAN32__
 #include <e32def.h>
+
+#ifndef PIPS
+#include "snprintf.h"
+#endif
 #elif !defined(MBEDTLS_STATIC)
 #ifndef EXPORT_C
 #define EXPORT_C

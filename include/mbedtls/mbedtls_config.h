@@ -204,9 +204,6 @@
  * Uncomment to prevent default assignment of standard functions in the
  * platform layer.
  */
-#if !defined(PIPS) && defined(__SYMBIAN32__)
-#define MBEDTLS_PLATFORM_NO_STD_FUNCTIONS
-#endif
 
 /**
  * \def MBEDTLS_PLATFORM_EXIT_ALT
