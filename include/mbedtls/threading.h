@@ -82,11 +82,13 @@ void mbedtls_threading_free_alt(void);
 
 #if !defined(MBEDTLS_THREADING_PTHREAD) && defined(__SYMBIAN32__)
 typedef struct mbedtls_threading_mutex_t {
-    void* mutex;
+	int MBEDTLS_PRIVATE(state);
+    void* MBEDTLS_PRIVATE(ptr);
+	int MBEDTLS_PRIVATE(padding);
     /* is_valid is 0 after a failed init or a free, and nonzero after a
      * successful init. This field is not considered part of the public
      * API of Mbed TLS and may change without notice. */
-    char is_valid;
+    char MBEDTLS_PRIVATE(is_valid);
 } mbedtls_threading_mutex_t;
 #endif
 

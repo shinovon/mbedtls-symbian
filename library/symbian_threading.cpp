@@ -13,41 +13,43 @@ static void threading_mutex_init_symbian(mbedtls_threading_mutex_t *mutex)
 
     RMutex* rmutex = new RMutex;
     if (!rmutex) {
-        mutex->is_valid = false;
+        mutex->MBEDTLS_PRIVATE(is_valid) = false;
         return;
     }
+    mutex->MBEDTLS_PRIVATE(state) = 0;
     
     rmutex->CreateLocal();
-    mutex->mutex = (void*) rmutex;
-    mutex->is_valid = true;
+    mutex->MBEDTLS_PRIVATE(ptr) = (void*) rmutex;
+    mutex->MBEDTLS_PRIVATE(is_valid) = 1;
 }
 
 static void threading_mutex_free_symbian(mbedtls_threading_mutex_t *mutex)
 {
-    if (mutex == NULL || !mutex->is_valid) {
+    if (mutex == NULL || !mutex->MBEDTLS_PRIVATE(is_valid)) {
         return;
     }
     
-    if (mutex->mutex) {
-		RMutex* rmutex = (RMutex*) mutex->mutex;
+    if (mutex->MBEDTLS_PRIVATE(ptr)) {
+		RMutex* rmutex = (RMutex*) mutex->MBEDTLS_PRIVATE(ptr);
 		rmutex->Close();
 		delete rmutex;
     }
+    mutex->MBEDTLS_PRIVATE(state) = 1;
     
-    mutex->is_valid = 0;
+    mutex->MBEDTLS_PRIVATE(is_valid) = 0;
 }
 
 static int threading_mutex_lock_symbian(mbedtls_threading_mutex_t *mutex)
 {
-    if (mutex == NULL || !mutex->is_valid) {
+    if (mutex == NULL || !mutex->MBEDTLS_PRIVATE(is_valid)) {
         return MBEDTLS_ERR_THREADING_BAD_INPUT_DATA;
     }
     
-    if (!mutex->mutex) {
+    if (mutex->MBEDTLS_PRIVATE(state) == 0xFFFFFFFD) {
     	threading_mutex_init_symbian(mutex);
     }
 
-    RMutex* rmutex = (RMutex*) mutex->mutex;
+    RMutex* rmutex = (RMutex*) mutex->MBEDTLS_PRIVATE(ptr);
     rmutex->Wait();
 
     return 0;
@@ -55,15 +57,15 @@ static int threading_mutex_lock_symbian(mbedtls_threading_mutex_t *mutex)
 
 static int threading_mutex_unlock_symbian(mbedtls_threading_mutex_t *mutex)
 {
-    if (mutex == NULL || !mutex->is_valid) {
+    if (mutex == NULL || !mutex->MBEDTLS_PRIVATE(is_valid)) {
         return MBEDTLS_ERR_THREADING_BAD_INPUT_DATA;
     }
-    
-    if (!mutex->mutex) {
+
+    if (mutex->MBEDTLS_PRIVATE(state) == 0xFFFFFFFD) {
     	threading_mutex_init_symbian(mutex);
     }
 
-    RMutex* rmutex = (RMutex*) mutex->mutex;
+    RMutex* rmutex = (RMutex*) mutex->MBEDTLS_PRIVATE(ptr);
     rmutex->Signal();
 
     return 0;

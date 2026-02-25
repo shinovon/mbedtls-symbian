@@ -89,6 +89,7 @@ PRJ_EXPORTS
 
 PRJ_MMPFILES
 mbedtls_stl.mmp
+mbedtls_stl_tls13.mmp
 // comment lines below when bulding for platform without PIPS
 mbedtls.mmp
 mbedtls_tls13.mmp

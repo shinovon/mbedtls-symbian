@@ -125,7 +125,7 @@ int (*mbedtls_mutex_unlock)(mbedtls_threading_mutex_t *) = threading_mutex_unloc
 
 #elif defined(__SYMBIAN32__) /* MBEDTLS_THREADING_PTHREAD */
 
-#define MUTEX_INIT  = { 0, 1 }
+#define MUTEX_INIT  = { 0xFFFFFFFD, 0, 0, 1 }
 
 #endif
 

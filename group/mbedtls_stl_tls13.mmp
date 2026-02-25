@@ -1,6 +1,6 @@
 #include "mbedtls_common.mmh"
 
-TARGET		  mbedtls_stlib.dll
+TARGET		  mbedtls_stlib_tls13.dll
 TARGETTYPE	  DLL
 UID			 0x1000008d 0x20292B6B
 
@@ -9,3 +9,5 @@ DEFFILE ./eabi/mbedtls_stlib.def
 SYSTEMINCLUDE /epoc32/include/libc
 
 LIBRARY estlib.lib
+
+MACRO MBEDTLS_SSL_PROTO_TLS1_3
