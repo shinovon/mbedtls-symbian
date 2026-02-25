@@ -123,7 +123,11 @@ int (*mbedtls_mutex_unlock)(mbedtls_threading_mutex_t *) = threading_mutex_unloc
  */
 #define MUTEX_INIT  = { PTHREAD_MUTEX_INITIALIZER, 1 }
 
-#endif /* MBEDTLS_THREADING_PTHREAD */
+#elif defined(__SYMBIAN32__) /* MBEDTLS_THREADING_PTHREAD */
+
+#define MUTEX_INIT  = { 0, 1 }
+
+#endif
 
 #if defined(MBEDTLS_THREADING_ALT)
 static int threading_mutex_fail(mbedtls_threading_mutex_t *mutex)

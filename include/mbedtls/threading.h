@@ -80,6 +80,16 @@ void mbedtls_threading_set_alt(void (*mutex_init)(mbedtls_threading_mutex_t *),
 void mbedtls_threading_free_alt(void);
 #endif /* MBEDTLS_THREADING_ALT */
 
+#if !defined(MBEDTLS_THREADING_PTHREAD) && defined(__SYMBIAN32__)
+typedef struct mbedtls_threading_mutex_t {
+    void* mutex;
+    /* is_valid is 0 after a failed init or a free, and nonzero after a
+     * successful init. This field is not considered part of the public
+     * API of Mbed TLS and may change without notice. */
+    char is_valid;
+} mbedtls_threading_mutex_t;
+#endif
+
 #if defined(MBEDTLS_THREADING_C)
 /*
  * The function pointers for mutex_init, mutex_free, mutex_ and mutex_unlock

@@ -1950,6 +1950,9 @@
  */
 #if defined(PIPS) || !defined(__SYMBIAN32__)
 #define MBEDTLS_THREADING_PTHREAD
+#else
+// use symbian_threading.cpp
+#define MBEDTLS_THREADING_IMPL
 #endif
 
 /**
@@ -3347,9 +3350,7 @@
  *
  * Enable this layer to allow use of mutexes within mbed TLS
  */
-#if defined(PIPS) || !defined(__SYMBIAN32__)
 #define MBEDTLS_THREADING_C
-#endif
 
 /**
  * \def MBEDTLS_TIMING_C
