@@ -1,10 +1,50 @@
 README for repo
 ===================
 
-This repo includes Mbed TLS source with custom configuration that disables unused components and allows building on needed platforms.
+This is a modification of MBedTLS 3.4.1, patched to be compatible with C89 and specifically Symbian OS 9.1+.
 
+It supports both PIPS and ESTLIB for standard libraries, but ESTLIB target excludes networking module (MBEDTLS_NET_C).
 
-README for Mbed TLS
+*ESTLIB is built-in libc subset.
+
+See [newtls repo](https://github.com/shinovon/newtls) for system SSL wrapper implementation for Symbian.
+
+## Building
+
+See `group` directory for Symbian build configuration files.
+
+`group` contents:
+- `bld.inf` Project descriptor
+- `mbedtls_common.mmh`: Common properties for library build
+- `mbedtls.mmp`, `mbedtls_tls13.mmp`, `mbedtls_stl.mmp`, `mbedtls_stl_tls13.mmp`, `mbedtls_static.mmp`: Build variants
+- `mbedtls.pkg`: Installation script
+- `eabi`: Frozen exports for dynamic library
+- `cacert.pem`: CA certificates from curl.se
+
+Import `bld.inf` as a project in Carbide C++ 2.7 or 3.2, select an SDK and armv5 (or gcce) release target.
+I recommend using sbsv2.
+
+Tested compilers:
+- RVCT 2.2 (Recommended)
+- RVCT 4.0
+- GCCE 4.4
+- Nokia x86 (WINSCW)
+
+Tested SDKs:
+- Symbian^3 SDK 1.0 (Recommended)
+- SymbianSR1 for Qt 4.7.4
+- Symbian Belle SDK 1.0
+- S60 5th Edition SDK
+- S60 3rd Edition FP2 SDK 1.1
+
+If targeting Symbian 9.1 (S60v3 Initial Release), make sure to use recommended tools as it tends to break there for no reason. 
+
+## Usage
+
+- Get mbedtls.dso (you can find prebuilt one at https://nnproject.cc/tls), add it to `epoc32/release/armv5/lib` in your Symbian SDK.
+- Copy `mbedtls` and `psa` from `include` to `epoc32/include` in your Symbian SDK.
+
+Original README
 ===================
 
 Mbed TLS is a C library that implements cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols. Its small code footprint makes it suitable for embedded systems.
