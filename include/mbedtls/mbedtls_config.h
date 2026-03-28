@@ -1944,11 +1944,11 @@
  *
  * Uncomment this to enable pthread mutexes.
  */
-#if defined(PIPS) || !defined(__SYMBIAN32__)
-#define MBEDTLS_THREADING_PTHREAD
-#else
+#if defined(__SYMBIAN32__) && !defined(PIPS)
 // use symbian_threading.cpp
 #define MBEDTLS_THREADING_IMPL
+#else
+#define MBEDTLS_THREADING_PTHREAD
 #endif
 
 /**
