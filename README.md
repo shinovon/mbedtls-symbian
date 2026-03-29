@@ -7,7 +7,7 @@ It supports both PIPS and ESTLIB for standard libraries, but ESTLIB target exclu
 
 *ESTLIB is built-in libc subset.
 
-See [newtls repo](https://github.com/shinovon/newtls) for system SSL wrapper implementation for Symbian.
+See [symbian-tls](https://github.com/shinovon/symbian-tls) for system SSL wrapper implementation for Symbian.
 
 ## Building
 
