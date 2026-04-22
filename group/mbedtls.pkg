@@ -15,7 +15,7 @@ IF option1
 	"cacert.pem"-"c:\resource\mbedtls\cacerts\cacert.pem"
 ENDIF
 
-IF (NOT package(0x20009A80)) OR (NOT package(0x20009AA2)) ; old or missing openc
+IF (NOT package(0x20009A80)) OR (NOT package(0x2002372A)) ; old or missing openc
 	; estlib
 	IF option2
 		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_stlib.dll"-"c:\sys\bin\mbedtls.dll"
