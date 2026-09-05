@@ -6,4 +6,4 @@ UID 0 0
 
 MACRO MBEDTLS_STATIC
 
-SYSTEMINCLUDE /epoc32/include/libc
+SYSTEMINCLUDE \epoc32\include\libc

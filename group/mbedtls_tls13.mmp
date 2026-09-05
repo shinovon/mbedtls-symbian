@@ -4,9 +4,9 @@ TARGET		  mbedtls_tls13.dll
 TARGETTYPE	  DLL
 UID			 0x1000008d 0x20292B6B
 
-DEFFILE ./eabi/mbedtls.def
+DEFFILE mbedtls.def
 
-SYSTEMINCLUDE /epoc32/include/stdapis
+SYSTEMINCLUDE \epoc32\include\stdapis
 MACRO SYMBIAN_OE_POSIX_SIGNALS
 MACRO PIPS
 

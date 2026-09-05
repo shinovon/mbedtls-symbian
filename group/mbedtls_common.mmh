@@ -7,10 +7,11 @@ EPOCALLOWDLLDATA
 SMPSAFE
 
 LIBRARY euser.lib
-SYSTEMINCLUDE /epoc32/include
+SYSTEMINCLUDE \epoc32\include
 
 CAPABILITY All -Tcb
 
+LINKAS mbedtls.dll
 NOSTRICTDEF
 
 SOURCEPATH ../library
