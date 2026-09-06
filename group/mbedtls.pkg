@@ -5,6 +5,7 @@
 [0x101F7961], 0, 0, 0, {"S60ProductID"}
 [0x1028315F], 0, 0, 0, {"S60ProductID"}
 [0x20022E6D], 0, 0, 0, {"S60ProductID"}
+[0x101F6300], 3, 0, 0, {"UIQ3ProductID"}
 
 %{"nnproject"}
 :"nnproject"
