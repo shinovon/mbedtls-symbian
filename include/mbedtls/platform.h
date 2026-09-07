@@ -247,6 +247,11 @@ int mbedtls_platform_set_snprintf(int (*snprintf_func)(char *s, size_t n,
 #define mbedtls_snprintf   MBEDTLS_PLATFORM_SNPRINTF_MACRO
 #else
 #define mbedtls_snprintf   MBEDTLS_PLATFORM_STD_SNPRINTF
+
+#if defined(__SYMBIAN32__) && !defined(PIPS)
+int snprintf(char *str, size_t count, const char *fmt, ...);
+int vsnprintf(char *str, size_t count, const char *fmt, va_list arg);
+#endif
 #endif /* MBEDTLS_PLATFORM_SNPRINTF_MACRO */
 #endif /* MBEDTLS_PLATFORM_SNPRINTF_ALT */
 
