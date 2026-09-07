@@ -37,7 +37,7 @@ Tested SDKs:
 - S60 5th Edition SDK
 - S60 3rd Edition FP2 SDK 1.1
 
-If targeting Symbian 9.1 (S60v3 Initial Release), make sure to use recommended tools as it tends to break there for no reason. 
+If targeting Symbian 9.1, make sure to use recommended tools as it tends to break there for no reason. 
 
 ## Usage
 
