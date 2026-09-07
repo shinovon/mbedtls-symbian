@@ -1,4 +1,4 @@
-README for repo
+MBedTLS for Symbian
 ===================
 
 This is a modification of MBedTLS 3.4.1, patched to be compatible with C89 and specifically Symbian OS 9.1+.
@@ -8,6 +8,11 @@ It supports both PIPS and ESTLIB for standard libraries, but ESTLIB target exclu
 *ESTLIB is built-in libc subset.
 
 See [symbian-tls](https://github.com/shinovon/symbian-tls) for system SSL wrapper implementation for Symbian.
+
+## Usage
+
+- Get mbedtls.dso (you can find prebuilt one at https://nnproject.cc/tls), add it to `epoc32/release/armv5/lib` in your Symbian SDK.
+- Copy `mbedtls` and `psa` from `include` to `epoc32/include` in your Symbian SDK.
 
 ## Building
 
@@ -37,12 +42,7 @@ Tested SDKs:
 - S60 5th Edition SDK
 - S60 3rd Edition FP2 SDK 1.1
 
-If targeting Symbian 9.1, make sure to use recommended tools as it tends to break there for no reason. 
-
-## Usage
-
-- Get mbedtls.dso (you can find prebuilt one at https://nnproject.cc/tls), add it to `epoc32/release/armv5/lib` in your Symbian SDK.
-- Copy `mbedtls` and `psa` from `include` to `epoc32/include` in your Symbian SDK.
+If targeting Symbian 9.1, make sure to use recommended tools as it tends to break there for no reason.
 
 Original README
 ===================
