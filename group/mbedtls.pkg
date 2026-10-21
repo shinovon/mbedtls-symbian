@@ -10,7 +10,7 @@
 %{"nnproject"}
 :"nnproject"
 
-!({"CA certificates"}, {"TLS 1.2 only"})
+!({"CA certificates"}, {"Enable TLS 1.3"})
 
 IF option1
 	"cacert.pem"-"c:\resource\mbedtls\cacerts\cacert.pem"
@@ -19,15 +19,15 @@ ENDIF
 IF (NOT package(0x20009A80)) OR (NOT package(0x2002372A)) ; old or missing openc
 	; estlib
 	IF option2
-		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_stlib.dll"-"c:\sys\bin\mbedtls.dll"
-	ELSE
 		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_stlib_tls13.dll"-"c:\sys\bin\mbedtls.dll"
+	ELSE
+		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_stlib.dll"-"c:\sys\bin\mbedtls.dll"
 	ENDIF
 ELSE
 	; pips
 	IF option2
-		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
-	ELSE
 		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls_tls13.dll"-"c:\sys\bin\mbedtls.dll"
+	ELSE
+		"$(EPOCROOT)Epoc32\release\$(PLATFORM)\$(TARGET)\mbedtls.dll"-"c:\sys\bin\mbedtls.dll"
 	ENDIF
 ENDIF
